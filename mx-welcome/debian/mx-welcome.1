@@ -1,0 +1,36 @@
+.TH MX-WELCOME 1 "August 2026" "MX Linux" "User Commands"
+.SH NAME
+mx-welcome \- display the MX Linux welcome screen
+.SH SYNOPSIS
+.B mx-welcome
+.RI [ options ]
+.SH DESCRIPTION
+.B mx-welcome
+displays a dashboard with links to MX Linux resources and tools.  It also
+provides basic distribution and hardware information and access to a full
+system report.
+.PP
+The application must be run as a normal user.
+.SH OPTIONS
+.TP
+.BR \-a ", " \-\-about
+Start with the About page selected.
+.TP
+.BR \-t ", " \-\-test
+Run in test mode.
+.TP
+.BR \-h ", " \-\-help
+Display command-line help and exit.
+.TP
+.BR \-v ", " \-\-version
+Display version information and exit.
+.SH FILES
+.TP
+.I /usr/share/mx-welcome/mx-welcome.desktop
+Desktop entry copied to the user's autostart directory when automatic startup
+is enabled.
+.TP
+.I ~/.config/autostart/mx-welcome.desktop
+Per-user autostart entry managed by the application.
+.SH SEE ALSO
+.BR inxi (1)

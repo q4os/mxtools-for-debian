@@ -5,9 +5,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 APPNAME="$(basename "$PROJECT_DIR")"
 
+cd "$PROJECT_DIR" || exit 1
+
 echodo() {
-  echo "${@}"
-  ${@}
+  printf '%q ' "$@"
+  printf '\n'
+  "$@"
 }
 
 # Prepare transifex
@@ -18,26 +21,32 @@ if [ ! -s  .tx/config ]; then
 host = https://www.transifex.com
 
 [o:anticapitalista:p:antix-development:r:$APPNAME]
-file_filter = ./${APPNAME}_<lang>.ts
-source_file = ${APPNAME}_en.ts
+file_filter = translations/${APPNAME}_<lang>.ts
+source_file = translations/${APPNAME}_en.ts
 source_lang = en
 type        = ts
 minimum_perc = 25
 EOF
 fi
 
+# Migrate configurations created before catalogs moved under translations/.
+sed -i \
+    -e "s|^file_filter = \./${APPNAME}_<lang>\.ts$|file_filter = translations/${APPNAME}_<lang>.ts|" \
+    -e "s|^source_file = ${APPNAME}_en\.ts$|source_file = translations/${APPNAME}_en.ts|" \
+    .tx/config
+
 # Migrate percent checking
-if [ -z "$(grep minimum_perc .tx/config)" ]; then
+if ! grep -q minimum_perc .tx/config; then
         echo "minimum_perc = 25" >> .tx/config
 fi
 
-# Remove existing translations
-find . -type f -name '*.ts' -not -name '*en.ts' -delete
-
 # Get all translations
 if command -v tx >/dev/null; then
-   echodo tx pull -r antix-development.$APPNAME --all
+   echodo tx pull -r "antix-development.$APPNAME" --all
 fi
+
+# en_US duplicates the English source catalog and should not be shipped.
+rm -f "translations/${APPNAME}_en_US.ts"
 
 # Find lupdate command in common locations
 LUPDATE=""
@@ -55,8 +64,9 @@ fi
 
 echo "Using lupdate: $LUPDATE"
 
-# Update all .ts files from source files
-SOURCE_FILES=$(find ../src -name "*.cpp" -o -name "*.h" -o -name "*.ui" 2>/dev/null)
-if [ -n "$SOURCE_FILES" ]; then
-    "$LUPDATE" $SOURCE_FILES -ts *en.ts
+# Update all catalogs from C++ and QML sources.
+mapfile -d '' SOURCE_FILES < <(find src qml -type f \( -name '*.cpp' -o -name '*.h' -o -name '*.qml' \) -print0)
+mapfile -d '' TRANSLATION_FILES < <(find translations -maxdepth 1 -type f -name '*.ts' -print0)
+if [ "${#SOURCE_FILES[@]}" -gt 0 ] && [ "${#TRANSLATION_FILES[@]}" -gt 0 ]; then
+    "$LUPDATE" "${SOURCE_FILES[@]}" -ts "${TRANSLATION_FILES[@]}"
 fi

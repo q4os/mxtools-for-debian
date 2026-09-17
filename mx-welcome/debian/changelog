@@ -1,14 +1,49 @@
-mx-welcome (26.03mx25.1302) stable; urgency=medium
+mx-welcome (26.09.5mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:20 +0200
+ -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:08 +0200
+
+mx-welcome (26.09.5mx25) mx; urgency=medium
+
+  * darken secondary text so descriptions are easier to read on light themes
+  * update translations
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 13 Sep 2026 09:12:46 -0400
+
+mx-welcome (26.09.4mx25) mx; urgency=medium
+
+  * Fix translations
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 11 Sep 2026 13:31:05 -0400
+
+mx-welcome (26.09.3mx25) mx; urgency=medium
+
+  * allow action descriptions to be customized through the configuration
+  * make system reports and documents readable with dark desktop themes
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 05 Sep 2026 08:24:22 -0400
+
+mx-welcome (26.09.2mx25) mx; urgency=medium
+
+  * prevent the application from failing to start when the desktop is configured to use the GTK2 style
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 04 Sep 2026 17:27:04 -0400
+
+mx-welcome (26.09.1mx25) mx; urgency=medium
+
+  * replace the old tabbed interface with a responsive dashboard that supports searching, category filtering, and compact layouts
+  * prevent system-information checks from leaving the application unresponsive when a command stalls
+  * preserve custom live-session information and use the correct MX application-menu category
+  * update translations for the new interface and add Korean localization support
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 02 Sep 2026 12:54:43 -0400
 
 mx-welcome (26.03mx25) mx; urgency=medium
 
   * show license inside app and remove mx-viewer/xdg-open dependency
 
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 19 Mar 2026 15:55:29 -0400
+ -- Adrian <adrian@mxlinux.org>  Thu, 19 Mar 2026 15:55:29 -0400
 
 mx-welcome (25.11.02mx25) mx; urgency=medium
 
@@ -240,7 +275,7 @@ mx-welcome (20.07.01) mx; urgency=medium
 
   * use xdg-open instead of exo-open
 
- -- Dolphin Oracle <dolphin@littlebyte>  Sun, 26 Jul 2020 09:01:04 -0400
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 26 Jul 2020 09:01:04 -0400
 
 mx-welcome (19.10.01) mx; urgency=medium
 

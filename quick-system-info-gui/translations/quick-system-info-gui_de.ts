@@ -71,13 +71,13 @@
         <location filename="../mainwindow.ui" line="254"/>
         <source>Journald</source>
         <extracomment>systemd journalctl tab</extracomment>
-        <translation type="unfinished"/>
+        <translation>Journald</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="262"/>
         <source>Log Type</source>
         <extracomment>type of log, either user level or system</extracomment>
-        <translation type="unfinished"/>
+        <translation>Log Typ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="270"/>
@@ -95,19 +95,19 @@
         <location filename="../mainwindow.ui" line="283"/>
         <source>Priority Level</source>
         <extracomment>level of status message to view</extracomment>
-        <translation type="unfinished"/>
+        <translation>Prioritätsstufe</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
         <source>Choose Boot Log</source>
         <extracomment>choose a boot to view the log</extracomment>
-        <translation type="unfinished"/>
+        <translation>Boot Log auswählen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="341"/>
         <source>Service Search</source>
         <extracomment>seek and ye shall find</extracomment>
-        <translation type="unfinished"/>
+        <translation>Suche Dienst</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="351"/>
@@ -242,13 +242,13 @@
         <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
-        <translation type="unfinished"/>
+        <translation>kein Journaleintrag auf dieser Admin- und Prioritätsstufe vorhanden</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="712"/>
         <source>Error running journalctl command</source>
         <comment>error report for journalctl command</comment>
-        <translation type="unfinished"/>
+        <translation>Fehler beim Ausführen des journalctl Befehls</translation>
     </message>
     <message>
         <source>Changelog</source>

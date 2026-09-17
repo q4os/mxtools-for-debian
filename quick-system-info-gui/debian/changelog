@@ -1,8 +1,18 @@
-quick-system-info-gui (26.06.02.1302) stable; urgency=medium
+quick-system-info-gui (26.08.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:21 +0200
+ -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:08 +0200
+
+quick-system-info-gui (26.08) mx; urgency=medium
+
+  * show the application in the correct MX Utilities menu category
+  * install the command reference and documentation images with Debian packages
+  * preserve spaces and other special characters in Journald filters
+  * open the Find dialog relative to the currently selected report, including Journald reports
+  * display rotated system logs in chronological order
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 30 Aug 2026 10:31:38 -0400
 
 quick-system-info-gui (26.06.02) mx; urgency=medium
 

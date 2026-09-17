@@ -94,6 +94,80 @@ PURGE=''
 INSTALL=''
 FORCEDRIVER=''
 TEST=false
+
+# Translate --longname options into their short-option equivalents so
+# getopts (which only understands short options) can keep parsing normally.
+ARGS=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --help)
+      ARGS+=("-h")
+      shift
+      ;;
+    --install)
+      ARGS+=("-i" "$2")
+      shift 2
+      ;;
+    --install=*)
+      ARGS+=("-i" "${1#*=}")
+      shift
+      ;;
+    --purge)
+      ARGS+=("-p" "$2")
+      shift 2
+      ;;
+    --purge=*)
+      ARGS+=("-p" "${1#*=}")
+      shift
+      ;;
+    --test)
+      ARGS+=("-t")
+      shift
+      ;;
+    --device)
+      ARGS+=("-d" "$2")
+      shift 2
+      ;;
+    --device=*)
+      ARGS+=("-d" "${1#*=}")
+      shift
+      ;;
+    --backports)
+      ARGS+=("-b")
+      shift
+      ;;
+    --nvidia-repo)
+      ARGS+=("-N")
+      shift
+      ;;
+    --create-conf)
+      ARGS+=("-c")
+      shift
+      ;;
+    --force)
+      ARGS+=("-f" "$2")
+      shift 2
+      ;;
+    --force=*)
+      ARGS+=("-f" "${1#*=}")
+      shift
+      ;;
+    --add-grub)
+      ARGS+=("-g")
+      shift
+      ;;
+    --remove-grub)
+      ARGS+=("-r")
+      shift
+      ;;
+    *)
+      ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+set -- "${ARGS[@]}"
+
 while getopts ":f:bNi:p:htd:cgr" opt; do
   case $opt in
     h)
@@ -282,31 +356,35 @@ function usage() {
   echo "======================================================================"
   echo $(gettext "The following options are allowed:")
   echo
-  echo "-b            " $(gettext "Offer debian-backports alternative")
+  echo "-b, --backports            " $(gettext "Offer debian-backports alternative")
   echo ""
-  echo "-N            " $(gettext "Offer Nvidia developer repo alternative")
-  echo "              " $(gettext "Implies -f nvidia-driver")
+  echo "-N, --nvidia-repo          " $(gettext "Offer Nvidia developer repo alternative")
+  echo "                           " $(gettext "Implies -f nvidia-driver")
   echo ""
-  echo "-c            " $(gettext "Create 20-nvidia.conf")
+  echo "-c, --create-conf          " $(gettext "Create 20-nvidia.conf")
   echo ""
-  echo "-g            " $(gettext "Add grub commandline and modules options to help with wayland")
+  echo "-g, --add-grub             " $(gettext "Add grub commandline and modules options to help with wayland")
   echo ""
-  echo "-r            " $(gettext "Remove grub commandline and modules options related to wayland")
+  echo "-r, --remove-grub          " $(gettext "Remove grub commandline and modules options related to wayland")
   echo ""
-  echo "-i [driver]   " $(gettext "Install given driver.")
-  echo "              " $(gettext "drivers: nvidia, open, fixbumblebee")
+  echo "-i, --install [driver]     " $(gettext "Install given driver.")
+  echo "                           " $(gettext "drivers: nvidia, open, fixbumblebee")
   echo
-  echo "-p [driver]   " $(gettext "Purge given driver.")
-  echo "              " $(gettext "driver: nvidia")
+  echo "-p, --purge [driver]       " $(gettext "Purge given driver.")
+  echo "                           " $(gettext "driver: nvidia")
   echo
-  echo "-f [driver]   " $(gettext "force specific nvidia driver package.")
-  echo "               nvidia-driver, nvidia-legacy-390xx-driver, nvidia-tesla-418-driver,"
-  echo "               nvidia-tesla-450-driver, nvidia-tesla-460-driver, nvidia-tesla-470-driver"
-  echo "               nvidia-tesla-510-driver nvidia-tesla-535-driver, nvidia-legacy-340xx-driver, bumblebee-nvidia"
+  echo "-f, --force [driver]       " $(gettext "force specific nvidia driver package.")
+  echo "                            nvidia-driver, nvidia-legacy-390xx-driver, nvidia-tesla-418-driver,"
+  echo "                            nvidia-tesla-450-driver, nvidia-tesla-460-driver, nvidia-tesla-470-driver"
+  echo "                            nvidia-tesla-510-driver nvidia-tesla-535-driver, nvidia-legacy-340xx-driver, bumblebee-nvidia"
   echo
-  echo "-t            " $(gettext "For development testing only!  simulate installs")
-  echo "              " $(gettext "This will install drivers for pre-defined hardware.")
-  echo "              " $(gettext "Use with -i.")
+  echo "-t, --test                 " $(gettext "For development testing only!  simulate installs")
+  echo "                           " $(gettext "This will install drivers for pre-defined hardware.")
+  echo "                           " $(gettext "Use with -i.")
+  echo
+  echo "-d, --device [pciid]       " $(gettext "Specify a PCI device ID to check instead of autodetecting.")
+  echo
+  echo "-h, --help                 " $(gettext "Show this help message")
   echo
   echo "----------------------------------------------------------------------"
    echo "sudo ddm-mx -i nvidia"
@@ -876,7 +954,7 @@ echo "========================================"| tee -a $LOG
 echo "========================================"| tee -a $LOG
 echo ""| tee -a $LOG
 echo "$PURGE_MESSAGE"  | tee -a $LOG
-echo "sudo ddm-mx -p nvidia"| tee -a $LOG
+echo "sudo ddm-mx --purge nvidia"| tee -a $LOG
 echo ""| tee -a $LOG
 echo "========================================"| tee -a $LOG
 echo "========================================"| tee -a $LOG
@@ -893,7 +971,7 @@ echo "========================================"| tee -a "$USER_HOME_PATH"
 echo "========================================"| tee -a "$USER_HOME_PATH"
 echo ""| tee -a "$USER_HOME_PATH"
 echo "$PURGE_MESSAGE"  | tee -a "$USER_HOME_PATH"
-echo "sudo ddm-mx -p nvidia"| tee -a "$USER_HOME_PATH"
+echo "sudo ddm-mx --purge nvidia"| tee -a "$USER_HOME_PATH"
 echo ""| tee -a $USER_HOME_PATH
 echo "========================================"| tee -a "$USER_HOME_PATH"
 echo "========================================"| tee -a "$USER_HOME_PATH"

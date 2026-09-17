@@ -441,7 +441,7 @@ if [ -n "$PACKAGE" ]; then
 	echo "INSTALL: "     $PACKAGE
 	echo "" 
 	echo "OPEN MODULES SUPPORT: "$OPEN_SUPPORT
-	echo "$(eval_gettext "To install alternate driver packages, use") sudo ddm-mx -i nvidia -f [driver package name]" 
+	echo "$(eval_gettext "To install alternate driver packages, use") sudo ddm-mx --install nvidia --force [driver package name]"
 	echo "" 
 fi
 

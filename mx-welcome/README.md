@@ -1,16 +1,17 @@
 # MX Welcome
 
-A Qt6-based welcome application for MX Linux that provides quick access to useful resources, tools, and system information. Features a clean tabbed interface with links to documentation, support forums, and essential system utilities.
+A Qt 6 Quick welcome application for MX Linux that provides quick access to useful resources, tools, and system information. Its responsive dashboard uses the desktop palette, fonts, and icon theme on both light and dark desktops.
 
 [![latest packaged version(s)](https://repology.org/badge/latest-versions/mx-welcome.svg)](https://repology.org/project/mx-welcome/versions)
 [![build result](https://build.opensuse.org/projects/home:mx-packaging/packages/mx-welcome/badge.svg?type=default)](https://software.opensuse.org//download.html?project=home%3Amx-packaging&package=mx-welcome)
 
-![image](https://github.com/MX-Linux/mx-welcome/assets/418436/44ea74b4-ef2d-4924-828a-7dc710f7c8c7)
+<img width="771" height="774" alt="image" src="https://github.com/user-attachments/assets/ac9b8fb6-f064-43ac-9009-8a20f4f14fb7" />
 
 ## Features
 
-- **Welcome Tab**: Quick access links to documentation, forums, videos, and contribution pages
-- **About Tab**: System information display with hardware details and MX Linux version
+- **Welcome Dashboard**: A straightforward collection of buttons for documentation, forums, videos, and system tools
+- **Responsive Navigation**: Sidebar navigation on wide windows and compact controls on smaller screens
+- **System Page**: System information display with hardware details and MX Linux version
 - **System Reports**: Generate comprehensive system information reports
 - **Auto-start Option**: Can be configured to launch automatically on login
 - **Internationalization**: Multi-language support with 40+ translations
@@ -20,7 +21,8 @@ A Qt6-based welcome application for MX Linux that provides quick access to usefu
 
 ### Prerequisites
 
-- Qt6 (Core, Gui, Widgets, LinguistTools)
+- Qt6 (Core, Gui, Widgets, Qml, Quick, QuickControls2, LinguistTools)
+- Qt 6 Declarative development files (`qt6-declarative-dev` on Debian/MX)
 - C++20 compatible compiler (GCC 14+ or Clang)
 - CMake 3.16+
 - Ninja build system (recommended)
@@ -58,14 +60,14 @@ sudo apt install mx-welcome
 ## Usage
 
 1. Launch from the application menu or run `mx-welcome` in terminal
-2. **Welcome Tab**: Click buttons to access:
+2. **Welcome Dashboard**: Select a button to access:
    - **MX Tools**: Launch the MX Tools collection
    - **Manual**: Open the MX Linux manual
    - **Forum**: Access the MX Linux community forum
    - **Wiki**: Browse the MX Linux wiki
    - **Videos**: View MX Linux tutorial videos
    - **Contribute**: Learn how to contribute to MX Linux
-3. **About Tab**: View system information including:
+3. **About This System**: View system information including:
    - MX Linux version and build details
    - Hardware information (CPU, memory, graphics)
    - Generate detailed system reports
@@ -85,10 +87,19 @@ Options:
 ## Technical Details
 
 - **Language**: C++20
-- **Framework**: Qt6
+- **Framework**: Qt 6 with a Qt Quick/QML frontend
 - **Build System**: CMake with Ninja generator
 - **License**: GPL v3
 - **Version**: 25.04.01
+
+### Source Layout
+
+- `src/backend.*`: configuration, environment policy, persistence, filtering, and process launching
+- `src/actionmodel.*`: model exposed to QML for dashboard actions
+- `qml/Main.qml`: application window, responsive navigation, system page, and dialogs
+- `qml/components/`: reusable action cards and themed controls
+
+The application intentionally starts with `QApplication` and retains the Widgets library so MX/XFCE's Qt GTK integration can provide the correct desktop palette to QML. It does not force a Qt Quick Controls style.
 
 ## Development
 

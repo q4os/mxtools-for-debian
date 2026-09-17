@@ -5,36 +5,36 @@
 
 A Qt6-based dashboard application providing centralized access to configuration tools in MX Linux. MX Tools offers an intuitive graphical interface for launching various system utilities, organized by categories for easy navigation.
 
-![image](https://github.com/MX-Linux/mx-tools/assets/418436/35cb4aa6-be40-4b84-8a24-c92fc610e52b)
+![MX Tools Qt Quick dashboard](screenshots/mx-tools.png)
 
 ## Features
 
 - **Categorized Tool Organization**: Tools are grouped into logical categories (System, Hardware, etc.)
 - **Environment-Aware Filtering**: Automatically filters tools based on desktop environment and system state
 - **Multi-Language Support**: Comprehensive internationalization with 50+ language translations
-- **Modern Qt6 Interface**: Clean, responsive UI built with Qt6 widgets
+- **Modern Qt Quick Interface**: Responsive card dashboard with adaptive navigation and system dark-theme support
 - **Live/Installed Detection**: Adapts tool availability based on live vs installed system state
 
 ## Architecture
 
-MX Tools is built with modern C++20 standards using Qt6 framework:
+MX Tools is built with C++20 and Qt 6. The platform integration stays in C++, while the interface is declarative QML:
 
-- **MainWindow**: Core application logic and UI management
-- **FlatButton**: Custom button widgets for the dashboard interface
-- **Category-based filtering**: Uses QMultiMap for efficient tool organization
-- **Resource management**: Integrated icon and translation systems
+- **ToolModel**: Discovers desktop files, applies environment rules, filters tools, and launches commands
+- **Qt Quick UI**: Responsive navigation, search, tool cards, dialogs, and system-palette adaptation
+- **Icon provider**: Makes desktop theme icons available to QML cards
+- **Resource management**: Embedded QML, application assets, and translation catalogs
 
 ## Build Requirements
 
 ### Dependencies
-- Qt6 Core, Widgets, and LinguistTools
+- Qt6 Core, QML, Quick, Quick Controls, and LinguistTools
 - CMake 3.16 or higher
 - Ninja build system
 - C++20 compatible compiler (GCC/Clang)
 
 ### Debian/Ubuntu
 ```bash
-sudo apt install cmake ninja-build qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools
+sudo apt install cmake ninja-build qt6-base-dev qt6-base-dev-tools qt6-declarative-dev qt6-tools-dev qt6-tools-dev-tools
 ```
 
 ## Building
@@ -77,11 +77,9 @@ ninja
 ### Project Structure
 ```
 mx-tools/
-├── main.cpp              # Application entry point
-├── mainwindow.{cpp,h,ui}  # Main window implementation
-├── flatbutton.{cpp,h}     # Custom button widget
-├── about.{cpp,h}          # About dialog
-├── images.qrc             # Resource file for icons
+├── src/                   # C++ entry point and application backend
+├── qml/                   # Qt Quick window and reusable UI components
+├── data/                  # Desktop integration files
 ├── translations/          # Translation files (.ts)
 ├── icons/                 # Application icons
 ├── help/                  # Documentation files
@@ -125,4 +123,3 @@ MX Tools is licensed under the GNU General Public License v3.0. See [LICENSE](LI
 - **Homepage**: https://github.com/MX-Linux/mx-tools
 - **Bug Reports**: https://github.com/MX-Linux/mx-tools/issues
 - **MX Linux**: https://mxlinux.org
-

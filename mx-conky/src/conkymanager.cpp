@@ -1,7 +1,7 @@
 /**********************************************************************
  *  ConkyManager.cpp
  **********************************************************************
- * Copyright (C) 2017-2025 MX Authors
+ * Copyright (C) 2017-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -294,13 +294,11 @@ void ConkyManager::stopAllRunning()
         }
     }
 
-    if (runningItems.isEmpty()) {
-        return;
-    }
-
-    // pkill by user ID ensures we only kill conkies belonging to this user and
-    // avoids a blanket killall that would hit conkies we don't manage.  The -x
-    // flag matches the exact name "conky" so mx-conky itself is not targeted.
+    // Stop every conky belonging to this user, including ones this app never
+    // started or cannot see (e.g. a bare "conky" with no -c, or a config outside
+    // the search paths).  The -u filter keeps other users' conkies untouched and
+    // the -x flag matches the exact name "conky" so mx-conky itself is not
+    // targeted.  pkill exits 1 when nothing matches, which is handled below.
     const auto userId = QString::number(getuid());
     QProcess killProcess;
     killProcess.start("pkill", {"-u", userId, "-x", "conky"});

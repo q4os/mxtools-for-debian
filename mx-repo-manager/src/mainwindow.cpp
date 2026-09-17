@@ -272,6 +272,13 @@ QStringList MainWindow::readMXRepos()
     return list;
 }
 
+// Compares by exact host, not substring: "mxrepo.com" must not match "la.mxrepo.com".
+bool MainWindow::repoEntryMatchesHost(const QString &repoLine, const QString &host)
+{
+    const QString url = repoLine.section(" - ", 1, 1).trimmed();
+    return QUrl(url).host().compare(host, Qt::CaseInsensitive) == 0;
+}
+
 void MainWindow::getCurrentRepo(bool force)
 {
     QFile file("/etc/apt/sources.list.d/mx.list");
@@ -316,7 +323,7 @@ void MainWindow::getCurrentRepo(bool force)
     }
 
     bool repoFound = std::find_if(repos.cbegin(), repos.cend(),
-                                  [this](const QString &item) { return item.contains(current_repo); })
+                                  [this](const QString &item) { return repoEntryMatchesHost(item, current_repo); })
                      != repos.cend();
 
     if (!repoFound) {
@@ -403,7 +410,7 @@ void MainWindow::displayMXRepos(const QStringList &repos, const QString &filter)
         auto *radio = new QRadioButton(repo);
         radio->setIcon(getFlag(country));
         ui->listWidget->setItemWidget(item, radio);
-        if (repo.contains(current_repo)) {
+        if (repoEntryMatchesHost(repo, current_repo)) {
             radio->setChecked(true);
             ui->listWidget->scrollToItem(item);
         }

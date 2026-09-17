@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: verify-iso-sig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-20 21:57+0200\n"
+"POT-Creation-Date: 2026-09-03 21:09+0200\n"
 "PO-Revision-Date: 2026-07-30 16:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
@@ -18,18 +18,17 @@ msgstr ""
 msgid "Verify ISO signature"
 msgstr "Επαλήθευση υπογραφής ISO"
 
+msgid "Manage Trusted Keys"
+msgstr "Διαχείριση έμπιστων κλειδιών"
+
 msgid "Trust this key"
 msgstr "Εμπιστοσύνη σε αυτό το κλειδί"
 
 msgid "Check Another File"
 msgstr "Έλεγχος άλλου αρχείου"
 
-msgid ""
-"error: refusing to run as root - run this as your normal desktop user "
-"instead"
-msgstr ""
-"σφάλμα: δεν επιτρέπεται η εκτέλεση ως root - εκτελέστε το ως κανονικός "
-"χρήστης"
+msgid "error: refusing to run as root - run this as your normal desktop user instead"
+msgstr "σφάλμα: δεν επιτρέπεται η εκτέλεση ως root - εκτελέστε το ως κανονικός χρήστης"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -37,23 +36,15 @@ msgstr "Εντάξει"
 msgid "ISO Signature Verifier"
 msgstr "Επαληθευτής υπογραφής ISO"
 
-msgid ""
-"Check the GPG signature of a downloaded ISO (built-in support for MX "
-"Linux/antiX signing keys)"
-msgstr ""
-"Ελέγχει την υπογραφή GPG ενός ληφθέντος ISO (με ενσωματωμένη υποστήριξη για "
-"τα κλειδιά υπογραφής MX Linux/antiX)"
+msgid "Check the GPG signature of a downloaded ISO (built-in support for MX Linux/antiX signing keys)"
+msgstr "Ελέγχει την υπογραφή GPG ενός ληφθέντος ISO (με ενσωματωμένη υποστήριξη για τα κλειδιά υπογραφής MX Linux/antiX)"
 
 #, sh-format
 msgid "Version ${VERSION}"
 msgstr "Έκδοση ${VERSION}"
 
-msgid ""
-"Check the GPG signature of a downloaded ISO\\n(built-in support for MX "
-"Linux/antiX signing keys)"
-msgstr ""
-"Ελέγχει την υπογραφή GPG ενός ληφθέντος ISO\\n(με ενσωματωμένη υποστήριξη "
-"για τα κλειδιά υπογραφής MX Linux/antiX)"
+msgid "Check the GPG signature of a downloaded ISO\\n(built-in support for MX Linux/antiX signing keys)"
+msgstr "Ελέγχει την υπογραφή GPG ενός ληφθέντος ISO\\n(με ενσωματωμένη υποστήριξη για τα κλειδιά υπογραφής MX Linux/antiX)"
 
 msgid "License: GNU GPL v3 or later"
 msgstr "Άδεια χρήσης: GNU GPL v3 ή νεότερη"
@@ -65,22 +56,23 @@ msgstr "Σχετικά με ${ABOUT_TITLE}"
 msgid "Close"
 msgstr "Κλείσιμο"
 
-msgid "Manage Trusted Keys"
-msgstr "Διαχείριση έμπιστων κλειδιών"
+msgid "Details"
+msgstr "Λεπτομέρειες"
 
-msgid "Forget Selected"
-msgstr "Λήθη επιλεγμένων"
+msgid "Untrust"
+msgstr "Ανάκληση"
 
 msgid "Import Selected"
 msgstr "Εισαγωγή επιλεγμένων"
+
+msgid "Refresh"
+msgstr "Ανανέωση"
 
 msgid "Could not read the list of trusted keys:"
 msgstr "Δεν ήταν δυνατή η ανάγνωση της λίστας έμπιστων κλειδιών:"
 
 msgid "No signing keys are currently saved in trustedkeys.gpg."
-msgstr ""
-"Δεν υπάρχουν αποθηκευμένα κλειδιά υπογραφής αυτή τη στιγμή στο "
-"trustedkeys.gpg."
+msgstr "Δεν υπάρχουν αποθηκευμένα κλειδιά υπογραφής αυτή τη στιγμή στο trustedkeys.gpg."
 
 #. TRANSLATORS: "Trust"/"Keep" here are informal short references to
 #. the main GUI's "Trust this key"/"Keep this key" button labels, not
@@ -88,18 +80,14 @@ msgstr ""
 #. The straight quotes around each word are just English's own
 #. convention - please use your language's own quotation marks
 #. instead (e.g. « », „", etc.) if that reads more naturally.
-msgid ""
-"A key ends up there after you choose to \"Trust\"/\"Keep\" it while "
-"verifying an ISO."
-msgstr ""
-"Ένα κλειδί καταλήγει εκεί αφού επιλέξετε να το «εμπιστευτείτε»/«διατηρήσετε»"
-" κατά την επαλήθευση ενός ISO."
+msgid "A key ends up there after you choose to \"Trust\"/\"Keep\" it while verifying an ISO."
+msgstr "Ένα κλειδί καταλήγει εκεί αφού επιλέξετε να το «εμπιστευτείτε»/«διατηρήσετε» κατά την επαλήθευση ενός ISO."
 
-msgid "Import from File"
-msgstr "Εισαγωγή από αρχείο"
+msgid "Import"
+msgstr "Εισαγωγή"
 
-msgid "Remove"
-msgstr "Αφαίρεση"
+msgid "Select"
+msgstr "Επιλογή"
 
 msgid "Fingerprint"
 msgstr "Αποτύπωμα"
@@ -116,18 +104,13 @@ msgstr "Κατάσταση"
 msgid "Expiration Date"
 msgstr "Ημερομηνία λήξης"
 
-#. TRANSLATORS: ${BTN_FORGET_SELECTED} is the translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_UNTRUST_SELECTED} is the translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"Keys saved in ~/.gnupg/trustedkeys.gpg - check any you want to forget, then "
-"click \"${BTN_FORGET_SELECTED}\"."
-msgstr ""
-"Κλειδιά αποθηκευμένα στο ~/.gnupg/trustedkeys.gpg - επιλέξτε όσα θέλετε να "
-"ξεχάσετε, και έπειτα κάντε κλικ στο «${BTN_FORGET_SELECTED}»."
+msgid "Keys saved in ~/.gnupg/trustedkeys.gpg - check any you want to untrust, then click \"${BTN_UNTRUST_SELECTED}\"."
+msgstr "Κλειδιά αποθηκευμένα στο ~/.gnupg/trustedkeys.gpg - επιλέξτε όσα θέλετε να ανακαλέσετε, και μετά κάντε κλικ στο «${BTN_UNTRUST_SELECTED}»."
 
-msgid "Export Selected"
-msgstr "Εξαγωγή επιλεγμένων"
+msgid "Export"
+msgstr "Εξαγωγή"
 
 #. TRANSLATORS: shown as-is in the list's "Status" column (a
 #. gpg key's trust validity), one word each.
@@ -147,6 +130,21 @@ msgstr "ανακληθέν"
 msgid "never"
 msgstr "ποτέ"
 
+msgid "No key was checked - nothing to show details for."
+msgstr "Δεν επιλέχθηκε κανένα κλειδί - τίποτα προς εμφάνιση."
+
+#. TRANSLATORS: ${DETAILS_N}/${DETAILS_TOTAL} are literal numbers - keep placeholders as-is.
+#, sh-format
+msgid "Key ${DETAILS_N} of ${DETAILS_TOTAL}"
+msgstr "Κλειδί ${DETAILS_N} από ${DETAILS_TOTAL}"
+
+#, sh-format
+msgid "(could not read details: ${OUT})"
+msgstr "(δεν ήταν δυνατή η ανάγνωση των λεπτομερειών: ${OUT})"
+
+msgid "Key Details"
+msgstr "Λεπτομέρειες κλειδιού"
+
 msgid "No key was checked - nothing to export."
 msgstr "Δεν επιλέχθηκε κανένα κλειδί - τίποτα προς εξαγωγή."
 
@@ -160,8 +158,7 @@ msgstr "Έγινε εξαγωγή ${EXPORT_COUNT} κλειδιού/-ών στο 
 msgid "Could not export keys:"
 msgstr "Δεν ήταν δυνατή η εξαγωγή κλειδιών:"
 
-#. TRANSLATORS: ${BTN_IMPORT_SELECTED} is the translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_IMPORT_SELECTED} is the translated button label - keep the placeholder as-is.
 msgid "Import Trusted Keys"
 msgstr "Εισαγωγή έμπιστων κλειδιών"
 
@@ -177,16 +174,9 @@ msgstr "Δεν ήταν δυνατή η ανάγνωση αυτού του αρ�
 msgid "No keys were found in that file."
 msgstr "Δεν βρέθηκαν κλειδιά σε αυτό το αρχείο."
 
-msgid "Import"
-msgstr "Εισαγωγή"
-
 #, sh-format
-msgid ""
-"Keys found in this file - check any you want to import, then click "
-"\"${BTN_IMPORT_SELECTED}\"."
-msgstr ""
-"Κλειδιά που βρέθηκαν σε αυτό το αρχείο - επιλέξτε όσα θέλετε να εισαγάγετε, "
-"και κάντε κλικ στο «${BTN_IMPORT_SELECTED}»."
+msgid "Keys found in this file - check any you want to import, then click \"${BTN_IMPORT_SELECTED}\"."
+msgstr "Κλειδιά που βρέθηκαν σε αυτό το αρχείο - επιλέξτε όσα θέλετε να εισαγάγετε, και κάντε κλικ στο «${BTN_IMPORT_SELECTED}»."
 
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -202,46 +192,63 @@ msgid "No key was checked - nothing to import."
 msgstr "Δεν επιλέχθηκε κανένα κλειδί - τίποτα προς εισαγωγή."
 
 #, sh-format
-msgid ""
-"Processed ${IMPORT_PROCESSED} key(s): ${IMPORT_NEW} new, ${IMPORT_UPDATED} "
-"updated, ${IMPORT_UNCHANGED} unchanged."
-msgstr ""
-"Έγινε επεξεργασία ${IMPORT_PROCESSED} κλειδιού/-ών: ${IMPORT_NEW} νέο(-α), "
-"${IMPORT_UPDATED} ενημερωμένο(-α), ${IMPORT_UNCHANGED} αμετάβλητο(-α)."
+msgid "Processed ${IMPORT_PROCESSED} key(s): ${IMPORT_NEW} new, ${IMPORT_UPDATED} updated, ${IMPORT_UNCHANGED} unchanged."
+msgstr "Έγινε επεξεργασία ${IMPORT_PROCESSED} κλειδιού/-ών: ${IMPORT_NEW} νέο(-α), ${IMPORT_UPDATED} ενημερωμένο(-α), ${IMPORT_UNCHANGED} αμετάβλητο(-α)."
 
 msgid "Could not import keys:"
 msgstr "Δεν ήταν δυνατή η εισαγωγή κλειδιών:"
 
-msgid "No key was checked - nothing to forget."
-msgstr "Δεν επιλέχθηκε κανένα κλειδί - τίποτα προς λήθη."
-
-#. TRANSLATORS: ${COUNT}/${CMD_LIST_KNOWN_KEYS} are literal - keep
-#. placeholders as-is.
 #, sh-format
-msgid "Forget ${COUNT} selected key(s) from trustedkeys.gpg?"
-msgstr "Λήθη ${COUNT} επιλεγμένου/-ων κλειδιού/-ών από το trustedkeys.gpg;"
+msgid "Checking ${REFRESH_COUNT} key(s) against pubring.kbx, mx-gpg-keyring, and a keyserver - this can take a while..."
+msgstr "Έλεγχος ${REFRESH_COUNT} κλειδιών στο pubring.kbx, στο mx-gpg-keyring και σε έναν διακομιστή κλειδιών - αυτό μπορεί να διαρκέσει λίγο..."
 
 #, sh-format
-msgid ""
-"If any of them is also one of this tool's built-in recognized keys (run "
-"'${CMD_LIST_KNOWN_KEYS}' to see the full list), it will still be recognized "
-"automatically next time - this only removes the local cache entry, not that "
-"recognition."
-msgstr ""
-"Αν κάποιο από αυτά είναι επίσης ένα από τα ενσωματωμένα κλειδιά που "
-"αναγνωρίζει αυτό το εργαλείο (εκτελέστε '${CMD_LIST_KNOWN_KEYS}' για να "
-"δείτε την πλήρη λίστα), αυτό το εργαλείο θα το αναγνωρίσει και πάλι αυτόματα"
-" την επόμενη φορά - αυτό αφαιρεί μόνο την τοπική καταχώριση προσωρινής "
-"μνήμης, όχι αυτή την αναγνώριση."
+msgid "Checking ${REFRESH_COUNT} key(s) against pubring.kbx and a keyserver - this can take a while..."
+msgstr "Έλεγχος ${REFRESH_COUNT} κλειδιών στο pubring.kbx και σε έναν διακομιστή κλειδιών - αυτό μπορεί να διαρκέσει λίγο..."
 
-msgid "Forget"
-msgstr "Λήθη"
+#, sh-format
+msgid "Checking ${REFRESH_COUNT} key(s) against mx-gpg-keyring and a keyserver - this can take a while..."
+msgstr "Έλεγχος ${REFRESH_COUNT} κλειδιών στο mx-gpg-keyring και σε έναν διακομιστή κλειδιών - αυτό μπορεί να διαρκέσει λίγο..."
+
+#, sh-format
+msgid "Checking ${REFRESH_COUNT} key(s) against a keyserver - this can take a while..."
+msgstr "Έλεγχος ${REFRESH_COUNT} κλειδιών σε έναν διακομιστή κλειδιών - αυτό μπορεί να διαρκέσει λίγο..."
+
+#, sh-format
+msgid "Checked ${SWEEP_CHECKED} key(s): ${SWEEP_UPDATED} updated, ${SWEEP_REVOKED} revoked."
+msgstr "Ελέγχθηκαν ${SWEEP_CHECKED} κλειδί(ά): ${SWEEP_UPDATED} ενημερώθηκαν, ${SWEEP_REVOKED} ανακλήθηκαν."
+
+#, sh-format
+msgid "${SWEEP_UNREACHABLE} of ${SWEEP_CHECKED} key(s) could not be checked against any keyserver - results for those may be incomplete."
+msgstr "${SWEEP_UNREACHABLE} από ${SWEEP_CHECKED} κλειδιά δεν ήταν δυνατό να ελεγχθούν σε κανέναν διακομιστή κλειδιών - τα αποτελέσματα γι' αυτά ενδέχεται να είναι ελλιπή."
+
+msgid "Could not refresh trusted keys:"
+msgstr "Δεν ήταν δυνατή η ανανέωση των έμπιστων κλειδιών:"
+
+msgid "No key was checked - nothing to untrust."
+msgstr "Δεν επιλέχθηκε κανένα κλειδί - τίποτα προς ανάκληση."
+
+#. TRANSLATORS: ${COUNT} is literal - keep the placeholder as-is.
+#, sh-format
+msgid "Untrust ${COUNT} selected key(s)?"
+msgstr "Ανάκληση ${COUNT} επιλεγμένων κλειδιών;"
+
+msgid "This tool will stop automatically trusting the selected key(s) - whether they're one of its built-in recognized keys, or separately marked trusted in your own GnuPG keyring. This isn't permanent - trust a key again anytime (verify something signed by it and accept it, or import the key again) and it'll be trusted normally from then on."
+msgstr "Αυτό το εργαλείο θα σταματήσει να εμπιστεύεται αυτόματα τα επιλεγμένα κλειδιά - είτε πρόκειται για ενσωματωμένο αναγνωρισμένο κλειδί, είτε για κλειδί που έχετε σημειώσει ως έμπιστο στη δική σας κλειδοθήκη GnuPG. Αυτό δεν είναι μόνιμο - εμπιστευτείτε ξανά ένα κλειδί όποτε θέλετε (επαληθεύστε κάτι υπογεγραμμένο με αυτό και αποδεχτείτε το, ή εισαγάγετε ξανά το κλειδί) και από τότε θα αντιμετωπίζεται κανονικά ως έμπιστο."
 
 msgid "Some keys could not be removed:"
 msgstr "Ορισμένα κλειδιά δεν ήταν δυνατό να αφαιρεθούν:"
 
+#, fuzzy, sh-format
+msgid "'${other_title}' is already open - close it first to check this file."
+msgstr "Εκτελείται ήδη - κλείστε το πρώτα για να ελέγξετε αυτό το αρχείο."
+
 msgid "Already running - close it first to check this file."
 msgstr "Εκτελείται ήδη - κλείστε το πρώτα για να ελέγξετε αυτό το αρχείο."
+
+#, sh-format
+msgid "'${other_title}' is already open."
+msgstr ""
 
 msgid "Already running."
 msgstr "Εκτελείται ήδη."
@@ -251,42 +258,24 @@ msgid "Cannot detect what '${anchor_base}' belongs to:"
 msgstr "Δεν είναι δυνατό να εντοπιστεί σε τι ανήκει το «${anchor_base}»:"
 
 msgid "Cannot detect how these three files belong together:"
-msgstr ""
-"Δεν είναι δυνατό να εντοπιστεί πώς αυτά τα τρία αρχεία ταιριάζουν μεταξύ "
-"τους:"
+msgstr "Δεν είναι δυνατό να εντοπιστεί πώς αυτά τα τρία αρχεία ταιριάζουν μεταξύ τους:"
 
-msgid ""
-"Cannot detect an ISO, a checksum listing, and its signature among these "
-"three files:"
-msgstr ""
-"Δεν είναι δυνατό να εντοπιστεί ένα ISO, μια λίστα αθροισμάτων ελέγχου και η "
-"υπογραφή της ανάμεσα σε αυτά τα τρία αρχεία:"
+msgid "Cannot detect an ISO, a checksum listing, and its signature among these three files:"
+msgstr "Δεν είναι δυνατό να εντοπιστεί ένα ISO, μια λίστα αθροισμάτων ελέγχου και η υπογραφή της ανάμεσα σε αυτά τα τρία αρχεία:"
 
 msgid "Too many files were given - at most three are supported."
 msgstr "Δόθηκαν πάρα πολλά αρχεία - υποστηρίζονται το πολύ τρία."
 
-msgid ""
-"This tool checks that a downloaded ISO is authentic and undamaged, using its"
-" signature file or a signed checksum listing."
-msgstr ""
-"Αυτό το εργαλείο ελέγχει ότι ένα ISO που έχετε κατεβάσει είναι γνήσιο και "
-"δεν έχει καταστραφεί, χρησιμοποιώντας το αρχείο υπογραφής του ή μια "
-"υπογεγραμμένη λίστα αθροισμάτων ελέγχου."
+msgid "This tool checks that a downloaded ISO is authentic and undamaged, using its signature file or a signed checksum listing."
+msgstr "Αυτό το εργαλείο ελέγχει ότι ένα ISO που έχετε κατεβάσει είναι γνήσιο και δεν έχει καταστραφεί, χρησιμοποιώντας το αρχείο υπογραφής του ή μια υπογεγραμμένη λίστα αθροισμάτων ελέγχου."
 
-msgid ""
-"Pick the .iso file, or its .sig/.asc/.gpg/.sign signature file directly."
-msgstr ""
-"Επιλέξτε το αρχείο .iso ή απευθείας το αρχείο υπογραφής "
-".sig/.asc/.gpg/.sign."
+msgid "Pick the .iso file, or its .sig/.asc/.gpg/.sign signature file directly."
+msgstr "Επιλέξτε το αρχείο .iso ή απευθείας το αρχείο υπογραφής .sig/.asc/.gpg/.sign."
 
 #. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render as
 #. bold text, not literal characters).
-msgid ""
-"The other one is found automatically - <b>but only if it's in the same "
-"folder</b>."
-msgstr ""
-"Το άλλο αρχείο εντοπίζεται αυτόματα - <b>αλλά μόνο αν βρίσκεται στον ίδιο "
-"φάκελο</b>."
+msgid "The other one is found automatically - <b>but only if it's in the same folder</b>."
+msgstr "Το άλλο αρχείο εντοπίζεται αυτόματα - <b>αλλά μόνο αν βρίσκεται στον ίδιο φάκελο</b>."
 
 msgid "ISO or signature file"
 msgstr "Αρχείο ISO ή υπογραφής"
@@ -310,53 +299,26 @@ msgid "Drag a File"
 msgstr "Σύρσιμο αρχείου"
 
 #, sh-format
-msgid ""
-"Drop at most three files (the ISO plus its checksum listing and/or signature"
-" file) - ${DROP_COUNT} were dropped."
-msgstr ""
-"Αφήστε το πολύ τρία αρχεία (το ISO, τη λίστα αθροισμάτων ελέγχου του και/ή "
-"το αρχείο υπογραφής του) - αφέθηκαν ${DROP_COUNT}."
+msgid "Drop at most three files (the ISO plus its checksum listing and/or signature file) - ${DROP_COUNT} were dropped."
+msgstr "Αφήστε το πολύ τρία αρχεία (το ISO, τη λίστα αθροισμάτων ελέγχου του και/ή το αρχείο υπογραφής του) - αφέθηκαν ${DROP_COUNT}."
 
-msgid ""
-"Could not find a way to open a web browser (xdg-open is missing). Open this "
-"address yourself:"
-msgstr ""
-"Δεν βρέθηκε τρόπος για να ανοίξει ένα πρόγραμμα περιήγησης ιστού (λείπει το "
-"xdg-open). Ανοίξτε εσείς αυτή τη διεύθυνση:"
+msgid "Could not find a way to open a web browser (xdg-open is missing). Open this address yourself:"
+msgstr "Δεν βρέθηκε τρόπος για να ανοίξει ένα πρόγραμμα περιήγησης ιστού (λείπει το xdg-open). Ανοίξτε εσείς αυτή τη διεύθυνση:"
 
-msgid ""
-"That's a folder, not a file - pick the .iso file itself (or its "
-".sig/.asc/.gpg/.sign signature file) directly."
-msgstr ""
-"Αυτό είναι φάκελος, όχι αρχείο - επιλέξτε το ίδιο το αρχείο .iso (ή "
-"απευθείας το αρχείο υπογραφής του .sig/.asc/.gpg/.sign)."
+msgid "That's a folder, not a file - pick the .iso file itself (or its .sig/.asc/.gpg/.sign signature file) directly."
+msgstr "Αυτό είναι φάκελος, όχι αρχείο - επιλέξτε το ίδιο το αρχείο .iso (ή απευθείας το αρχείο υπογραφής του .sig/.asc/.gpg/.sign)."
 
 #, sh-format
-msgid ""
-"'${named_base}' looks like a signature file by its name, but its content "
-"doesn't look like a real one."
-msgstr ""
-"Το «${named_base}» μοιάζει με αρχείο υπογραφής ως προς το όνομά του, αλλά το"
-" περιεχόμενό του δεν μοιάζει με πραγματικό."
+msgid "'${named_base}' looks like a signature file by its name, but its content doesn't look like a real one."
+msgstr "Το «${named_base}» μοιάζει με αρχείο υπογραφής ως προς το όνομά του, αλλά το περιεχόμενό του δεν μοιάζει με πραγματικό."
 
 #, sh-format
-msgid ""
-"Neither '${neither_iso_base}' nor '${neither_sig_base}' looks like a real "
-"ISO signature file, by name or content."
-msgstr ""
-"Δεν μοιάζει ούτε το «${neither_iso_base}» ούτε το «${neither_sig_base}» με "
-"πραγματικό αρχείο υπογραφής ISO, ούτε ως προς το όνομα ούτε ως προς το "
-"περιεχόμενο."
+msgid "Neither '${neither_iso_base}' nor '${neither_sig_base}' looks like a real ISO signature file, by name or content."
+msgstr "Δεν μοιάζει ούτε το «${neither_iso_base}» ούτε το «${neither_sig_base}» με πραγματικό αρχείο υπογραφής ISO, ούτε ως προς το όνομα ούτε ως προς το περιεχόμενο."
 
 #, sh-format
-msgid ""
-"'${not_plausible_iso_base}' and '${not_plausible_sig_base}' both look like "
-"signature or checksum-listing files - pick the actual ISO, plus its checksum"
-" listing or signature file."
-msgstr ""
-"Και το «${not_plausible_iso_base}» και το «${not_plausible_sig_base}» "
-"μοιάζουν με αρχείο υπογραφής ή λίστα αθροισμάτων ελέγχου - επιλέξτε το ίδιο "
-"το ISO, καθώς και τη λίστα αθροισμάτων ελέγχου ή το αρχείο υπογραφής του."
+msgid "'${not_plausible_iso_base}' and '${not_plausible_sig_base}' both look like signature or checksum-listing files - pick the actual ISO, plus its checksum listing or signature file."
+msgstr "Και το «${not_plausible_iso_base}» και το «${not_plausible_sig_base}» μοιάζουν με αρχείο υπογραφής ή λίστα αθροισμάτων ελέγχου - επιλέξτε το ίδιο το ISO, καθώς και τη λίστα αθροισμάτων ελέγχου ή το αρχείο υπογραφής του."
 
 msgid "No ISO or signature file was selected."
 msgstr "Δεν επιλέχθηκε αρχείο ISO ή υπογραφής."
@@ -383,66 +345,47 @@ msgid "SIG:"
 msgstr "SIG:"
 
 msgid "Verifying signature - this can take a while for a large ISO..."
-msgstr ""
-"Γίνεται επαλήθευση της υπογραφής - αυτό μπορεί να διαρκέσει αρκετή ώρα για "
-"ένα μεγάλο αρχείο ISO..."
+msgstr "Γίνεται επαλήθευση της υπογραφής - αυτό μπορεί να διαρκέσει αρκετή ώρα για ένα μεγάλο αρχείο ISO..."
 
 msgid "Verifying signature - this can take a few seconds"
-msgstr ""
-"Γίνεται επαλήθευση της υπογραφής - αυτό μπορεί να διαρκέσει μερικά "
-"δευτερόλεπτα"
+msgstr "Γίνεται επαλήθευση της υπογραφής - αυτό μπορεί να διαρκέσει μερικά δευτερόλεπτα"
 
 #. TRANSLATORS: continues the previous line's sentence ("Verifying
 #. signature - this can take a few seconds") onto a second line -
 #. the two need to read as one continuous sentence together.
 msgid "if the signing key needs to be fetched from a keyserver..."
-msgstr ""
-"αν χρειαστεί να ανακτηθεί το κλειδί υπογραφής από έναν διακομιστή "
-"κλειδιών..."
+msgstr "αν χρειαστεί να ανακτηθεί το κλειδί υπογραφής από έναν διακομιστή κλειδιών..."
 
-msgid ""
-"Process was interrupted - the check did not finish, so nothing here has been"
-" verified."
-msgstr ""
-"Η διαδικασία διακόπηκε - ο έλεγχος δεν ολοκληρώθηκε, οπότε δεν έχει "
-"επαληθευτεί τίποτα εδώ."
+msgid "Process was interrupted - the check did not finish, so nothing here has been verified."
+msgstr "Η διαδικασία διακόπηκε - ο έλεγχος δεν ολοκληρώθηκε, οπότε δεν έχει επαληθευτεί τίποτα εδώ."
 
-#. TRANSLATORS: ${BTN_TRUST_THIS_KEY} is the translated button label - keep
-#. the placeholder as-is.
+msgid "Primary key:"
+msgstr "Κύριο κλειδί:"
+
+#. TRANSLATORS: ${BTN_TRUST_THIS_KEY} is the translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"By clicking \"${BTN_TRUST_THIS_KEY}\" you confirm you've checked the Key ID "
-"or fingerprint yourself and want to trust and remember this key for future "
-"checks."
-msgstr ""
-"Κάνοντας κλικ στο «${BTN_TRUST_THIS_KEY}» επιβεβαιώνετε ότι έχετε ελέγξει οι"
-" ίδιοι το αναγνωριστικό κλειδιού ή το αποτύπωμα και ότι θέλετε να "
-"εμπιστευτείτε και να απομνημονεύσετε αυτό το κλειδί για μελλοντικούς "
-"ελέγχους."
+msgid "By clicking \"${BTN_TRUST_THIS_KEY}\" you confirm you've checked the Key ID or fingerprint yourself and want to trust and remember this key for future checks."
+msgstr "Κάνοντας κλικ στο «${BTN_TRUST_THIS_KEY}» επιβεβαιώνετε ότι έχετε ελέγξει οι ίδιοι το αναγνωριστικό κλειδιού ή το αποτύπωμα και ότι θέλετε να εμπιστευτείτε και να απομνημονεύσετε αυτό το κλειδί για μελλοντικούς ελέγχους."
+
+msgid "You've told this tool not to automatically trust this signing key anymore."
+msgstr "Έχετε πει σε αυτό το εργαλείο να μην εμπιστεύεται πια αυτόματα αυτό το κλειδί υπογραφής."
+
+msgid "You've told this tool not to automatically trust this checksum-listing signing key anymore."
+msgstr "Έχετε πει σε αυτό το εργαλείο να μην εμπιστεύεται πια αυτόματα το κλειδί υπογραφής αυτής της λίστας αθροισμάτων ελέγχου."
+
+msgid "This ISO's signing key isn't one this tool already recognizes."
+msgstr "Το κλειδί υπογραφής αυτού του ISO δεν είναι κλειδί που αναγνωρίζει ήδη αυτό το εργαλείο."
+
+msgid "This checksum-listing file's signing key isn't one this tool already recognizes."
+msgstr "Το κλειδί υπογραφής αυτού του αρχείου λίστας αθροισμάτων ελέγχου δεν είναι κλειδί που αναγνωρίζει ήδη αυτό το εργαλείο."
 
 #. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render
 #. as bold text, not literal characters).
 msgid "Signature check: <b>GOOD</b> - the ISO exactly matches this key."
-msgstr ""
-"Έλεγχος υπογραφής: <b>ΕΓΚΥΡΗ</b> - το ISO ταιριάζει ακριβώς με αυτό το "
-"κλειδί."
+msgstr "Έλεγχος υπογραφής: <b>ΕΓΚΥΡΗ</b> - το ISO ταιριάζει ακριβώς με αυτό το κλειδί."
 
-msgid ""
-"Note: that identity is self-declared by whoever created the key - it is NOT "
-"independently verified, unlike the Key ID or fingerprint. Only trust this "
-"key if you've confirmed the Key ID or fingerprint yourself (e.g. from the "
-"respin/distro's own official site, or its keyserver listing)."
-msgstr ""
-"Σημείωση: αυτή η ταυτότητα δηλώνεται από το άτομο που δημιούργησε το κλειδί "
-"- ΔΕΝ έχει επαληθευτεί ανεξάρτητα, σε αντίθεση με το αναγνωριστικό κλειδιού "
-"ή το αποτύπωμα. Εμπιστευτείτε αυτό το κλειδί μόνο αν έχετε επαληθεύσει οι "
-"ίδιοι το αναγνωριστικό κλειδιού ή το αποτύπωμα (π.χ. από την επίσημη "
-"ιστοσελίδα του respin/της διανομής, ή από καταχώριση διακομιστή κλειδιών)."
-
-msgid "This ISO's signing key isn't one this tool already recognizes."
-msgstr ""
-"Το κλειδί υπογραφής αυτού του ISO δεν είναι κλειδί που αναγνωρίζει ήδη αυτό "
-"το εργαλείο."
+msgid "Note: that identity is just self-declared text - whoever made the key could have typed anything there. The Key ID and fingerprint are different: they can't be faked, so they're what you can actually check against an independent source. Only trust this key if you've confirmed the Key ID or fingerprint yourself (e.g. from the respin/distro's own official site, or its keyserver listing)."
+msgstr "Σημείωση: Αυτή η ταυτότητα είναι απλώς αυτοδηλωμένο κείμενο - όποιος δημιούργησε το κλειδί θα μπορούσε να έχει γράψει οτιδήποτε εκεί. Το αναγνωριστικό κλειδιού και το αποτύπωμα είναι διαφορετικά: δεν μπορούν να πλαστογραφηθούν, οπότε είναι αυτά που μπορείτε πράγματι να ελέγξετε σε σχέση με μια ανεξάρτητη πηγή. Εμπιστευτείτε αυτό το κλειδί μόνο αν έχετε επαληθεύσει οι ίδιοι το αναγνωριστικό κλειδιού ή το αποτύπωμα (π.χ. από την επίσημη ιστοσελίδα του respin/της διανομής, ή από καταχώριση διακομιστή κλειδιών)."
 
 msgid "Key ID:"
 msgstr "Αναγνωριστικό κλειδιού:"
@@ -455,57 +398,23 @@ msgstr "Αποτύπωμα:"
 
 #. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render
 #. as bold text, not literal characters).
-msgid ""
-"Signature check: <b>GOOD</b> - the checksum listing exactly matches this key"
-" (the ISO's own hash is checked separately, next)."
-msgstr ""
-"Έλεγχος υπογραφής: <b>ΕΓΚΥΡΗ</b> - η λίστα αθροισμάτων ελέγχου ταιριάζει "
-"ακριβώς με αυτό το κλειδί (το άθροισμα ελέγχου του ίδιου του ISO ελέγχεται "
-"ξεχωριστά, στη συνέχεια)."
+msgid "Signature check: <b>GOOD</b> - the checksum listing exactly matches this key (the ISO's own hash is checked separately, next)."
+msgstr "Έλεγχος υπογραφής: <b>ΕΓΚΥΡΗ</b> - η λίστα αθροισμάτων ελέγχου ταιριάζει ακριβώς με αυτό το κλειδί (το άθροισμα ελέγχου του ίδιου του ISO ελέγχεται ξεχωριστά, στη συνέχεια)."
 
-msgid ""
-"Note: that identity is self-declared by whoever created the key - it is NOT "
-"independently verified, unlike the Key ID or fingerprint. Only trust this "
-"key if you've confirmed it yourself (e.g. from the distro's own official "
-"website or keyserver listing)."
-msgstr ""
-"Σημείωση: αυτή η ταυτότητα δηλώνεται από το άτομο που δημιούργησε το κλειδί "
-"- ΔΕΝ έχει επαληθευτεί ανεξάρτητα, σε αντίθεση με το αναγνωριστικό κλειδιού "
-"ή το αποτύπωμα. Εμπιστευτείτε αυτό το κλειδί μόνο αν το έχετε επαληθεύσει οι"
-" ίδιοι (π.χ. από την επίσημη ιστοσελίδα της διανομής ή από καταχώριση "
-"διακομιστή κλειδιών)."
+msgid "Note: that identity is just self-declared text - whoever made the key could have typed anything there. The Key ID and fingerprint are different: they can't be faked, so they're what you can actually check against an independent source. Only trust this key if you've confirmed it yourself (e.g. from the distro's own official website or keyserver listing)."
+msgstr "Σημείωση: Αυτή η ταυτότητα είναι απλώς αυτοδηλωμένο κείμενο - όποιος δημιούργησε το κλειδί θα μπορούσε να έχει γράψει οτιδήποτε εκεί. Το αναγνωριστικό κλειδιού και το αποτύπωμα είναι διαφορετικά: δεν μπορούν να πλαστογραφηθούν, οπότε είναι αυτά που μπορείτε πράγματι να ελέγξετε σε σχέση με μια ανεξάρτητη πηγή. Εμπιστευτείτε αυτό το κλειδί μόνο αν το έχετε επαληθεύσει οι ίδιοι (π.χ. από την επίσημη ιστοσελίδα της διανομής ή από καταχώριση διακομιστή κλειδιών)."
 
-msgid ""
-"This checksum-listing file's signing key isn't one this tool already "
-"recognizes."
-msgstr ""
-"Το κλειδί υπογραφής αυτού του αρχείου λίστας αθροισμάτων ελέγχου δεν είναι "
-"κλειδί που αναγνωρίζει ήδη αυτό το εργαλείο."
+msgid "This signing key currently only lives in your personal keyring (pubring.kbx)."
+msgstr "Αυτό το κλειδί υπογραφής βρίσκεται προς το παρόν μόνο στην προσωπική σας κλειδοθήκη (pubring.kbx)."
 
-msgid ""
-"This signing key currently only lives in your personal keyring "
-"(pubring.kbx)."
-msgstr ""
-"Αυτό το κλειδί υπογραφής βρίσκεται προς το παρόν μόνο στην προσωπική σας "
-"κλειδοθήκη (pubring.kbx)."
-
-msgid ""
-"Copy it into ~/.gnupg/trustedkeys.gpg so future checks don't depend on it "
-"staying there?"
-msgstr ""
-"Να αντιγραφεί στο ~/.gnupg/trustedkeys.gpg ώστε οι μελλοντικοί έλεγχοι να "
-"μην εξαρτώνται από την παραμονή του εκεί;"
+msgid "Copy it into ~/.gnupg/trustedkeys.gpg so future checks don't depend on it staying there?"
+msgstr "Να αντιγραφεί στο ~/.gnupg/trustedkeys.gpg ώστε οι μελλοντικοί έλεγχοι να μην εξαρτώνται από την παραμονή του εκεί;"
 
 msgid "This signing key was just fetched from a keyserver."
-msgstr ""
-"Αυτό το κλειδί υπογραφής μόλις ανακτήθηκε από έναν διακομιστή κλειδιών."
+msgstr "Αυτό το κλειδί υπογραφής μόλις ανακτήθηκε από έναν διακομιστή κλειδιών."
 
-msgid ""
-"Remember it locally, in ~/.gnupg/trustedkeys.gpg, so future checks don't "
-"need the network again?"
-msgstr ""
-"Να απομνημονευτεί τοπικά, στο ~/.gnupg/trustedkeys.gpg, ώστε οι μελλοντικοί "
-"έλεγχοι να μη χρειάζονται ξανά δίκτυο;"
+msgid "Remember it locally, in ~/.gnupg/trustedkeys.gpg, so future checks don't need the network again?"
+msgstr "Να απομνημονευτεί τοπικά, στο ~/.gnupg/trustedkeys.gpg, ώστε οι μελλοντικοί έλεγχοι να μη χρειάζονται ξανά δίκτυο;"
 
 msgid "Keep this key"
 msgstr "Διατήρηση αυτού του κλειδιού"
@@ -513,10 +422,8 @@ msgstr "Διατήρηση αυτού του κλειδιού"
 msgid "No thanks"
 msgstr "Όχι, ευχαριστώ"
 
-msgid "key saved locally - future checks won't need the network"
-msgstr ""
-"το κλειδί αποθηκεύτηκε τοπικά - οι μελλοντικοί έλεγχοι δεν θα χρειάζονται "
-"δίκτυο"
+msgid "key fetched and saved locally - future checks won't need the network"
+msgstr "το κλειδί ανακτήθηκε και αποθηκεύτηκε τοπικά - οι μελλοντικοί έλεγχοι δεν θα χρειάζονται δίκτυο"
 
 msgid "used an already-cached key, no network needed"
 msgstr "χρησιμοποιήθηκε ήδη αποθηκευμένο κλειδί, δεν χρειάστηκε δίκτυο"
@@ -524,22 +431,22 @@ msgstr "χρησιμοποιήθηκε ήδη αποθηκευμένο κλει�
 msgid "used a key from your personal keyring (pubring.kbx)"
 msgstr "χρησιμοποιήθηκε κλειδί από την προσωπική σας κλειδοθήκη (pubring.kbx)"
 
+msgid "used a key from mx-gpg-keyring"
+msgstr "χρησιμοποιήθηκε κλειδί από το mx-gpg-keyring"
+
+msgid "key saved locally for faster future checks"
+msgstr "το κλειδί αποθηκεύτηκε τοπικά για ταχύτερους μελλοντικούς ελέγχους"
+
 msgid "fetched the signing key from a keyserver"
 msgstr "το κλειδί υπογραφής ανακτήθηκε από διακομιστή κλειδιών"
 
-#. TRANSLATORS: ${KEY_EXPIRY_DATE_SAFE} is a date (e.g. 2026-08-06) - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${KEY_EXPIRY_DATE_SAFE} is a date (e.g. 2026-08-06) - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"this key expired on ${KEY_EXPIRY_DATE_SAFE} - this does not affect the "
-"signature check"
-msgstr ""
-"αυτό το κλειδί έληξε στις ${KEY_EXPIRY_DATE_SAFE} - αυτό δεν επηρεάζει τον "
-"έλεγχο της υπογραφής"
+msgid "this key expired on ${KEY_EXPIRY_DATE_SAFE} - this does not affect the signature check"
+msgstr "αυτό το κλειδί έληξε στις ${KEY_EXPIRY_DATE_SAFE} - αυτό δεν επηρεάζει τον έλεγχο της υπογραφής"
 
 msgid "this key has expired - this does not affect the signature check"
-msgstr ""
-"αυτό το κλειδί έχει λήξει - αυτό δεν επηρεάζει τον έλεγχο της υπογραφής"
+msgstr "αυτό το κλειδί έχει λήξει - αυτό δεν επηρεάζει τον έλεγχο της υπογραφής"
 
 msgid "Verified OK"
 msgstr "Επιτυχής επαλήθευση"
@@ -553,210 +460,93 @@ msgstr "Τίποτα προς έλεγχο"
 msgid "Verification FAILED"
 msgstr "Η επαλήθευση ΑΠΕΤΥΧΕ"
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE}/${BTN_TRUST_THIS_KEY} are translated
-#. button labels - keep placeholders as-is.
+msgid "This signing key has been revoked - refusing to use it, whatever the reason (a real key compromise, or the owner deliberately retiring it). Do not trust this file."
+msgstr "Αυτό το κλειδί υπογραφής έχει ανακληθεί - δεν θα χρησιμοποιηθεί, όποιος κι αν είναι ο λόγος (πραγματική διακύβευση του κλειδιού, ή σκόπιμη απόσυρσή του από τον κάτοχο). Μην εμπιστεύεστε αυτό το αρχείο."
+
+msgid "The signing key could not be fetched from any keyserver - this looks like a network problem, not necessarily a bad signature. Try again once you have a working connection."
+msgstr "Δεν ήταν δυνατή η λήψη του κλειδιού υπογραφής από κανέναν διακομιστή κλειδιών - αυτό μοιάζει με πρόβλημα δικτύου, όχι απαραίτητα με εσφαλμένη υπογραφή. Δοκιμάστε ξανά μόλις υπάρξει σύνδεση."
+
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE}/${BTN_TRUST_THIS_KEY} are translated button labels - keep placeholders as-is.
 #, sh-format
-msgid ""
-"The cryptographic check itself already came back GOOD (see the technical "
-"details below) - you just haven't trusted this signing key yet. If you're "
-"confident this is the genuine key (e.g. you've checked its fingerprint "
-"against the distro's own official site or keyserver listing), click "
-"\"${BTN_CHECK_ANOTHER_FILE}\" and choose \"${BTN_TRUST_THIS_KEY}\" this "
-"time."
-msgstr ""
-"Ο ίδιος ο κρυπτογραφικός έλεγχος ήταν ήδη ΕΠΙΤΥΧΗΣ (δείτε τις τεχνικές "
-"λεπτομέρειες παρακάτω) - απλώς δεν έχετε ακόμη εμπιστευτεί αυτό το κλειδί "
-"υπογραφής. Αν είστε σίγουροι ότι πρόκειται για το γνήσιο κλειδί (π.χ. έχετε "
-"ελέγξει το αποτύπωμά του στην επίσημη ιστοσελίδα της διανομής ή σε έναν "
-"διακομιστή κλειδιών), πατήστε «${BTN_CHECK_ANOTHER_FILE}» και επιλέξτε αυτή "
-"τη φορά «${BTN_TRUST_THIS_KEY}»."
+msgid "The cryptographic check itself already came back GOOD (see the technical details below) - you just haven't trusted this signing key yet. If you're confident this is the genuine key (e.g. you've checked its fingerprint against the distro's own official site or keyserver listing), click \"${BTN_CHECK_ANOTHER_FILE}\" and choose \"${BTN_TRUST_THIS_KEY}\" this time."
+msgstr "Ο ίδιος ο κρυπτογραφικός έλεγχος ήταν ήδη ΕΠΙΤΥΧΗΣ (δείτε τις τεχνικές λεπτομέρειες παρακάτω) - απλώς δεν έχετε ακόμη εμπιστευτεί αυτό το κλειδί υπογραφής. Αν είστε σίγουροι ότι πρόκειται για το γνήσιο κλειδί (π.χ. έχετε ελέγξει το αποτύπωμά του στην επίσημη ιστοσελίδα της διανομής ή σε έναν διακομιστή κλειδιών), πατήστε «${BTN_CHECK_ANOTHER_FILE}» και επιλέξτε αυτή τη φορά «${BTN_TRUST_THIS_KEY}»."
 
-msgid ""
-"The cryptographic check itself already came back GOOD (see the technical "
-"details below) - the key just couldn't be saved for future trust (see the "
-"technical details for why). Feel free to try again."
-msgstr ""
-"Ο ίδιος ο κρυπτογραφικός έλεγχος ήταν ήδη ΕΠΙΤΥΧΗΣ (δείτε τις τεχνικές "
-"λεπτομέρειες παρακάτω) - απλώς το κλειδί δεν ήταν δυνατό να αποθηκευτεί για "
-"μελλοντική εμπιστοσύνη (δείτε τις τεχνικές λεπτομέρειες για τον λόγο). "
-"Δοκιμάστε ξανά ελεύθερα."
+msgid "The cryptographic check itself already came back GOOD (see the technical details below) - the key just couldn't be saved for future trust (see the technical details for why). Feel free to try again."
+msgstr "Ο ίδιος ο κρυπτογραφικός έλεγχος ήταν ήδη ΕΠΙΤΥΧΗΣ (δείτε τις τεχνικές λεπτομέρειες παρακάτω) - απλώς το κλειδί δεν ήταν δυνατό να αποθηκευτεί για μελλοντική εμπιστοσύνη (δείτε τις τεχνικές λεπτομέρειες για τον λόγο). Δοκιμάστε ξανά ελεύθερα."
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"You pointed this tool at a checksum-listing file, not a single ISO - it can "
-"cover many ISOs at once, so there's no one file to check unless exactly one "
-"of the ones it mentions is actually present here (see the technical details "
-"below for which). Use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the actual "
-".iso file instead."
-msgstr ""
-"Κατευθύνατε αυτό το εργαλείο σε ένα αρχείο λίστας αθροισμάτων ελέγχου, όχι "
-"σε ένα μεμονωμένο ISO - ένα τέτοιο αρχείο μπορεί να καλύπτει πολλά ISO "
-"ταυτόχρονα, οπότε δεν υπάρχει ένα συγκεκριμένο αρχείο προς έλεγχο, εκτός αν "
-"ακριβώς ένα από τα αναφερόμενα ISO βρίσκεται πράγματι εδώ (δείτε τις "
-"τεχνικές λεπτομέρειες παρακάτω για το ποιο). Χρησιμοποιήστε το "
-"«${BTN_CHECK_ANOTHER_FILE}» και υποδείξτε απευθείας το πραγματικό αρχείο "
-".iso."
+msgid "You pointed this tool at a checksum-listing file, not a single ISO - it can cover many ISOs at once, so there's no one file to check unless exactly one of the ones it mentions is actually present here (see the technical details below for which). Use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the actual .iso file instead."
+msgstr "Κατευθύνατε αυτό το εργαλείο σε ένα αρχείο λίστας αθροισμάτων ελέγχου, όχι σε ένα μεμονωμένο ISO - ένα τέτοιο αρχείο μπορεί να καλύπτει πολλά ISO ταυτόχρονα, οπότε δεν υπάρχει ένα συγκεκριμένο αρχείο προς έλεγχο, εκτός αν ακριβώς ένα από τα αναφερόμενα ISO βρίσκεται πράγματι εδώ (δείτε τις τεχνικές λεπτομέρειες παρακάτω για το ποιο). Χρησιμοποιήστε το «${BTN_CHECK_ANOTHER_FILE}» και υποδείξτε απευθείας το πραγματικό αρχείο .iso."
 
-msgid ""
-"No signature file or signed checksum listing was found for this ISO - "
-"there's nothing here to check yet."
-msgstr ""
-"Δεν βρέθηκε αρχείο υπογραφής ούτε υπογεγραμμένη λίστα αθροισμάτων ελέγχου "
-"για αυτό το ISO - δεν υπάρχει ακόμη τίποτα προς έλεγχο εδώ."
+msgid "No signature file or signed checksum listing was found for this ISO - there's nothing here to check yet."
+msgstr "Δεν βρέθηκε αρχείο υπογραφής ούτε υπογεγραμμένη λίστα αθροισμάτων ελέγχου για αυτό το ISO - δεν υπάρχει ακόμη τίποτα προς έλεγχο εδώ."
 
-#. TRANSLATORS: ${CHECKSUM_FILE_SAFE} is the checksum-listing file's name -
-#. keep the placeholder as-is.
+#. TRANSLATORS: ${CHECKSUM_FILE_SAFE} is the checksum-listing file's name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This checksum listing (${CHECKSUM_FILE_SAFE}) has no signature file of its "
-"own (.sig/.asc/.gpg/.sign) next to it - it can't be trusted without one, so "
-"it was never checked against this ISO."
-msgstr ""
-"Αυτή η λίστα αθροισμάτων ελέγχου (${CHECKSUM_FILE_SAFE}) δεν διαθέτει δικό "
-"της αρχείο υπογραφής (.sig/.asc/.gpg/.sign) δίπλα της - χωρίς αυτό δεν "
-"μπορεί να είναι έμπιστη, επομένως δεν ελέγχθηκε ποτέ σε σχέση με αυτό το "
-"ISO."
+msgid "This checksum listing (${CHECKSUM_FILE_SAFE}) has no signature file of its own (.sig/.asc/.gpg/.sign) next to it - it can't be trusted without one, so it was never checked against this ISO."
+msgstr "Αυτή η λίστα αθροισμάτων ελέγχου (${CHECKSUM_FILE_SAFE}) δεν διαθέτει δικό της αρχείο υπογραφής (.sig/.asc/.gpg/.sign) δίπλα της - χωρίς αυτό δεν μπορεί να είναι έμπιστη, επομένως δεν ελέγχθηκε ποτέ σε σχέση με αυτό το ISO."
 
-#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This is a signature file, but its ISO ('${DISPLAY_ISO_SAFE}') isn't in the "
-"same folder - this tool only looks for a counterpart next to the file you "
-"pick."
-msgstr ""
-"Αυτό είναι ένα αρχείο υπογραφής, αλλά το αντίστοιχο ISO "
-"(«${DISPLAY_ISO_SAFE}») δεν βρίσκεται στον ίδιο φάκελο - αυτό το εργαλείο "
-"αναζητά το αντίστοιχο αρχείο μόνο δίπλα στο αρχείο που επιλέξατε."
+msgid "This is a signature file, but its ISO ('${DISPLAY_ISO_SAFE}') isn't in the same folder - this tool only looks for a counterpart next to the file you pick."
+msgstr "Αυτό είναι ένα αρχείο υπογραφής, αλλά το αντίστοιχο ISO («${DISPLAY_ISO_SAFE}») δεν βρίσκεται στον ίδιο φάκελο - αυτό το εργαλείο αναζητά το αντίστοιχο αρχείο μόνο δίπλα στο αρχείο που επιλέξατε."
 
-#. TRANSLATORS: ${LISTING_BASE_SAFE} is the checksum-listing file's name -
-#. keep the placeholder as-is.
+#. TRANSLATORS: ${LISTING_BASE_SAFE} is the checksum-listing file's name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This is a signature file for a checksum listing, but '${LISTING_BASE_SAFE}' "
-"isn't in the same folder - this tool only looks for a counterpart next to "
-"the file you pick."
-msgstr ""
-"Αυτό είναι ένα αρχείο υπογραφής για μια λίστα αθροισμάτων ελέγχου, αλλά το "
-"«${LISTING_BASE_SAFE}» δεν βρίσκεται στον ίδιο φάκελο - αυτό το εργαλείο "
-"αναζητά το αντίστοιχο αρχείο μόνο δίπλα στο αρχείο που επιλέξατε."
+msgid "This is a signature file for a checksum listing, but '${LISTING_BASE_SAFE}' isn't in the same folder - this tool only looks for a counterpart next to the file you pick."
+msgstr "Αυτό είναι ένα αρχείο υπογραφής για μια λίστα αθροισμάτων ελέγχου, αλλά το «${LISTING_BASE_SAFE}» δεν βρίσκεται στον ίδιο φάκελο - αυτό το εργαλείο αναζητά το αντίστοιχο αρχείο μόνο δίπλα στο αρχείο που επιλέξατε."
 
-#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"Neither '${DISPLAY_ISO_SAFE}' nor a signature file for it were found in this"
-" folder - nothing to check yet."
-msgstr ""
-"Δεν βρέθηκε ούτε το «${DISPLAY_ISO_SAFE}» ούτε ένα αρχείο υπογραφής για αυτό"
-" σε αυτόν τον φάκελο - δεν υπάρχει ακόμη τίποτα προς έλεγχο."
+msgid "Neither '${DISPLAY_ISO_SAFE}' nor a signature file for it were found in this folder - nothing to check yet."
+msgstr "Δεν βρέθηκε ούτε το «${DISPLAY_ISO_SAFE}» ούτε ένα αρχείο υπογραφής για αυτό σε αυτόν τον φάκελο - δεν υπάρχει ακόμη τίποτα προς έλεγχο."
 
-msgid ""
-"This checksum file isn't signed, and the ISO it describes has no signature "
-"of its own either - there's nothing here this tool can cryptographically "
-"verify. Check whether the distro provides a signed checksum listing or a "
-"direct .sig/.asc/.gpg file for this ISO."
-msgstr ""
-"Αυτό το αρχείο αθροίσματος ελέγχου δεν είναι υπογεγραμμένο, και το ISO που "
-"περιγράφει δεν έχει ούτε αυτό δική του υπογραφή - δεν υπάρχει τίποτα εδώ που"
-" αυτό το εργαλείο να μπορεί να επαληθεύσει κρυπτογραφικά. Ελέγξτε αν η "
-"διανομή παρέχει μια υπογεγραμμένη λίστα αθροισμάτων ελέγχου ή ένα άμεσο "
-"αρχείο .sig/.asc/.gpg για αυτό το ISO."
+msgid "This checksum file isn't signed, and the ISO it describes has no signature of its own either - there's nothing here this tool can cryptographically verify. Check whether the distro provides a signed checksum listing, a direct .sig/.asc/.gpg file, or a self-contained clearsigned checksum (e.g. '.sha512.asc') for this ISO."
+msgstr "Αυτό το αρχείο αθροίσματος ελέγχου δεν είναι υπογεγραμμένο, και το ISO που περιγράφει δεν έχει ούτε αυτό δική του υπογραφή - δεν υπάρχει τίποτα εδώ που αυτό το εργαλείο να μπορεί να επαληθεύσει κρυπτογραφικά. Ελέγξτε αν η διανομή παρέχει μια υπογεγραμμένη λίστα αθροισμάτων ελέγχου, ένα άμεσο αρχείο .sig/.asc/.gpg ή ένα αυτόνομο, αυτο-υπογεγραμμένο άθροισμα ελέγχου (π.χ. '.sha512.asc') για αυτό το ISO."
 
-msgid ""
-"The checksum file that lists this ISO's hash failed its own verification "
-"(bad/untrusted signature, or its key couldn't be confirmed) - nothing in it "
-"can be trusted. Re-download the checksum/signature files (and probably the "
-"ISO too), ideally from a different mirror."
-msgstr ""
-"Το αρχείο αθροισμάτων ελέγχου που αναφέρει το άθροισμα ελέγχου αυτού του ISO"
-" απέτυχε στη δική του επαλήθευση (μη έγκυρη/μη έμπιστη υπογραφή, ή το κλειδί"
-" του δεν μπόρεσε να επιβεβαιωθεί) - τίποτα σε αυτό δεν μπορεί να θεωρηθεί "
-"έμπιστο. Κατεβάστε ξανά τα αρχεία αθροισμάτων ελέγχου/υπογραφής (και πιθανώς"
-" και το ISO), κατά προτίμηση από διαφορετικό διακομιστή αντικατοπτρισμού."
+msgid "The checksum listing's signing key could not be fetched from any keyserver - nothing in it could be checked. This looks like a network problem, not necessarily a bad signature. Try again once you have a working connection."
+msgstr "Δεν ήταν δυνατή η λήψη του κλειδιού υπογραφής της λίστας αθροισμάτων ελέγχου από κανέναν διακομιστή κλειδιών - τίποτα σε αυτήν δεν ήταν δυνατό να ελεγχθεί. Αυτό μοιάζει με πρόβλημα δικτύου, όχι απαραίτητα με εσφαλμένη υπογραφή. Δοκιμάστε ξανά μόλις υπάρξει σύνδεση."
 
-#. TRANSLATORS: ${CHECKSUM_INFO_SAFE} is the checksum-listing file's name -
-#. keep the placeholder as-is.
+msgid "The checksum file that lists this ISO's hash failed its own verification (bad/untrusted signature, or its key couldn't be confirmed) - nothing in it can be trusted. Re-download the checksum/signature files (and probably the ISO too), ideally from a different mirror."
+msgstr "Το αρχείο αθροισμάτων ελέγχου που αναφέρει το άθροισμα ελέγχου αυτού του ISO απέτυχε στη δική του επαλήθευση (μη έγκυρη/μη έμπιστη υπογραφή, ή το κλειδί του δεν μπόρεσε να επιβεβαιωθεί) - τίποτα σε αυτό δεν μπορεί να θεωρηθεί έμπιστο. Κατεβάστε ξανά τα αρχεία αθροισμάτων ελέγχου/υπογραφής (και πιθανώς και το ISO), κατά προτίμηση από διαφορετικό διακομιστή αντικατοπτρισμού."
+
+#. TRANSLATORS: ${CHECKSUM_INFO_SAFE} is the checksum-listing file's name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This ISO was checked against a signed checksum listing "
-"(${CHECKSUM_INFO_SAFE}) that IS validly signed - but the ISO's own hash "
-"doesn't match what's listed. The checksum list itself is trustworthy; this "
-"particular download is not. Re-download the ISO, ideally from a different "
-"mirror."
-msgstr ""
-"Αυτό το ISO ελέγχθηκε σε σχέση με μια υπογεγραμμένη λίστα αθροισμάτων "
-"ελέγχου (${CHECKSUM_INFO_SAFE}) η οποία ΕΙΝΑΙ έγκυρα υπογεγραμμένη - όμως το"
-" άθροισμα ελέγχου του ίδιου του ISO δεν ταιριάζει με αυτό που αναφέρεται. Η "
-"ίδια η λίστα αθροισμάτων ελέγχου είναι έμπιστη· αυτή η συγκεκριμένη λήψη δεν"
-" είναι. Κατεβάστε ξανά το ISO, κατά προτίμηση από διαφορετικό διακομιστή "
-"αντικατοπτρισμού."
+msgid "This ISO was checked against a signed checksum listing (${CHECKSUM_INFO_SAFE}) that IS validly signed - but the ISO's own hash doesn't match what's listed. The checksum list itself is trustworthy; this particular download is not. Re-download the ISO, ideally from a different mirror."
+msgstr "Αυτό το ISO ελέγχθηκε σε σχέση με μια υπογεγραμμένη λίστα αθροισμάτων ελέγχου (${CHECKSUM_INFO_SAFE}) η οποία ΕΙΝΑΙ έγκυρα υπογεγραμμένη - όμως το άθροισμα ελέγχου του ίδιου του ISO δεν ταιριάζει με αυτό που αναφέρεται. Η ίδια η λίστα αθροισμάτων ελέγχου είναι έμπιστη· αυτή η συγκεκριμένη λήψη δεν είναι. Κατεβάστε ξανά το ISO, κατά προτίμηση από διαφορετικό διακομιστή αντικατοπτρισμού."
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"No direct signature file was found for this ISO, and none of the checksum-"
-"listing files found nearby mention this exact ISO filename either. If this "
-"distro uses a different naming convention, use \"${BTN_CHECK_ANOTHER_FILE}\""
-" and point at the right file directly."
-msgstr ""
-"Δεν βρέθηκε άμεσο αρχείο υπογραφής για αυτό το ISO, και κανένα από τα αρχεία"
-" λίστας αθροισμάτων ελέγχου που βρέθηκαν κοντά δεν αναφέρει επίσης ακριβώς "
-"αυτό το όνομα αρχείου ISO. Αν αυτή η διανομή χρησιμοποιεί διαφορετική "
-"σύμβαση ονοματοδοσίας, χρησιμοποιήστε το «${BTN_CHECK_ANOTHER_FILE}» και "
-"υποδείξτε απευθείας το σωστό αρχείο."
+msgid "No direct signature file was found for this ISO, and none of the checksum-listing files found nearby mention this exact ISO filename either. If this distro uses a different naming convention, use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the right file directly."
+msgstr "Δεν βρέθηκε άμεσο αρχείο υπογραφής για αυτό το ISO, και κανένα από τα αρχεία λίστας αθροισμάτων ελέγχου που βρέθηκαν κοντά δεν αναφέρει επίσης ακριβώς αυτό το όνομα αρχείου ISO. Αν αυτή η διανομή χρησιμοποιεί διαφορετική σύμβαση ονοματοδοσίας, χρησιμοποιήστε το «${BTN_CHECK_ANOTHER_FILE}» και υποδείξτε απευθείας το σωστό αρχείο."
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This signature file's name doesn't match this ISO's name, so it likely "
-"belongs to a different download. Use \"${BTN_CHECK_ANOTHER_FILE}\" and pick "
-"just this ISO, or just its own real signature file - the tool finds the "
-"matching one automatically."
-msgstr ""
-"Το όνομα αυτού του αρχείου υπογραφής δεν ταιριάζει με το όνομα αυτού του "
-"ISO, άρα πιθανώς ανήκει σε διαφορετική λήψη. Χρησιμοποιήστε το "
-"«${BTN_CHECK_ANOTHER_FILE}» και επιλέξτε μόνο αυτό το ISO, ή μόνο το δικό "
-"του πραγματικό αρχείο υπογραφής - το εργαλείο βρίσκει αυτόματα το αντίστοιχο"
-" αρχείο."
+msgid "This signature file's name doesn't match this ISO's name, so it likely belongs to a different download. Use \"${BTN_CHECK_ANOTHER_FILE}\" and pick just this ISO, or just its own real signature file - the tool finds the matching one automatically."
+msgstr "Το όνομα αυτού του αρχείου υπογραφής δεν ταιριάζει με το όνομα αυτού του ISO, άρα πιθανώς ανήκει σε διαφορετική λήψη. Χρησιμοποιήστε το «${BTN_CHECK_ANOTHER_FILE}» και επιλέξτε μόνο αυτό το ISO, ή μόνο το δικό του πραγματικό αρχείο υπογραφής - το εργαλείο βρίσκει αυτόματα το αντίστοιχο αρχείο."
 
-msgid ""
-"On top of the signature not matching, this signing key also isn't one this "
-"tool already recognizes - treat this file as untrustworthy and re-download "
-"from an official source."
-msgstr ""
-"Εκτός από το ότι η υπογραφή δεν ταιριάζει, αυτό το κλειδί υπογραφής δεν "
-"είναι επίσης ένα από τα κλειδιά που αναγνωρίζει ήδη αυτό το εργαλείο - "
-"θεωρήστε αυτό το αρχείο μη έμπιστο και κατεβάστε το ξανά από επίσημη πηγή."
+msgid "On top of the signature not matching, this signing key also isn't one this tool already recognizes - treat this file as untrustworthy and re-download from an official source."
+msgstr "Εκτός από το ότι η υπογραφή δεν ταιριάζει, αυτό το κλειδί υπογραφής δεν είναι επίσης ένα από τα κλειδιά που αναγνωρίζει ήδη αυτό το εργαλείο - θεωρήστε αυτό το αρχείο μη έμπιστο και κατεβάστε το ξανά από επίσημη πηγή."
 
-msgid ""
-"The ISO may be corrupted, or the download was incomplete or tampered with - "
-"try re-downloading it, ideally from a different mirror."
-msgstr ""
-"Το ISO ενδέχεται να είναι κατεστραμμένο, ή η λήψη ήταν ημιτελής ή έχει "
-"παραποιηθεί - δοκιμάστε να το κατεβάσετε ξανά, κατά προτίμηση από "
-"διαφορετικό διακομιστή αντικατοπτρισμού."
+msgid "The ISO may be corrupted, or the download was incomplete or tampered with - try re-downloading it, ideally from a different mirror."
+msgstr "Το ISO ενδέχεται να είναι κατεστραμμένο, ή η λήψη ήταν ημιτελής ή έχει παραποιηθεί - δοκιμάστε να το κατεβάσετε ξανά, κατά προτίμηση από διαφορετικό διακομιστή αντικατοπτρισμού."
+
+#. TRANSLATORS: ${WEAK_ALGO_SAFE} is a literal algorithm name (e.g. "md5") - keep the placeholder as-is.
+#, sh-format
+msgid "This relies on ${WEAK_ALGO_SAFE}, a broken checksum algorithm - a matching hash doesn't prove the ISO is genuine. Prefer a real signature or a stronger checksum (SHA256/SHA512) when available."
+msgstr "Αυτό βασίζεται στο ${WEAK_ALGO_SAFE}, έναν κατεστραμμένο αλγόριθμο αθροίσματος ελέγχου - ένα αντίστοιχο άθροισμα δεν αποδεικνύει ότι το ISO είναι γνήσιο. Προτιμήστε μια πραγματική υπογραφή ή ένα ισχυρότερο άθροισμα ελέγχου (SHA256/SHA512) όταν είναι διαθέσιμο."
+
+#, sh-format
+msgid "${algo} is a broken checksum algorithm - a matching hash doesn't prove the ISO is genuine. Prefer a real signature or a stronger checksum (SHA256/SHA512) when available."
+msgstr "Το ${algo} είναι ένας κατεστραμμένος αλγόριθμος αθροίσματος ελέγχου - ένα αντίστοιχο άθροισμα δεν αποδεικνύει ότι το ISO είναι γνήσιο. Προτιμήστε μια πραγματική υπογραφή ή ένα ισχυρότερο άθροισμα ελέγχου (SHA256/SHA512) όταν είναι διαθέσιμο."
 
 msgid "Usage:"
 msgstr "Χρήση:"
 
-#. TRANSLATORS: keep the distro names (Debian, Ubuntu, Linux Mint) exactly as-
-#. is.
-msgid ""
-"Verify the GPG signature of an ISO image (any distro - built-in recognition "
-"of the documented MX Linux/antiX signing keys, plus a checksum-listing "
-"convention for distros that sign a checksum listing instead of the ISO "
-"directly, e.g. Debian, Ubuntu, Linux Mint)."
-msgstr ""
-"Επαληθεύει την υπογραφή GPG μιας εικόνας ISO (οποιαδήποτε διανομή - με "
-"ενσωματωμένη αναγνώριση των τεκμηριωμένων κλειδιών υπογραφής MX Linux/antiX,"
-" καθώς και μια σύμβαση λίστας αθροισμάτων ελέγχου για διανομές που "
-"υπογράφουν μια λίστα αθροισμάτων ελέγχου αντί για το ίδιο το ISO, π.χ. "
-"Debian, Ubuntu, Linux Mint)."
+#. TRANSLATORS: keep the distro names (Debian, Ubuntu, Linux Mint) exactly as-is.
+msgid "Verify the GPG signature of an ISO image (any distro - built-in recognition of the documented MX Linux/antiX signing keys, plus a checksum-listing convention for distros that sign a checksum listing instead of the ISO directly, e.g. Debian, Ubuntu, Linux Mint)."
+msgstr "Επαληθεύει την υπογραφή GPG μιας εικόνας ISO (οποιαδήποτε διανομή - με ενσωματωμένη αναγνώριση των τεκμηριωμένων κλειδιών υπογραφής MX Linux/antiX, καθώς και μια σύμβαση λίστας αθροισμάτων ελέγχου για διανομές που υπογράφουν μια λίστα αθροισμάτων ελέγχου αντί για το ίδιο το ISO, π.χ. Debian, Ubuntu, Linux Mint)."
 
 msgid "this help"
 msgstr "αυτή η βοήθεια"
@@ -764,56 +554,38 @@ msgstr "αυτή η βοήθεια"
 msgid "show version and exit"
 msgstr "εμφάνιση έκδοσης και έξοδος"
 
-msgid ""
-"full manual: every option, recognition rules, the checksum-listing "
-"convention, and more"
-msgstr ""
-"πλήρες εγχειρίδιο: όλες οι επιλογές, οι κανόνες αναγνώρισης, η σύμβαση "
-"λίστας αθροισμάτων ελέγχου και άλλα"
+msgid "full manual: every option, recognition rules, the checksum-listing convention, and more"
+msgstr "πλήρες εγχειρίδιο: όλες οι επιλογές, οι κανόνες αναγνώρισης, η σύμβαση λίστας αθροισμάτων ελέγχου και άλλα"
 
 msgid "verify once even if the key isn't recognized"
 msgstr "επαλήθευση μία φορά ακόμη κι αν το κλειδί δεν αναγνωρίζεται"
 
-#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN} is a literal flag name - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN} is a literal flag name - keep the placeholder as-is.
 #, sh-format
 msgid "like ${FLAG_ALLOW_UNKNOWN}, and remembers the key too"
 msgstr "όπως το ${FLAG_ALLOW_UNKNOWN}, αλλά απομνημονεύει και το κλειδί"
 
 msgid "list this tool's built-in recognized signing keys"
-msgstr ""
-"λίστα των ενσωματωμένων κλειδιών υπογραφής που αναγνωρίζει αυτό το εργαλείο"
+msgstr "λίστα των ενσωματωμένων κλειδιών υπογραφής που αναγνωρίζει αυτό το εργαλείο"
 
 msgid "list every key saved in trustedkeys.gpg"
 msgstr "λίστα όλων των κλειδιών που είναι αποθηκευμένα στο trustedkeys.gpg"
 
-msgid ""
-"Run with no arguments, or via a file manager's \"Open With\" (up to 3 "
-"files), to open a picker window instead."
-msgstr ""
-"Εκτελούμενο χωρίς ορίσματα, ή μέσω του «Άνοιγμα με» του διαχειριστή αρχείων "
-"(έως 3 αρχεία), ανοίγει αντ' αυτού ένα παράθυρο επιλογής."
+msgid "Run with no arguments, or via a file manager's \"Open With\" (up to 3 files), to open a picker window instead."
+msgstr "Εκτελούμενο χωρίς ορίσματα, ή μέσω του «Άνοιγμα με» του διαχειριστή αρχείων (έως 3 αρχεία), ανοίγει αντ' αυτού ένα παράθυρο επιλογής."
 
-#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-is.
 #, sh-format
 msgid "For every other option (scripting/automation flags) see ${FLAG_MAN}."
-msgstr ""
-"Για κάθε άλλη επιλογή (σημαίες σεναρίων/αυτοματισμού) δείτε το ${FLAG_MAN}."
+msgstr "Για κάθε άλλη επιλογή (σημαίες σεναρίων/αυτοματισμού) δείτε το ${FLAG_MAN}."
 
 msgid "could not generate the man page (pandoc failed)"
-msgstr ""
-"δεν ήταν δυνατή η δημιουργία της σελίδας εγχειριδίου (το pandoc απέτυχε)"
+msgstr "δεν ήταν δυνατή η δημιουργία της σελίδας εγχειριδίου (το pandoc απέτυχε)"
 
 #. TRANSLATORS: ${man_src} is a file path, ${FLAG_MAN} a literal flag name.
 #, sh-format
-msgid ""
-"man page not built yet and pandoc isn't installed - see ${man_src} directly,"
-" or install pandoc and re-run ${FLAG_MAN}"
-msgstr ""
-"η σελίδα εγχειριδίου δεν έχει δημιουργηθεί ακόμη και το pandoc δεν είναι "
-"εγκατεστημένο - δείτε απευθείας το ${man_src}, ή εγκαταστήστε το pandoc και "
-"εκτελέστε ξανά το ${FLAG_MAN}"
+msgid "man page not built yet and pandoc isn't installed - see ${man_src} directly, or install pandoc and re-run ${FLAG_MAN}"
+msgstr "η σελίδα εγχειριδίου δεν έχει δημιουργηθεί ακόμη και το pandoc δεν είναι εγκατεστημένο - δείτε απευθείας το ${man_src}, ή εγκαταστήστε το pandoc και εκτελέστε ξανά το ${FLAG_MAN}"
 
 msgid "warning:"
 msgstr "προειδοποίηση:"
@@ -824,8 +596,7 @@ msgstr "πληροφορία:"
 msgid "error:"
 msgstr "σφάλμα:"
 
-#. TRANSLATORS: ${flag}/${FLAG_MAN} are literal names - keep placeholders as-
-#. is.
+#. TRANSLATORS: ${flag}/${FLAG_MAN} are literal names - keep placeholders as-is.
 #, sh-format
 msgid "${flag} requires a value (see ${FLAG_MAN})"
 msgstr "το ${flag} απαιτεί τιμή (δείτε ${FLAG_MAN})"
@@ -833,66 +604,47 @@ msgstr "το ${flag} απαιτεί τιμή (δείτε ${FLAG_MAN})"
 msgid "Manage trusted keys from the command line:"
 msgstr "Διαχειριστείτε τα έμπιστα κλειδιά από τη γραμμή εντολών:"
 
-#. TRANSLATORS: ${ENV_DISPLAY}/${ENV_WAYLAND_DISPLAY} are literal env-var
-#. names - keep placeholders as-is.
+#. TRANSLATORS: ${ENV_DISPLAY}/${ENV_WAYLAND_DISPLAY} are literal env-var names - keep placeholders as-is.
 #, sh-format
-msgid ""
-"no graphical session detected (neither ${ENV_DISPLAY} nor "
-"${ENV_WAYLAND_DISPLAY} is set) - the trusted-keys manager needs a desktop to"
-" show its window."
-msgstr ""
-"δεν εντοπίστηκε γραφική συνεδρία (ούτε το ${ENV_DISPLAY} ούτε το "
-"${ENV_WAYLAND_DISPLAY} έχει οριστεί) - ο διαχειριστής έμπιστων κλειδιών "
-"χρειάζεται γραφικό περιβάλλον για να εμφανίσει το παράθυρό του."
+msgid "no graphical session detected (neither ${ENV_DISPLAY} nor ${ENV_WAYLAND_DISPLAY} is set) - the trusted-keys manager needs a desktop to show its window."
+msgstr "δεν εντοπίστηκε γραφική συνεδρία (ούτε το ${ENV_DISPLAY} ούτε το ${ENV_WAYLAND_DISPLAY} έχει οριστεί) - ο διαχειριστής έμπιστων κλειδιών χρειάζεται γραφικό περιβάλλον για να εμφανίσει το παράθυρό του."
 
 msgid "Manage trusted keys from the command line instead:"
 msgstr "Διαχειριστείτε τα έμπιστα κλειδιά από τη γραμμή εντολών:"
+
+msgid "list key(s) saved in trustedkeys.gpg (all if none given)"
+msgstr "λίστα κλειδιού/-ών αποθηκευμένου/-ων στο trustedkeys.gpg (όλα αν δεν δοθεί κανένα)"
+
+msgid "check every trusted key against pubring.kbx, mx-gpg-keyring, and a keyserver for updates (renewed expiry, new subkeys, or a revocation)"
+msgstr "έλεγχος κάθε έμπιστου κλειδιού στο pubring.kbx, στο mx-gpg-keyring και σε έναν διακομιστή κλειδιών για ενημερώσεις (παρατεταμένη ισχύ, νέα υποκλειδιά ή ανάκληση)"
+
+msgid "show fingerprint/algorithm/dates/subkeys for trusted key(s)"
+msgstr "εμφάνιση αποτυπώματος/αλγορίθμου/ημερομηνιών/υποκλειδιών για τα έμπιστα κλειδιά"
 
 msgid "remove <fpr> from trustedkeys.gpg"
 msgstr "αφαίρεση του <fpr> από το trustedkeys.gpg"
 
 msgid "export trusted key(s) to <path> (all if none given)"
-msgstr ""
-"εξαγωγή έμπιστου/-ων κλειδιού/-ών στο <path> (όλα αν δεν δοθεί κανένα)"
+msgstr "εξαγωγή έμπιστου/-ων κλειδιού/-ών στο <path> (όλα αν δεν δοθεί κανένα)"
 
 msgid "list the key(s) in an external key file, read-only"
 msgstr "λίστα των κλειδιών σε εξωτερικό αρχείο κλειδιών, μόνο για ανάγνωση"
 
 msgid "import key(s) from an external key file (all if none given)"
-msgstr ""
-"εισαγωγή κλειδιού/-ών από εξωτερικό αρχείο κλειδιών (όλα αν δεν δοθεί "
-"κανένα)"
+msgstr "εισαγωγή κλειδιού/-ών από εξωτερικό αρχείο κλειδιών (όλα αν δεν δοθεί κανένα)"
 
 #. TRANSLATORS: ${CMD_MAN} is a literal command - keep the placeholder as-is.
 #, sh-format
 msgid "See '${CMD_MAN}' for the full manual."
 msgstr "Δείτε το '${CMD_MAN}' για το πλήρες εγχειρίδιο."
 
-#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"verify-iso-sig - opens a window to pick and check an ISO or signature file "
-"by default when a graphical session is available; falls back to the plain "
-"command-line tool otherwise. This preamble covers this launcher's own "
-"behavior; a short command-line reference (used automatically whenever given "
-"arguments don't look like that window's own syntax, or no graphical session "
-"is available) follows below it - see ${FLAG_MAN} for the complete one."
-msgstr ""
-"Το verify-iso-sig ανοίγει από προεπιλογή ένα παράθυρο για να επιλέξετε και "
-"να ελέγξετε ένα αρχείο ISO ή υπογραφής, όταν υπάρχει διαθέσιμη γραφική "
-"συνεδρία· διαφορετικά επιστρέφει στο απλό εργαλείο γραμμής εντολών. Αυτή η "
-"εισαγωγή καλύπτει τη συμπεριφορά αυτού του εκκινητή· μια σύντομη αναφορά "
-"γραμμής εντολών (που χρησιμοποιείται αυτόματα όποτε τα ορίσματα δεν μοιάζουν"
-" με τη σύνταξη αυτού του παραθύρου, ή δεν υπάρχει γραφική συνεδρία) "
-"ακολουθεί αμέσως παρακάτω - δείτε το ${FLAG_MAN} για την πλήρη έκδοση."
+msgid "verify-iso-sig - opens a window to pick and check an ISO or signature file by default when a graphical session is available; falls back to the plain command-line tool otherwise. This preamble covers this launcher's own behavior; a short command-line reference (used automatically whenever given arguments don't look like that window's own syntax, or no graphical session is available) follows below it - see ${FLAG_MAN} for the complete one."
+msgstr "Το verify-iso-sig ανοίγει από προεπιλογή ένα παράθυρο για να επιλέξετε και να ελέγξετε ένα αρχείο ISO ή υπογραφής, όταν υπάρχει διαθέσιμη γραφική συνεδρία· διαφορετικά επιστρέφει στο απλό εργαλείο γραμμής εντολών. Αυτή η εισαγωγή καλύπτει τη συμπεριφορά αυτού του εκκινητή· μια σύντομη αναφορά γραμμής εντολών (που χρησιμοποιείται αυτόματα όποτε τα ορίσματα δεν μοιάζουν με τη σύνταξη αυτού του παραθύρου, ή δεν υπάρχει γραφική συνεδρία) ακολουθεί αμέσως παρακάτω - δείτε το ${FLAG_MAN} για την πλήρη έκδοση."
 
-msgid ""
-"open that window if a display is available (default), otherwise this same "
-"help"
-msgstr ""
-"ανοίγει αυτό το παράθυρο αν υπάρχει διαθέσιμη οθόνη (προεπιλογή), "
-"διαφορετικά την ίδια βοήθεια"
+msgid "open that window if a display is available (default), otherwise this same help"
+msgstr "ανοίγει αυτό το παράθυρο αν υπάρχει διαθέσιμη οθόνη (προεπιλογή), διαφορετικά την ίδια βοήθεια"
 
 msgid "(default) the graphical main program"
 msgstr "(προεπιλογή) το κύριο γραφικό πρόγραμμα"
@@ -900,58 +652,45 @@ msgstr "(προεπιλογή) το κύριο γραφικό πρόγραμμα
 msgid "plain command-line mode"
 msgstr "λειτουργία απλής γραμμής εντολών"
 
-#. TRANSLATORS: ${FLAG_HELP} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_HELP} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"trusted-keys manager GUI (add ${FLAG_HELP} for its own flags), or with no "
-"display, print the CLI flags that cover the same ground"
-msgstr ""
-"γραφικό περιβάλλον διαχείρισης έμπιστων κλειδιών (προσθέστε ${FLAG_HELP} για"
-" τις δικές του επιλογές), ή χωρίς οθόνη, εκτύπωση των επιλογών CLI που "
-"καλύπτουν το ίδιο έδαφος"
+msgid "trusted-keys manager GUI (add ${FLAG_HELP} for its own flags), or with no display, print the CLI flags that cover the same ground"
+msgstr "γραφικό περιβάλλον διαχείρισης έμπιστων κλειδιών (προσθέστε ${FLAG_HELP} για τις δικές του επιλογές), ή χωρίς οθόνη, εκτύπωση των επιλογών CLI που καλύπτουν το ίδιο έδαφος"
 
-#. TRANSLATORS: ${FLAG_GUI} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_GUI} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"same as ${FLAG_GUI}, but also shows the drag-and-drop pane (most users won't"
-" need this - reachable from the app menu's own \"Drag & Drop\" entry)"
-msgstr ""
-"ίδιο με το ${FLAG_GUI}, αλλά εμφανίζει επιπλέον την περιοχή μεταφοράς και "
-"απόθεσης (οι περισσότεροι χρήστες δεν το χρειάζονται - προσβάσιμο από την "
-"καταχώριση «Μεταφορά και απόθεση» του μενού της εφαρμογής)"
+msgid "same as ${FLAG_GUI}, but also shows the drag-and-drop pane (most users won't need this - reachable from the app menu's own \"Drag & Drop\" entry)"
+msgstr "ίδιο με το ${FLAG_GUI}, αλλά εμφανίζει επιπλέον την περιοχή μεταφοράς και απόθεσης (οι περισσότεροι χρήστες δεν το χρειάζονται - προσβάσιμο από την καταχώριση «Μεταφορά και απόθεση» του μενού της εφαρμογής)"
 
-#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${algo} are literal - keep placeholders
-#. as-is.
+#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${algo} are literal - keep placeholders as-is.
 #, sh-format
-msgid ""
-"unknown ${FLAG_CHECKSUM_ALGO} '${algo}' (expected sha256, sha512, sha1, or "
-"md5)"
-msgstr ""
-"άγνωστο ${FLAG_CHECKSUM_ALGO} '${algo}' (αναμένεται sha256, sha512, sha1, ή "
-"md5)"
+msgid "unknown ${FLAG_CHECKSUM_ALGO} '${algo}' (expected sha256, sha512, sha1, or md5)"
+msgstr "άγνωστο ${FLAG_CHECKSUM_ALGO} '${algo}' (αναμένεται sha256, sha512, sha1, ή md5)"
 
 #. TRANSLATORS: ${opt}/${FLAG_MAN} are literal - keep placeholders as-is.
 #, sh-format
 msgid "unknown option '${opt}' (see ${FLAG_MAN})"
 msgstr "άγνωστη επιλογή '${opt}' (δείτε ${FLAG_MAN})"
 
-#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder
-#. as-is.
+#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder as-is.
 #, sh-format
 msgid "exactly one fingerprint argument is required for ${FLAG_KEEP_KEY}"
 msgstr "για το ${FLAG_KEEP_KEY} απαιτείται ακριβώς ένα όρισμα αποτυπώματος"
 
-#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder
-#. as-is.
+#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"${FLAG_KEEP_KEY} needs a full 40-character (or 64-character) hex "
-"fingerprint, not '${FPR}'"
-msgstr ""
-"Το ${FLAG_KEEP_KEY} απαιτεί πλήρες δεκαεξαδικό αποτύπωμα 40 χαρακτήρων (ή 64"
-" χαρακτήρων), όχι '${FPR}'"
+msgid "${FLAG_KEEP_KEY} needs a full 40-character (or 64-character) hex fingerprint, not '${FPR}'"
+msgstr "Το ${FLAG_KEEP_KEY} απαιτεί πλήρες δεκαεξαδικό αποτύπωμα 40 χαρακτήρων (ή 64 χαρακτήρων), όχι '${FPR}'"
+
+#. TRANSLATORS: ${FLAG_SHOW_KEY_DETAILS} is a literal flag name - keep the placeholder as-is.
+#, sh-format
+msgid "at least one fingerprint argument is required for ${FLAG_SHOW_KEY_DETAILS}"
+msgstr "για το ${FLAG_SHOW_KEY_DETAILS} απαιτείται τουλάχιστον ένα όρισμα αποτυπώματος"
+
+#. TRANSLATORS: ${FLAG_SHOW_KEY_DETAILS} is a literal flag name - keep the placeholder as-is.
+#, sh-format
+msgid "${FLAG_SHOW_KEY_DETAILS} needs a full 40-character (or 64-character) hex fingerprint, not '${fpr}'"
+msgstr "Το ${FLAG_SHOW_KEY_DETAILS} απαιτεί πλήρες δεκαεξαδικό αποτύπωμα 40 χαρακτήρων (ή 64 χαρακτήρων), όχι '${fpr}'"
 
 msgid "this option takes no extra arguments"
 msgstr "αυτή η επιλογή δεν δέχεται επιπλέον ορίσματα"
@@ -960,99 +699,96 @@ msgid "expected an ISO or signature file to check"
 msgstr "αναμενόταν ένα αρχείο ISO ή υπογραφής για έλεγχο"
 
 #, sh-format
-msgid ""
-"cannot detect what '${anchor_base}' belongs to: '${cand1_base}', "
-"'${cand2_base}'."
-msgstr ""
-"δεν είναι δυνατό να εντοπιστεί σε τι ανήκει το «${anchor_base}»: "
-"«${cand1_base}», «${cand2_base}»."
+msgid "cannot detect what '${anchor_base}' belongs to: '${cand1_base}', '${cand2_base}'."
+msgstr "δεν είναι δυνατό να εντοπιστεί σε τι ανήκει το «${anchor_base}»: «${cand1_base}», «${cand2_base}»."
 
 #, sh-format
-msgid ""
-"cannot detect how these three files belong together: '${triple_base1}', "
-"'${triple_base2}', '${triple_base3}'."
-msgstr ""
-"δεν είναι δυνατό να εντοπιστεί πώς αυτά τα τρία αρχεία ταιριάζουν μεταξύ "
-"τους: «${triple_base1}», «${triple_base2}», «${triple_base3}»."
+msgid "cannot detect how these three files belong together: '${triple_base1}', '${triple_base2}', '${triple_base3}'."
+msgstr "δεν είναι δυνατό να εντοπιστεί πώς αυτά τα τρία αρχεία ταιριάζουν μεταξύ τους: «${triple_base1}», «${triple_base2}», «${triple_base3}»."
 
 #, sh-format
-msgid ""
-"cannot detect an ISO, a checksum listing, and its signature among these "
-"three files: '${triple_base1}', '${triple_base2}', '${triple_base3}'."
-msgstr ""
-"δεν είναι δυνατό να εντοπιστεί ένα ISO, μια λίστα αθροισμάτων ελέγχου και η "
-"υπογραφή της ανάμεσα σε αυτά τα τρία αρχεία: «${triple_base1}», "
-"«${triple_base2}», «${triple_base3}»."
+msgid "cannot detect an ISO, a checksum listing, and its signature among these three files: '${triple_base1}', '${triple_base2}', '${triple_base3}'."
+msgstr "δεν είναι δυνατό να εντοπιστεί ένα ISO, μια λίστα αθροισμάτων ελέγχου και η υπογραφή της ανάμεσα σε αυτά τα τρία αρχεία: «${triple_base1}», «${triple_base2}», «${triple_base3}»."
 
 #, sh-format
-msgid ""
-"'${ISO}' is a directory, not a file - point this at the actual .iso file (or"
-" its .sig/.asc/.gpg/.sign signature file) directly."
-msgstr ""
-"Το '${ISO}' είναι φάκελος, όχι αρχείο - υποδείξτε το ίδιο το αρχείο .iso (ή "
-"απευθείας το αρχείο υπογραφής του .sig/.asc/.gpg/.sign)."
+msgid "'${ISO}' is a directory, not a file - point this at the actual .iso file (or its .sig/.asc/.gpg/.sign signature file) directly."
+msgstr "Το '${ISO}' είναι φάκελος, όχι αρχείο - υποδείξτε το ίδιο το αρχείο .iso (ή απευθείας το αρχείο υπογραφής του .sig/.asc/.gpg/.sign)."
 
 #, sh-format
-msgid ""
-"'${named_base}' looks like a signature file by its name, but its content "
-"doesn't look like a real one - point this tool at the actual signature file,"
-" or a checksum listing."
-msgstr ""
-"Το «${named_base}» μοιάζει με αρχείο υπογραφής ως προς το όνομά του, αλλά το"
-" περιεχόμενό του δεν μοιάζει με πραγματικό - κατευθύνετε αυτό το εργαλείο "
-"στο πραγματικό αρχείο υπογραφής, ή σε μια λίστα αθροισμάτων ελέγχου."
+msgid "'${named_base}' looks like a signature file by its name, but its content doesn't look like a real one - point this tool at the actual signature file, or a checksum listing."
+msgstr "Το «${named_base}» μοιάζει με αρχείο υπογραφής ως προς το όνομά του, αλλά το περιεχόμενό του δεν μοιάζει με πραγματικό - κατευθύνετε αυτό το εργαλείο στο πραγματικό αρχείο υπογραφής, ή σε μια λίστα αθροισμάτων ελέγχου."
 
 #, sh-format
-msgid ""
-"neither '${iso_base}' nor '${sig_base}' looks like a real ISO signature "
-"file, by name or content - point this tool at the actual ISO and its "
-".sig/.asc/.gpg/.sign file, or a checksum listing."
-msgstr ""
-"δεν μοιάζει ούτε το «${iso_base}» ούτε το «${sig_base}» με πραγματικό αρχείο"
-" υπογραφής ISO, ούτε ως προς το όνομα ούτε ως προς το περιεχόμενο - "
-"κατευθύνετε αυτό το εργαλείο στο ίδιο το ISO και στο αρχείο "
-".sig/.asc/.gpg/.sign του, ή σε μια λίστα αθροισμάτων ελέγχου."
+msgid "neither '${iso_base}' nor '${sig_base}' looks like a real ISO signature file, by name or content - point this tool at the actual ISO and its .sig/.asc/.gpg/.sign file, or a checksum listing."
+msgstr "δεν μοιάζει ούτε το «${iso_base}» ούτε το «${sig_base}» με πραγματικό αρχείο υπογραφής ISO, ούτε ως προς το όνομα ούτε ως προς το περιεχόμενο - κατευθύνετε αυτό το εργαλείο στο ίδιο το ISO και στο αρχείο .sig/.asc/.gpg/.sign του, ή σε μια λίστα αθροισμάτων ελέγχου."
 
 #, sh-format
-msgid ""
-"'${iso_base}' and '${sig_base}' both look like signature or checksum-listing"
-" files - point this tool at the actual ISO, plus its checksum listing or "
-"signature file."
-msgstr ""
-"Και το «${iso_base}» και το «${sig_base}» μοιάζουν με αρχείο υπογραφής ή "
-"λίστα αθροισμάτων ελέγχου - κατευθύνετε αυτό το εργαλείο στο ίδιο το ISO, "
-"καθώς και στη λίστα αθροισμάτων ελέγχου ή το αρχείο υπογραφής του."
+msgid "'${iso_base}' and '${sig_base}' both look like signature or checksum-listing files - point this tool at the actual ISO, plus its checksum listing or signature file."
+msgstr "Και το «${iso_base}» και το «${sig_base}» μοιάζουν με αρχείο υπογραφής ή λίστα αθροισμάτων ελέγχου - κατευθύνετε αυτό το εργαλείο στο ίδιο το ISO, καθώς και στη λίστα αθροισμάτων ελέγχου ή το αρχείο υπογραφής του."
 
 #, sh-format
-msgid ""
-"'${SIG}' is a directory, not a file - point this at the actual signature "
-"file directly."
-msgstr ""
-"Το '${SIG}' είναι φάκελος, όχι αρχείο - υποδείξτε απευθείας το ίδιο το "
-"αρχείο υπογραφής."
+msgid "'${SIG}' is a directory, not a file - point this at the actual signature file directly."
+msgstr "Το '${SIG}' είναι φάκελος, όχι αρχείο - υποδείξτε απευθείας το ίδιο το αρχείο υπογραφής."
 
 #, sh-format
-msgid ""
-"this key expired on ${date_str} - this does not affect the signature check"
-msgstr ""
-"αυτό το κλειδί έληξε στις ${date_str} - αυτό δεν επηρεάζει τον έλεγχο της "
-"υπογραφής"
+msgid "warning: could not read ${MX_GPG_KEYRING}: ${out}"
+msgstr "προειδοποίηση: δεν ήταν δυνατή η ανάγνωση του ${MX_GPG_KEYRING}: ${out}"
+
+#, sh-format
+msgid "this key expired on ${date_str} - this does not affect the signature check"
+msgstr "αυτό το κλειδί έληξε στις ${date_str} - αυτό δεν επηρεάζει τον έλεγχο της υπογραφής"
+
+msgid "this signing key has been revoked - refusing to use it, whatever the reason (a real key compromise, or the owner deliberately retiring it)"
+msgstr "αυτό το κλειδί υπογραφής έχει ανακληθεί - δεν θα χρησιμοποιηθεί, όποιος κι αν είναι ο λόγος (πραγματική διακύβευση του κλειδιού, ή σκόπιμη απόσυρσή του από τον κάτοχο)"
+
+msgid "this key was found revoked locally - updated the local copy automatically"
+msgstr "αυτό το κλειδί βρέθηκε ανακληθέν τοπικά - το τοπικό αντίγραφο ενημερώθηκε αυτόματα"
 
 msgid "this key's expiry was renewed - updated local copy automatically"
-msgstr ""
-"η ισχύς αυτού του κλειδιού ανανεώθηκε - το τοπικό αντίγραφο ενημερώθηκε "
-"αυτόματα"
+msgstr "η ισχύς αυτού του κλειδιού ανανεώθηκε - το τοπικό αντίγραφο ενημερώθηκε αυτόματα"
 
 #, sh-format
 msgid "checking ${ks} for a renewed copy of this key..."
 msgstr "έλεγχος του ${ks} για ανανεωμένο αντίγραφο αυτού του κλειδιού..."
 
+#, sh-format
+msgid "${ks} reports this key as revoked - updated the local copy automatically"
+msgstr "το ${ks} αναφέρει ότι αυτό το κλειδί είναι ανακληθέν - το τοπικό αντίγραφο ενημερώθηκε αυτόματα"
+
 msgid "no renewal found - continuing with the existing (expired) key"
 msgstr "δεν βρέθηκε ανανέωση - συνέχεια με το υπάρχον (ληγμένο) κλειδί"
 
 #, sh-format
-msgid "'${UNTRUST_KEY}' is not in ${TRUSTED_GPG}"
-msgstr "Το '${UNTRUST_KEY}' δεν βρίσκεται στο ${TRUSTED_GPG}"
+msgid "warning: fingerprint '${fpr}' not found in ${TRUSTED_GPG}, skipping"
+msgstr "προειδοποίηση: το αποτύπωμα '${fpr}' δεν βρέθηκε στο ${TRUSTED_GPG}, παράλειψη"
+
+#, sh-format
+msgid "note: '${fpr}' is a subkey - resolved to its primary key '${resolved}'"
+msgstr "σημείωση: το '${fpr}' είναι υποκλειδί - επιλύθηκε στο κύριο κλειδί του '${resolved}'"
+
+#, sh-format
+msgid "no trusted keys saved yet (${TRUSTED_GPG} doesn't exist)"
+msgstr "δεν έχουν αποθηκευτεί ακόμη έμπιστα κλειδιά (το ${TRUSTED_GPG} δεν υπάρχει)"
+
+#, sh-format
+msgid "${fpr} (${uid}) is revoked - updated ${TRUSTED_GPG}"
+msgstr "${fpr} (${uid}) έχει ανακληθεί - το ${TRUSTED_GPG} ενημερώθηκε"
+
+#, sh-format
+msgid "${fpr} (${uid}) has newer key data - updated ${TRUSTED_GPG}"
+msgstr "${fpr} (${uid}) διαθέτει νεότερα δεδομένα κλειδιού - το ${TRUSTED_GPG} ενημερώθηκε"
+
+#, sh-format
+msgid "checked ${checked} key(s): ${updated} updated, ${revoked_found} revoked"
+msgstr "ελέγχθηκαν ${checked} κλειδί(ά): ${updated} ενημερώθηκαν, ${revoked_found} ανακλήθηκαν"
+
+#, sh-format
+msgid "${unreachable} of ${checked} key(s) could not be checked against any keyserver - results for those may be incomplete"
+msgstr "${unreachable} από ${checked} κλειδιά δεν ήταν δυνατό να ελεγχθούν σε κανέναν διακομιστή κλειδιών - τα αποτελέσματα γι' αυτά ενδέχεται να είναι ελλιπή"
+
+#, sh-format
+msgid "warning: could not read details for '${fpr}': ${out}"
+msgstr "προειδοποίηση: δεν ήταν δυνατή η ανάγνωση των λεπτομερειών για το '${fpr}': ${out}"
 
 #, sh-format
 msgid "removed ${UNTRUST_KEY} from ${TRUSTED_GPG}"
@@ -1060,26 +796,7 @@ msgstr "αφαιρέθηκε το ${UNTRUST_KEY} από το ${TRUSTED_GPG}"
 
 #, sh-format
 msgid "could not remove '${UNTRUST_KEY}' from ${TRUSTED_GPG}: ${out}"
-msgstr ""
-"δεν ήταν δυνατή η αφαίρεση του '${UNTRUST_KEY}' από το ${TRUSTED_GPG}: "
-"${out}"
-
-#, sh-format
-msgid "no trusted keys saved yet (${TRUSTED_GPG} doesn't exist)"
-msgstr ""
-"δεν έχουν αποθηκευτεί ακόμη έμπιστα κλειδιά (το ${TRUSTED_GPG} δεν υπάρχει)"
-
-#, sh-format
-msgid "warning: fingerprint '${fpr}' not found in ${TRUSTED_GPG}, skipping"
-msgstr ""
-"προειδοποίηση: το αποτύπωμα '${fpr}' δεν βρέθηκε στο ${TRUSTED_GPG}, "
-"παράλειψη"
-
-#, sh-format
-msgid "note: '${fpr}' is a subkey - resolved to its primary key '${resolved}'"
-msgstr ""
-"σημείωση: το '${fpr}' είναι υποκλειδί - επιλύθηκε στο κύριο κλειδί του "
-"'${resolved}'"
+msgstr "δεν ήταν δυνατή η αφαίρεση του '${UNTRUST_KEY}' από το ${TRUSTED_GPG}: ${out}"
 
 msgid "no matching trusted key(s) to export"
 msgstr "δεν υπάρχουν αντίστοιχα έμπιστα κλειδιά προς εξαγωγή"
@@ -1090,53 +807,39 @@ msgstr "δεν ήταν δυνατή η εξαγωγή στο '${EXPORT_TRUSTED_
 
 #, sh-format
 msgid "exported ${EXPORTED_COUNT} key(s) to ${EXPORT_TRUSTED_KEYS}"
-msgstr ""
-"έγινε εξαγωγή ${EXPORTED_COUNT} κλειδιού/-ών στο ${EXPORT_TRUSTED_KEYS}"
+msgstr "έγινε εξαγωγή ${EXPORTED_COUNT} κλειδιού/-ών στο ${EXPORT_TRUSTED_KEYS}"
 
 #, sh-format
 msgid "cannot read '${INSPECT_KEY_FILE}'"
 msgstr "δεν είναι δυνατή η ανάγνωση του '${INSPECT_KEY_FILE}'"
 
 #, sh-format
-msgid ""
-"'${INSPECT_KEY_FILE}' does not look like a valid OpenPGP key file: "
-"${SHOW_OUT}"
-msgstr ""
-"Το '${INSPECT_KEY_FILE}' δεν μοιάζει με έγκυρο αρχείο κλειδιού OpenPGP: "
-"${SHOW_OUT}"
+msgid "'${INSPECT_KEY_FILE}' does not look like a valid OpenPGP key file: ${SHOW_OUT}"
+msgstr "Το '${INSPECT_KEY_FILE}' δεν μοιάζει με έγκυρο αρχείο κλειδιού OpenPGP: ${SHOW_OUT}"
 
 #, sh-format
-msgid ""
-"'${INSPECT_KEY_FILE}' contains private/secret key material - refusing to "
-"treat it as a public trusted-signing key"
-msgstr ""
-"Το '${INSPECT_KEY_FILE}' περιέχει ιδιωτικό/μυστικό υλικό κλειδιού - άρνηση "
-"μεταχείρισής του ως δημόσιο έμπιστο κλειδί υπογραφής"
+msgid "'${INSPECT_KEY_FILE}' contains private/secret key material - refusing to treat it as a public trusted-signing key"
+msgstr "Το '${INSPECT_KEY_FILE}' περιέχει ιδιωτικό/μυστικό υλικό κλειδιού - άρνηση μεταχείρισής του ως δημόσιο έμπιστο κλειδί υπογραφής"
+
+#, sh-format
+msgid "${fpr} removed from the explicitly-untrusted list - it can be auto-recognized again"
+msgstr "το ${fpr} αφαιρέθηκε από τη λίστα ρητά μη έμπιστων κλειδιών - μπορεί να αναγνωριστεί ξανά αυτόματα"
 
 #, sh-format
 msgid "warning: could not export key from ${ring}: ${out}"
-msgstr ""
-"προειδοποίηση: δεν ήταν δυνατή η εξαγωγή κλειδιού από το ${ring}: ${out}"
+msgstr "προειδοποίηση: δεν ήταν δυνατή η εξαγωγή κλειδιού από το ${ring}: ${out}"
 
 #, sh-format
 msgid "cannot read '${IMPORT_TRUSTED_KEYS}'"
 msgstr "δεν είναι δυνατή η ανάγνωση του '${IMPORT_TRUSTED_KEYS}'"
 
 #, sh-format
-msgid ""
-"'${IMPORT_TRUSTED_KEYS}' does not look like a valid OpenPGP key file: "
-"${SHOW_OUT}"
-msgstr ""
-"Το '${IMPORT_TRUSTED_KEYS}' δεν μοιάζει με έγκυρο αρχείο κλειδιού OpenPGP: "
-"${SHOW_OUT}"
+msgid "'${IMPORT_TRUSTED_KEYS}' does not look like a valid OpenPGP key file: ${SHOW_OUT}"
+msgstr "Το '${IMPORT_TRUSTED_KEYS}' δεν μοιάζει με έγκυρο αρχείο κλειδιού OpenPGP: ${SHOW_OUT}"
 
 #, sh-format
-msgid ""
-"'${IMPORT_TRUSTED_KEYS}' contains private/secret key material - refusing to "
-"import it as a public trusted-signing key"
-msgstr ""
-"Το '${IMPORT_TRUSTED_KEYS}' περιέχει ιδιωτικό/μυστικό υλικό κλειδιού - "
-"άρνηση εισαγωγής του ως δημόσιο έμπιστο κλειδί υπογραφής"
+msgid "'${IMPORT_TRUSTED_KEYS}' contains private/secret key material - refusing to import it as a public trusted-signing key"
+msgstr "Το '${IMPORT_TRUSTED_KEYS}' περιέχει ιδιωτικό/μυστικό υλικό κλειδιού - άρνηση εισαγωγής του ως δημόσιο έμπιστο κλειδί υπογραφής"
 
 #, sh-format
 msgid "no OpenPGP keys found in '${IMPORT_TRUSTED_KEYS}'"
@@ -1144,25 +847,18 @@ msgstr "δεν βρέθηκαν κλειδιά OpenPGP στο '${IMPORT_TRUSTED_
 
 #, sh-format
 msgid "could not import '${IMPORT_TRUSTED_KEYS}' into a scratch keyring"
-msgstr ""
-"δεν ήταν δυνατή η εισαγωγή του '${IMPORT_TRUSTED_KEYS}' σε προσωρινή "
-"κλειδοθήκη"
+msgstr "δεν ήταν δυνατή η εισαγωγή του '${IMPORT_TRUSTED_KEYS}' σε προσωρινή κλειδοθήκη"
 
 #, sh-format
-msgid ""
-"warning: fingerprint '${fpr}' not found in '${IMPORT_TRUSTED_KEYS}', "
-"skipping"
-msgstr ""
-"προειδοποίηση: το αποτύπωμα '${fpr}' δεν βρέθηκε στο "
-"'${IMPORT_TRUSTED_KEYS}', παράλειψη"
+msgid "warning: fingerprint '${fpr}' not found in '${IMPORT_TRUSTED_KEYS}', skipping"
+msgstr "προειδοποίηση: το αποτύπωμα '${fpr}' δεν βρέθηκε στο '${IMPORT_TRUSTED_KEYS}', παράλειψη"
 
 msgid "no matching key(s) to import"
 msgstr "δεν υπάρχουν αντίστοιχα κλειδιά προς εισαγωγή"
 
 #, sh-format
 msgid "warning: could not import '${FPR}' into ${TRUSTED_GPG}"
-msgstr ""
-"προειδοποίηση: δεν ήταν δυνατή η εισαγωγή του '${FPR}' στο ${TRUSTED_GPG}"
+msgstr "προειδοποίηση: δεν ήταν δυνατή η εισαγωγή του '${FPR}' στο ${TRUSTED_GPG}"
 
 #, sh-format
 msgid "no key(s) were actually imported into ${TRUSTED_GPG}"
@@ -1173,56 +869,40 @@ msgstr "δεν εισήχθη τελικά κανένα κλειδί στο ${TR
 #. translate freely, the numbers/word order can differ per language,
 #. only this line's own display text changes.
 #, sh-format
-msgid ""
-"${PROCESSED} key(s) processed: ${IMPORTED} new, ${CHANGED} updated, "
-"${UNCHANGED_COUNT} unchanged"
-msgstr ""
-"${PROCESSED} κλειδί/-ά υποβλήθηκαν σε επεξεργασία: ${IMPORTED} νέο(-α), "
-"${CHANGED} ενημερωμένο(-α), ${UNCHANGED_COUNT} αμετάβλητο(-α)"
+msgid "${PROCESSED} key(s) processed: ${IMPORTED} new, ${CHANGED} updated, ${UNCHANGED_COUNT} unchanged"
+msgstr "${PROCESSED} κλειδί/-ά υποβλήθηκαν σε επεξεργασία: ${IMPORTED} νέο(-α), ${CHANGED} ενημερωμένο(-α), ${UNCHANGED_COUNT} αμετάβλητο(-α)"
 
 #, sh-format
-msgid ""
-"neither '${candidate_base}' nor a signature file for it were found in this "
-"folder - nothing to check yet."
-msgstr ""
-"δεν βρέθηκε ούτε το «${candidate_base}» ούτε ένα αρχείο υπογραφής για αυτό "
-"σε αυτόν τον φάκελο - δεν υπάρχει ακόμη τίποτα προς έλεγχο."
+msgid "neither '${candidate_base}' nor a signature file for it were found in this folder - nothing to check yet."
+msgstr "δεν βρέθηκε ούτε το «${candidate_base}» ούτε ένα αρχείο υπογραφής για αυτό σε αυτόν τον φάκελο - δεν υπάρχει ακόμη τίποτα προς έλεγχο."
+
+#, sh-format
+msgid "'${iso_base}' names multiple files present in this folder: ${candidates_joined} - point this tool at the specific .iso file you want to check instead."
+msgstr "Το '${iso_base}' αναφέρει πολλαπλά αρχεία που υπάρχουν σε αυτόν τον φάκελο: ${candidates_joined} - κατευθύνετε αυτό το εργαλείο στο συγκεκριμένο αρχείο .iso που θέλετε να ελέγξετε."
 
 #, sh-format
 msgid "resolved ISO: ${resolved_base}"
 msgstr "επιλυμένο ISO: ${resolved_base}"
 
 #, sh-format
-msgid ""
-"'${iso_base}' is an unsigned per-file checksum - not used for verification. "
-"Using '${candidate_sig_base}' instead, the ISO's own direct signature."
-msgstr ""
-"Το '${iso_base}' είναι ανυπόγραφο άθροισμα ελέγχου ανά αρχείο - δεν "
-"χρησιμοποιείται για επαλήθευση. Χρησιμοποιείται αντ' αυτού το "
-"'${candidate_sig_base}', η άμεση υπογραφή του ίδιου του ISO."
+msgid "'${iso_base}' is unsigned - not used for verification. Using '${clearsigned_base}' instead, a self-contained clearsigned checksum for the ISO."
+msgstr "Το '${iso_base}' δεν είναι υπογεγραμμένο - δεν χρησιμοποιείται για επαλήθευση. Χρησιμοποιείται αντ' αυτού το '${clearsigned_base}', ένα αυτόνομο, αυτο-υπογεγραμμένο άθροισμα ελέγχου του ISO."
 
 #, sh-format
-msgid ""
-"'${iso_base}' is an unsigned checksum file, and '${candidate_base}' has no "
-"direct .sig/.asc/.gpg/.sign of its own either - nothing here can be "
-"cryptographically verified."
-msgstr ""
-"Το '${iso_base}' είναι ανυπόγραφο αρχείο αθροίσματος ελέγχου, και το "
-"'${candidate_base}' δεν έχει ούτε αυτό δικό του άμεσο .sig/.asc/.gpg/.sign -"
-" τίποτα εδώ δεν μπορεί να επαληθευτεί κρυπτογραφικά."
+msgid "'${iso_base}' is unsigned - not used for verification. Using '${candidate_sig_base}' instead, the ISO's own direct signature."
+msgstr "Το '${iso_base}' δεν είναι υπογεγραμμένο - δεν χρησιμοποιείται για επαλήθευση. Χρησιμοποιείται αντ' αυτού το '${candidate_sig_base}', η άμεση υπογραφή του ίδιου του ISO."
 
 #, sh-format
-msgid ""
-"this is a signature file for a checksum listing, but '${iso_base}' isn't in "
-"the same folder"
-msgstr ""
-"αυτό είναι ένα αρχείο υπογραφής για μια λίστα αθροισμάτων ελέγχου, αλλά το "
-"«${iso_base}» δεν βρίσκεται στον ίδιο φάκελο"
+msgid "'${iso_base}' is an unsigned checksum file, and '${candidate_base}' has no direct .sig/.asc/.gpg/.sign of its own, nor a self-contained clearsigned checksum (e.g. '.sha512.asc') either - nothing here can be cryptographically verified."
+msgstr "Το '${iso_base}' είναι ανυπόγραφο αρχείο αθροίσματος ελέγχου, και το '${candidate_base}' δεν έχει ούτε δικό του άμεσο .sig/.asc/.gpg/.sign ούτε αυτόνομο, αυτο-υπογεγραμμένο άθροισμα ελέγχου (π.χ. '.sha512.asc') - τίποτα εδώ δεν μπορεί να επαληθευτεί κρυπτογραφικά."
+
+#, sh-format
+msgid "this is a signature file for a checksum listing, but '${iso_base}' isn't in the same folder"
+msgstr "αυτό είναι ένα αρχείο υπογραφής για μια λίστα αθροισμάτων ελέγχου, αλλά το «${iso_base}» δεν βρίσκεται στον ίδιο φάκελο"
 
 #, sh-format
 msgid "cannot read checksum listing '${iso_base}'"
-msgstr ""
-"δεν είναι δυνατή η ανάγνωση της λίστας αθροισμάτων ελέγχου «${iso_base}»"
+msgstr "δεν είναι δυνατή η ανάγνωση της λίστας αθροισμάτων ελέγχου «${iso_base}»"
 
 #, sh-format
 msgid "using checksum file: ${iso_base} (${algo})"
@@ -1233,122 +913,64 @@ msgid "checksum file signature: ${sigfile_base}"
 msgstr "υπογραφή αρχείου αθροίσματος ελέγχου: ${sigfile_base}"
 
 #, sh-format
-msgid ""
-"'${iso_base}' is a checksum listing (it can cover many ISOs), not a single "
-"ISO to verify directly - none of the .iso files it mentions are present in "
-"'${dir}'. Point this tool at the actual .iso file instead (its "
-"checksum/signature will be found and checked automatically)."
-msgstr ""
-"Το '${iso_base}' είναι λίστα αθροισμάτων ελέγχου (μπορεί να καλύπτει πολλά "
-"ISO), όχι ένα μεμονωμένο ISO προς άμεση επαλήθευση - κανένα από τα αρχεία "
-".iso που αναφέρει δεν υπάρχει στο '${dir}'. Κατευθύνετε αυτό το εργαλείο στο"
-" πραγματικό αρχείο .iso (το άθροισμα ελέγχου/η υπογραφή του θα εντοπιστούν "
-"και θα ελεγχθούν αυτόματα)."
+msgid "'${iso_base}' is a checksum listing (it can cover many ISOs), not a single ISO to verify directly - none of the .iso files it mentions are present in '${dir}'. Point this tool at the actual .iso file instead (its checksum/signature will be found and checked automatically)."
+msgstr "Το '${iso_base}' είναι λίστα αθροισμάτων ελέγχου (μπορεί να καλύπτει πολλά ISO), όχι ένα μεμονωμένο ISO προς άμεση επαλήθευση - κανένα από τα αρχεία .iso που αναφέρει δεν υπάρχει στο '${dir}'. Κατευθύνετε αυτό το εργαλείο στο πραγματικό αρχείο .iso (το άθροισμα ελέγχου/η υπογραφή του θα εντοπιστούν και θα ελεγχθούν αυτόματα)."
 
 #, sh-format
-msgid ""
-"'${iso_base}' is a checksum listing covering multiple ISOs present in "
-"'${dir}': ${candidates_joined} - point this tool at the specific .iso file "
-"you want to check instead."
-msgstr ""
-"Το '${iso_base}' είναι λίστα αθροισμάτων ελέγχου που καλύπτει πολλαπλά ISO "
-"που υπάρχουν στο '${dir}': ${candidates_joined} - κατευθύνετε αυτό το "
-"εργαλείο στο συγκεκριμένο αρχείο .iso που θέλετε να ελέγξετε."
+msgid "'${iso_base}' is a checksum listing covering multiple ISOs present in '${dir}': ${candidates_joined} - point this tool at the specific .iso file you want to check instead."
+msgstr "Το '${iso_base}' είναι λίστα αθροισμάτων ελέγχου που καλύπτει πολλαπλά ISO που υπάρχουν στο '${dir}': ${candidates_joined} - κατευθύνετε αυτό το εργαλείο στο συγκεκριμένο αρχείο .iso που θέλετε να ελέγξετε."
 
 #, sh-format
-msgid ""
-"this line claims ${tag_algo}, but its hash is ${hash_len} characters long, "
-"which looks like ${len_algo} instead - using ${len_algo}"
-msgstr ""
-"αυτή η γραμμή δηλώνει ${tag_algo}, αλλά το hash της έχει μήκος ${hash_len} "
-"χαρακτήρες, κάτι που μοιάζει περισσότερο με ${len_algo} - χρήση ${len_algo}"
+msgid "this line claims ${tag_algo}, but its hash is ${hash_len} characters long, which looks like ${len_algo} instead - using ${len_algo}"
+msgstr "αυτή η γραμμή δηλώνει ${tag_algo}, αλλά το hash της έχει μήκος ${hash_len} χαρακτήρες, κάτι που μοιάζει περισσότερο με ${len_algo} - χρήση ${len_algo}"
 
-#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${FLAG_CHECKSUM_FILE} are literal flag
-#. names - keep placeholders as-is.
+#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${FLAG_CHECKSUM_FILE} are literal flag names - keep placeholders as-is.
 #, sh-format
-msgid ""
-"${FLAG_CHECKSUM_ALGO} is required when ${FLAG_CHECKSUM_FILE} names a file "
-"not in the built-in list (SHA512SUMS, SHA256SUMS, sha256sum.txt, ...)"
-msgstr ""
-"Το ${FLAG_CHECKSUM_ALGO} απαιτείται όταν το ${FLAG_CHECKSUM_FILE} αναφέρεται"
-" σε αρχείο που δεν βρίσκεται στην ενσωματωμένη λίστα (SHA512SUMS, "
-"SHA256SUMS, sha256sum.txt, ...)"
+msgid "${FLAG_CHECKSUM_ALGO} is required when ${FLAG_CHECKSUM_FILE} names a file not in the built-in list (SHA512SUMS, SHA256SUMS, sha256sum.txt, ...)"
+msgstr "Το ${FLAG_CHECKSUM_ALGO} απαιτείται όταν το ${FLAG_CHECKSUM_FILE} αναφέρεται σε αρχείο που δεν βρίσκεται στην ενσωματωμένη λίστα (SHA512SUMS, SHA256SUMS, sha256sum.txt, ...)"
 
 #, sh-format
-msgid ""
-"the checksum file '${name_base}' failed its own signature check - it cannot "
-"be trusted, so the ISO hash inside it cannot be trusted either. Re-download "
-"the ISO and the checksum/signature files, ideally from a different mirror."
-msgstr ""
-"Το αρχείο αθροίσματος ελέγχου '${name_base}' απέτυχε στη δική του επαλήθευση"
-" υπογραφής - δεν μπορεί να θεωρηθεί έμπιστο, οπότε ούτε το άθροισμα ελέγχου "
-"του ISO που περιέχει μπορεί να θεωρηθεί έμπιστο. Κατεβάστε ξανά το ISO και "
-"τα αρχεία αθροισμάτων ελέγχου/υπογραφής, κατά προτίμηση από διαφορετικό "
-"διακομιστή αντικατοπτρισμού."
+msgid "could not fetch the signing key for checksum file '${name_base}' from any keyserver - nothing in it could be checked. This looks like a network problem, not necessarily a bad signature - try again once you have a working connection."
+msgstr "δεν ήταν δυνατή η λήψη του κλειδιού υπογραφής για το αρχείο αθροισμάτων ελέγχου '${name_base}' από κανέναν διακομιστή κλειδιών - τίποτα σε αυτό δεν ήταν δυνατό να ελεγχθεί. Αυτό μοιάζει με πρόβλημα δικτύου, όχι απαραίτητα με εσφαλμένη υπογραφή - δοκιμάστε ξανά μόλις υπάρξει σύνδεση."
 
 #, sh-format
-msgid ""
-"${name_base} is named for ${name_algo}, but its content looks like "
-"${content_algo} - using ${content_algo}"
-msgstr ""
-"Το ${name_base} έχει όνομα για ${name_algo}, αλλά το περιεχόμενό του μοιάζει"
-" με ${content_algo} - χρήση ${content_algo}"
+msgid "the checksum file '${name_base}' failed its own signature check - it cannot be trusted, so the ISO hash inside it cannot be trusted either. Re-download the ISO and the checksum/signature files, ideally from a different mirror."
+msgstr "Το αρχείο αθροίσματος ελέγχου '${name_base}' απέτυχε στη δική του επαλήθευση υπογραφής - δεν μπορεί να θεωρηθεί έμπιστο, οπότε ούτε το άθροισμα ελέγχου του ISO που περιέχει μπορεί να θεωρηθεί έμπιστο. Κατεβάστε ξανά το ISO και τα αρχεία αθροισμάτων ελέγχου/υπογραφής, κατά προτίμηση από διαφορετικό διακομιστή αντικατοπτρισμού."
 
 #, sh-format
-msgid ""
-"checksum file '${name_base}' uses an unsupported hash algorithm "
-"('${hashcmd}' not found)"
-msgstr ""
-"το αρχείο αθροίσματος ελέγχου '${name_base}' χρησιμοποιεί μη υποστηριζόμενο "
-"αλγόριθμο κατακερματισμού ('${hashcmd}' δεν βρέθηκε)"
+msgid "${name_base} is named for ${name_algo}, but its content looks like ${content_algo} - using ${content_algo}"
+msgstr "Το ${name_base} έχει όνομα για ${name_algo}, αλλά το περιεχόμενό του μοιάζει με ${content_algo} - χρήση ${content_algo}"
+
+#, sh-format
+msgid "checksum file '${name_base}' uses an unsupported hash algorithm ('${hashcmd}' not found)"
+msgstr "το αρχείο αθροίσματος ελέγχου '${name_base}' χρησιμοποιεί μη υποστηριζόμενο αλγόριθμο κατακερματισμού ('${hashcmd}' δεν βρέθηκε)"
 
 #, sh-format
 msgid "using checksum file: ${name_base} (${algo})"
 msgstr "χρήση αρχείου αθροίσματος ελέγχου: ${name_base} (${algo})"
 
 #, sh-format
-msgid ""
-"'${name_base}' is validly signed, but '${base}' does not match the recorded "
-"${algo} checksum - this download is likely corrupted, incomplete, or was "
-"tampered with after the checksum file was signed. Re-download the ISO, "
-"ideally from a different mirror. (The checksum/signature files themselves "
-"are fine - no need to re-fetch those.)"
-msgstr ""
-"Το '${name_base}' είναι έγκυρα υπογεγραμμένο, όμως το '${base}' δεν "
-"ταιριάζει με το καταγεγραμμένο άθροισμα ελέγχου ${algo} - αυτή η λήψη είναι "
-"πιθανώς κατεστραμμένη, ημιτελής, ή έχει παραποιηθεί μετά την υπογραφή του "
-"αρχείου αθροισμάτων ελέγχου. Κατεβάστε ξανά το ISO, κατά προτίμηση από "
-"διαφορετικό διακομιστή αντικατοπτρισμού. (Τα ίδια τα αρχεία αθροισμάτων "
-"ελέγχου/υπογραφής είναι εντάξει - δεν χρειάζεται να τα ανακτήσετε ξανά.)"
+msgid "'${name_base}' is validly signed, but '${base}' does not match the recorded ${algo} checksum - this download is likely corrupted, incomplete, or was tampered with after the checksum file was signed. Re-download the ISO, ideally from a different mirror. (The checksum/signature files themselves are fine - no need to re-fetch those.)"
+msgstr "Το '${name_base}' είναι έγκυρα υπογεγραμμένο, όμως το '${base}' δεν ταιριάζει με το καταγεγραμμένο άθροισμα ελέγχου ${algo} - αυτή η λήψη είναι πιθανώς κατεστραμμένη, ημιτελής, ή έχει παραποιηθεί μετά την υπογραφή του αρχείου αθροισμάτων ελέγχου. Κατεβάστε ξανά το ISO, κατά προτίμηση από διαφορετικό διακομιστή αντικατοπτρισμού. (Τα ίδια τα αρχεία αθροισμάτων ελέγχου/υπογραφής είναι εντάξει - δεν χρειάζεται να τα ανακτήσετε ξανά.)"
 
 msgid "OK - signature and checksum both verified"
 msgstr "OK - επαληθεύτηκαν τόσο η υπογραφή όσο και το άθροισμα ελέγχου"
 
 #, sh-format
-msgid ""
-"no signature file (.sig/.asc/.gpg/.sign) was found for '${override_base}' - "
-"cannot verify it without one"
-msgstr ""
-"δεν βρέθηκε αρχείο υπογραφής (.sig/.asc/.gpg/.sign) για το "
-"«${override_base}» - δεν είναι δυνατός ο έλεγχος χωρίς αυτό"
+msgid "no signature file (.sig/.asc/.gpg/.sign) was found for '${override_base}' - cannot verify it without one"
+msgstr "δεν βρέθηκε αρχείο υπογραφής (.sig/.asc/.gpg/.sign) για το «${override_base}» - δεν είναι δυνατός ο έλεγχος χωρίς αυτό"
 
 #, sh-format
 msgid "'${base}' is not listed in '${CHECKSUM_FILE_OVERRIDE}'"
 msgstr "Το '${base}' δεν αναφέρεται στο '${CHECKSUM_FILE_OVERRIDE}'"
 
 #, sh-format
-msgid ""
-"no signature file found for '${base}', and none of the checksum-listing "
-"files in its directory (${tried_joined}) contain an entry for it either"
-msgstr ""
-"δεν βρέθηκε αρχείο υπογραφής για το '${base}', και κανένα από τα αρχεία "
-"λίστας αθροισμάτων ελέγχου στον κατάλογό του (${tried_joined}) δεν περιέχει "
-"επίσης καταχώριση για αυτό"
+msgid "no signature file found for '${base}', and none of the checksum-listing files in its directory (${tried_joined}) contain an entry for it either"
+msgstr "δεν βρέθηκε αρχείο υπογραφής για το '${base}', και κανένα από τα αρχεία λίστας αθροισμάτων ελέγχου στον κατάλογό του (${tried_joined}) δεν περιέχει επίσης καταχώριση για αυτό"
 
 #, sh-format
 msgid "no signature file or checksum listing was found for '${base}'"
-msgstr ""
-"δεν βρέθηκε αρχείο υπογραφής ούτε λίστα αθροισμάτων ελέγχου για το «${base}»"
+msgstr "δεν βρέθηκε αρχείο υπογραφής ούτε λίστα αθροισμάτων ελέγχου για το «${base}»"
 
 #, sh-format
 msgid "cannot read ISO file '${ISO}'"
@@ -1366,26 +988,15 @@ msgstr "το gpg δεν βρέθηκε"
 
 #, sh-format
 msgid "could not extract signing key fingerprint from '${ISO}'"
-msgstr ""
-"δεν ήταν δυνατή η εξαγωγή του αποτυπώματος κλειδιού υπογραφής από το "
-"'${ISO}'"
+msgstr "δεν ήταν δυνατή η εξαγωγή του αποτυπώματος κλειδιού υπογραφής από το '${ISO}'"
 
 #, sh-format
-msgid ""
-"'${SIG}' looks like a full clearsigned message (e.g. a checksum listing), "
-"not a plain detached signature - point this tool at it on its own, or "
-"together with the ISO it checksums, not as a signature file."
-msgstr ""
-"Το '${SIG}' μοιάζει με πλήρες μήνυμα υπογεγραμμένο σε καθαρό κείμενο (π.χ. "
-"μια λίστα αθροισμάτων ελέγχου), όχι με απλή αποσπασμένη υπογραφή - "
-"κατευθύνετε αυτό το εργαλείο σε αυτό μόνο του, ή μαζί με το ISO που ελέγχει,"
-" όχι ως αρχείο υπογραφής."
+msgid "'${SIG}' looks like a full clearsigned message (e.g. a checksum listing), not a plain detached signature - point this tool at it on its own, or together with the ISO it checksums, not as a signature file."
+msgstr "Το '${SIG}' μοιάζει με πλήρες μήνυμα υπογεγραμμένο σε καθαρό κείμενο (π.χ. μια λίστα αθροισμάτων ελέγχου), όχι με απλή αποσπασμένη υπογραφή - κατευθύνετε αυτό το εργαλείο σε αυτό μόνο του, ή μαζί με το ISO που ελέγχει, όχι ως αρχείο υπογραφής."
 
 #, sh-format
 msgid "could not extract signing key fingerprint from '${SIG}'"
-msgstr ""
-"δεν ήταν δυνατή η εξαγωγή του αποτυπώματος κλειδιού υπογραφής από το "
-"'${SIG}'"
+msgstr "δεν ήταν δυνατή η εξαγωγή του αποτυπώματος κλειδιού υπογραφής από το '${SIG}'"
 
 #, sh-format
 msgid "signature made with: ${FPR}"
@@ -1397,74 +1008,48 @@ msgstr "αναγνωρισμένο κλειδί υπογραφής: ${label}"
 
 #, sh-format
 msgid "recognized: key already cached and trusted in ${TRUSTED_GPG}"
-msgstr ""
-"αναγνωρίστηκε: το κλειδί είναι ήδη αποθηκευμένο και έμπιστο στο "
-"${TRUSTED_GPG}"
+msgstr "αναγνωρίστηκε: το κλειδί είναι ήδη αποθηκευμένο και έμπιστο στο ${TRUSTED_GPG}"
 
 #, sh-format
-msgid ""
-"recognized: key already present in ${PUBRING_KBX} and explicitly marked "
-"trusted there"
-msgstr ""
-"αναγνωρίστηκε: το κλειδί υπάρχει ήδη στο ${PUBRING_KBX} και έχει επισημανθεί"
-" ρητά ως έμπιστο εκεί"
+msgid "recognized: key found in mx-gpg-keyring - ${mx_uid}"
+msgstr "αναγνωρίστηκε: το κλειδί βρέθηκε στο mx-gpg-keyring - ${mx_uid}"
+
+msgid "recognized: key found in mx-gpg-keyring"
+msgstr "αναγνωρίστηκε: το κλειδί βρέθηκε στο mx-gpg-keyring"
 
 #, sh-format
-msgid ""
-"kept ${FPR} in ${TRUSTED_GPG} - future runs will recognize it automatically"
-msgstr ""
-"διατηρήθηκε το ${FPR} στο ${TRUSTED_GPG} - οι μελλοντικές εκτελέσεις θα το "
-"αναγνωρίζουν αυτόματα"
+msgid "kept ${FPR} in ${TRUSTED_GPG} - future runs will recognize it automatically"
+msgstr "διατηρήθηκε το ${FPR} στο ${TRUSTED_GPG} - οι μελλοντικές εκτελέσεις θα το αναγνωρίζουν αυτόματα"
 
 #, sh-format
 msgid "warning: could not save key into ${TRUSTED_GPG}: ${out}"
-msgstr ""
-"προειδοποίηση: δεν ήταν δυνατή η αποθήκευση του κλειδιού στο ${TRUSTED_GPG}:"
-" ${out}"
+msgstr "προειδοποίηση: δεν ήταν δυνατή η αποθήκευση του κλειδιού στο ${TRUSTED_GPG}: ${out}"
 
 #, sh-format
-msgid ""
-"${FPR} is not one of this tool's built-in recognized keys - verify its "
-"fingerprint independently before trusting it (e.g. against the distro's own "
-"official website or keyserver listing)"
-msgstr ""
-"Το ${FPR} δεν είναι ένα από τα ενσωματωμένα κλειδιά που αναγνωρίζει αυτό το "
-"εργαλείο - ελέγξτε ανεξάρτητα το αποτύπωμά του πριν το εμπιστευτείτε (π.χ. "
-"στην επίσημη ιστοσελίδα της διανομής ή σε έναν διακομιστή κλειδιών)"
-
-#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN}/${FLAG_TRUST_KEY} are literal flag names
-#. - keep placeholders as-is.
-#, sh-format
-msgid ""
-"refusing to verify against an unrecognized signing key (pass "
-"${FLAG_ALLOW_UNKNOWN} to verify just this once, or ${FLAG_TRUST_KEY} to also"
-" remember it for next time)"
-msgstr ""
-"άρνηση επαλήθευσης έναντι μη αναγνωρισμένου κλειδιού υπογραφής "
-"(χρησιμοποιήστε ${FLAG_ALLOW_UNKNOWN} για επαλήθευση μόνο αυτή τη φορά, ή "
-"${FLAG_TRUST_KEY} για να απομνημονευτεί επίσης για την επόμενη φορά)"
-
-#. TRANSLATORS: ${FLAG_TRUST_KEY} is a literal flag name - keep the
-#. placeholder as-is.
-#, sh-format
-msgid ""
-"verifying anyway - if the result below is GOOD and you decide you trust this"
-" key, use ${FLAG_TRUST_KEY} next time (or mark it trusted in your own GPG "
-"keyring) so future checks recognize it automatically"
-msgstr ""
-"γίνεται επαλήθευση ούτως ή άλλως - αν το αποτέλεσμα παρακάτω είναι ΕΓΚΥΡΟ "
-"και αποφασίσετε ότι εμπιστεύεστε αυτό το κλειδί, χρησιμοποιήστε το "
-"${FLAG_TRUST_KEY} την επόμενη φορά (ή επισημάνετέ το ως έμπιστο στη δική σας"
-" κλειδοθήκη GPG) ώστε οι μελλοντικοί έλεγχοι να το αναγνωρίζουν αυτόματα"
+msgid "recognized: key already present in ${PUBRING_KBX} and explicitly marked trusted there"
+msgstr "αναγνωρίστηκε: το κλειδί υπάρχει ήδη στο ${PUBRING_KBX} και έχει επισημανθεί ρητά ως έμπιστο εκεί"
 
 #, sh-format
-msgid ""
-"kept ${FPR} in ${TRUSTED_GPG} (reused the copy fetched during verification -"
-" no extra keyserver lookup needed)"
-msgstr ""
-"διατηρήθηκε το ${FPR} στο ${TRUSTED_GPG} (επαναχρησιμοποιήθηκε το αντίγραφο "
-"που ανακτήθηκε κατά την επαλήθευση - δεν χρειάστηκε επιπλέον αναζήτηση σε "
-"διακομιστή κλειδιών)"
+msgid "${FPR} has been explicitly untrusted - you've told this tool not to auto-trust it anymore, whatever the reason it would otherwise be recognized. Pass ${FLAG_TRUST_KEY} again if you've changed your mind"
+msgstr "Το ${FPR} έχει ρητά ανακληθεί - έχετε πει σε αυτό το εργαλείο να μην το εμπιστεύεται πια αυτόματα, ανεξάρτητα από τον λόγο για τον οποίο θα αναγνωριζόταν διαφορετικά. Περάστε ξανά το ${FLAG_TRUST_KEY} αν αλλάξατε γνώμη"
+
+#, sh-format
+msgid "${FPR} is not one of this tool's built-in recognized keys - verify its fingerprint independently before trusting it (e.g. against the distro's own official website or keyserver listing)"
+msgstr "Το ${FPR} δεν είναι ένα από τα ενσωματωμένα κλειδιά που αναγνωρίζει αυτό το εργαλείο - ελέγξτε ανεξάρτητα το αποτύπωμά του πριν το εμπιστευτείτε (π.χ. στην επίσημη ιστοσελίδα της διανομής ή σε έναν διακομιστή κλειδιών)"
+
+#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN}/${FLAG_TRUST_KEY} are literal flag names - keep placeholders as-is.
+#, sh-format
+msgid "refusing to verify against an unrecognized signing key (pass ${FLAG_ALLOW_UNKNOWN} to verify just this once, or ${FLAG_TRUST_KEY} to also remember it for next time)"
+msgstr "άρνηση επαλήθευσης έναντι μη αναγνωρισμένου κλειδιού υπογραφής (χρησιμοποιήστε ${FLAG_ALLOW_UNKNOWN} για επαλήθευση μόνο αυτή τη φορά, ή ${FLAG_TRUST_KEY} για να απομνημονευτεί επίσης για την επόμενη φορά)"
+
+#. TRANSLATORS: ${FLAG_TRUST_KEY} is a literal flag name - keep the placeholder as-is.
+#, sh-format
+msgid "verifying anyway - if the result below is GOOD and you decide you trust this key, use ${FLAG_TRUST_KEY} next time (or mark it trusted in your own GPG keyring) so future checks recognize it automatically"
+msgstr "γίνεται επαλήθευση ούτως ή άλλως - αν το αποτέλεσμα παρακάτω είναι ΕΓΚΥΡΟ και αποφασίσετε ότι εμπιστεύεστε αυτό το κλειδί, χρησιμοποιήστε το ${FLAG_TRUST_KEY} την επόμενη φορά (ή επισημάνετέ το ως έμπιστο στη δική σας κλειδοθήκη GPG) ώστε οι μελλοντικοί έλεγχοι να το αναγνωρίζουν αυτόματα"
+
+#, sh-format
+msgid "kept ${FPR} in ${TRUSTED_GPG} - already fetched during verification, no second fetch needed"
+msgstr "διατηρήθηκε το ${FPR} στο ${TRUSTED_GPG} - ήδη ανακτήθηκε κατά την επαλήθευση, δεν χρειάζεται δεύτερη ανάκτηση"
 
 #, sh-format
 msgid "key already present and valid in ${TRUSTED_GPG}"
@@ -1472,9 +1057,7 @@ msgstr "το κλειδί υπάρχει ήδη και είναι έγκυρο �
 
 #, sh-format
 msgid "key in ${TRUSTED_GPG} is ${status}, ignoring cached copy"
-msgstr ""
-"το κλειδί στο ${TRUSTED_GPG} είναι ${status}, το αποθηκευμένο αντίγραφο "
-"αγνοείται"
+msgstr "το κλειδί στο ${TRUSTED_GPG} είναι ${status}, το αποθηκευμένο αντίγραφο αγνοείται"
 
 #, sh-format
 msgid "key already present and valid in ${PUBRING_KBX}"
@@ -1482,55 +1065,42 @@ msgstr "το κλειδί υπάρχει ήδη και είναι έγκυρο �
 
 #, sh-format
 msgid "key in ${PUBRING_KBX} is ${pr_status}, ignoring cached copy"
-msgstr ""
-"το κλειδί στο ${PUBRING_KBX} είναι ${pr_status}, το αποθηκευμένο αντίγραφο "
-"αγνοείται"
+msgstr "το κλειδί στο ${PUBRING_KBX} είναι ${pr_status}, το αποθηκευμένο αντίγραφο αγνοείται"
+
+msgid "key already present and valid in mx-gpg-keyring"
+msgstr "το κλειδί υπάρχει ήδη και είναι έγκυρο στο mx-gpg-keyring"
 
 #, sh-format
 msgid "fetching ${FPR} from ${ks}"
 msgstr "ανάκτηση του ${FPR} από το ${ks}"
 
 #, sh-format
-msgid ""
-"${ks} returned more than one key for Key ID ${FPR} - refusing to guess which"
-" one is real"
-msgstr ""
-"Το ${ks} επέστρεψε περισσότερα από ένα κλειδιά για το αναγνωριστικό κλειδιού"
-" ${FPR} - άρνηση μαντέματος ποιο είναι το πραγματικό"
+msgid "${ks} returned more than one key for Key ID ${FPR} - refusing to guess which one is real"
+msgstr "Το ${ks} επέστρεψε περισσότερα από ένα κλειδιά για το αναγνωριστικό κλειδιού ${FPR} - άρνηση μαντέματος ποιο είναι το πραγματικό"
 
 #, sh-format
-msgid ""
-"${ks} returned ${FPR} without any usable key material (likely a user ID that"
-" was never confirmed there) - trying next..."
-msgstr ""
-"το ${ks} επέστρεψε το ${FPR} χωρίς κανένα χρησιμοποιήσιμο υλικό κλειδιού "
-"(πιθανώς αναγνωριστικό χρήστη που δεν επιβεβαιώθηκε ποτέ εκεί) - δοκιμή του "
-"επόμενου..."
+msgid "${ks} returned ${FPR} without any usable key material (likely a user ID that was never confirmed there) - trying next..."
+msgstr "το ${ks} επέστρεψε το ${FPR} χωρίς κανένα χρησιμοποιήσιμο υλικό κλειδιού (πιθανώς αναγνωριστικό χρήστη που δεν επιβεβαιώθηκε ποτέ εκεί) - δοκιμή του επόμενου..."
 
 #, sh-format
 msgid "could not fetch from ${ks}, trying next..."
 msgstr "δεν ήταν δυνατή η ανάκτηση από το ${ks}, δοκιμή του επόμενου..."
 
 #, sh-format
-msgid ""
-"could not fetch key ${FPR} from any keyserver (tried: ${TRIED_KEYSERVERS})"
-msgstr ""
-"δεν ήταν δυνατή η ανάκτηση του κλειδιού ${FPR} από κανέναν διακομιστή "
-"κλειδιών (δοκιμάστηκαν: ${TRIED_KEYSERVERS})"
+msgid "could not fetch key ${FPR} from any keyserver (tried: ${TRIED_KEYSERVERS}) - this looks like a network problem, not necessarily an invalid signature. Try again once you have a working connection."
+msgstr "δεν ήταν δυνατή η λήψη του κλειδιού ${FPR} από κανέναν διακομιστή κλειδιών (δοκιμάστηκαν: ${TRIED_KEYSERVERS}) - αυτό μοιάζει με πρόβλημα δικτύου, όχι απαραίτητα με μη έγκυρη υπογραφή. Δοκιμάστε ξανά μόλις υπάρξει σύνδεση."
+
+#, sh-format
+msgid "could not fetch key ${FPR} from any keyserver (tried: ${TRIED_KEYSERVERS})"
+msgstr "δεν ήταν δυνατή η ανάκτηση του κλειδιού ${FPR} από κανέναν διακομιστή κλειδιών (δοκιμάστηκαν: ${TRIED_KEYSERVERS})"
 
 #, sh-format
 msgid "keeping fetched key in ${TRUSTED_GPG} for future runs"
-msgstr ""
-"διατήρηση του ανακτημένου κλειδιού στο ${TRUSTED_GPG} για μελλοντικές "
-"εκτελέσεις"
+msgstr "διατήρηση του ανακτημένου κλειδιού στο ${TRUSTED_GPG} για μελλοντικές εκτελέσεις"
 
 #, sh-format
-msgid ""
-"warning: could not save key into ${TRUSTED_GPG} (${out}), continuing with a "
-"throw-away keyring for this run"
-msgstr ""
-"προειδοποίηση: δεν ήταν δυνατή η αποθήκευση του κλειδιού στο ${TRUSTED_GPG} "
-"(${out}), συνέχεια με προσωρινή κλειδοθήκη μίας χρήσης για αυτή την εκτέλεση"
+msgid "warning: could not save key into ${TRUSTED_GPG} (${out}), continuing with a throw-away keyring for this run"
+msgstr "προειδοποίηση: δεν ήταν δυνατή η αποθήκευση του κλειδιού στο ${TRUSTED_GPG} (${out}), συνέχεια με προσωρινή κλειδοθήκη μίας χρήσης για αυτή την εκτέλεση"
 
 #, sh-format
 msgid "could not save key into ${TRUSTED_GPG}: ${out}"
@@ -1542,8 +1112,7 @@ msgstr "Το ${FPR} είναι ήδη αποθηκευμένο στο ${TRUSTED_
 
 #, sh-format
 msgid "verifying inline-signed checksum file '${ISO_BASE}'"
-msgstr ""
-"επαλήθευση αυτο-υπογεγραμμένου αρχείου αθροίσματος ελέγχου '${ISO_BASE}'"
+msgstr "επαλήθευση αυτο-υπογεγραμμένου αρχείου αθροίσματος ελέγχου '${ISO_BASE}'"
 
 #, sh-format
 msgid "verifying '${SIG_BASE}' against '${ISO_BASE}'"
@@ -1556,15 +1125,52 @@ msgstr "OK - η υπογραφή επαληθεύτηκε"
 msgid "claimed identity: ${CLAIMED_UID}"
 msgstr "δηλωμένη ταυτότητα: ${CLAIMED_UID}"
 
+#, sh-format
+msgid "primary key: ${PRIMARY_FPR}"
+msgstr "κύριο κλειδί: ${PRIMARY_FPR}"
+
 msgid "FAILED - signature did NOT verify"
 msgstr "ΑΠΟΤΥΧΙΑ - η υπογραφή ΔΕΝ επαληθεύτηκε"
 
 msgid "refusing to run as root - run this as a regular user instead"
-msgstr ""
-"δεν επιτρέπεται η εκτέλεση ως root - εκτελέστε το ως κανονικός χρήστης"
+msgstr "δεν επιτρέπεται η εκτέλεση ως root - εκτελέστε το ως κανονικός χρήστης"
 
 msgid "iso;sig;gpg;"
 msgstr "iso;sig;gpg;υπογραφή;"
 
 msgid "Verify with Drag & Drop"
 msgstr "Επαλήθευση με μεταφορά και απόθεση"
+
+#~ msgid "Refresh Trusted Keys"
+#~ msgstr "Ανανέωση έμπιστων κλειδιών"
+
+#, sh-format
+#~ msgid "recognized: key found in this system's own signing-key package (${MX_GPG_KEYRING})"
+#~ msgstr "αναγνωρίστηκε: το κλειδί βρέθηκε στο δικό του πακέτο κλειδιών υπογραφής αυτού του συστήματος (${MX_GPG_KEYRING})"
+
+#, sh-format
+#~ msgid "key already present and valid in this system's own signing-key package (${MX_GPG_KEYRING})"
+#~ msgstr "το κλειδί υπάρχει ήδη και είναι έγκυρο στο δικό του πακέτο κλειδιών υπογραφής αυτού του συστήματος (${MX_GPG_KEYRING})"
+
+#~ msgid "Untrust Selected"
+#~ msgstr "Ανάκληση επιλεγμένων"
+
+#~ msgid "Import from File"
+#~ msgstr "Εισαγωγή από αρχείο"
+
+#~ msgid "Export Selected"
+#~ msgstr "Εξαγωγή επιλεγμένων"
+
+#~ msgid "Remove"
+#~ msgstr "Αφαίρεση"
+
+#, sh-format
+#~ msgid "If any of them is also one of this tool's built-in recognized keys (run '${CMD_LIST_KNOWN_KEYS}' to see the full list), it will still be recognized automatically next time - this only removes the local cache entry, not that recognition."
+#~ msgstr "Αν κάποιο από αυτά είναι επίσης ένα από τα ενσωματωμένα κλειδιά που αναγνωρίζει αυτό το εργαλείο (εκτελέστε '${CMD_LIST_KNOWN_KEYS}' για να δείτε την πλήρη λίστα), αυτό το εργαλείο θα το αναγνωρίσει και πάλι αυτόματα την επόμενη φορά - αυτό αφαιρεί μόνο την τοπική καταχώριση προσωρινής μνήμης, όχι αυτή την αναγνώριση."
+
+#~ msgid "Forget"
+#~ msgstr "Λήθη"
+
+#, sh-format
+#~ msgid "'${UNTRUST_KEY}' is not in ${TRUSTED_GPG}"
+#~ msgstr "Το '${UNTRUST_KEY}' δεν βρίσκεται στο ${TRUSTED_GPG}"

@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2017-2025 MX Authors
+# * Copyright (C) 2017-2026 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -82,34 +82,37 @@ find_package(Qt6 REQUIRED COMPONENTS
     Core
     Gui
     Widgets
+    Qml
+    Quick
+    QuickControls2
     LinguistTools
 )
 
+# These policies were introduced after the minimum Qt version available on
+# some supported distributions. Only set them when the installed Qt knows
+# about them.
+if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
+    qt6_policy(SET QTP0001 NEW)
+endif()
+if(Qt6_VERSION VERSION_GREATER_EQUAL 6.8)
+    qt6_policy(SET QTP0004 NEW)
+endif()
+
 # Enable automatic MOC, UIC, and RCC processing
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOUIC OFF)
 set(CMAKE_AUTORCC ON)
-
-# Set AUTOUIC search paths to find custom widget headers
-set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_SOURCE_DIR}/src)
 
 # Define source files
 set(SOURCES
     src/main.cpp
-    src/mainwindow.cpp
-    src/flatbutton.cpp
-    src/about.cpp
+    src/actionmodel.cpp
+    src/backend.cpp
 )
 
 set(HEADERS
-    src/mainwindow.h
-    src/flatbutton.h
-    src/about.h
-    src/version.h
-)
-
-set(UI_FILES
-    src/mainwindow.ui
+    src/actionmodel.h
+    src/backend.h
 )
 
 # No resource files for mx-welcome currently
@@ -119,25 +122,38 @@ set(UI_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/mx-welcome_en_US\\.ts$")
 
 # Create the executable
 add_executable(mx-welcome
     ${SOURCES}
     ${HEADERS}
-    ${UI_FILES}
-    # ${RESOURCE_FILES}
+)
+
+qt6_add_qml_module(mx-welcome
+    URI MxWelcome
+    VERSION 1.0
+    QML_FILES
+        qml/Main.qml
+        qml/components/SecondaryButton.qml
+        qml/components/ToolCard.qml
+    RESOURCES
+        icons/mx-welcome.svg
 )
 
 # Link Qt6 libraries
 target_link_libraries(mx-welcome
+    PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
 )
 
 # Set compiler flags
 target_compile_options(mx-welcome PRIVATE
-    -Wpedantic
     -pedantic
     -Werror=return-type
     -Werror=switch
@@ -161,7 +177,7 @@ target_compile_definitions(mx-welcome PRIVATE
 # Release-specific optimizations
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(mx-welcome PRIVATE NDEBUG)
-    target_compile_options(mx-welcome PRIVATE -O3)
+    target_compile_options(mx-welcome PRIVATE -Os)
 
     # Add LTO - different flags for different compilers
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
@@ -196,7 +212,6 @@ set_target_properties(mx-welcome PROPERTIES
 )
 
 # Add build directory to include path for generated version.h
-# Also add source directory for AUTOUIC-generated headers to find custom widget headers
 target_include_directories(mx-welcome PRIVATE
     ${CMAKE_BINARY_DIR}/src
     ${CMAKE_SOURCE_DIR}/src

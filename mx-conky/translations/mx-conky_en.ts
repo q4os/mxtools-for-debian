@@ -980,12 +980,12 @@ Please install the graphicsmagick-imagemagick-compat package to enable this feat
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="113"/>
+        <location filename="../src/main.cpp" line="120"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="113"/>
+        <location filename="../src/main.cpp" line="120"/>
         <source>You must run this program as normal user</source>
         <translation type="unfinished"></translation>
     </message>

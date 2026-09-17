@@ -1,8 +1,44 @@
-mx-tools (26.06.1302) stable; urgency=medium
+mx-tools (26.09.7.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:19 +0200
+ -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:07 +0200
+
+mx-tools (26.09.7) mx; urgency=medium
+
+  * Add an option to hide the category list so tools use the full window
+    width, remembered the next time MX Tools starts
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 13 Sep 2026 16:24:33 -0400
+
+mx-tools (26.09.6) mx; urgency=medium
+
+  * Fix a tool that could no longer be started again after it was closed
+  * Darken the smaller descriptive text so it is easier to read
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 13 Sep 2026 09:10:36 -0400
+
+mx-tools (26.09.5) mx; urgency=medium
+
+  * Keep the application and tool icons visible when a desktop theme does not
+    provide them
+  * Allow MX Tools to start on older Qt 6 systems such as Debian Bookworm
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 10 Sep 2026 08:09:28 -0400
+
+mx-tools (26.09) mx; urgency=medium
+
+  * Replace the interface with a responsive dashboard featuring searchable
+    tool cards, category navigation, and desktop light or dark theme support
+  * Add direct access to the MX Linux manual, website, license, and
+    application changelog
+  * Add a manual page describing how to launch MX Tools
+  * Preserve Whisker Menu favorites when tools are hidden and later
+    restored from the menu
+  * Stop needlessly restarting the panel when hiding or restoring menu
+    entries
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 29 Aug 2026 19:04:24 -0400
 
 mx-tools (26.06) mx; urgency=medium
 

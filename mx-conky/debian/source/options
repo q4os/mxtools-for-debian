@@ -1,0 +1,9 @@
+# Keep dpkg-source's default excludes (VCS dirs, backups, etc.) in addition
+# to the custom patterns below -- specifying tar-ignore with a pattern
+# otherwise replaces the default exclude list instead of extending it.
+tar-ignore
+
+# Exclude stray local CMake build directories (e.g. ad hoc test builds)
+# from the native source tarball, regardless of their name.
+tar-ignore = CMakeCache.txt
+tar-ignore = CMakeFiles

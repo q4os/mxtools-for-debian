@@ -5,3 +5,4 @@ help usr/lib/verify-iso-sig/
 verify-iso-sig.svg usr/lib/verify-iso-sig/
 verify-iso-sig.svg usr/share/icons/hicolor/scalable/apps/
 verify-iso-sig.desktop usr/share/applications/
+verify-iso-sig.xml usr/share/mime/packages/

@@ -3,11 +3,11 @@ Upstream-Name: mx-conky
 Source: http://mxlinux.org
 
 Files: *
-Copyright: 2017-2025 Adrian
+Copyright: 2017-2026 Adrian
 License: GPL-3+
 
 Files: debian/*
-Copyright: 2017 Steven Pusser <stevep@mxlinux.org>
+Copyright: 2017-2026 Steven Pusser <stevep@mxlinux.org>
 License: GPL-3+
 
 Files: icons/*

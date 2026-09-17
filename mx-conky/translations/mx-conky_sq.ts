@@ -122,217 +122,217 @@ Leje të pamjaftueshme.</translation>
         <translation>S’shkruhet dot te kartela: %1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="940"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="934"/>
         <source>Backup Config File</source>
         <translation>Kartelë Kopjeruajtjeje Formësimi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="940"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="934"/>
         <source>Do you want to preserve the original file?</source>
         <translation>Doni të ruhet kartela origjinale?</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="964"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="958"/>
         <source>Backed Up Config File</source>
         <translation>U Kopjeruajt Kartelë Formësimi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="965"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="959"/>
         <source>The original configuration was backed up to %1</source>
         <translation>Formësimi origjinal u kopjeruajt te %1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="967"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="961"/>
         <source>Backup Failed</source>
         <translation>Kopjeruajtja Dështoi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="967"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="961"/>
         <source>Failed to create a backup file.</source>
         <translation>S’u arrit të krijohej kartelë kopjeruajtjeje.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1048"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1051"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1042"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1045"/>
         <source>Restore Failed</source>
         <translation>Rikthimi Dështoi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1048"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1042"/>
         <source>Failed to restore from backup file.</source>
         <translation>S’u arrit të rikthehej që nga kartelë kopjeruajtjeje.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1051"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1045"/>
         <source>Backup file does not exist.</source>
         <translation>Kartela kopjeruajtje s’ekziston.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1403"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1397"/>
         <source>Position</source>
         <translation>Pozicion</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1410"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1404"/>
         <source>Alignment</source>
         <translation>Drejtim</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1415"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1409"/>
         <source>Top Left</source>
         <translation>Majtas Në Krye</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1416"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1410"/>
         <source>Top Right</source>
         <translation>Djathtas Në Krye</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1417"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1411"/>
         <source>Top Middle</source>
         <translation>Në Krye Në Mes</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1418"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1412"/>
         <source>Bottom Left</source>
         <translation>Majtas Në Fund</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1419"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1413"/>
         <source>Bottom Right</source>
         <translation>Djathtas Në Fund</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1420"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1414"/>
         <source>Bottom Middle</source>
         <translation>Në Fund Në Mes</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1421"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1415"/>
         <source>Middle Left</source>
         <translation>Në Mes Majtas</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1422"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1416"/>
         <source>Middle Right</source>
         <translation>Në Mes Djathtas</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1423"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1417"/>
         <source>Middle Middle</source>
         <translation>Në Mes Në Mes</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1428"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1422"/>
         <source>Horizontal Gap</source>
         <translation>Hapësirë Horizontale</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1429"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1423"/>
         <source>[GAP_X] Horizontal distance from window border (in pixels)</source>
         <translation>[GAP_X] Largësi horizontale nga ana e dritares (në piksel)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1441"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1435"/>
         <source>Vertical Gap</source>
         <translation>Hapësirë Vertikale</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1442"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1436"/>
         <source>[GAP_Y] Vertical distance from window border (in pixels)</source>
         <translation>[GAP_Y] Largësi vertikale nga ana e dritares (në piksel)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1454"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1448"/>
         <source>Desktop</source>
         <translation>Desktop</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1457"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1451"/>
         <source>Desktop 1</source>
         <translation>Desktopi 1</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1458"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1452"/>
         <source>All Desktops</source>
         <translation>Krejt desktopët</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1470"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1464"/>
         <source>Location</source>
         <translation>Vendndodhje</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1482"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1476"/>
         <source>Width should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
         <translation>Gjerësia duhet të jetë më e madhe se sa madhësia e lëndës
  së dritares, ndryshe ky rregullim s’do të ketë ndonjë efekt</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1486"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1480"/>
         <source>Minimum Width</source>
         <translation>Gjerësi Minimum</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1501"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1495"/>
         <source>Height should be larger than the size of window contents,
 otherwise this setting will not have any effect</source>
         <translation>Lartësia duhet të jetë më e madhe se sa madhësia e lëndës
  së dritares, ndryshe ky rregullim s’do të ketë ndonjë efekt</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1503"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1497"/>
         <source>Minimum Height</source>
         <translation>Lartësi Minimum</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1517"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1511"/>
         <source>Increases the window height by adding empty lines at the end of the Conky config file</source>
         <translation>Bën rritjen e lartësisë së dritares duke shtuar rreshta të zbrazët në fund të kartelës Conky të formësimit</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1518"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1512"/>
         <source>Height Padding</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1533"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1527"/>
         <source>Size</source>
         <translation>Madhësi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1546"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1540"/>
         <source>Transparency Type</source>
         <translation>Lloj Tejdukshmërie</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1551"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1545"/>
         <source>Opaque</source>
         <translation>E marrtë</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1552"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1546"/>
         <source>Transparent</source>
         <translation>E tejdukshme</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1553"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1547"/>
         <source>Pseudo-Transparent</source>
         <translation>Pseudo-e-tejdukshme</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1554"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1548"/>
         <source>Semi-Transparent</source>
         <translation>Gjysmë-e-tejdukshme</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1559"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1553"/>
         <source>Opacity (%)</source>
         <translation>Patejdukshmëri (%)</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1560"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1554"/>
         <source>Window Opacity
 
 0 = Fully Transparent, 100 = Fully Opaque</source>
@@ -341,84 +341,84 @@ otherwise this setting will not have any effect</source>
 0 = Plotësisht e Tejdukshme, 100 = Plotësisht e Marrtë</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1574"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1568"/>
         <source>Background Color</source>
         <translation>Ngjyrë Sfondi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1579"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1573"/>
         <source>Choose Color</source>
         <translation>Zgjidhni Ngjyrë</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1599"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1593"/>
         <source>Setting Type to &quot;Transparent&quot; will make the whole window transparent (including any images). Use &quot;Pseudo-Transparent&quot; if you want the images to be opaque.</source>
         <translation>Vënia e Llojit si “E tejdukshme” do ta bëjë krejt dritaren të tejdukshme (përfshi çfarëdo figurë). Përdorni “Pseudo-e-Tejdukshme”, nëse doni që të jenë të marrta figurat.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1609"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1603"/>
         <source>Setting Type to &quot;Pseudo-Transparent&quot; will make the window transparent but the window will have a shadow. The shadow can be disabled by configuring your window manager.</source>
         <translation>Vënia e Llojit si “Pseudo-e-Tejdukshme” do ta bëjë dritaren të tejdukshme, por dritarja do të ketë një hije. Hija mund të çaktivizohet duke formësuar përgjegjësin tuaj të dritareve.</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1620"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1614"/>
         <source>Transparency</source>
         <translation>Tejdukshmëri</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1631"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1625"/>
         <source>Date Format</source>
         <translation>Format Datash</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1634"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1628"/>
         <source>Day</source>
         <translation>Ditë</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1636"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1647"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1630"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1641"/>
         <source>Long</source>
         <translation>I gjatë</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1637"/>
-        <location filename="../src/conkycustomizedialog.cpp" line="1648"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1631"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1642"/>
         <source>Short</source>
         <translation>I shkurtër</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1638"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1632"/>
         <source>Abbreviated name, e.g. Tu</source>
         <translation>Emër i shkurtuar, p.sh., Ma</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1645"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1639"/>
         <source>Month</source>
         <translation>Muaj</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1649"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1643"/>
         <source>Abbreviated name, e.g. Oct</source>
         <translation>Emër i shkurtuar, p.sh., Tet</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1668"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1662"/>
         <source>Time Format</source>
         <translation>Format Kohe</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1675"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1669"/>
         <source>Format</source>
         <translation>Formatoje</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1680"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1674"/>
         <source>12 Hour</source>
         <translation>12 Orë</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1681"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1675"/>
         <source>24 Hour</source>
         <translation>24 Orë</translation>
     </message>
@@ -430,42 +430,42 @@ otherwise this setting will not have any effect</source>
         <translation>automatikisht</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1696"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1690"/>
         <source>Date &amp;&amp; Time</source>
         <translation>Datë &amp;&amp; Kohë</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1709"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1703"/>
         <source>Interface</source>
         <translation>Ndërfaqe</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1717"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1711"/>
         <source>WiFi</source>
         <translation>WiFi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1720"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1714"/>
         <source>WiFi Network</source>
         <translation>Rrjet WiFi</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1723"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1717"/>
         <source>LAN</source>
         <translation>LAN</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1726"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1720"/>
         <source>Wired LAN Network</source>
         <translation>Rrjet LAN me fill</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="1740"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="1734"/>
         <source>Network</source>
         <translation>Rrjet</translation>
     </message>
     <message>
-        <location filename="../src/conkycustomizedialog.cpp" line="2061"/>
+        <location filename="../src/conkycustomizedialog.cpp" line="2055"/>
         <source>Select Background Color</source>
         <translation>Përzgjidhni Ngjyrë Sfondi</translation>
     </message>
@@ -558,7 +558,7 @@ otherwise this setting will not have any effect</source>
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.cpp" line="57"/>
-        <location filename="../src/mainwindow.cpp" line="778"/>
+        <location filename="../src/mainwindow.cpp" line="810"/>
         <source>MX Conky</source>
         <translation>MX Conky</translation>
     </message>
@@ -633,19 +633,19 @@ otherwise this setting will not have any effect</source>
         <translation>Ndali krejt kartelat e formësimit të Conky-t që xhirojnë</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="792"/>
+        <location filename="../src/mainwindow.cpp" line="824"/>
         <source>MX Conky License</source>
         <translation>Licencë MX Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="843"/>
-        <location filename="../src/mainwindow.cpp" line="894"/>
+        <location filename="../src/mainwindow.cpp" line="875"/>
+        <location filename="../src/mainwindow.cpp" line="926"/>
         <source>Running</source>
         <translation>Në funksionim</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="845"/>
-        <location filename="../src/mainwindow.cpp" line="895"/>
+        <location filename="../src/mainwindow.cpp" line="877"/>
+        <location filename="../src/mainwindow.cpp" line="927"/>
         <source>Stopped</source>
         <translation>E ndalur</translation>
     </message>
@@ -665,29 +665,29 @@ otherwise this setting will not have any effect</source>
         <translation>Shfaq ndihmë</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1041"/>
+        <location filename="../src/mainwindow.cpp" line="1073"/>
         <source>Copy Conky</source>
         <translation>Kopjoje Conky-n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1089"/>
+        <location filename="../src/mainwindow.cpp" line="1121"/>
         <source>Conky Copied</source>
         <translation>Conky u Kopjua</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1088"/>
+        <location filename="../src/mainwindow.cpp" line="1120"/>
         <source>Conky has been copied to your personal folder for editing:
 %1</source>
         <translation>Conky është kopjuar te dosja juaj personale për përpunim:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1065"/>
+        <location filename="../src/mainwindow.cpp" line="1097"/>
         <source>Copy Failed</source>
         <translation>Kopjimi Dështoi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1065"/>
+        <location filename="../src/mainwindow.cpp" line="1097"/>
         <source>Failed to copy conky to your personal folder.</source>
         <translation>S’u arrit të kopjohet kartelë formësimi Conky te dosja juaj personale.</translation>
     </message>
@@ -697,7 +697,7 @@ otherwise this setting will not have any effect</source>
         <translation>Fshije Conky-n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1087"/>
+        <location filename="../src/mainwindow.cpp" line="1119"/>
         <source>Conky has been copied to your personal folder for customization:
 %1</source>
         <translation>Conky është kopjuar te dosja juaj personale për përshtatje:
@@ -715,9 +715,9 @@ otherwise this setting will not have any effect</source>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="259"/>
-        <location filename="../src/mainwindow.cpp" line="841"/>
-        <location filename="../src/mainwindow.cpp" line="893"/>
-        <location filename="../src/mainwindow.cpp" line="1075"/>
+        <location filename="../src/mainwindow.cpp" line="873"/>
+        <location filename="../src/mainwindow.cpp" line="925"/>
+        <location filename="../src/mainwindow.cpp" line="1107"/>
         <source>All</source>
         <translation>Krejt</translation>
     </message>
@@ -727,24 +727,24 @@ otherwise this setting will not have any effect</source>
         <translation>Filtroji kartelat e formësimit Conky sipas gjendje xhirimi ose vendndodhje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1037"/>
+        <location filename="../src/mainwindow.cpp" line="1069"/>
         <source>Enter a name for the copy:</source>
         <translation>Jepni një emër për kopjen:</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1038"/>
+        <location filename="../src/mainwindow.cpp" line="1070"/>
         <source>In order for you to edit and save a conky, it must first be copied to ~/.conky where you have permission.
 Enter a name for the copy.</source>
         <translation>Që të mund të përpunoni dhe ruani një kartelë formësimi Conky, së pari duhet kopjuar te ~/.conky ku keni leje.
 Jepni një emër për kopjen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1053"/>
+        <location filename="../src/mainwindow.cpp" line="1085"/>
         <source>Directory Exists</source>
         <translation>Drejtoria Ekziston</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1054"/>
+        <location filename="../src/mainwindow.cpp" line="1086"/>
         <source>A conky with the name '%1' already exists in your personal folder.
 Do you want to overwrite it?</source>
         <translation>Te dosja juaj personale ka tashmë një kartelë formësimi Conky me emrin &apos;%1&apos;.
@@ -774,89 +774,89 @@ This action cannot be undone.</source>
 Ky veprim s’mund të zhbëhet.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="573"/>
+        <location filename="../src/mainwindow.cpp" line="572"/>
         <source>Delete Failed</source>
         <translation>Fshirja Dështoi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="573"/>
+        <location filename="../src/mainwindow.cpp" line="572"/>
         <source>Failed to delete conky file:
 %1</source>
         <translation>S’u arrit të fshihet kartelë formësimi Conky:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="602"/>
+        <location filename="../src/mainwindow.cpp" line="601"/>
         <source>Customize Conky</source>
         <translation>Përshtatni Conky-n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="603"/>
+        <location filename="../src/mainwindow.cpp" line="602"/>
         <source>This conky file is read-only and requires administrator privileges to customize.
 Do you want to customize it with elevated privileges?</source>
         <translation>Kjo kartelë formësimi Conky është vetëm për lexim dhe lyp privilegje përgjegjësi për ta përshtatur.
 Doni ta përshtatni me privilegje më të larta?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="767"/>
+        <location filename="../src/mainwindow.cpp" line="799"/>
         <source>Editor Error</source>
         <translation>Gabim Përpunuesi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="767"/>
+        <location filename="../src/mainwindow.cpp" line="799"/>
         <source>Cannot start editor for file: %1</source>
         <translation>S’niset dot përpunuesi për kartelën: %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="777"/>
+        <location filename="../src/mainwindow.cpp" line="809"/>
         <source>About MX Conky</source>
         <translation>Mbi MX-Conky</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="779"/>
+        <location filename="../src/mainwindow.cpp" line="811"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="812"/>
         <source>GUI program for configuring Conky in MX Linux</source>
         <translation>Program GUI për formësimin e Conky-t në MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="783"/>
+        <location filename="../src/mainwindow.cpp" line="815"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Të drejta kopjimi (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="784"/>
+        <location filename="../src/mainwindow.cpp" line="816"/>
         <source>License</source>
         <translation>Licencë</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="785"/>
-        <location filename="../src/mainwindow.cpp" line="795"/>
+        <location filename="../src/mainwindow.cpp" line="817"/>
+        <location filename="../src/mainwindow.cpp" line="827"/>
         <source>Changelog</source>
         <translation>Regjistër ndryshimesh</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="786"/>
+        <location filename="../src/mainwindow.cpp" line="818"/>
         <source>Cancel</source>
         <translation>Anuloje</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="129"/>
-        <location filename="../src/mainwindow.cpp" line="806"/>
+        <location filename="../src/mainwindow.cpp" line="838"/>
         <source>&amp;Close</source>
         <translation>&amp;Mbylle</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="823"/>
+        <location filename="../src/mainwindow.cpp" line="855"/>
         <source>MX Conky Help</source>
         <translation>Ndihmë për MX Conky-n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="847"/>
-        <location filename="../src/mainwindow.cpp" line="896"/>
+        <location filename="../src/mainwindow.cpp" line="879"/>
+        <location filename="../src/mainwindow.cpp" line="928"/>
         <source>Autostart</source>
         <translation>Vetënise</translation>
     </message>
@@ -869,119 +869,119 @@ Doni ta përshtatni me privilegje më të larta?</translation>
         <translation>Prodho Paraparje</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="76"/>
+        <location filename="../src/previewdialog.cpp" line="82"/>
         <source>Generate preview images for</source>
         <translation>Prodhoni pamje paraparje për</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="79"/>
+        <location filename="../src/previewdialog.cpp" line="85"/>
         <source>Selected Widget</source>
         <translation>Widget-in e Përzgjedhur</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="80"/>
+        <location filename="../src/previewdialog.cpp" line="86"/>
         <source>All Widgets with Missing Previews</source>
         <translation>Krejt Widget-et Pa Paraparje</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="81"/>
+        <location filename="../src/previewdialog.cpp" line="87"/>
         <source>All Widgets (Overwrite Existing Images)</source>
         <translation>Krejt Widget-et (Mbishkruaj Pamje Ekzistuese)</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="86"/>
+        <location filename="../src/previewdialog.cpp" line="92"/>
         <source>No conky is currently selected</source>
         <translation>Aktualisht s’është përzgjedhur ndonjë kartelë formësimi Conky</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="94"/>
+        <location filename="../src/previewdialog.cpp" line="100"/>
         <source>Options</source>
         <translation>Mundësi</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="97"/>
+        <location filename="../src/previewdialog.cpp" line="103"/>
         <source>High quality images (PNG)</source>
         <translation>Figura të cilësisë së lartë (PNG)</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="98"/>
+        <location filename="../src/previewdialog.cpp" line="104"/>
         <source>Generate preview images in PNG format instead of JPEG</source>
         <translation>Prodho pamje paraprje në formatin PNG, në vend se JPEG</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="115"/>
+        <location filename="../src/previewdialog.cpp" line="121"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="119"/>
+        <location filename="../src/previewdialog.cpp" line="125"/>
         <source>Cancel</source>
         <translation>Anuloje</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="146"/>
+        <location filename="../src/previewdialog.cpp" line="152"/>
         <source>No Items</source>
         <translation>Pa Objekte</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="146"/>
+        <location filename="../src/previewdialog.cpp" line="152"/>
         <source>No conky widgets need preview generation.</source>
         <translation>S’ka widget-e kartele formësimi Conky që duan prodhim paraparjeje.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="152"/>
+        <location filename="../src/previewdialog.cpp" line="158"/>
         <source>Missing Dependency</source>
         <translation>Mungon Varësi</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="153"/>
+        <location filename="../src/previewdialog.cpp" line="159"/>
         <source>Preview generation requires the GraphicsMagick compatibility tools.
 Please install the graphicsmagick-imagemagick-compat package to enable this feature.</source>
         <translation>Prodhimi i paraparjeve lyp mjete të përputhshme me GraphicsMagick.
 Ju lutemi, që të aktivizohet kjo veçori, instaloni paketën graphicsmagick-imagemagick-compat.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="164"/>
+        <location filename="../src/previewdialog.cpp" line="174"/>
         <source>Starting preview generation...</source>
         <translation>Po niset prodhim paraparjesh…</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="168"/>
+        <location filename="../src/previewdialog.cpp" line="178"/>
         <source>Stop</source>
         <translation>Ndale</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="207"/>
+        <location filename="../src/previewdialog.cpp" line="217"/>
         <source>Generating preview for: %1</source>
         <translation>Po prodhohet paraparje për: %1</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="243"/>
+        <location filename="../src/previewdialog.cpp" line="253"/>
         <source>Unsupported Display Server</source>
         <translation>Shërbyes i Pambuluar Ekranesh</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="244"/>
+        <location filename="../src/previewdialog.cpp" line="254"/>
         <source>Preview generation requires X11 and is not supported on Wayland.</source>
         <translation>Prodhimi i paraparjeve lyp X11 dhe s’mbulohet nën Wayland.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="437"/>
+        <location filename="../src/previewdialog.cpp" line="451"/>
         <source>Preview generation complete! Generated %1 previews.</source>
         <translation>Prodhim paraparjesh i plotësuar! U prodhuan %1 paraparje.</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="441"/>
+        <location filename="../src/previewdialog.cpp" line="455"/>
         <source>Close</source>
         <translation>Mbylle</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="444"/>
+        <location filename="../src/previewdialog.cpp" line="458"/>
         <source>Preview Generation Complete</source>
         <translation>Prodhim Paraparjesh i Plotësuar</translation>
     </message>
     <message>
-        <location filename="../src/previewdialog.cpp" line="445"/>
+        <location filename="../src/previewdialog.cpp" line="459"/>
         <source>Successfully generated %1 preview images.</source>
         <translation>U prodhuan me sukses %1 pamje paraparjesh.</translation>
     </message>

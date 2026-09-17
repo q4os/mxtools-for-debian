@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: verify-iso-sig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-20 21:57+0200\n"
+"POT-Creation-Date: 2026-09-03 21:09+0200\n"
 "PO-Revision-Date: 2026-07-30 16:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
@@ -18,18 +18,17 @@ msgstr ""
 msgid "Verify ISO signature"
 msgstr "Tarkista ISO-allekirjoitus"
 
+msgid "Manage Trusted Keys"
+msgstr "Hallinnoi luotettuja avaimia"
+
 msgid "Trust this key"
 msgstr "Luota tähän avaimeen"
 
 msgid "Check Another File"
 msgstr "Tarkista toinen tiedosto"
 
-msgid ""
-"error: refusing to run as root - run this as your normal desktop user "
-"instead"
-msgstr ""
-"virhe: suorittaminen pääkäyttäjänä (root) on estetty - käytä omaa "
-"käyttäjätunnustasi"
+msgid "error: refusing to run as root - run this as your normal desktop user instead"
+msgstr "virhe: suorittaminen pääkäyttäjänä (root) on estetty - käytä omaa käyttäjätunnustasi"
 
 msgid "OK"
 msgstr "OK"
@@ -37,23 +36,15 @@ msgstr "OK"
 msgid "ISO Signature Verifier"
 msgstr "ISO-allekirjoitustarkistin"
 
-msgid ""
-"Check the GPG signature of a downloaded ISO (built-in support for MX "
-"Linux/antiX signing keys)"
-msgstr ""
-"Tarkistaa ladatun ISO-tiedoston GPG-allekirjoituksen (sisäänrakennettu tuki "
-"MX Linux/antiX-allekirjoitusavaimille)"
+msgid "Check the GPG signature of a downloaded ISO (built-in support for MX Linux/antiX signing keys)"
+msgstr "Tarkistaa ladatun ISO-tiedoston GPG-allekirjoituksen (sisäänrakennettu tuki MX Linux/antiX-allekirjoitusavaimille)"
 
 #, sh-format
 msgid "Version ${VERSION}"
 msgstr "Versio ${VERSION}"
 
-msgid ""
-"Check the GPG signature of a downloaded ISO\\n(built-in support for MX "
-"Linux/antiX signing keys)"
-msgstr ""
-"Tarkistaa ladatun ISO-tiedoston GPG-allekirjoituksen\\n(sisäänrakennettu "
-"tuki MX Linux/antiX-allekirjoitusavaimille)"
+msgid "Check the GPG signature of a downloaded ISO\\n(built-in support for MX Linux/antiX signing keys)"
+msgstr "Tarkistaa ladatun ISO-tiedoston GPG-allekirjoituksen\\n(sisäänrakennettu tuki MX Linux/antiX-allekirjoitusavaimille)"
 
 msgid "License: GNU GPL v3 or later"
 msgstr "Lisenssi: GNU GPL v3 tai uudempi"
@@ -65,22 +56,23 @@ msgstr "Tietoja – ${ABOUT_TITLE}"
 msgid "Close"
 msgstr "Sulje"
 
-msgid "Manage Trusted Keys"
-msgstr "Hallinnoi luotettuja avaimia"
+msgid "Details"
+msgstr "Tiedot"
 
-msgid "Forget Selected"
-msgstr "Unohda valitut"
+msgid "Untrust"
+msgstr "Kumoa"
 
 msgid "Import Selected"
 msgstr "Tuo valitut"
+
+msgid "Refresh"
+msgstr "Päivitä"
 
 msgid "Could not read the list of trusted keys:"
 msgstr "Luotettujen avainten luetteloa ei voitu lukea:"
 
 msgid "No signing keys are currently saved in trustedkeys.gpg."
-msgstr ""
-"Tiedostossa trustedkeys.gpg ei ole tällä hetkellä tallennettuja "
-"allekirjoitusavaimia."
+msgstr "Tiedostossa trustedkeys.gpg ei ole tällä hetkellä tallennettuja allekirjoitusavaimia."
 
 #. TRANSLATORS: "Trust"/"Keep" here are informal short references to
 #. the main GUI's "Trust this key"/"Keep this key" button labels, not
@@ -88,18 +80,14 @@ msgstr ""
 #. The straight quotes around each word are just English's own
 #. convention - please use your language's own quotation marks
 #. instead (e.g. « », „", etc.) if that reads more naturally.
-msgid ""
-"A key ends up there after you choose to \"Trust\"/\"Keep\" it while "
-"verifying an ISO."
-msgstr ""
-"Avain päätyy sinne, kun valitset ISO-tiedoston tarkistuksen yhteydessä "
-"”Luota”- tai ”Säilytä”-toiminnon."
+msgid "A key ends up there after you choose to \"Trust\"/\"Keep\" it while verifying an ISO."
+msgstr "Avain päätyy sinne, kun valitset ISO-tiedoston tarkistuksen yhteydessä ”Luota”- tai ”Säilytä”-toiminnon."
 
-msgid "Import from File"
-msgstr "Tuo tiedostosta"
+msgid "Import"
+msgstr "Tuo"
 
-msgid "Remove"
-msgstr "Poista"
+msgid "Select"
+msgstr "Valitse"
 
 msgid "Fingerprint"
 msgstr "Sormenjälki"
@@ -116,18 +104,13 @@ msgstr "Tila"
 msgid "Expiration Date"
 msgstr "Vanhenemispäivä"
 
-#. TRANSLATORS: ${BTN_FORGET_SELECTED} is the translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_UNTRUST_SELECTED} is the translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"Keys saved in ~/.gnupg/trustedkeys.gpg - check any you want to forget, then "
-"click \"${BTN_FORGET_SELECTED}\"."
-msgstr ""
-"Tiedostoon ~/.gnupg/trustedkeys.gpg tallennetut avaimet - valitse ne, jotka "
-"haluat unohtaa, ja napsauta sitten ”${BTN_FORGET_SELECTED}”."
+msgid "Keys saved in ~/.gnupg/trustedkeys.gpg - check any you want to untrust, then click \"${BTN_UNTRUST_SELECTED}\"."
+msgstr "Tiedostoon ~/.gnupg/trustedkeys.gpg tallennetut avaimet - valitse ne, joiden luottamuksen haluat kumota, ja napsauta sitten \"${BTN_UNTRUST_SELECTED}\"."
 
-msgid "Export Selected"
-msgstr "Vie valitut"
+msgid "Export"
+msgstr "Vie"
 
 #. TRANSLATORS: shown as-is in the list's "Status" column (a
 #. gpg key's trust validity), one word each.
@@ -147,6 +130,21 @@ msgstr "kumottu"
 msgid "never"
 msgstr "ei koskaan"
 
+msgid "No key was checked - nothing to show details for."
+msgstr "Yhtään avainta ei valittu - ei mitään näytettävää."
+
+#. TRANSLATORS: ${DETAILS_N}/${DETAILS_TOTAL} are literal numbers - keep placeholders as-is.
+#, sh-format
+msgid "Key ${DETAILS_N} of ${DETAILS_TOTAL}"
+msgstr "Avain ${DETAILS_N}/${DETAILS_TOTAL}"
+
+#, sh-format
+msgid "(could not read details: ${OUT})"
+msgstr "(tietoja ei voitu lukea: ${OUT})"
+
+msgid "Key Details"
+msgstr "Avaimen tiedot"
+
 msgid "No key was checked - nothing to export."
 msgstr "Yhtään avainta ei valittu - ei mitään vietävää."
 
@@ -160,8 +158,7 @@ msgstr "Vietiin ${EXPORT_COUNT} avainta kohteeseen ${EXPORT_PATH_SAFE}."
 msgid "Could not export keys:"
 msgstr "Avaimia ei voitu viedä:"
 
-#. TRANSLATORS: ${BTN_IMPORT_SELECTED} is the translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_IMPORT_SELECTED} is the translated button label - keep the placeholder as-is.
 msgid "Import Trusted Keys"
 msgstr "Tuo luotettuja avaimia"
 
@@ -177,16 +174,9 @@ msgstr "Tätä avaintiedostoa ei voitu lukea:"
 msgid "No keys were found in that file."
 msgstr "Tästä tiedostosta ei löytynyt avaimia."
 
-msgid "Import"
-msgstr "Tuo"
-
 #, sh-format
-msgid ""
-"Keys found in this file - check any you want to import, then click "
-"\"${BTN_IMPORT_SELECTED}\"."
-msgstr ""
-"Tästä tiedostosta löytyneet avaimet - valitse ne, jotka haluat tuoda, ja "
-"napsauta sitten ”${BTN_IMPORT_SELECTED}”."
+msgid "Keys found in this file - check any you want to import, then click \"${BTN_IMPORT_SELECTED}\"."
+msgstr "Tästä tiedostosta löytyneet avaimet - valitse ne, jotka haluat tuoda, ja napsauta sitten ”${BTN_IMPORT_SELECTED}”."
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -202,47 +192,63 @@ msgid "No key was checked - nothing to import."
 msgstr "Yhtään avainta ei valittu - ei mitään tuotavaa."
 
 #, sh-format
-msgid ""
-"Processed ${IMPORT_PROCESSED} key(s): ${IMPORT_NEW} new, ${IMPORT_UPDATED} "
-"updated, ${IMPORT_UNCHANGED} unchanged."
-msgstr ""
-"${IMPORT_PROCESSED} avainta käsitelty: ${IMPORT_NEW} uutta, "
-"${IMPORT_UPDATED} päivitettyä, ${IMPORT_UNCHANGED} muuttumatonta."
+msgid "Processed ${IMPORT_PROCESSED} key(s): ${IMPORT_NEW} new, ${IMPORT_UPDATED} updated, ${IMPORT_UNCHANGED} unchanged."
+msgstr "${IMPORT_PROCESSED} avainta käsitelty: ${IMPORT_NEW} uutta, ${IMPORT_UPDATED} päivitettyä, ${IMPORT_UNCHANGED} muuttumatonta."
 
 msgid "Could not import keys:"
 msgstr "Avaimia ei voitu tuoda:"
 
-msgid "No key was checked - nothing to forget."
-msgstr "Yhtään avainta ei valittu - ei mitään unohdettavaa."
-
-#. TRANSLATORS: ${COUNT}/${CMD_LIST_KNOWN_KEYS} are literal - keep
-#. placeholders as-is.
 #, sh-format
-msgid "Forget ${COUNT} selected key(s) from trustedkeys.gpg?"
-msgstr ""
-"Unohdetaanko ${COUNT} valittu(a) avain(ta) tiedostosta trustedkeys.gpg?"
+msgid "Checking ${REFRESH_COUNT} key(s) against pubring.kbx, mx-gpg-keyring, and a keyserver - this can take a while..."
+msgstr "Tarkistetaan ${REFRESH_COUNT} avainta pubring.kbx:ää, mx-gpg-keyringiä ja avainpalvelinta vasten - tämä voi kestää hetken..."
 
 #, sh-format
-msgid ""
-"If any of them is also one of this tool's built-in recognized keys (run "
-"'${CMD_LIST_KNOWN_KEYS}' to see the full list), it will still be recognized "
-"automatically next time - this only removes the local cache entry, not that "
-"recognition."
-msgstr ""
-"Jos jokin niistä on myös yksi tämän työkalun sisäänrakennetuista "
-"tunnistamista avaimista (näet koko luettelon komennolla "
-"'${CMD_LIST_KNOWN_KEYS}'), tämä työkalu tunnistaa sen silti automaattisesti "
-"seuraavalla kerralla - tämä poistaa vain paikallisen välimuistimerkinnän, ei"
-" tätä tunnistusta."
+msgid "Checking ${REFRESH_COUNT} key(s) against pubring.kbx and a keyserver - this can take a while..."
+msgstr "Tarkistetaan ${REFRESH_COUNT} avainta pubring.kbx:ää ja avainpalvelinta vasten - tämä voi kestää hetken..."
 
-msgid "Forget"
-msgstr "Unohda"
+#, sh-format
+msgid "Checking ${REFRESH_COUNT} key(s) against mx-gpg-keyring and a keyserver - this can take a while..."
+msgstr "Tarkistetaan ${REFRESH_COUNT} avainta mx-gpg-keyringiä ja avainpalvelinta vasten - tämä voi kestää hetken..."
+
+#, sh-format
+msgid "Checking ${REFRESH_COUNT} key(s) against a keyserver - this can take a while..."
+msgstr "Tarkistetaan ${REFRESH_COUNT} avainta avainpalvelinta vasten - tämä voi kestää hetken..."
+
+#, sh-format
+msgid "Checked ${SWEEP_CHECKED} key(s): ${SWEEP_UPDATED} updated, ${SWEEP_REVOKED} revoked."
+msgstr "Tarkistettu ${SWEEP_CHECKED} avain(ta): ${SWEEP_UPDATED} päivitetty, ${SWEEP_REVOKED} kumottu."
+
+#, sh-format
+msgid "${SWEEP_UNREACHABLE} of ${SWEEP_CHECKED} key(s) could not be checked against any keyserver - results for those may be incomplete."
+msgstr "${SWEEP_UNREACHABLE}/${SWEEP_CHECKED} avainta ei voitu tarkistaa mistään avainpalvelimesta - näiden tulokset voivat olla puutteellisia."
+
+msgid "Could not refresh trusted keys:"
+msgstr "Luotettuja avaimia ei voitu päivittää:"
+
+msgid "No key was checked - nothing to untrust."
+msgstr "Yhtään avainta ei valittu - ei mitään kumottavaa."
+
+#. TRANSLATORS: ${COUNT} is literal - keep the placeholder as-is.
+#, sh-format
+msgid "Untrust ${COUNT} selected key(s)?"
+msgstr "Kumotaanko ${COUNT} valitun avaimen luottamus?"
+
+msgid "This tool will stop automatically trusting the selected key(s) - whether they're one of its built-in recognized keys, or separately marked trusted in your own GnuPG keyring. This isn't permanent - trust a key again anytime (verify something signed by it and accept it, or import the key again) and it'll be trusted normally from then on."
+msgstr "Tämä työkalu lakkaa luottamasta valittuihin avaimiin automaattisesti - olipa kyseessä sisäänrakennettu tunnistettu avain tai avain, jonka olet erikseen merkinnyt luotetuksi omassa GnuPG-avainnipussasi. Tämä ei ole pysyvää - voit luottaa avaimeen taas milloin tahansa (tarkista sillä allekirjoitettu tiedosto ja hyväksy se, tai tuo avain uudelleen), ja siitä lähtien sitä kohdellaan taas normaalisti luotettuna."
 
 msgid "Some keys could not be removed:"
 msgstr "Joitakin avaimia ei voitu poistaa:"
 
+#, fuzzy, sh-format
+msgid "'${other_title}' is already open - close it first to check this file."
+msgstr "On jo käynnissä - sulje se ensin tarkistaaksesi tämän tiedoston."
+
 msgid "Already running - close it first to check this file."
 msgstr "On jo käynnissä - sulje se ensin tarkistaaksesi tämän tiedoston."
+
+#, sh-format
+msgid "'${other_title}' is already open."
+msgstr ""
 
 msgid "Already running."
 msgstr "On jo käynnissä."
@@ -254,38 +260,22 @@ msgstr "Ei voida määrittää, mihin ${anchor_base} kuuluu:"
 msgid "Cannot detect how these three files belong together:"
 msgstr "Ei voida määrittää, miten nämä kolme tiedostoa kuuluvat yhteen:"
 
-msgid ""
-"Cannot detect an ISO, a checksum listing, and its signature among these "
-"three files:"
-msgstr ""
-"Näiden kolmen tiedoston joukosta ei löydy ISO-tiedostoa, "
-"tarkistussummalistaa ja sen allekirjoitusta:"
+msgid "Cannot detect an ISO, a checksum listing, and its signature among these three files:"
+msgstr "Näiden kolmen tiedoston joukosta ei löydy ISO-tiedostoa, tarkistussummalistaa ja sen allekirjoitusta:"
 
 msgid "Too many files were given - at most three are supported."
 msgstr "Liian monta tiedostoa annettiin - enintään kolme on tuettu."
 
-msgid ""
-"This tool checks that a downloaded ISO is authentic and undamaged, using its"
-" signature file or a signed checksum listing."
-msgstr ""
-"Tämä työkalu tarkistaa allekirjoitustiedoston tai allekirjoitetun "
-"tarkistussummaluettelon avulla, että ladattu ISO on aito ja "
-"vahingoittumaton."
+msgid "This tool checks that a downloaded ISO is authentic and undamaged, using its signature file or a signed checksum listing."
+msgstr "Tämä työkalu tarkistaa allekirjoitustiedoston tai allekirjoitetun tarkistussummaluettelon avulla, että ladattu ISO on aito ja vahingoittumaton."
 
-msgid ""
-"Pick the .iso file, or its .sig/.asc/.gpg/.sign signature file directly."
-msgstr ""
-"Valitse .iso-tiedosto tai suoraan sen .sig/.asc/.gpg/.sign-"
-"allekirjoitustiedosto."
+msgid "Pick the .iso file, or its .sig/.asc/.gpg/.sign signature file directly."
+msgstr "Valitse .iso-tiedosto tai suoraan sen .sig/.asc/.gpg/.sign-allekirjoitustiedosto."
 
 #. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render as
 #. bold text, not literal characters).
-msgid ""
-"The other one is found automatically - <b>but only if it's in the same "
-"folder</b>."
-msgstr ""
-"Toinen tiedosto löytyy automaattisesti - <b>mutta vain, jos se on samassa "
-"kansiossa</b>."
+msgid "The other one is found automatically - <b>but only if it's in the same folder</b>."
+msgstr "Toinen tiedosto löytyy automaattisesti - <b>mutta vain, jos se on samassa kansiossa</b>."
 
 msgid "ISO or signature file"
 msgstr "ISO- tai allekirjoitustiedosto"
@@ -309,52 +299,26 @@ msgid "Drag a File"
 msgstr "Vedä tiedosto"
 
 #, sh-format
-msgid ""
-"Drop at most three files (the ISO plus its checksum listing and/or signature"
-" file) - ${DROP_COUNT} were dropped."
-msgstr ""
-"Pudota enintään kolme tiedostoa (ISO sekä sen tarkistussummalista ja/tai "
-"allekirjoitustiedosto) - pudotettiin ${DROP_COUNT}."
+msgid "Drop at most three files (the ISO plus its checksum listing and/or signature file) - ${DROP_COUNT} were dropped."
+msgstr "Pudota enintään kolme tiedostoa (ISO sekä sen tarkistussummalista ja/tai allekirjoitustiedosto) - pudotettiin ${DROP_COUNT}."
 
-msgid ""
-"Could not find a way to open a web browser (xdg-open is missing). Open this "
-"address yourself:"
-msgstr ""
-"Verkkoselaimen avaamiseen ei löytynyt keinoa (xdg-open puuttuu). Avaa tämä "
-"osoite itse:"
+msgid "Could not find a way to open a web browser (xdg-open is missing). Open this address yourself:"
+msgstr "Verkkoselaimen avaamiseen ei löytynyt keinoa (xdg-open puuttuu). Avaa tämä osoite itse:"
 
-msgid ""
-"That's a folder, not a file - pick the .iso file itself (or its "
-".sig/.asc/.gpg/.sign signature file) directly."
-msgstr ""
-"Tämä on kansio, ei tiedosto - valitse itse .iso-tiedosto (tai suoraan sen "
-".sig/.asc/.gpg/.sign-allekirjoitustiedosto)."
+msgid "That's a folder, not a file - pick the .iso file itself (or its .sig/.asc/.gpg/.sign signature file) directly."
+msgstr "Tämä on kansio, ei tiedosto - valitse itse .iso-tiedosto (tai suoraan sen .sig/.asc/.gpg/.sign-allekirjoitustiedosto)."
 
 #, sh-format
-msgid ""
-"'${named_base}' looks like a signature file by its name, but its content "
-"doesn't look like a real one."
-msgstr ""
-"Tiedosto ${named_base} näyttää nimensä perusteella allekirjoitustiedostolta,"
-" mutta sen sisältö ei näytä oikealta."
+msgid "'${named_base}' looks like a signature file by its name, but its content doesn't look like a real one."
+msgstr "Tiedosto ${named_base} näyttää nimensä perusteella allekirjoitustiedostolta, mutta sen sisältö ei näytä oikealta."
 
 #, sh-format
-msgid ""
-"Neither '${neither_iso_base}' nor '${neither_sig_base}' looks like a real "
-"ISO signature file, by name or content."
-msgstr ""
-"Tiedostot ${neither_iso_base} tai ${neither_sig_base} eivät näytä oikealta "
-"ISO-allekirjoitustiedostolta, ei nimen eikä sisällön perusteella."
+msgid "Neither '${neither_iso_base}' nor '${neither_sig_base}' looks like a real ISO signature file, by name or content."
+msgstr "Tiedostot ${neither_iso_base} tai ${neither_sig_base} eivät näytä oikealta ISO-allekirjoitustiedostolta, ei nimen eikä sisällön perusteella."
 
 #, sh-format
-msgid ""
-"'${not_plausible_iso_base}' and '${not_plausible_sig_base}' both look like "
-"signature or checksum-listing files - pick the actual ISO, plus its checksum"
-" listing or signature file."
-msgstr ""
-"Tiedostot ${not_plausible_iso_base} ja ${not_plausible_sig_base} näyttävät "
-"molemmat allekirjoitus- tai tarkistussummaluettelotiedostolta - valitse itse"
-" ISO-tiedosto sekä sen tarkistussummaluettelo tai allekirjoitustiedosto."
+msgid "'${not_plausible_iso_base}' and '${not_plausible_sig_base}' both look like signature or checksum-listing files - pick the actual ISO, plus its checksum listing or signature file."
+msgstr "Tiedostot ${not_plausible_iso_base} ja ${not_plausible_sig_base} näyttävät molemmat allekirjoitus- tai tarkistussummaluettelotiedostolta - valitse itse ISO-tiedosto sekä sen tarkistussummaluettelo tai allekirjoitustiedosto."
 
 msgid "No ISO or signature file was selected."
 msgstr "ISO- tai allekirjoitustiedostoa ei valittu."
@@ -381,9 +345,7 @@ msgid "SIG:"
 msgstr "SIG:"
 
 msgid "Verifying signature - this can take a while for a large ISO..."
-msgstr ""
-"Allekirjoitusta tarkistetaan - tämä voi kestää hetken suuren ISO-tiedoston "
-"kohdalla..."
+msgstr "Allekirjoitusta tarkistetaan - tämä voi kestää hetken suuren ISO-tiedoston kohdalla..."
 
 msgid "Verifying signature - this can take a few seconds"
 msgstr "Allekirjoitusta tarkistetaan - tämä voi kestää muutaman sekunnin"
@@ -394,48 +356,36 @@ msgstr "Allekirjoitusta tarkistetaan - tämä voi kestää muutaman sekunnin"
 msgid "if the signing key needs to be fetched from a keyserver..."
 msgstr "jos allekirjoitusavain täytyy hakea avainpalvelimelta..."
 
-msgid ""
-"Process was interrupted - the check did not finish, so nothing here has been"
-" verified."
-msgstr ""
-"Toiminto keskeytettiin - tarkistus ei valmistunut, joten mitään ei ole "
-"vahvistettu."
+msgid "Process was interrupted - the check did not finish, so nothing here has been verified."
+msgstr "Toiminto keskeytettiin - tarkistus ei valmistunut, joten mitään ei ole vahvistettu."
 
-#. TRANSLATORS: ${BTN_TRUST_THIS_KEY} is the translated button label - keep
-#. the placeholder as-is.
+msgid "Primary key:"
+msgstr "Pääavain:"
+
+#. TRANSLATORS: ${BTN_TRUST_THIS_KEY} is the translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"By clicking \"${BTN_TRUST_THIS_KEY}\" you confirm you've checked the Key ID "
-"or fingerprint yourself and want to trust and remember this key for future "
-"checks."
-msgstr ""
-"Napsauttamalla ”${BTN_TRUST_THIS_KEY}” vahvistat, että olet itse tarkistanut"
-" avaintunnuksen tai sormenjäljen ja haluat luottaa tähän avaimeen sekä "
-"muistaa sen tulevia tarkistuksia varten."
+msgid "By clicking \"${BTN_TRUST_THIS_KEY}\" you confirm you've checked the Key ID or fingerprint yourself and want to trust and remember this key for future checks."
+msgstr "Napsauttamalla ”${BTN_TRUST_THIS_KEY}” vahvistat, että olet itse tarkistanut avaintunnuksen tai sormenjäljen ja haluat luottaa tähän avaimeen sekä muistaa sen tulevia tarkistuksia varten."
+
+msgid "You've told this tool not to automatically trust this signing key anymore."
+msgstr "Olet kertonut tälle työkalulle, ettei se luota tähän allekirjoitusavaimeen enää automaattisesti."
+
+msgid "You've told this tool not to automatically trust this checksum-listing signing key anymore."
+msgstr "Olet kertonut tälle työkalulle, ettei se luota tämän tarkistussummaluettelon allekirjoitusavaimeen enää automaattisesti."
+
+msgid "This ISO's signing key isn't one this tool already recognizes."
+msgstr "Tämän ISO-tiedoston allekirjoitusavain ei ole tämän työkalun jo tunnistama avain."
+
+msgid "This checksum-listing file's signing key isn't one this tool already recognizes."
+msgstr "Tämän tarkistussummaluettelotiedoston allekirjoitusavain ei ole tämän työkalun jo tunnistama avain."
 
 #. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render
 #. as bold text, not literal characters).
 msgid "Signature check: <b>GOOD</b> - the ISO exactly matches this key."
-msgstr ""
-"Allekirjoituksen tarkistus: <b>HYVÄ</b> - ISO-tiedosto vastaa täsmälleen "
-"tätä avainta."
+msgstr "Allekirjoituksen tarkistus: <b>HYVÄ</b> - ISO-tiedosto vastaa täsmälleen tätä avainta."
 
-msgid ""
-"Note: that identity is self-declared by whoever created the key - it is NOT "
-"independently verified, unlike the Key ID or fingerprint. Only trust this "
-"key if you've confirmed the Key ID or fingerprint yourself (e.g. from the "
-"respin/distro's own official site, or its keyserver listing)."
-msgstr ""
-"Huomautus: tämän henkilöllisyyden on ilmoittanut avaimen luonut henkilö itse"
-" - sitä EI ole vahvistettu riippumattomasti, toisin kuin avaintunnusta tai "
-"sormenjälkeä. Luota tähän avaimeen vain, jos olet itse varmistanut "
-"avaintunnuksen tai sormenjäljen (esimerkiksi jakelun/respinin virallisilta "
-"verkkosivuilta tai avainpalvelimen tiedoista)."
-
-msgid "This ISO's signing key isn't one this tool already recognizes."
-msgstr ""
-"Tämän ISO-tiedoston allekirjoitusavain ei ole tämän työkalun jo tunnistama "
-"avain."
+msgid "Note: that identity is just self-declared text - whoever made the key could have typed anything there. The Key ID and fingerprint are different: they can't be faked, so they're what you can actually check against an independent source. Only trust this key if you've confirmed the Key ID or fingerprint yourself (e.g. from the respin/distro's own official site, or its keyserver listing)."
+msgstr "Huomautus: Tuo henkilöllisyys on vain itse ilmoitettua tekstiä - avaimen luonut henkilö olisi voinut kirjoittaa sinne mitä tahansa. Avaintunnus ja sormenjälki ovat eri asia: niitä ei voi väärentää, joten ne ovat se, minkä voit todella tarkistaa riippumattomasta lähteestä. Luota tähän avaimeen vain, jos olet itse varmistanut avaintunnuksen tai sormenjäljen (esimerkiksi jakelun/respinin virallisilta verkkosivuilta tai avainpalvelimen tiedoista)."
 
 msgid "Key ID:"
 msgstr "Avaintunnus:"
@@ -448,56 +398,23 @@ msgstr "Sormenjälki:"
 
 #. TRANSLATORS: keep the <b>/</b> tags exactly as-is (they render
 #. as bold text, not literal characters).
-msgid ""
-"Signature check: <b>GOOD</b> - the checksum listing exactly matches this key"
-" (the ISO's own hash is checked separately, next)."
-msgstr ""
-"Allekirjoituksen tarkistus: <b>HYVÄ</b> - tarkistussummaluettelo vastaa "
-"täsmälleen tätä avainta (ISO-tiedoston oma tiiviste tarkistetaan erikseen "
-"seuraavaksi)."
+msgid "Signature check: <b>GOOD</b> - the checksum listing exactly matches this key (the ISO's own hash is checked separately, next)."
+msgstr "Allekirjoituksen tarkistus: <b>HYVÄ</b> - tarkistussummaluettelo vastaa täsmälleen tätä avainta (ISO-tiedoston oma tiiviste tarkistetaan erikseen seuraavaksi)."
 
-msgid ""
-"Note: that identity is self-declared by whoever created the key - it is NOT "
-"independently verified, unlike the Key ID or fingerprint. Only trust this "
-"key if you've confirmed it yourself (e.g. from the distro's own official "
-"website or keyserver listing)."
-msgstr ""
-"Huomautus: tämän henkilöllisyyden on ilmoittanut avaimen luonut henkilö itse"
-" - sitä EI ole vahvistettu riippumattomasti, toisin kuin avaintunnusta tai "
-"sormenjälkeä. Luota tähän avaimeen vain, jos olet itse varmistanut sen "
-"(esimerkiksi jakelun virallisilta verkkosivuilta tai avainpalvelimen "
-"tiedoista)."
+msgid "Note: that identity is just self-declared text - whoever made the key could have typed anything there. The Key ID and fingerprint are different: they can't be faked, so they're what you can actually check against an independent source. Only trust this key if you've confirmed it yourself (e.g. from the distro's own official website or keyserver listing)."
+msgstr "Huomautus: Tuo henkilöllisyys on vain itse ilmoitettua tekstiä - avaimen luonut henkilö olisi voinut kirjoittaa sinne mitä tahansa. Avaintunnus ja sormenjälki ovat eri asia: niitä ei voi väärentää, joten ne ovat se, minkä voit todella tarkistaa riippumattomasta lähteestä. Luota tähän avaimeen vain, jos olet itse varmistanut sen (esimerkiksi jakelun virallisilta verkkosivuilta tai avainpalvelimen tiedoista)."
 
-msgid ""
-"This checksum-listing file's signing key isn't one this tool already "
-"recognizes."
-msgstr ""
-"Tämän tarkistussummaluettelotiedoston allekirjoitusavain ei ole tämän "
-"työkalun jo tunnistama avain."
+msgid "This signing key currently only lives in your personal keyring (pubring.kbx)."
+msgstr "Tämä allekirjoitusavain on tällä hetkellä vain henkilökohtaisessa avainnipussasi (pubring.kbx)."
 
-msgid ""
-"This signing key currently only lives in your personal keyring "
-"(pubring.kbx)."
-msgstr ""
-"Tämä allekirjoitusavain on tällä hetkellä vain henkilökohtaisessa "
-"avainnipussasi (pubring.kbx)."
-
-msgid ""
-"Copy it into ~/.gnupg/trustedkeys.gpg so future checks don't depend on it "
-"staying there?"
-msgstr ""
-"Kopioidaanko se tiedostoon ~/.gnupg/trustedkeys.gpg, jotta tulevat "
-"tarkistukset eivät riipu siitä, että se pysyy siellä?"
+msgid "Copy it into ~/.gnupg/trustedkeys.gpg so future checks don't depend on it staying there?"
+msgstr "Kopioidaanko se tiedostoon ~/.gnupg/trustedkeys.gpg, jotta tulevat tarkistukset eivät riipu siitä, että se pysyy siellä?"
 
 msgid "This signing key was just fetched from a keyserver."
 msgstr "Tämä allekirjoitusavain haettiin juuri avainpalvelimelta."
 
-msgid ""
-"Remember it locally, in ~/.gnupg/trustedkeys.gpg, so future checks don't "
-"need the network again?"
-msgstr ""
-"Muistetaanko se paikallisesti tiedostossa ~/.gnupg/trustedkeys.gpg, jotta "
-"tulevat tarkistukset eivät enää tarvitse verkkoyhteyttä?"
+msgid "Remember it locally, in ~/.gnupg/trustedkeys.gpg, so future checks don't need the network again?"
+msgstr "Muistetaanko se paikallisesti tiedostossa ~/.gnupg/trustedkeys.gpg, jotta tulevat tarkistukset eivät enää tarvitse verkkoyhteyttä?"
 
 msgid "Keep this key"
 msgstr "Säilytä tämä avain"
@@ -505,34 +422,31 @@ msgstr "Säilytä tämä avain"
 msgid "No thanks"
 msgstr "Ei kiitos"
 
-msgid "key saved locally - future checks won't need the network"
-msgstr ""
-"avain tallennettu paikallisesti - tulevat tarkistukset eivät tarvitse "
-"verkkoyhteyttä"
+msgid "key fetched and saved locally - future checks won't need the network"
+msgstr "avain haettiin ja tallennettiin paikallisesti - tulevat tarkistukset eivät tarvitse verkkoyhteyttä"
 
 msgid "used an already-cached key, no network needed"
-msgstr ""
-"käytettiin jo välimuistissa olevaa avainta, verkkoyhteyttä ei tarvittu"
+msgstr "käytettiin jo välimuistissa olevaa avainta, verkkoyhteyttä ei tarvittu"
 
 msgid "used a key from your personal keyring (pubring.kbx)"
 msgstr "käytettiin avainta henkilökohtaisesta avainnipustasi (pubring.kbx)"
 
+msgid "used a key from mx-gpg-keyring"
+msgstr "käytettiin avainta tiedostosta mx-gpg-keyring"
+
+msgid "key saved locally for faster future checks"
+msgstr "avain tallennettu paikallisesti nopeampia tulevia tarkistuksia varten"
+
 msgid "fetched the signing key from a keyserver"
 msgstr "allekirjoitusavain haettiin avainpalvelimelta"
 
-#. TRANSLATORS: ${KEY_EXPIRY_DATE_SAFE} is a date (e.g. 2026-08-06) - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${KEY_EXPIRY_DATE_SAFE} is a date (e.g. 2026-08-06) - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"this key expired on ${KEY_EXPIRY_DATE_SAFE} - this does not affect the "
-"signature check"
-msgstr ""
-"tämä avain vanheni ${KEY_EXPIRY_DATE_SAFE} - tämä ei vaikuta "
-"allekirjoituksen tarkistukseen"
+msgid "this key expired on ${KEY_EXPIRY_DATE_SAFE} - this does not affect the signature check"
+msgstr "tämä avain vanheni ${KEY_EXPIRY_DATE_SAFE} - tämä ei vaikuta allekirjoituksen tarkistukseen"
 
 msgid "this key has expired - this does not affect the signature check"
-msgstr ""
-"tämä avain on vanhentunut - tämä ei vaikuta allekirjoituksen tarkistukseen"
+msgstr "tämä avain on vanhentunut - tämä ei vaikuta allekirjoituksen tarkistukseen"
 
 msgid "Verified OK"
 msgstr "Tarkistus onnistui"
@@ -546,205 +460,93 @@ msgstr "Ei tarkistettavaa"
 msgid "Verification FAILED"
 msgstr "Tarkistus EPÄONNISTUI"
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE}/${BTN_TRUST_THIS_KEY} are translated
-#. button labels - keep placeholders as-is.
+msgid "This signing key has been revoked - refusing to use it, whatever the reason (a real key compromise, or the owner deliberately retiring it). Do not trust this file."
+msgstr "Tämä allekirjoitusavain on kumottu - sitä ei käytetä, syystä riippumatta (todellinen avaimen vaarantuminen tai omistajan tarkoituksellinen käytöstä poistaminen). Älä luota tähän tiedostoon."
+
+msgid "The signing key could not be fetched from any keyserver - this looks like a network problem, not necessarily a bad signature. Try again once you have a working connection."
+msgstr "Allekirjoitusavainta ei voitu noutaa mistään avainpalvelimesta - tämä vaikuttaa verkko-ongelmalta, ei välttämättä virheelliseltä allekirjoitukselta. Yritä uudelleen, kun yhteys toimii."
+
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE}/${BTN_TRUST_THIS_KEY} are translated button labels - keep placeholders as-is.
 #, sh-format
-msgid ""
-"The cryptographic check itself already came back GOOD (see the technical "
-"details below) - you just haven't trusted this signing key yet. If you're "
-"confident this is the genuine key (e.g. you've checked its fingerprint "
-"against the distro's own official site or keyserver listing), click "
-"\"${BTN_CHECK_ANOTHER_FILE}\" and choose \"${BTN_TRUST_THIS_KEY}\" this "
-"time."
-msgstr ""
-"Salauksellinen tarkistus itsessään onnistui jo (katso tekniset tiedot alta) "
-"- et vain ole vielä luottanut tähän allekirjoitusavaimeen. Jos olet varma, "
-"että kyseessä on aito avain (esim. olet tarkistanut sen sormenjäljen jakelun"
-" omalta viralliselta sivustolta tai avainpalvelimelta), napsauta "
-"”${BTN_CHECK_ANOTHER_FILE}” ja valitse tällä kertaa ”${BTN_TRUST_THIS_KEY}”."
+msgid "The cryptographic check itself already came back GOOD (see the technical details below) - you just haven't trusted this signing key yet. If you're confident this is the genuine key (e.g. you've checked its fingerprint against the distro's own official site or keyserver listing), click \"${BTN_CHECK_ANOTHER_FILE}\" and choose \"${BTN_TRUST_THIS_KEY}\" this time."
+msgstr "Salauksellinen tarkistus itsessään onnistui jo (katso tekniset tiedot alta) - et vain ole vielä luottanut tähän allekirjoitusavaimeen. Jos olet varma, että kyseessä on aito avain (esim. olet tarkistanut sen sormenjäljen jakelun omalta viralliselta sivustolta tai avainpalvelimelta), napsauta ”${BTN_CHECK_ANOTHER_FILE}” ja valitse tällä kertaa ”${BTN_TRUST_THIS_KEY}”."
 
-msgid ""
-"The cryptographic check itself already came back GOOD (see the technical "
-"details below) - the key just couldn't be saved for future trust (see the "
-"technical details for why). Feel free to try again."
-msgstr ""
-"Salauksellinen tarkistus itsessään onnistui jo (katso tekniset tiedot alta) "
-"- avainta ei vain voitu tallentaa tulevaa luottamusta varten (katso tekniset"
-" tiedot syystä). Kokeile rauhassa uudelleen."
+msgid "The cryptographic check itself already came back GOOD (see the technical details below) - the key just couldn't be saved for future trust (see the technical details for why). Feel free to try again."
+msgstr "Salauksellinen tarkistus itsessään onnistui jo (katso tekniset tiedot alta) - avainta ei vain voitu tallentaa tulevaa luottamusta varten (katso tekniset tiedot syystä). Kokeile rauhassa uudelleen."
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"You pointed this tool at a checksum-listing file, not a single ISO - it can "
-"cover many ISOs at once, so there's no one file to check unless exactly one "
-"of the ones it mentions is actually present here (see the technical details "
-"below for which). Use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the actual "
-".iso file instead."
-msgstr ""
-"Osoitit tämän työkalun tarkistussummaluettelotiedostoon eikä yksittäiseen "
-"ISO-tiedostoon - tällainen tiedosto voi kattaa useita ISO-tiedostoja "
-"kerralla, joten tarkistettavaa yksittäistä tiedostoa ei ole, ellei "
-"tarkalleen yksi mainituista ISO-tiedostoista todella ole täällä (katso "
-"tekniset tiedot alla, mikä niistä). Käytä ”${BTN_CHECK_ANOTHER_FILE}” "
-"-toimintoa ja osoita suoraan varsinaiseen .iso-tiedostoon."
+msgid "You pointed this tool at a checksum-listing file, not a single ISO - it can cover many ISOs at once, so there's no one file to check unless exactly one of the ones it mentions is actually present here (see the technical details below for which). Use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the actual .iso file instead."
+msgstr "Osoitit tämän työkalun tarkistussummaluettelotiedostoon eikä yksittäiseen ISO-tiedostoon - tällainen tiedosto voi kattaa useita ISO-tiedostoja kerralla, joten tarkistettavaa yksittäistä tiedostoa ei ole, ellei tarkalleen yksi mainituista ISO-tiedostoista todella ole täällä (katso tekniset tiedot alla, mikä niistä). Käytä ”${BTN_CHECK_ANOTHER_FILE}” -toimintoa ja osoita suoraan varsinaiseen .iso-tiedostoon."
 
-msgid ""
-"No signature file or signed checksum listing was found for this ISO - "
-"there's nothing here to check yet."
-msgstr ""
-"Tälle ISO-tiedostolle ei löytynyt allekirjoitustiedostoa eikä "
-"allekirjoitettua tarkistussummaluetteloa - tarkistettavaa ei vielä ole."
+msgid "No signature file or signed checksum listing was found for this ISO - there's nothing here to check yet."
+msgstr "Tälle ISO-tiedostolle ei löytynyt allekirjoitustiedostoa eikä allekirjoitettua tarkistussummaluetteloa - tarkistettavaa ei vielä ole."
 
-#. TRANSLATORS: ${CHECKSUM_FILE_SAFE} is the checksum-listing file's name -
-#. keep the placeholder as-is.
+#. TRANSLATORS: ${CHECKSUM_FILE_SAFE} is the checksum-listing file's name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This checksum listing (${CHECKSUM_FILE_SAFE}) has no signature file of its "
-"own (.sig/.asc/.gpg/.sign) next to it - it can't be trusted without one, so "
-"it was never checked against this ISO."
-msgstr ""
-"Tällä tarkistussummaluettelolla (${CHECKSUM_FILE_SAFE}) ei ole omaa "
-"allekirjoitustiedostoa (.sig/.asc/.gpg/.sign) vieressään - ilman sitä siihen"
-" ei voi luottaa, joten sitä ei koskaan tarkistettu tätä ISO-tiedostoa "
-"vasten."
+msgid "This checksum listing (${CHECKSUM_FILE_SAFE}) has no signature file of its own (.sig/.asc/.gpg/.sign) next to it - it can't be trusted without one, so it was never checked against this ISO."
+msgstr "Tällä tarkistussummaluettelolla (${CHECKSUM_FILE_SAFE}) ei ole omaa allekirjoitustiedostoa (.sig/.asc/.gpg/.sign) vieressään - ilman sitä siihen ei voi luottaa, joten sitä ei koskaan tarkistettu tätä ISO-tiedostoa vasten."
 
-#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This is a signature file, but its ISO ('${DISPLAY_ISO_SAFE}') isn't in the "
-"same folder - this tool only looks for a counterpart next to the file you "
-"pick."
-msgstr ""
-"Tämä on allekirjoitustiedosto, mutta sen ISO (”${DISPLAY_ISO_SAFE}”) ei ole "
-"samassa kansiossa - tämä työkalu etsii vastinparia vain valitsemasi "
-"tiedoston vierestä."
+msgid "This is a signature file, but its ISO ('${DISPLAY_ISO_SAFE}') isn't in the same folder - this tool only looks for a counterpart next to the file you pick."
+msgstr "Tämä on allekirjoitustiedosto, mutta sen ISO (”${DISPLAY_ISO_SAFE}”) ei ole samassa kansiossa - tämä työkalu etsii vastinparia vain valitsemasi tiedoston vierestä."
 
-#. TRANSLATORS: ${LISTING_BASE_SAFE} is the checksum-listing file's name -
-#. keep the placeholder as-is.
+#. TRANSLATORS: ${LISTING_BASE_SAFE} is the checksum-listing file's name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This is a signature file for a checksum listing, but '${LISTING_BASE_SAFE}' "
-"isn't in the same folder - this tool only looks for a counterpart next to "
-"the file you pick."
-msgstr ""
-"Tämä on tarkistussummaluettelon allekirjoitustiedosto, mutta "
-"”${LISTING_BASE_SAFE}” ei ole samassa kansiossa - tämä työkalu etsii "
-"vastinparia vain valitsemasi tiedoston vierestä."
+msgid "This is a signature file for a checksum listing, but '${LISTING_BASE_SAFE}' isn't in the same folder - this tool only looks for a counterpart next to the file you pick."
+msgstr "Tämä on tarkistussummaluettelon allekirjoitustiedosto, mutta ”${LISTING_BASE_SAFE}” ei ole samassa kansiossa - tämä työkalu etsii vastinparia vain valitsemasi tiedoston vierestä."
 
-#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${DISPLAY_ISO_SAFE} is the ISO's filename - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"Neither '${DISPLAY_ISO_SAFE}' nor a signature file for it were found in this"
-" folder - nothing to check yet."
-msgstr ""
-"Kansiosta ei löytynyt tiedostoa ${DISPLAY_ISO_SAFE} eikä sen "
-"allekirjoitustiedostoa - tarkistettavaa ei vielä ole."
+msgid "Neither '${DISPLAY_ISO_SAFE}' nor a signature file for it were found in this folder - nothing to check yet."
+msgstr "Kansiosta ei löytynyt tiedostoa ${DISPLAY_ISO_SAFE} eikä sen allekirjoitustiedostoa - tarkistettavaa ei vielä ole."
 
-msgid ""
-"This checksum file isn't signed, and the ISO it describes has no signature "
-"of its own either - there's nothing here this tool can cryptographically "
-"verify. Check whether the distro provides a signed checksum listing or a "
-"direct .sig/.asc/.gpg file for this ISO."
-msgstr ""
-"Tätä tarkistussummatiedostoa ei ole allekirjoitettu, eikä sen kuvaamalla "
-"ISO-tiedostolla ole myöskään omaa allekirjoitusta - täällä ei ole mitään, "
-"minkä tämä työkalu voisi kryptografisesti varmentaa. Tarkista, tarjoaako "
-"jakelu allekirjoitetun tarkistussummaluettelon tai suoran .sig-/.asc-/.gpg-"
-"tiedoston tälle ISO-tiedostolle."
+msgid "This checksum file isn't signed, and the ISO it describes has no signature of its own either - there's nothing here this tool can cryptographically verify. Check whether the distro provides a signed checksum listing, a direct .sig/.asc/.gpg file, or a self-contained clearsigned checksum (e.g. '.sha512.asc') for this ISO."
+msgstr "Tätä tarkistussummatiedostoa ei ole allekirjoitettu, eikä sen kuvaamalla ISO-tiedostolla ole myöskään omaa allekirjoitusta - täällä ei ole mitään, minkä tämä työkalu voisi kryptografisesti varmentaa. Tarkista, tarjoaako jakelu allekirjoitetun tarkistussummaluettelon, suoran .sig-/.asc-/.gpg-tiedoston tai itsenäisen, itseallekirjoitetun tarkistussumman (esim. '.sha512.asc') tälle ISO-tiedostolle."
 
-msgid ""
-"The checksum file that lists this ISO's hash failed its own verification "
-"(bad/untrusted signature, or its key couldn't be confirmed) - nothing in it "
-"can be trusted. Re-download the checksum/signature files (and probably the "
-"ISO too), ideally from a different mirror."
-msgstr ""
-"Tarkistussummatiedosto, joka luettelee tämän ISO-tiedoston tiivisteen, "
-"epäonnistui omassa tarkistuksessaan (virheellinen/ei-luotettu allekirjoitus,"
-" tai sen avainta ei voitu vahvistaa) - mikään siinä ei ole luotettavaa. "
-"Lataa tarkistussumma-/allekirjoitustiedostot (ja todennäköisesti myös ISO-"
-"tiedosto) uudelleen, mieluiten toisesta peilipalvelimesta."
+msgid "The checksum listing's signing key could not be fetched from any keyserver - nothing in it could be checked. This looks like a network problem, not necessarily a bad signature. Try again once you have a working connection."
+msgstr "Tarkistussummaluettelon allekirjoitusavainta ei voitu noutaa mistään avainpalvelimesta - mitään siinä ei voitu tarkistaa. Tämä vaikuttaa verkko-ongelmalta, ei välttämättä virheelliseltä allekirjoitukselta. Yritä uudelleen, kun yhteys toimii."
 
-#. TRANSLATORS: ${CHECKSUM_INFO_SAFE} is the checksum-listing file's name -
-#. keep the placeholder as-is.
+msgid "The checksum file that lists this ISO's hash failed its own verification (bad/untrusted signature, or its key couldn't be confirmed) - nothing in it can be trusted. Re-download the checksum/signature files (and probably the ISO too), ideally from a different mirror."
+msgstr "Tarkistussummatiedosto, joka luettelee tämän ISO-tiedoston tiivisteen, epäonnistui omassa tarkistuksessaan (virheellinen/ei-luotettu allekirjoitus, tai sen avainta ei voitu vahvistaa) - mikään siinä ei ole luotettavaa. Lataa tarkistussumma-/allekirjoitustiedostot (ja todennäköisesti myös ISO-tiedosto) uudelleen, mieluiten toisesta peilipalvelimesta."
+
+#. TRANSLATORS: ${CHECKSUM_INFO_SAFE} is the checksum-listing file's name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This ISO was checked against a signed checksum listing "
-"(${CHECKSUM_INFO_SAFE}) that IS validly signed - but the ISO's own hash "
-"doesn't match what's listed. The checksum list itself is trustworthy; this "
-"particular download is not. Re-download the ISO, ideally from a different "
-"mirror."
-msgstr ""
-"Tämä ISO-tiedosto tarkistettiin allekirjoitettua tarkistussummaluetteloa "
-"(${CHECKSUM_INFO_SAFE}) vasten, joka ON pätevästi allekirjoitettu - mutta "
-"ISO-tiedoston oma tiiviste ei vastaa luetteloitua arvoa. "
-"Tarkistussummaluettelo itsessään on luotettava; tämä tietty lataus ei ole. "
-"Lataa ISO-tiedosto uudelleen, mieluiten toisesta peilipalvelimesta."
+msgid "This ISO was checked against a signed checksum listing (${CHECKSUM_INFO_SAFE}) that IS validly signed - but the ISO's own hash doesn't match what's listed. The checksum list itself is trustworthy; this particular download is not. Re-download the ISO, ideally from a different mirror."
+msgstr "Tämä ISO-tiedosto tarkistettiin allekirjoitettua tarkistussummaluetteloa (${CHECKSUM_INFO_SAFE}) vasten, joka ON pätevästi allekirjoitettu - mutta ISO-tiedoston oma tiiviste ei vastaa luetteloitua arvoa. Tarkistussummaluettelo itsessään on luotettava; tämä tietty lataus ei ole. Lataa ISO-tiedosto uudelleen, mieluiten toisesta peilipalvelimesta."
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"No direct signature file was found for this ISO, and none of the checksum-"
-"listing files found nearby mention this exact ISO filename either. If this "
-"distro uses a different naming convention, use \"${BTN_CHECK_ANOTHER_FILE}\""
-" and point at the right file directly."
-msgstr ""
-"Tälle ISO-tiedostolle ei löytynyt suoraa allekirjoitustiedostoa, eikä "
-"yksikään läheltä löytynyt tarkistussummaluettelotiedosto mainitse myöskään "
-"täsmälleen tätä ISO-tiedostonimeä. Jos tämä jakelu käyttää erilaista "
-"nimeämiskäytäntöä, käytä ”${BTN_CHECK_ANOTHER_FILE}” -toimintoa ja osoita "
-"suoraan oikeaan tiedostoon."
+msgid "No direct signature file was found for this ISO, and none of the checksum-listing files found nearby mention this exact ISO filename either. If this distro uses a different naming convention, use \"${BTN_CHECK_ANOTHER_FILE}\" and point at the right file directly."
+msgstr "Tälle ISO-tiedostolle ei löytynyt suoraa allekirjoitustiedostoa, eikä yksikään läheltä löytynyt tarkistussummaluettelotiedosto mainitse myöskään täsmälleen tätä ISO-tiedostonimeä. Jos tämä jakelu käyttää erilaista nimeämiskäytäntöä, käytä ”${BTN_CHECK_ANOTHER_FILE}” -toimintoa ja osoita suoraan oikeaan tiedostoon."
 
-#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep
-#. the placeholder as-is.
+#. TRANSLATORS: ${BTN_CHECK_ANOTHER_FILE} is a translated button label - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"This signature file's name doesn't match this ISO's name, so it likely "
-"belongs to a different download. Use \"${BTN_CHECK_ANOTHER_FILE}\" and pick "
-"just this ISO, or just its own real signature file - the tool finds the "
-"matching one automatically."
-msgstr ""
-"Tämän allekirjoitustiedoston nimi ei vastaa tämän ISO-tiedoston nimeä, joten"
-" se kuuluu todennäköisesti eri lataukseen. Käytä ”${BTN_CHECK_ANOTHER_FILE}”"
-" ja valitse vain tämä ISO tai vain sen oma todellinen allekirjoitustiedosto "
-"- työkalu löytää vastaavan tiedoston automaattisesti."
+msgid "This signature file's name doesn't match this ISO's name, so it likely belongs to a different download. Use \"${BTN_CHECK_ANOTHER_FILE}\" and pick just this ISO, or just its own real signature file - the tool finds the matching one automatically."
+msgstr "Tämän allekirjoitustiedoston nimi ei vastaa tämän ISO-tiedoston nimeä, joten se kuuluu todennäköisesti eri lataukseen. Käytä ”${BTN_CHECK_ANOTHER_FILE}” ja valitse vain tämä ISO tai vain sen oma todellinen allekirjoitustiedosto - työkalu löytää vastaavan tiedoston automaattisesti."
 
-msgid ""
-"On top of the signature not matching, this signing key also isn't one this "
-"tool already recognizes - treat this file as untrustworthy and re-download "
-"from an official source."
-msgstr ""
-"Sen lisäksi, ettei allekirjoitus täsmää, tämä allekirjoitusavain ei myöskään"
-" ole yksi tämän työkalun jo tunnistamista avaimista - pidä tätä tiedostoa "
-"epäluotettavana ja lataa se uudelleen virallisesta lähteestä."
+msgid "On top of the signature not matching, this signing key also isn't one this tool already recognizes - treat this file as untrustworthy and re-download from an official source."
+msgstr "Sen lisäksi, ettei allekirjoitus täsmää, tämä allekirjoitusavain ei myöskään ole yksi tämän työkalun jo tunnistamista avaimista - pidä tätä tiedostoa epäluotettavana ja lataa se uudelleen virallisesta lähteestä."
 
-msgid ""
-"The ISO may be corrupted, or the download was incomplete or tampered with - "
-"try re-downloading it, ideally from a different mirror."
-msgstr ""
-"ISO-tiedosto saattaa olla vioittunut, tai lataus oli keskeneräinen tai sitä "
-"on peukaloitu - yritä ladata se uudelleen, mieluiten toisesta "
-"peilipalvelimesta."
+msgid "The ISO may be corrupted, or the download was incomplete or tampered with - try re-downloading it, ideally from a different mirror."
+msgstr "ISO-tiedosto saattaa olla vioittunut, tai lataus oli keskeneräinen tai sitä on peukaloitu - yritä ladata se uudelleen, mieluiten toisesta peilipalvelimesta."
+
+#. TRANSLATORS: ${WEAK_ALGO_SAFE} is a literal algorithm name (e.g. "md5") - keep the placeholder as-is.
+#, sh-format
+msgid "This relies on ${WEAK_ALGO_SAFE}, a broken checksum algorithm - a matching hash doesn't prove the ISO is genuine. Prefer a real signature or a stronger checksum (SHA256/SHA512) when available."
+msgstr "Tämä perustuu algoritmiin ${WEAK_ALGO_SAFE}, joka on rikkinäinen tarkistussumma-algoritmi - täsmäävä tarkistussumma ei todista, että ISO on aito. Suosi oikeaa allekirjoitusta tai vahvempaa tarkistussummaa (SHA256/SHA512), jos saatavilla."
+
+#, sh-format
+msgid "${algo} is a broken checksum algorithm - a matching hash doesn't prove the ISO is genuine. Prefer a real signature or a stronger checksum (SHA256/SHA512) when available."
+msgstr "${algo} on rikkinäinen tarkistussumma-algoritmi - täsmäävä tarkistussumma ei todista, että ISO on aito. Suosi oikeaa allekirjoitusta tai vahvempaa tarkistussummaa (SHA256/SHA512), jos saatavilla."
 
 msgid "Usage:"
 msgstr "Käyttö:"
 
-#. TRANSLATORS: keep the distro names (Debian, Ubuntu, Linux Mint) exactly as-
-#. is.
-msgid ""
-"Verify the GPG signature of an ISO image (any distro - built-in recognition "
-"of the documented MX Linux/antiX signing keys, plus a checksum-listing "
-"convention for distros that sign a checksum listing instead of the ISO "
-"directly, e.g. Debian, Ubuntu, Linux Mint)."
-msgstr ""
-"Tarkistaa ISO-levykuvan GPG-allekirjoituksen (mikä tahansa jakelu - "
-"sisäänrakennettu tuki dokumentoiduille MX Linux-/antiX-"
-"allekirjoitusavaimille, sekä tarkistussummaluettelokäytäntö jakeluille, "
-"jotka allekirjoittavat tarkistussummaluettelon suoraan ISO-tiedoston sijaan,"
-" esim. Debian, Ubuntu, Linux Mint)."
+#. TRANSLATORS: keep the distro names (Debian, Ubuntu, Linux Mint) exactly as-is.
+msgid "Verify the GPG signature of an ISO image (any distro - built-in recognition of the documented MX Linux/antiX signing keys, plus a checksum-listing convention for distros that sign a checksum listing instead of the ISO directly, e.g. Debian, Ubuntu, Linux Mint)."
+msgstr "Tarkistaa ISO-levykuvan GPG-allekirjoituksen (mikä tahansa jakelu - sisäänrakennettu tuki dokumentoiduille MX Linux-/antiX-allekirjoitusavaimille, sekä tarkistussummaluettelokäytäntö jakeluille, jotka allekirjoittavat tarkistussummaluettelon suoraan ISO-tiedoston sijaan, esim. Debian, Ubuntu, Linux Mint)."
 
 msgid "this help"
 msgstr "tämä ohje"
@@ -752,56 +554,38 @@ msgstr "tämä ohje"
 msgid "show version and exit"
 msgstr "näytä versio ja lopeta"
 
-msgid ""
-"full manual: every option, recognition rules, the checksum-listing "
-"convention, and more"
-msgstr ""
-"täydellinen käyttöohje: kaikki valinnat, tunnistussäännöt, "
-"tarkistussummaluettelokäytäntö ja muuta"
+msgid "full manual: every option, recognition rules, the checksum-listing convention, and more"
+msgstr "täydellinen käyttöohje: kaikki valinnat, tunnistussäännöt, tarkistussummaluettelokäytäntö ja muuta"
 
 msgid "verify once even if the key isn't recognized"
 msgstr "tarkista kerran, vaikka avainta ei tunnistettaisi"
 
-#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN} is a literal flag name - keep the
-#. placeholder as-is.
+#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN} is a literal flag name - keep the placeholder as-is.
 #, sh-format
 msgid "like ${FLAG_ALLOW_UNKNOWN}, and remembers the key too"
 msgstr "kuten ${FLAG_ALLOW_UNKNOWN}, mutta muistaa avaimen myös"
 
 msgid "list this tool's built-in recognized signing keys"
-msgstr ""
-"luettele tämän työkalun tunnistamat sisäänrakennetut allekirjoitusavaimet"
+msgstr "luettele tämän työkalun tunnistamat sisäänrakennetut allekirjoitusavaimet"
 
 msgid "list every key saved in trustedkeys.gpg"
 msgstr "luettele jokainen tiedostoon trustedkeys.gpg tallennettu avain"
 
-msgid ""
-"Run with no arguments, or via a file manager's \"Open With\" (up to 3 "
-"files), to open a picker window instead."
-msgstr ""
-"Ilman argumentteja suoritettuna, tai tiedostonhallinnan \"Avaa "
-"sovelluksella\" -valikon kautta (enintään 3 tiedostoa), tämä avaa "
-"valintaikkunan sen sijaan."
+msgid "Run with no arguments, or via a file manager's \"Open With\" (up to 3 files), to open a picker window instead."
+msgstr "Ilman argumentteja suoritettuna, tai tiedostonhallinnan \"Avaa sovelluksella\" -valikon kautta (enintään 3 tiedostoa), tämä avaa valintaikkunan sen sijaan."
 
-#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-is.
 #, sh-format
 msgid "For every other option (scripting/automation flags) see ${FLAG_MAN}."
-msgstr ""
-"Kaikki muut valinnat (skripti-/automaatiovalitsimet) löytyvät komennolla "
-"${FLAG_MAN}."
+msgstr "Kaikki muut valinnat (skripti-/automaatiovalitsimet) löytyvät komennolla ${FLAG_MAN}."
 
 msgid "could not generate the man page (pandoc failed)"
 msgstr "man-sivua ei voitu luoda (pandoc epäonnistui)"
 
 #. TRANSLATORS: ${man_src} is a file path, ${FLAG_MAN} a literal flag name.
 #, sh-format
-msgid ""
-"man page not built yet and pandoc isn't installed - see ${man_src} directly,"
-" or install pandoc and re-run ${FLAG_MAN}"
-msgstr ""
-"man-sivua ei ole vielä koottu eikä pandoc ole asennettu - katso suoraan "
-"${man_src}, tai asenna pandoc ja suorita ${FLAG_MAN} uudelleen"
+msgid "man page not built yet and pandoc isn't installed - see ${man_src} directly, or install pandoc and re-run ${FLAG_MAN}"
+msgstr "man-sivua ei ole vielä koottu eikä pandoc ole asennettu - katso suoraan ${man_src}, tai asenna pandoc ja suorita ${FLAG_MAN} uudelleen"
 
 msgid "warning:"
 msgstr "varoitus:"
@@ -812,8 +596,7 @@ msgstr "info:"
 msgid "error:"
 msgstr "virhe:"
 
-#. TRANSLATORS: ${flag}/${FLAG_MAN} are literal names - keep placeholders as-
-#. is.
+#. TRANSLATORS: ${flag}/${FLAG_MAN} are literal names - keep placeholders as-is.
 #, sh-format
 msgid "${flag} requires a value (see ${FLAG_MAN})"
 msgstr "${flag} vaatii arvon (katso ${FLAG_MAN})"
@@ -821,20 +604,22 @@ msgstr "${flag} vaatii arvon (katso ${FLAG_MAN})"
 msgid "Manage trusted keys from the command line:"
 msgstr "Hallitse luotettuja avaimia komentoriviltä:"
 
-#. TRANSLATORS: ${ENV_DISPLAY}/${ENV_WAYLAND_DISPLAY} are literal env-var
-#. names - keep placeholders as-is.
+#. TRANSLATORS: ${ENV_DISPLAY}/${ENV_WAYLAND_DISPLAY} are literal env-var names - keep placeholders as-is.
 #, sh-format
-msgid ""
-"no graphical session detected (neither ${ENV_DISPLAY} nor "
-"${ENV_WAYLAND_DISPLAY} is set) - the trusted-keys manager needs a desktop to"
-" show its window."
-msgstr ""
-"graafista istuntoa ei havaittu (${ENV_DISPLAY}-muuttujaa eikä "
-"${ENV_WAYLAND_DISPLAY}-muuttujaa ole asetettu) - luotettujen avainten "
-"hallinta tarvitsee työpöydän ikkunansa näyttämiseen."
+msgid "no graphical session detected (neither ${ENV_DISPLAY} nor ${ENV_WAYLAND_DISPLAY} is set) - the trusted-keys manager needs a desktop to show its window."
+msgstr "graafista istuntoa ei havaittu (${ENV_DISPLAY}-muuttujaa eikä ${ENV_WAYLAND_DISPLAY}-muuttujaa ole asetettu) - luotettujen avainten hallinta tarvitsee työpöydän ikkunansa näyttämiseen."
 
 msgid "Manage trusted keys from the command line instead:"
 msgstr "Hallitse luotettuja avaimia sen sijaan komentoriviltä:"
+
+msgid "list key(s) saved in trustedkeys.gpg (all if none given)"
+msgstr "luettele tiedostoon trustedkeys.gpg tallennetut avaimet (kaikki, jos yhtään ei anneta)"
+
+msgid "check every trusted key against pubring.kbx, mx-gpg-keyring, and a keyserver for updates (renewed expiry, new subkeys, or a revocation)"
+msgstr "tarkista jokainen luotettu avain pubring.kbx:stä, mx-gpg-keyringistä ja avainpalvelimelta päivitysten varalta (pidennetty voimassaolo, uudet aliavaimet tai kumoaminen)"
+
+msgid "show fingerprint/algorithm/dates/subkeys for trusted key(s)"
+msgstr "näytä luotettujen avainten sormenjälki/algoritmi/päivämäärät/aliavaimet"
 
 msgid "remove <fpr> from trustedkeys.gpg"
 msgstr "poista <fpr> tiedostosta trustedkeys.gpg"
@@ -846,38 +631,20 @@ msgid "list the key(s) in an external key file, read-only"
 msgstr "luettele avaimet ulkoisesta avaintiedostosta, vain luku"
 
 msgid "import key(s) from an external key file (all if none given)"
-msgstr ""
-"tuo avaimia ulkoisesta avaintiedostosta (kaikki, jos yhtään ei anneta)"
+msgstr "tuo avaimia ulkoisesta avaintiedostosta (kaikki, jos yhtään ei anneta)"
 
 #. TRANSLATORS: ${CMD_MAN} is a literal command - keep the placeholder as-is.
 #, sh-format
 msgid "See '${CMD_MAN}' for the full manual."
 msgstr "Katso täydellinen käyttöohje komennolla '${CMD_MAN}'."
 
-#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_MAN} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"verify-iso-sig - opens a window to pick and check an ISO or signature file "
-"by default when a graphical session is available; falls back to the plain "
-"command-line tool otherwise. This preamble covers this launcher's own "
-"behavior; a short command-line reference (used automatically whenever given "
-"arguments don't look like that window's own syntax, or no graphical session "
-"is available) follows below it - see ${FLAG_MAN} for the complete one."
-msgstr ""
-"verify-iso-sig avaa oletuksena ikkunan ISO- tai allekirjoitustiedoston "
-"valitsemiseen ja tarkistamiseen, kun graafinen istunto on käytettävissä; "
-"muutoin käytetään tavallista komentorivityökalua. Tämä johdanto kuvaa tämän "
-"käynnistimen omaa toimintaa; lyhyt komentoriviohje (jota käytetään "
-"automaattisesti aina, kun annetut argumentit eivät muistuta tuon ikkunan "
-"omaa syntaksia, tai graafista istuntoa ei ole käytettävissä) seuraa heti "
-"alla - katso ${FLAG_MAN} täydellistä ohjetta varten."
+msgid "verify-iso-sig - opens a window to pick and check an ISO or signature file by default when a graphical session is available; falls back to the plain command-line tool otherwise. This preamble covers this launcher's own behavior; a short command-line reference (used automatically whenever given arguments don't look like that window's own syntax, or no graphical session is available) follows below it - see ${FLAG_MAN} for the complete one."
+msgstr "verify-iso-sig avaa oletuksena ikkunan ISO- tai allekirjoitustiedoston valitsemiseen ja tarkistamiseen, kun graafinen istunto on käytettävissä; muutoin käytetään tavallista komentorivityökalua. Tämä johdanto kuvaa tämän käynnistimen omaa toimintaa; lyhyt komentoriviohje (jota käytetään automaattisesti aina, kun annetut argumentit eivät muistuta tuon ikkunan omaa syntaksia, tai graafista istuntoa ei ole käytettävissä) seuraa heti alla - katso ${FLAG_MAN} täydellistä ohjetta varten."
 
-msgid ""
-"open that window if a display is available (default), otherwise this same "
-"help"
-msgstr ""
-"avaa tuon ikkunan, jos näyttö on käytettävissä (oletus), muutoin sama ohje"
+msgid "open that window if a display is available (default), otherwise this same help"
+msgstr "avaa tuon ikkunan, jos näyttö on käytettävissä (oletus), muutoin sama ohje"
 
 msgid "(default) the graphical main program"
 msgstr "(oletus) graafinen pääohjelma"
@@ -885,58 +652,45 @@ msgstr "(oletus) graafinen pääohjelma"
 msgid "plain command-line mode"
 msgstr "pelkkä komentorivitila"
 
-#. TRANSLATORS: ${FLAG_HELP} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_HELP} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"trusted-keys manager GUI (add ${FLAG_HELP} for its own flags), or with no "
-"display, print the CLI flags that cover the same ground"
-msgstr ""
-"luotettujen avainten hallinnan graafinen käyttöliittymä (lisää ${FLAG_HELP} "
-"sen omia valitsimia varten), tai ilman näyttöä tulostaa CLI-valitsimet, "
-"jotka kattavat saman asian"
+msgid "trusted-keys manager GUI (add ${FLAG_HELP} for its own flags), or with no display, print the CLI flags that cover the same ground"
+msgstr "luotettujen avainten hallinnan graafinen käyttöliittymä (lisää ${FLAG_HELP} sen omia valitsimia varten), tai ilman näyttöä tulostaa CLI-valitsimet, jotka kattavat saman asian"
 
-#. TRANSLATORS: ${FLAG_GUI} is a literal flag name - keep the placeholder as-
-#. is.
+#. TRANSLATORS: ${FLAG_GUI} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"same as ${FLAG_GUI}, but also shows the drag-and-drop pane (most users won't"
-" need this - reachable from the app menu's own \"Drag & Drop\" entry)"
-msgstr ""
-"sama kuin ${FLAG_GUI}, mutta näyttää lisäksi vedä ja pudota -alueen "
-"(useimmat käyttäjät eivät tarvitse tätä - saatavilla sovellusvalikon omasta "
-"”Vedä ja pudota” -kohdasta)"
+msgid "same as ${FLAG_GUI}, but also shows the drag-and-drop pane (most users won't need this - reachable from the app menu's own \"Drag & Drop\" entry)"
+msgstr "sama kuin ${FLAG_GUI}, mutta näyttää lisäksi vedä ja pudota -alueen (useimmat käyttäjät eivät tarvitse tätä - saatavilla sovellusvalikon omasta ”Vedä ja pudota” -kohdasta)"
 
-#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${algo} are literal - keep placeholders
-#. as-is.
+#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${algo} are literal - keep placeholders as-is.
 #, sh-format
-msgid ""
-"unknown ${FLAG_CHECKSUM_ALGO} '${algo}' (expected sha256, sha512, sha1, or "
-"md5)"
-msgstr ""
-"tuntematon ${FLAG_CHECKSUM_ALGO} '${algo}' (odotettiin sha256, sha512, sha1 "
-"tai md5)"
+msgid "unknown ${FLAG_CHECKSUM_ALGO} '${algo}' (expected sha256, sha512, sha1, or md5)"
+msgstr "tuntematon ${FLAG_CHECKSUM_ALGO} '${algo}' (odotettiin sha256, sha512, sha1 tai md5)"
 
 #. TRANSLATORS: ${opt}/${FLAG_MAN} are literal - keep placeholders as-is.
 #, sh-format
 msgid "unknown option '${opt}' (see ${FLAG_MAN})"
 msgstr "tuntematon valitsin '${opt}' (katso ${FLAG_MAN})"
 
-#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder
-#. as-is.
+#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder as-is.
 #, sh-format
 msgid "exactly one fingerprint argument is required for ${FLAG_KEEP_KEY}"
 msgstr "${FLAG_KEEP_KEY} vaatii tasan yhden sormenjälki-argumentin"
 
-#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder
-#. as-is.
+#. TRANSLATORS: ${FLAG_KEEP_KEY} is a literal flag name - keep the placeholder as-is.
 #, sh-format
-msgid ""
-"${FLAG_KEEP_KEY} needs a full 40-character (or 64-character) hex "
-"fingerprint, not '${FPR}'"
-msgstr ""
-"${FLAG_KEEP_KEY} vaatii täyden 40-merkkisen (tai 64-merkkisen) "
-"heksadesimaalisen sormenjäljen, ei '${FPR}'"
+msgid "${FLAG_KEEP_KEY} needs a full 40-character (or 64-character) hex fingerprint, not '${FPR}'"
+msgstr "${FLAG_KEEP_KEY} vaatii täyden 40-merkkisen (tai 64-merkkisen) heksadesimaalisen sormenjäljen, ei '${FPR}'"
+
+#. TRANSLATORS: ${FLAG_SHOW_KEY_DETAILS} is a literal flag name - keep the placeholder as-is.
+#, sh-format
+msgid "at least one fingerprint argument is required for ${FLAG_SHOW_KEY_DETAILS}"
+msgstr "${FLAG_SHOW_KEY_DETAILS} vaatii vähintään yhden sormenjälki-argumentin"
+
+#. TRANSLATORS: ${FLAG_SHOW_KEY_DETAILS} is a literal flag name - keep the placeholder as-is.
+#, sh-format
+msgid "${FLAG_SHOW_KEY_DETAILS} needs a full 40-character (or 64-character) hex fingerprint, not '${fpr}'"
+msgstr "${FLAG_SHOW_KEY_DETAILS} vaatii täyden 40-merkkisen (tai 64-merkkisen) heksadesimaalisen sormenjäljen, ei '${fpr}'"
 
 msgid "this option takes no extra arguments"
 msgstr "tämä valinta ei ota vastaan ylimääräisiä argumentteja"
@@ -945,102 +699,96 @@ msgid "expected an ISO or signature file to check"
 msgstr "odotettiin tarkistettavaa ISO- tai allekirjoitustiedostoa"
 
 #, sh-format
-msgid ""
-"cannot detect what '${anchor_base}' belongs to: '${cand1_base}', "
-"'${cand2_base}'."
-msgstr ""
-"ei voida määrittää, mihin ${anchor_base} kuuluu: ${cand1_base}, "
-"${cand2_base}."
+msgid "cannot detect what '${anchor_base}' belongs to: '${cand1_base}', '${cand2_base}'."
+msgstr "ei voida määrittää, mihin ${anchor_base} kuuluu: ${cand1_base}, ${cand2_base}."
 
 #, sh-format
-msgid ""
-"cannot detect how these three files belong together: '${triple_base1}', "
-"'${triple_base2}', '${triple_base3}'."
-msgstr ""
-"ei voida määrittää, miten nämä kolme tiedostoa kuuluvat yhteen: "
-"${triple_base1}, ${triple_base2}, ${triple_base3}."
+msgid "cannot detect how these three files belong together: '${triple_base1}', '${triple_base2}', '${triple_base3}'."
+msgstr "ei voida määrittää, miten nämä kolme tiedostoa kuuluvat yhteen: ${triple_base1}, ${triple_base2}, ${triple_base3}."
 
 #, sh-format
-msgid ""
-"cannot detect an ISO, a checksum listing, and its signature among these "
-"three files: '${triple_base1}', '${triple_base2}', '${triple_base3}'."
-msgstr ""
-"näiden kolmen tiedoston joukosta ei löydy ISO-tiedostoa, "
-"tarkistussummalistaa ja sen allekirjoitusta: ${triple_base1}, "
-"${triple_base2}, ${triple_base3}."
+msgid "cannot detect an ISO, a checksum listing, and its signature among these three files: '${triple_base1}', '${triple_base2}', '${triple_base3}'."
+msgstr "näiden kolmen tiedoston joukosta ei löydy ISO-tiedostoa, tarkistussummalistaa ja sen allekirjoitusta: ${triple_base1}, ${triple_base2}, ${triple_base3}."
 
 #, sh-format
-msgid ""
-"'${ISO}' is a directory, not a file - point this at the actual .iso file (or"
-" its .sig/.asc/.gpg/.sign signature file) directly."
-msgstr ""
-"'${ISO}' on kansio, ei tiedosto - osoita tämä suoraan varsinaiseen .iso-"
-"tiedostoon (tai sen .sig/.asc/.gpg/.sign-allekirjoitustiedostoon)."
+msgid "'${ISO}' is a directory, not a file - point this at the actual .iso file (or its .sig/.asc/.gpg/.sign signature file) directly."
+msgstr "'${ISO}' on kansio, ei tiedosto - osoita tämä suoraan varsinaiseen .iso-tiedostoon (tai sen .sig/.asc/.gpg/.sign-allekirjoitustiedostoon)."
 
 #, sh-format
-msgid ""
-"'${named_base}' looks like a signature file by its name, but its content "
-"doesn't look like a real one - point this tool at the actual signature file,"
-" or a checksum listing."
-msgstr ""
-"Tiedosto ${named_base} näyttää nimensä perusteella allekirjoitustiedostolta,"
-" mutta sen sisältö ei näytä oikealta - osoita tämä työkalu oikeaan "
-"allekirjoitustiedostoon tai tarkistussummalistaan."
+msgid "'${named_base}' looks like a signature file by its name, but its content doesn't look like a real one - point this tool at the actual signature file, or a checksum listing."
+msgstr "Tiedosto ${named_base} näyttää nimensä perusteella allekirjoitustiedostolta, mutta sen sisältö ei näytä oikealta - osoita tämä työkalu oikeaan allekirjoitustiedostoon tai tarkistussummalistaan."
 
 #, sh-format
-msgid ""
-"neither '${iso_base}' nor '${sig_base}' looks like a real ISO signature "
-"file, by name or content - point this tool at the actual ISO and its "
-".sig/.asc/.gpg/.sign file, or a checksum listing."
-msgstr ""
-"tiedostot ${iso_base} tai ${sig_base} eivät näytä oikealta ISO-"
-"allekirjoitustiedostolta, ei nimen eikä sisällön perusteella - osoita tämä "
-"työkalu itse ISO-tiedostoon ja sen .sig-/.asc-/.gpg-/.sign-tiedostoon tai "
-"tarkistussummalistaan."
+msgid "neither '${iso_base}' nor '${sig_base}' looks like a real ISO signature file, by name or content - point this tool at the actual ISO and its .sig/.asc/.gpg/.sign file, or a checksum listing."
+msgstr "tiedostot ${iso_base} tai ${sig_base} eivät näytä oikealta ISO-allekirjoitustiedostolta, ei nimen eikä sisällön perusteella - osoita tämä työkalu itse ISO-tiedostoon ja sen .sig-/.asc-/.gpg-/.sign-tiedostoon tai tarkistussummalistaan."
 
 #, sh-format
-msgid ""
-"'${iso_base}' and '${sig_base}' both look like signature or checksum-listing"
-" files - point this tool at the actual ISO, plus its checksum listing or "
-"signature file."
-msgstr ""
-"Tiedostot ${iso_base} ja ${sig_base} näyttävät molemmat allekirjoitus- tai "
-"tarkistussummaluettelotiedostolta - osoita tämä työkalu itse ISO-tiedostoon "
-"sekä sen tarkistussummaluetteloon tai allekirjoitustiedostoon."
+msgid "'${iso_base}' and '${sig_base}' both look like signature or checksum-listing files - point this tool at the actual ISO, plus its checksum listing or signature file."
+msgstr "Tiedostot ${iso_base} ja ${sig_base} näyttävät molemmat allekirjoitus- tai tarkistussummaluettelotiedostolta - osoita tämä työkalu itse ISO-tiedostoon sekä sen tarkistussummaluetteloon tai allekirjoitustiedostoon."
 
 #, sh-format
-msgid ""
-"'${SIG}' is a directory, not a file - point this at the actual signature "
-"file directly."
-msgstr ""
-"'${SIG}' on kansio, ei tiedosto - osoita tämä suoraan varsinaiseen "
-"allekirjoitustiedostoon."
+msgid "'${SIG}' is a directory, not a file - point this at the actual signature file directly."
+msgstr "'${SIG}' on kansio, ei tiedosto - osoita tämä suoraan varsinaiseen allekirjoitustiedostoon."
 
 #, sh-format
-msgid ""
-"this key expired on ${date_str} - this does not affect the signature check"
-msgstr ""
-"tämä avain vanheni ${date_str} - tämä ei vaikuta allekirjoituksen "
-"tarkistukseen"
+msgid "warning: could not read ${MX_GPG_KEYRING}: ${out}"
+msgstr "varoitus: kohdetta ${MX_GPG_KEYRING} ei voitu lukea: ${out}"
+
+#, sh-format
+msgid "this key expired on ${date_str} - this does not affect the signature check"
+msgstr "tämä avain vanheni ${date_str} - tämä ei vaikuta allekirjoituksen tarkistukseen"
+
+msgid "this signing key has been revoked - refusing to use it, whatever the reason (a real key compromise, or the owner deliberately retiring it)"
+msgstr "tämä allekirjoitusavain on kumottu - sitä ei käytetä, syystä riippumatta (todellinen avaimen vaarantuminen tai omistajan tarkoituksellinen käytöstä poistaminen)"
+
+msgid "this key was found revoked locally - updated the local copy automatically"
+msgstr "tämä avain havaittiin kumotuksi paikallisesti - paikallinen kopio päivitettiin automaattisesti"
 
 msgid "this key's expiry was renewed - updated local copy automatically"
-msgstr ""
-"tämän avaimen voimassaolo uusittiin - paikallinen kopio päivitettiin "
-"automaattisesti"
+msgstr "tämän avaimen voimassaolo uusittiin - paikallinen kopio päivitettiin automaattisesti"
 
 #, sh-format
 msgid "checking ${ks} for a renewed copy of this key..."
-msgstr ""
-"tarkistetaan, onko palvelimella ${ks} uusittu kopio tästä avaimesta..."
-
-msgid "no renewal found - continuing with the existing (expired) key"
-msgstr ""
-"uusintaa ei löytynyt - jatketaan olemassa olevalla (vanhentuneella) "
-"avaimella"
+msgstr "tarkistetaan, onko palvelimella ${ks} uusittu kopio tästä avaimesta..."
 
 #, sh-format
-msgid "'${UNTRUST_KEY}' is not in ${TRUSTED_GPG}"
-msgstr "'${UNTRUST_KEY}' ei ole tiedostossa ${TRUSTED_GPG}"
+msgid "${ks} reports this key as revoked - updated the local copy automatically"
+msgstr "${ks} ilmoittaa tämän avaimen olevan kumottu - paikallinen kopio päivitettiin automaattisesti"
+
+msgid "no renewal found - continuing with the existing (expired) key"
+msgstr "uusintaa ei löytynyt - jatketaan olemassa olevalla (vanhentuneella) avaimella"
+
+#, sh-format
+msgid "warning: fingerprint '${fpr}' not found in ${TRUSTED_GPG}, skipping"
+msgstr "varoitus: sormenjälkeä '${fpr}' ei löytynyt tiedostosta ${TRUSTED_GPG}, ohitetaan"
+
+#, sh-format
+msgid "note: '${fpr}' is a subkey - resolved to its primary key '${resolved}'"
+msgstr "huomautus: '${fpr}' on alaavain - ratkaistiin sen pääavaimeksi '${resolved}'"
+
+#, sh-format
+msgid "no trusted keys saved yet (${TRUSTED_GPG} doesn't exist)"
+msgstr "luotettuja avaimia ei ole vielä tallennettu (${TRUSTED_GPG} ei ole olemassa)"
+
+#, sh-format
+msgid "${fpr} (${uid}) is revoked - updated ${TRUSTED_GPG}"
+msgstr "${fpr} (${uid}) on kumottu - ${TRUSTED_GPG} päivitetty"
+
+#, sh-format
+msgid "${fpr} (${uid}) has newer key data - updated ${TRUSTED_GPG}"
+msgstr "${fpr} (${uid}): saatavilla uudempaa avaindataa - ${TRUSTED_GPG} päivitetty"
+
+#, sh-format
+msgid "checked ${checked} key(s): ${updated} updated, ${revoked_found} revoked"
+msgstr "tarkistettu ${checked} avain(ta): ${updated} päivitetty, ${revoked_found} kumottu"
+
+#, sh-format
+msgid "${unreachable} of ${checked} key(s) could not be checked against any keyserver - results for those may be incomplete"
+msgstr "${unreachable}/${checked} avainta ei voitu tarkistaa mistään avainpalvelimesta - näiden tulokset voivat olla puutteellisia"
+
+#, sh-format
+msgid "warning: could not read details for '${fpr}': ${out}"
+msgstr "varoitus: kohteen '${fpr}' tietoja ei voitu lukea: ${out}"
 
 #, sh-format
 msgid "removed ${UNTRUST_KEY} from ${TRUSTED_GPG}"
@@ -1048,24 +796,7 @@ msgstr "poistettiin ${UNTRUST_KEY} tiedostosta ${TRUSTED_GPG}"
 
 #, sh-format
 msgid "could not remove '${UNTRUST_KEY}' from ${TRUSTED_GPG}: ${out}"
-msgstr ""
-"avainta '${UNTRUST_KEY}' ei voitu poistaa tiedostosta ${TRUSTED_GPG}: ${out}"
-
-#, sh-format
-msgid "no trusted keys saved yet (${TRUSTED_GPG} doesn't exist)"
-msgstr ""
-"luotettuja avaimia ei ole vielä tallennettu (${TRUSTED_GPG} ei ole olemassa)"
-
-#, sh-format
-msgid "warning: fingerprint '${fpr}' not found in ${TRUSTED_GPG}, skipping"
-msgstr ""
-"varoitus: sormenjälkeä '${fpr}' ei löytynyt tiedostosta ${TRUSTED_GPG}, "
-"ohitetaan"
-
-#, sh-format
-msgid "note: '${fpr}' is a subkey - resolved to its primary key '${resolved}'"
-msgstr ""
-"huomautus: '${fpr}' on alaavain - ratkaistiin sen pääavaimeksi '${resolved}'"
+msgstr "avainta '${UNTRUST_KEY}' ei voitu poistaa tiedostosta ${TRUSTED_GPG}: ${out}"
 
 msgid "no matching trusted key(s) to export"
 msgstr "ei vastaavia luotettuja avaimia vietäväksi"
@@ -1083,20 +814,16 @@ msgid "cannot read '${INSPECT_KEY_FILE}'"
 msgstr "tiedostoa '${INSPECT_KEY_FILE}' ei voi lukea"
 
 #, sh-format
-msgid ""
-"'${INSPECT_KEY_FILE}' does not look like a valid OpenPGP key file: "
-"${SHOW_OUT}"
-msgstr ""
-"'${INSPECT_KEY_FILE}' ei näytä kelvolliselta OpenPGP-avaintiedostolta: "
-"${SHOW_OUT}"
+msgid "'${INSPECT_KEY_FILE}' does not look like a valid OpenPGP key file: ${SHOW_OUT}"
+msgstr "'${INSPECT_KEY_FILE}' ei näytä kelvolliselta OpenPGP-avaintiedostolta: ${SHOW_OUT}"
 
 #, sh-format
-msgid ""
-"'${INSPECT_KEY_FILE}' contains private/secret key material - refusing to "
-"treat it as a public trusted-signing key"
-msgstr ""
-"'${INSPECT_KEY_FILE}' sisältää yksityistä/salaista avainaineistoa - "
-"kieltäydytään käsittelemästä sitä julkisena luotettuna allekirjoitusavaimena"
+msgid "'${INSPECT_KEY_FILE}' contains private/secret key material - refusing to treat it as a public trusted-signing key"
+msgstr "'${INSPECT_KEY_FILE}' sisältää yksityistä/salaista avainaineistoa - kieltäydytään käsittelemästä sitä julkisena luotettuna allekirjoitusavaimena"
+
+#, sh-format
+msgid "${fpr} removed from the explicitly-untrusted list - it can be auto-recognized again"
+msgstr "${fpr} poistettiin nimenomaisesti epäluotettujen avainten luettelosta - se voidaan tunnistaa taas automaattisesti"
 
 #, sh-format
 msgid "warning: could not export key from ${ring}: ${out}"
@@ -1107,20 +834,12 @@ msgid "cannot read '${IMPORT_TRUSTED_KEYS}'"
 msgstr "tiedostoa '${IMPORT_TRUSTED_KEYS}' ei voi lukea"
 
 #, sh-format
-msgid ""
-"'${IMPORT_TRUSTED_KEYS}' does not look like a valid OpenPGP key file: "
-"${SHOW_OUT}"
-msgstr ""
-"'${IMPORT_TRUSTED_KEYS}' ei näytä kelvolliselta OpenPGP-avaintiedostolta: "
-"${SHOW_OUT}"
+msgid "'${IMPORT_TRUSTED_KEYS}' does not look like a valid OpenPGP key file: ${SHOW_OUT}"
+msgstr "'${IMPORT_TRUSTED_KEYS}' ei näytä kelvolliselta OpenPGP-avaintiedostolta: ${SHOW_OUT}"
 
 #, sh-format
-msgid ""
-"'${IMPORT_TRUSTED_KEYS}' contains private/secret key material - refusing to "
-"import it as a public trusted-signing key"
-msgstr ""
-"'${IMPORT_TRUSTED_KEYS}' sisältää yksityistä/salaista avainaineistoa - "
-"kieltäydytään tuomasta sitä julkisena luotettuna allekirjoitusavaimena"
+msgid "'${IMPORT_TRUSTED_KEYS}' contains private/secret key material - refusing to import it as a public trusted-signing key"
+msgstr "'${IMPORT_TRUSTED_KEYS}' sisältää yksityistä/salaista avainaineistoa - kieltäydytään tuomasta sitä julkisena luotettuna allekirjoitusavaimena"
 
 #, sh-format
 msgid "no OpenPGP keys found in '${IMPORT_TRUSTED_KEYS}'"
@@ -1128,16 +847,11 @@ msgstr "tiedostosta '${IMPORT_TRUSTED_KEYS}' ei löytynyt OpenPGP-avaimia"
 
 #, sh-format
 msgid "could not import '${IMPORT_TRUSTED_KEYS}' into a scratch keyring"
-msgstr ""
-"tiedostoa '${IMPORT_TRUSTED_KEYS}' ei voitu tuoda tilapäiseen avainnippuun"
+msgstr "tiedostoa '${IMPORT_TRUSTED_KEYS}' ei voitu tuoda tilapäiseen avainnippuun"
 
 #, sh-format
-msgid ""
-"warning: fingerprint '${fpr}' not found in '${IMPORT_TRUSTED_KEYS}', "
-"skipping"
-msgstr ""
-"varoitus: sormenjälkeä '${fpr}' ei löytynyt tiedostosta "
-"'${IMPORT_TRUSTED_KEYS}', ohitetaan"
+msgid "warning: fingerprint '${fpr}' not found in '${IMPORT_TRUSTED_KEYS}', skipping"
+msgstr "varoitus: sormenjälkeä '${fpr}' ei löytynyt tiedostosta '${IMPORT_TRUSTED_KEYS}', ohitetaan"
 
 msgid "no matching key(s) to import"
 msgstr "ei vastaavia avaimia tuotavaksi"
@@ -1155,52 +869,36 @@ msgstr "yhtään avainta ei lopulta tuotu tiedostoon ${TRUSTED_GPG}"
 #. translate freely, the numbers/word order can differ per language,
 #. only this line's own display text changes.
 #, sh-format
-msgid ""
-"${PROCESSED} key(s) processed: ${IMPORTED} new, ${CHANGED} updated, "
-"${UNCHANGED_COUNT} unchanged"
-msgstr ""
-"${PROCESSED} avainta käsitelty: ${IMPORTED} uutta, ${CHANGED} päivitettyä, "
-"${UNCHANGED_COUNT} muuttumatonta"
+msgid "${PROCESSED} key(s) processed: ${IMPORTED} new, ${CHANGED} updated, ${UNCHANGED_COUNT} unchanged"
+msgstr "${PROCESSED} avainta käsitelty: ${IMPORTED} uutta, ${CHANGED} päivitettyä, ${UNCHANGED_COUNT} muuttumatonta"
 
 #, sh-format
-msgid ""
-"neither '${candidate_base}' nor a signature file for it were found in this "
-"folder - nothing to check yet."
-msgstr ""
-"kansiosta ei löytynyt tiedostoa ${candidate_base} eikä sen "
-"allekirjoitustiedostoa - tarkistettavaa ei vielä ole."
+msgid "neither '${candidate_base}' nor a signature file for it were found in this folder - nothing to check yet."
+msgstr "kansiosta ei löytynyt tiedostoa ${candidate_base} eikä sen allekirjoitustiedostoa - tarkistettavaa ei vielä ole."
+
+#, sh-format
+msgid "'${iso_base}' names multiple files present in this folder: ${candidates_joined} - point this tool at the specific .iso file you want to check instead."
+msgstr "'${iso_base}' nimeää useita tässä kansiossa olevia tiedostoja: ${candidates_joined} - osoita tämä työkalu sen sijaan siihen tiettyyn .iso-tiedostoon, jonka haluat tarkistaa."
 
 #, sh-format
 msgid "resolved ISO: ${resolved_base}"
 msgstr "ratkaistu ISO: ${resolved_base}"
 
 #, sh-format
-msgid ""
-"'${iso_base}' is an unsigned per-file checksum - not used for verification. "
-"Using '${candidate_sig_base}' instead, the ISO's own direct signature."
-msgstr ""
-"'${iso_base}' on allekirjoittamaton tiedostokohtainen tarkistussumma - ei "
-"käytetä tarkistukseen. Käytetään sen sijaan tiedostoa "
-"'${candidate_sig_base}', ISO-tiedoston omaa suoraa allekirjoitusta."
+msgid "'${iso_base}' is unsigned - not used for verification. Using '${clearsigned_base}' instead, a self-contained clearsigned checksum for the ISO."
+msgstr "'${iso_base}' on allekirjoittamaton - ei käytetä tarkistukseen. Käytetään sen sijaan tiedostoa '${clearsigned_base}', joka on ISO:n itsenäinen, itseallekirjoitettu tarkistussumma."
 
 #, sh-format
-msgid ""
-"'${iso_base}' is an unsigned checksum file, and '${candidate_base}' has no "
-"direct .sig/.asc/.gpg/.sign of its own either - nothing here can be "
-"cryptographically verified."
-msgstr ""
-"'${iso_base}' on allekirjoittamaton tarkistussummatiedosto, eikä tiedostolla"
-" '${candidate_base}' ole myöskään omaa suoraa .sig-/.asc-/.gpg-/.sign-"
-"tiedostoa - täällä ei ole mitään, mikä voitaisiin kryptografisesti "
-"varmentaa."
+msgid "'${iso_base}' is unsigned - not used for verification. Using '${candidate_sig_base}' instead, the ISO's own direct signature."
+msgstr "'${iso_base}' on allekirjoittamaton - ei käytetä tarkistukseen. Käytetään sen sijaan tiedostoa '${candidate_sig_base}', ISO-tiedoston omaa suoraa allekirjoitusta."
 
 #, sh-format
-msgid ""
-"this is a signature file for a checksum listing, but '${iso_base}' isn't in "
-"the same folder"
-msgstr ""
-"tämä on tarkistussummaluettelon allekirjoitustiedosto, mutta ”${iso_base}” "
-"ei ole samassa kansiossa"
+msgid "'${iso_base}' is an unsigned checksum file, and '${candidate_base}' has no direct .sig/.asc/.gpg/.sign of its own, nor a self-contained clearsigned checksum (e.g. '.sha512.asc') either - nothing here can be cryptographically verified."
+msgstr "'${iso_base}' on allekirjoittamaton tarkistussummatiedosto, eikä tiedostolla '${candidate_base}' ole myöskään omaa suoraa .sig-/.asc-/.gpg-/.sign-tiedostoa eikä itsenäistä, itseallekirjoitettua tarkistussummaa (esim. '.sha512.asc') - täällä ei ole mitään, mikä voitaisiin kryptografisesti varmentaa."
+
+#, sh-format
+msgid "this is a signature file for a checksum listing, but '${iso_base}' isn't in the same folder"
+msgstr "tämä on tarkistussummaluettelon allekirjoitustiedosto, mutta ”${iso_base}” ei ole samassa kansiossa"
 
 #, sh-format
 msgid "cannot read checksum listing '${iso_base}'"
@@ -1215,124 +913,64 @@ msgid "checksum file signature: ${sigfile_base}"
 msgstr "tarkistussummatiedoston allekirjoitus: ${sigfile_base}"
 
 #, sh-format
-msgid ""
-"'${iso_base}' is a checksum listing (it can cover many ISOs), not a single "
-"ISO to verify directly - none of the .iso files it mentions are present in "
-"'${dir}'. Point this tool at the actual .iso file instead (its "
-"checksum/signature will be found and checked automatically)."
-msgstr ""
-"'${iso_base}' on tarkistussummaluettelo (se voi kattaa useita ISO-"
-"tiedostoja), ei yksittäinen suoraan tarkistettava ISO-tiedosto - yksikään "
-"sen mainitsemista .iso-tiedostoista ei ole kansiossa '${dir}'. Osoita tämä "
-"työkalu sen sijaan varsinaiseen .iso-tiedostoon (sen "
-"tarkistussumma/allekirjoitus löydetään ja tarkistetaan automaattisesti)."
+msgid "'${iso_base}' is a checksum listing (it can cover many ISOs), not a single ISO to verify directly - none of the .iso files it mentions are present in '${dir}'. Point this tool at the actual .iso file instead (its checksum/signature will be found and checked automatically)."
+msgstr "'${iso_base}' on tarkistussummaluettelo (se voi kattaa useita ISO-tiedostoja), ei yksittäinen suoraan tarkistettava ISO-tiedosto - yksikään sen mainitsemista .iso-tiedostoista ei ole kansiossa '${dir}'. Osoita tämä työkalu sen sijaan varsinaiseen .iso-tiedostoon (sen tarkistussumma/allekirjoitus löydetään ja tarkistetaan automaattisesti)."
 
 #, sh-format
-msgid ""
-"'${iso_base}' is a checksum listing covering multiple ISOs present in "
-"'${dir}': ${candidates_joined} - point this tool at the specific .iso file "
-"you want to check instead."
-msgstr ""
-"'${iso_base}' on tarkistussummaluettelo, joka kattaa useita kansiossa "
-"'${dir}' olevia ISO-tiedostoja: ${candidates_joined} - osoita tämä työkalu "
-"sen sijaan siihen tiettyyn .iso-tiedostoon, jonka haluat tarkistaa."
+msgid "'${iso_base}' is a checksum listing covering multiple ISOs present in '${dir}': ${candidates_joined} - point this tool at the specific .iso file you want to check instead."
+msgstr "'${iso_base}' on tarkistussummaluettelo, joka kattaa useita kansiossa '${dir}' olevia ISO-tiedostoja: ${candidates_joined} - osoita tämä työkalu sen sijaan siihen tiettyyn .iso-tiedostoon, jonka haluat tarkistaa."
 
 #, sh-format
-msgid ""
-"this line claims ${tag_algo}, but its hash is ${hash_len} characters long, "
-"which looks like ${len_algo} instead - using ${len_algo}"
-msgstr ""
-"tämä rivi väittää olevansa ${tag_algo}, mutta sen tiiviste on ${hash_len} "
-"merkkiä pitkä, mikä muistuttaa enemmän algoritmia ${len_algo} - käytetään "
-"${len_algo}"
+msgid "this line claims ${tag_algo}, but its hash is ${hash_len} characters long, which looks like ${len_algo} instead - using ${len_algo}"
+msgstr "tämä rivi väittää olevansa ${tag_algo}, mutta sen tiiviste on ${hash_len} merkkiä pitkä, mikä muistuttaa enemmän algoritmia ${len_algo} - käytetään ${len_algo}"
 
-#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${FLAG_CHECKSUM_FILE} are literal flag
-#. names - keep placeholders as-is.
+#. TRANSLATORS: ${FLAG_CHECKSUM_ALGO}/${FLAG_CHECKSUM_FILE} are literal flag names - keep placeholders as-is.
 #, sh-format
-msgid ""
-"${FLAG_CHECKSUM_ALGO} is required when ${FLAG_CHECKSUM_FILE} names a file "
-"not in the built-in list (SHA512SUMS, SHA256SUMS, sha256sum.txt, ...)"
-msgstr ""
-"${FLAG_CHECKSUM_ALGO} vaaditaan, kun ${FLAG_CHECKSUM_FILE} nimeää tiedoston,"
-" joka ei ole sisäänrakennetussa luettelossa (SHA512SUMS, SHA256SUMS, "
-"sha256sum.txt, ...)"
+msgid "${FLAG_CHECKSUM_ALGO} is required when ${FLAG_CHECKSUM_FILE} names a file not in the built-in list (SHA512SUMS, SHA256SUMS, sha256sum.txt, ...)"
+msgstr "${FLAG_CHECKSUM_ALGO} vaaditaan, kun ${FLAG_CHECKSUM_FILE} nimeää tiedoston, joka ei ole sisäänrakennetussa luettelossa (SHA512SUMS, SHA256SUMS, sha256sum.txt, ...)"
 
 #, sh-format
-msgid ""
-"the checksum file '${name_base}' failed its own signature check - it cannot "
-"be trusted, so the ISO hash inside it cannot be trusted either. Re-download "
-"the ISO and the checksum/signature files, ideally from a different mirror."
-msgstr ""
-"tarkistussummatiedosto '${name_base}' epäonnistui omassa allekirjoituksen "
-"tarkistuksessaan - siihen ei voi luottaa, joten myöskään sen sisältämään "
-"ISO-tiivisteeseen ei voi luottaa. Lataa ISO-tiedosto sekä "
-"tarkistussumma-/allekirjoitustiedostot uudelleen, mieluiten toisesta "
-"peilipalvelimesta."
+msgid "could not fetch the signing key for checksum file '${name_base}' from any keyserver - nothing in it could be checked. This looks like a network problem, not necessarily a bad signature - try again once you have a working connection."
+msgstr "tarkistussummatiedoston '${name_base}' allekirjoitusavainta ei voitu noutaa mistään avainpalvelimesta - mitään siinä ei voitu tarkistaa. Tämä vaikuttaa verkko-ongelmalta, ei välttämättä virheelliseltä allekirjoitukselta - yritä uudelleen, kun yhteys toimii."
 
 #, sh-format
-msgid ""
-"${name_base} is named for ${name_algo}, but its content looks like "
-"${content_algo} - using ${content_algo}"
-msgstr ""
-"${name_base} on nimetty algoritmille ${name_algo}, mutta sisältö näyttää "
-"${content_algo}-tyyppiseltä - käytetään ${content_algo}"
+msgid "the checksum file '${name_base}' failed its own signature check - it cannot be trusted, so the ISO hash inside it cannot be trusted either. Re-download the ISO and the checksum/signature files, ideally from a different mirror."
+msgstr "tarkistussummatiedosto '${name_base}' epäonnistui omassa allekirjoituksen tarkistuksessaan - siihen ei voi luottaa, joten myöskään sen sisältämään ISO-tiivisteeseen ei voi luottaa. Lataa ISO-tiedosto sekä tarkistussumma-/allekirjoitustiedostot uudelleen, mieluiten toisesta peilipalvelimesta."
 
 #, sh-format
-msgid ""
-"checksum file '${name_base}' uses an unsupported hash algorithm "
-"('${hashcmd}' not found)"
-msgstr ""
-"tarkistussummatiedosto '${name_base}' käyttää tukematonta tiivistealgoritmia"
-" ('${hashcmd}' ei löytynyt)"
+msgid "${name_base} is named for ${name_algo}, but its content looks like ${content_algo} - using ${content_algo}"
+msgstr "${name_base} on nimetty algoritmille ${name_algo}, mutta sisältö näyttää ${content_algo}-tyyppiseltä - käytetään ${content_algo}"
+
+#, sh-format
+msgid "checksum file '${name_base}' uses an unsupported hash algorithm ('${hashcmd}' not found)"
+msgstr "tarkistussummatiedosto '${name_base}' käyttää tukematonta tiivistealgoritmia ('${hashcmd}' ei löytynyt)"
 
 #, sh-format
 msgid "using checksum file: ${name_base} (${algo})"
 msgstr "käytetään tarkistussummatiedostoa: ${name_base} (${algo})"
 
 #, sh-format
-msgid ""
-"'${name_base}' is validly signed, but '${base}' does not match the recorded "
-"${algo} checksum - this download is likely corrupted, incomplete, or was "
-"tampered with after the checksum file was signed. Re-download the ISO, "
-"ideally from a different mirror. (The checksum/signature files themselves "
-"are fine - no need to re-fetch those.)"
-msgstr ""
-"'${name_base}' on pätevästi allekirjoitettu, mutta '${base}' ei vastaa "
-"tallennettua ${algo}-tarkistussummaa - tämä lataus on todennäköisesti "
-"vioittunut, keskeneräinen tai sitä on peukaloitu tarkistussummatiedoston "
-"allekirjoittamisen jälkeen. Lataa ISO-tiedosto uudelleen, mieluiten toisesta"
-" peilipalvelimesta. (Tarkistussumma-/allekirjoitustiedostot itsessään ovat "
-"kunnossa - niitä ei tarvitse hakea uudelleen.)"
+msgid "'${name_base}' is validly signed, but '${base}' does not match the recorded ${algo} checksum - this download is likely corrupted, incomplete, or was tampered with after the checksum file was signed. Re-download the ISO, ideally from a different mirror. (The checksum/signature files themselves are fine - no need to re-fetch those.)"
+msgstr "'${name_base}' on pätevästi allekirjoitettu, mutta '${base}' ei vastaa tallennettua ${algo}-tarkistussummaa - tämä lataus on todennäköisesti vioittunut, keskeneräinen tai sitä on peukaloitu tarkistussummatiedoston allekirjoittamisen jälkeen. Lataa ISO-tiedosto uudelleen, mieluiten toisesta peilipalvelimesta. (Tarkistussumma-/allekirjoitustiedostot itsessään ovat kunnossa - niitä ei tarvitse hakea uudelleen.)"
 
 msgid "OK - signature and checksum both verified"
 msgstr "OK - sekä allekirjoitus että tarkistussumma varmennettu"
 
 #, sh-format
-msgid ""
-"no signature file (.sig/.asc/.gpg/.sign) was found for '${override_base}' - "
-"cannot verify it without one"
-msgstr ""
-"tiedostolle ”${override_base}” ei löytynyt allekirjoitustiedostoa "
-"(.sig/.asc/.gpg/.sign) - sitä ei voi tarkistaa ilman sitä"
+msgid "no signature file (.sig/.asc/.gpg/.sign) was found for '${override_base}' - cannot verify it without one"
+msgstr "tiedostolle ”${override_base}” ei löytynyt allekirjoitustiedostoa (.sig/.asc/.gpg/.sign) - sitä ei voi tarkistaa ilman sitä"
 
 #, sh-format
 msgid "'${base}' is not listed in '${CHECKSUM_FILE_OVERRIDE}'"
 msgstr "'${base}' ei ole luetteloitu tiedostossa '${CHECKSUM_FILE_OVERRIDE}'"
 
 #, sh-format
-msgid ""
-"no signature file found for '${base}', and none of the checksum-listing "
-"files in its directory (${tried_joined}) contain an entry for it either"
-msgstr ""
-"tiedostolle '${base}' ei löytynyt allekirjoitustiedostoa, eikä yksikään sen "
-"kansion tarkistussummaluettelotiedostoista (${tried_joined}) sisällä "
-"myöskään sitä koskevaa merkintää"
+msgid "no signature file found for '${base}', and none of the checksum-listing files in its directory (${tried_joined}) contain an entry for it either"
+msgstr "tiedostolle '${base}' ei löytynyt allekirjoitustiedostoa, eikä yksikään sen kansion tarkistussummaluettelotiedostoista (${tried_joined}) sisällä myöskään sitä koskevaa merkintää"
 
 #, sh-format
 msgid "no signature file or checksum listing was found for '${base}'"
-msgstr ""
-"tiedostolle ”${base}” ei löytynyt allekirjoitustiedostoa eikä "
-"tarkistussummaluetteloa"
+msgstr "tiedostolle ”${base}” ei löytynyt allekirjoitustiedostoa eikä tarkistussummaluetteloa"
 
 #, sh-format
 msgid "cannot read ISO file '${ISO}'"
@@ -1350,24 +988,15 @@ msgstr "gpg-ohjelmaa ei löytynyt"
 
 #, sh-format
 msgid "could not extract signing key fingerprint from '${ISO}'"
-msgstr ""
-"allekirjoitusavaimen sormenjälkeä ei voitu poimia tiedostosta '${ISO}'"
+msgstr "allekirjoitusavaimen sormenjälkeä ei voitu poimia tiedostosta '${ISO}'"
 
 #, sh-format
-msgid ""
-"'${SIG}' looks like a full clearsigned message (e.g. a checksum listing), "
-"not a plain detached signature - point this tool at it on its own, or "
-"together with the ISO it checksums, not as a signature file."
-msgstr ""
-"'${SIG}' näyttää täydeltä selkotekstinä allekirjoitetulta viestiltä (esim. "
-"tarkistussummaluettelolta), ei tavalliselta erilliseltä allekirjoitukselta -"
-" käytä tätä työkalua sillä yksin, tai yhdessä sen tarkistaman ISO-tiedoston "
-"kanssa, ei allekirjoitustiedostona."
+msgid "'${SIG}' looks like a full clearsigned message (e.g. a checksum listing), not a plain detached signature - point this tool at it on its own, or together with the ISO it checksums, not as a signature file."
+msgstr "'${SIG}' näyttää täydeltä selkotekstinä allekirjoitetulta viestiltä (esim. tarkistussummaluettelolta), ei tavalliselta erilliseltä allekirjoitukselta - käytä tätä työkalua sillä yksin, tai yhdessä sen tarkistaman ISO-tiedoston kanssa, ei allekirjoitustiedostona."
 
 #, sh-format
 msgid "could not extract signing key fingerprint from '${SIG}'"
-msgstr ""
-"allekirjoitusavaimen sormenjälkeä ei voitu poimia tiedostosta '${SIG}'"
+msgstr "allekirjoitusavaimen sormenjälkeä ei voitu poimia tiedostosta '${SIG}'"
 
 #, sh-format
 msgid "signature made with: ${FPR}"
@@ -1379,73 +1008,48 @@ msgstr "tunnistettu allekirjoitusavain: ${label}"
 
 #, sh-format
 msgid "recognized: key already cached and trusted in ${TRUSTED_GPG}"
-msgstr ""
-"tunnistettu: avain on jo välimuistissa ja luotettu tiedostossa "
-"${TRUSTED_GPG}"
+msgstr "tunnistettu: avain on jo välimuistissa ja luotettu tiedostossa ${TRUSTED_GPG}"
 
 #, sh-format
-msgid ""
-"recognized: key already present in ${PUBRING_KBX} and explicitly marked "
-"trusted there"
-msgstr ""
-"tunnistettu: avain on jo tiedostossa ${PUBRING_KBX} ja merkitty siellä "
-"nimenomaisesti luotetuksi"
+msgid "recognized: key found in mx-gpg-keyring - ${mx_uid}"
+msgstr "tunnistettu: avain löytyi tiedostosta mx-gpg-keyring - ${mx_uid}"
+
+msgid "recognized: key found in mx-gpg-keyring"
+msgstr "tunnistettu: avain löytyi tiedostosta mx-gpg-keyring"
 
 #, sh-format
-msgid ""
-"kept ${FPR} in ${TRUSTED_GPG} - future runs will recognize it automatically"
-msgstr ""
-"säilytettiin ${FPR} tiedostossa ${TRUSTED_GPG} - tulevat ajokerrat "
-"tunnistavat sen automaattisesti"
+msgid "kept ${FPR} in ${TRUSTED_GPG} - future runs will recognize it automatically"
+msgstr "säilytettiin ${FPR} tiedostossa ${TRUSTED_GPG} - tulevat ajokerrat tunnistavat sen automaattisesti"
 
 #, sh-format
 msgid "warning: could not save key into ${TRUSTED_GPG}: ${out}"
-msgstr ""
-"varoitus: avainta ei voitu tallentaa tiedostoon ${TRUSTED_GPG}: ${out}"
+msgstr "varoitus: avainta ei voitu tallentaa tiedostoon ${TRUSTED_GPG}: ${out}"
 
 #, sh-format
-msgid ""
-"${FPR} is not one of this tool's built-in recognized keys - verify its "
-"fingerprint independently before trusting it (e.g. against the distro's own "
-"official website or keyserver listing)"
-msgstr ""
-"${FPR} ei ole yksi tämän työkalun sisäänrakennetuista tunnistamista "
-"avaimista - tarkista sen sormenjälki itsenäisesti ennen kuin luotat siihen "
-"(esim. jakelun omalta viralliselta verkkosivustolta tai avainpalvelimelta)"
-
-#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN}/${FLAG_TRUST_KEY} are literal flag names
-#. - keep placeholders as-is.
-#, sh-format
-msgid ""
-"refusing to verify against an unrecognized signing key (pass "
-"${FLAG_ALLOW_UNKNOWN} to verify just this once, or ${FLAG_TRUST_KEY} to also"
-" remember it for next time)"
-msgstr ""
-"kieltäydytään tarkistamasta tunnistamatonta allekirjoitusavainta vastaan "
-"(anna ${FLAG_ALLOW_UNKNOWN} tarkistaaksesi vain tämän kerran, tai "
-"${FLAG_TRUST_KEY} muistaaksesi sen myös seuraavaa kertaa varten)"
-
-#. TRANSLATORS: ${FLAG_TRUST_KEY} is a literal flag name - keep the
-#. placeholder as-is.
-#, sh-format
-msgid ""
-"verifying anyway - if the result below is GOOD and you decide you trust this"
-" key, use ${FLAG_TRUST_KEY} next time (or mark it trusted in your own GPG "
-"keyring) so future checks recognize it automatically"
-msgstr ""
-"tarkistetaan silti - jos alla oleva tulos on HYVÄ ja päätät luottaa tähän "
-"avaimeen, käytä ${FLAG_TRUST_KEY} seuraavalla kerralla (tai merkitse se "
-"luotetuksi omassa GPG-avainnipussasi), jotta tulevat tarkistukset "
-"tunnistavat sen automaattisesti"
+msgid "recognized: key already present in ${PUBRING_KBX} and explicitly marked trusted there"
+msgstr "tunnistettu: avain on jo tiedostossa ${PUBRING_KBX} ja merkitty siellä nimenomaisesti luotetuksi"
 
 #, sh-format
-msgid ""
-"kept ${FPR} in ${TRUSTED_GPG} (reused the copy fetched during verification -"
-" no extra keyserver lookup needed)"
-msgstr ""
-"säilytettiin ${FPR} tiedostossa ${TRUSTED_GPG} (käytettiin uudelleen "
-"tarkistuksen aikana haettua kopiota - ylimääräistä avainpalvelinhakua ei "
-"tarvittu)"
+msgid "${FPR} has been explicitly untrusted - you've told this tool not to auto-trust it anymore, whatever the reason it would otherwise be recognized. Pass ${FLAG_TRUST_KEY} again if you've changed your mind"
+msgstr "${FPR} on nimenomaisesti merkitty ei-luotetuksi - olet kertonut tälle työkalulle, ettei siihen luoteta enää automaattisesti, riippumatta siitä, mistä syystä se muuten tunnistettaisiin. Anna ${FLAG_TRUST_KEY} uudelleen, jos muutit mielesi"
+
+#, sh-format
+msgid "${FPR} is not one of this tool's built-in recognized keys - verify its fingerprint independently before trusting it (e.g. against the distro's own official website or keyserver listing)"
+msgstr "${FPR} ei ole yksi tämän työkalun sisäänrakennetuista tunnistamista avaimista - tarkista sen sormenjälki itsenäisesti ennen kuin luotat siihen (esim. jakelun omalta viralliselta verkkosivustolta tai avainpalvelimelta)"
+
+#. TRANSLATORS: ${FLAG_ALLOW_UNKNOWN}/${FLAG_TRUST_KEY} are literal flag names - keep placeholders as-is.
+#, sh-format
+msgid "refusing to verify against an unrecognized signing key (pass ${FLAG_ALLOW_UNKNOWN} to verify just this once, or ${FLAG_TRUST_KEY} to also remember it for next time)"
+msgstr "kieltäydytään tarkistamasta tunnistamatonta allekirjoitusavainta vastaan (anna ${FLAG_ALLOW_UNKNOWN} tarkistaaksesi vain tämän kerran, tai ${FLAG_TRUST_KEY} muistaaksesi sen myös seuraavaa kertaa varten)"
+
+#. TRANSLATORS: ${FLAG_TRUST_KEY} is a literal flag name - keep the placeholder as-is.
+#, sh-format
+msgid "verifying anyway - if the result below is GOOD and you decide you trust this key, use ${FLAG_TRUST_KEY} next time (or mark it trusted in your own GPG keyring) so future checks recognize it automatically"
+msgstr "tarkistetaan silti - jos alla oleva tulos on HYVÄ ja päätät luottaa tähän avaimeen, käytä ${FLAG_TRUST_KEY} seuraavalla kerralla (tai merkitse se luotetuksi omassa GPG-avainnipussasi), jotta tulevat tarkistukset tunnistavat sen automaattisesti"
+
+#, sh-format
+msgid "kept ${FPR} in ${TRUSTED_GPG} - already fetched during verification, no second fetch needed"
+msgstr "säilytettiin ${FPR} tiedostossa ${TRUSTED_GPG} - haettu jo varmennuksen aikana, toista hakua ei tarvittu"
 
 #, sh-format
 msgid "key already present and valid in ${TRUSTED_GPG}"
@@ -1453,9 +1057,7 @@ msgstr "avain on jo olemassa ja voimassa tiedostossa ${TRUSTED_GPG}"
 
 #, sh-format
 msgid "key in ${TRUSTED_GPG} is ${status}, ignoring cached copy"
-msgstr ""
-"tiedostossa ${TRUSTED_GPG} oleva avain on ${status}, ohitetaan välimuistissa"
-" oleva kopio"
+msgstr "tiedostossa ${TRUSTED_GPG} oleva avain on ${status}, ohitetaan välimuistissa oleva kopio"
 
 #, sh-format
 msgid "key already present and valid in ${PUBRING_KBX}"
@@ -1463,55 +1065,42 @@ msgstr "avain on jo olemassa ja voimassa tiedostossa ${PUBRING_KBX}"
 
 #, sh-format
 msgid "key in ${PUBRING_KBX} is ${pr_status}, ignoring cached copy"
-msgstr ""
-"tiedostossa ${PUBRING_KBX} oleva avain on ${pr_status}, ohitetaan "
-"välimuistissa oleva kopio"
+msgstr "tiedostossa ${PUBRING_KBX} oleva avain on ${pr_status}, ohitetaan välimuistissa oleva kopio"
+
+msgid "key already present and valid in mx-gpg-keyring"
+msgstr "avain on jo olemassa ja voimassa tiedostossa mx-gpg-keyring"
 
 #, sh-format
 msgid "fetching ${FPR} from ${ks}"
 msgstr "haetaan ${FPR} palvelimelta ${ks}"
 
 #, sh-format
-msgid ""
-"${ks} returned more than one key for Key ID ${FPR} - refusing to guess which"
-" one is real"
-msgstr ""
-"${ks} palautti useamman kuin yhden avaimen avaintunnukselle ${FPR} - "
-"kieltäydytään arvaamasta, mikä niistä on aito"
+msgid "${ks} returned more than one key for Key ID ${FPR} - refusing to guess which one is real"
+msgstr "${ks} palautti useamman kuin yhden avaimen avaintunnukselle ${FPR} - kieltäydytään arvaamasta, mikä niistä on aito"
 
 #, sh-format
-msgid ""
-"${ks} returned ${FPR} without any usable key material (likely a user ID that"
-" was never confirmed there) - trying next..."
-msgstr ""
-"${ks} palautti avaimen ${FPR} ilman käyttökelpoista avainaineistoa "
-"(todennäköisesti käyttäjätunnus, jota ei koskaan vahvistettu siellä) - "
-"kokeillaan seuraavaa..."
+msgid "${ks} returned ${FPR} without any usable key material (likely a user ID that was never confirmed there) - trying next..."
+msgstr "${ks} palautti avaimen ${FPR} ilman käyttökelpoista avainaineistoa (todennäköisesti käyttäjätunnus, jota ei koskaan vahvistettu siellä) - kokeillaan seuraavaa..."
 
 #, sh-format
 msgid "could not fetch from ${ks}, trying next..."
 msgstr "haku palvelimelta ${ks} epäonnistui, kokeillaan seuraavaa..."
 
 #, sh-format
-msgid ""
-"could not fetch key ${FPR} from any keyserver (tried: ${TRIED_KEYSERVERS})"
-msgstr ""
-"avainta ${FPR} ei voitu hakea mistään avainpalvelimesta (kokeiltiin: "
-"${TRIED_KEYSERVERS})"
+msgid "could not fetch key ${FPR} from any keyserver (tried: ${TRIED_KEYSERVERS}) - this looks like a network problem, not necessarily an invalid signature. Try again once you have a working connection."
+msgstr "avainta ${FPR} ei voitu noutaa mistään avainpalvelimesta (yritettiin: ${TRIED_KEYSERVERS}) - tämä vaikuttaa verkko-ongelmalta, ei välttämättä virheelliseltä allekirjoitukselta. Yritä uudelleen, kun yhteys toimii."
+
+#, sh-format
+msgid "could not fetch key ${FPR} from any keyserver (tried: ${TRIED_KEYSERVERS})"
+msgstr "avainta ${FPR} ei voitu hakea mistään avainpalvelimesta (kokeiltiin: ${TRIED_KEYSERVERS})"
 
 #, sh-format
 msgid "keeping fetched key in ${TRUSTED_GPG} for future runs"
-msgstr ""
-"säilytetään haettu avain tiedostossa ${TRUSTED_GPG} tulevia ajokertoja "
-"varten"
+msgstr "säilytetään haettu avain tiedostossa ${TRUSTED_GPG} tulevia ajokertoja varten"
 
 #, sh-format
-msgid ""
-"warning: could not save key into ${TRUSTED_GPG} (${out}), continuing with a "
-"throw-away keyring for this run"
-msgstr ""
-"varoitus: avainta ei voitu tallentaa tiedostoon ${TRUSTED_GPG} (${out}), "
-"jatketaan tämän ajokerran kertakäyttöisellä avainnipulla"
+msgid "warning: could not save key into ${TRUSTED_GPG} (${out}), continuing with a throw-away keyring for this run"
+msgstr "varoitus: avainta ei voitu tallentaa tiedostoon ${TRUSTED_GPG} (${out}), jatketaan tämän ajokerran kertakäyttöisellä avainnipulla"
 
 #, sh-format
 msgid "could not save key into ${TRUSTED_GPG}: ${out}"
@@ -1523,8 +1112,7 @@ msgstr "${FPR} on jo säilytetty tiedostossa ${TRUSTED_GPG}"
 
 #, sh-format
 msgid "verifying inline-signed checksum file '${ISO_BASE}'"
-msgstr ""
-"tarkistetaan itseallekirjoitettua tarkistussummatiedostoa '${ISO_BASE}'"
+msgstr "tarkistetaan itseallekirjoitettua tarkistussummatiedostoa '${ISO_BASE}'"
 
 #, sh-format
 msgid "verifying '${SIG_BASE}' against '${ISO_BASE}'"
@@ -1537,16 +1125,52 @@ msgstr "OK - allekirjoitus varmennettu"
 msgid "claimed identity: ${CLAIMED_UID}"
 msgstr "ilmoitettu henkilöllisyys: ${CLAIMED_UID}"
 
+#, sh-format
+msgid "primary key: ${PRIMARY_FPR}"
+msgstr "pääavain: ${PRIMARY_FPR}"
+
 msgid "FAILED - signature did NOT verify"
 msgstr "EPÄONNISTUI - allekirjoitusta EI varmennettu"
 
 msgid "refusing to run as root - run this as a regular user instead"
-msgstr ""
-"suorittaminen pääkäyttäjänä (root) on estetty - käytä tavallista "
-"käyttäjätunnusta"
+msgstr "suorittaminen pääkäyttäjänä (root) on estetty - käytä tavallista käyttäjätunnusta"
 
 msgid "iso;sig;gpg;"
 msgstr "iso;sig;gpg;allekirjoitus;"
 
 msgid "Verify with Drag & Drop"
 msgstr "Tarkista vetämällä ja pudottamalla"
+
+#~ msgid "Refresh Trusted Keys"
+#~ msgstr "Päivitä luotetut avaimet"
+
+#, sh-format
+#~ msgid "recognized: key found in this system's own signing-key package (${MX_GPG_KEYRING})"
+#~ msgstr "tunnistettu: avain löytyi tämän järjestelmän omasta allekirjoitusavainpaketista (${MX_GPG_KEYRING})"
+
+#, sh-format
+#~ msgid "key already present and valid in this system's own signing-key package (${MX_GPG_KEYRING})"
+#~ msgstr "avain on jo olemassa ja voimassa tämän järjestelmän omassa allekirjoitusavainpaketissa (${MX_GPG_KEYRING})"
+
+#~ msgid "Untrust Selected"
+#~ msgstr "Kumoa valitut"
+
+#~ msgid "Import from File"
+#~ msgstr "Tuo tiedostosta"
+
+#~ msgid "Export Selected"
+#~ msgstr "Vie valitut"
+
+#~ msgid "Remove"
+#~ msgstr "Poista"
+
+#, sh-format
+#~ msgid "If any of them is also one of this tool's built-in recognized keys (run '${CMD_LIST_KNOWN_KEYS}' to see the full list), it will still be recognized automatically next time - this only removes the local cache entry, not that recognition."
+#~ msgstr "Jos jokin niistä on myös yksi tämän työkalun sisäänrakennetuista tunnistamista avaimista (näet koko luettelon komennolla '${CMD_LIST_KNOWN_KEYS}'), tämä työkalu tunnistaa sen silti automaattisesti seuraavalla kerralla - tämä poistaa vain paikallisen välimuistimerkinnän, ei tätä tunnistusta."
+
+#~ msgid "Forget"
+#~ msgstr "Unohda"
+
+#, sh-format
+#~ msgid "'${UNTRUST_KEY}' is not in ${TRUSTED_GPG}"
+#~ msgstr "'${UNTRUST_KEY}' ei ole tiedostossa ${TRUSTED_GPG}"

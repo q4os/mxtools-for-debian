@@ -3,7 +3,7 @@
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">MX Welcome</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="33"/>
@@ -35,12 +35,12 @@
         <location filename="../mainwindow.ui" line="202"/>
         <location filename="../mainwindow.cpp" line="137"/>
         <source>&amp;Save...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;შენახვა...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
         <source>Quit application</source>
-        <translation type="unfinished"/>
+        <translation>აპლიკაციიდან გასვლა</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="105"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>About this application</source>
-        <translation type="unfinished"/>
+        <translation>ამ აპლიკაციის შესახებ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
@@ -140,7 +140,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="203"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>(c) MX Linux საავტორო ფულებები დაცულია</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="198"/>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="96"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;ძებნა...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
@@ -180,7 +180,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="205"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>ლიცენზია %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="299"/>
@@ -220,17 +220,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="520"/>
         <source>Direction</source>
-        <translation type="unfinished"/>
+        <translation>მიმართულება</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="522"/>
         <source>&amp;Up</source>
-        <translation type="unfinished"/>
+        <translation>ჩართული&amp;ა</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="523"/>
         <source>&amp;Down</source>
-        <translation type="unfinished"/>
+        <translation>გა&amp;მორთულია</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="568"/>
@@ -281,12 +281,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="351"/>
         <source>history</source>
-        <translation type="unfinished"/>
+        <translation>ისტორია</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="374"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1-ის დახმარება</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="82"/>
@@ -304,7 +304,7 @@
     <message>
         <location filename="../main.cpp" line="66"/>
         <source>You must run this program as normal user.</source>
-        <translation type="unfinished"/>
+        <translation>ეს პროგრამა ნორმალური მომხმარებლით უნდა გაუშვათ.</translation>
     </message>
 </context>
 <context>

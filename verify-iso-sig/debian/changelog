@@ -1,8 +1,52 @@
-verify-iso-sig (2026.08.04.1302) stable; urgency=medium
+verify-iso-sig (2026.09.01.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:21 +0200
+ -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:09 +0200
+
+verify-iso-sig (2026.09.01) mx; urgency=medium
+
+  * Take both personal and system-wide keys into account when
+    recognizing a signing key.
+  * Recognize a new signing subkey of an already-known key
+    automatically.
+  * Take key revocation into account more thoroughly, including a
+    revoked subkey.
+  * Add a way to refresh trusted keys for updates.
+  * Add .kbx import support, in addition to .asc and .gpg.
+  * Accept fingerprints to list only specific trusted keys.
+  * Show more detail about a signing key, including its primary key
+    when a subkey signed the ISO.
+  * Adjust the key manager's button and column labels.
+  * Add mx-gpg-keys to Recommends.
+
+ -- fehlix <fehlix@mxlinux.org>  Sun, 06 Sep 2026 16:39:17 -0400
+
+verify-iso-sig (2026.08.06) mx; urgency=medium
+
+  * Get the ISO name from a plain checksum file's own content when
+    needed.
+  * Prefer a clearsigned per-ISO checksum over a direct .sig when
+    resolving a plain checksum, matching bare-ISO auto-discovery.
+  * GUI: the run-once lock now also covers --manage-keys.
+  * GUI: fixed a lock-release gap after a backgrounded child.
+  * GUI: the run-once notification now names whichever window is
+    already open.
+  * GUI: fixed the progress popup not closing when yad is a wrapper
+    script rather than the real binary.
+  * Warn when a checksum relies on MD5 or SHA1.
+
+ -- fehlix <fehlix@mxlinux.org>  Mon, 31 Aug 2026 15:36:52 -0400
+
+verify-iso-sig (2026.08.05) mx; urgency=medium
+
+  * Make --untrust-key durable against pubring.kbx auto-re-trust.
+  * Rename GUI "Forget Selected" to "Untrust Selected"
+  * Recognize a cleartext-signed per-ISO checksum (e.g. "<iso>.sha512.asc")
+  * Register shared-mime-info types and icons for "*.sha256.asc"/
+    "*.sha512.asc" and for "*.iso.sig", with "Open With" support.
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 27 Aug 2026 20:43:19 -0400
 
 verify-iso-sig (2026.08.04) mx; urgency=medium
 

@@ -94,6 +94,7 @@ private:
     static QVector<QPair<QString, bool>> loadAptFile(const QString &file);
     static bool checkRepo(const QString &repo);
     static bool isValidRepositoryUrl(const QString &url);
+    static bool repoEntryMatchesHost(const QString &repoLine, const QString &host);
     static int getDebianVerNum();
     void centerWindow();
     void displayAllRepos(const QFileInfoList &apt_files);

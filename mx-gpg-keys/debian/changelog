@@ -1,8 +1,14 @@
-mx-gpg-keys (26.08.1302) stable; urgency=medium
+mx-gpg-keys (26.09.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 31 Aug 2026 17:00:18 +0200
+ -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:05 +0200
+
+mx-gpg-keys (26.09) mx; urgency=medium
+
+  * Add m_pav's key
+
+ -- Timothy E. Harris <maintainer@mxrepo.com>  Wed, 02 Sep 2026 13:38:57 +0000
 
 mx-gpg-keys (26.08) mx; urgency=medium
 

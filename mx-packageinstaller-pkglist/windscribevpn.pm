@@ -76,9 +76,14 @@ trap tidy_up EXIT
 chmod +xr $TMP_DIR
 pushd $TMP_DIR >/dev/null
 
-DLD_URL=https://windscribe.net/install/desktop/linux_deb_x64
-DEB_URL=$(curl -sI $DLD_URL | grep -oP '^location: \Khttps://[0-9a-zA-Z/._-].*/windscribe[0-9a-zA-Z._-]*_amd64.deb')
+API_URL='https://api.windscribe.com/CheckUpdate?platform=linux_deb_x64&beta=0'
+DEB_URL=$(curl -s "$API_URL" -H 'Authorization: Bearer 1234' | grep -oP '"update_url"\s*:\s*"\K[^"]+' | sed 's/\\\//\//g')
 DEB=${DEB_URL##*/}
+if [ -z "$DEB_URL" ]; then
+   echo "Error: could not determine Windscribe download URL from $API_URL"
+   popd >/dev/null
+   exit 1
+fi
 echo " "
 echo "Downloading ... $DEB"
 echo "curl -RLJO $DEB_URL"

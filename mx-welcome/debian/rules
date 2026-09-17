@@ -8,11 +8,16 @@ override_dh_auto_configure:
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf build/
+	rm -rf build/ obj-*/
 	rm -f translations/*.qm
+	rm -f src/version.h
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
+
+# Do not create package-private .dwz debug data.
+override_dh_dwz:
+	@:
 
 override_dh_auto_test:
 	# Skip tests as no test targets are defined

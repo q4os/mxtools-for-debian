@@ -28,5 +28,5 @@ Exec=bash -c 'sleep 5 && mx-welcome'
 Terminal=false
 Type=Application
 Icon=mx-welcome
-Categories=GNOME;GTK;System;MX-Setup;
+Categories=GNOME;GTK;System;X-MX-Setup;
 NoDisplay=false

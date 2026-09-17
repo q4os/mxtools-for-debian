@@ -20,9 +20,8 @@ override_dh_auto_build:
 		-M toc-title="Contents" -M pagetitle="ISO Signature Verifier - Help" \
 		-M lang=en -H help-header.html \
 		README.md -o help/help.html
-	# pandoc's --toc places the table of contents right after <body>,
-	# before the title/hero image - move it to just before the first
-	# <h2> instead, so the hero image is the first thing seen.
+	# Move pandoc's --toc block to just before the first <h2>, so the
+	# hero image comes first.
 	awk '/<nav id="TOC"/{toc=1} toc{tocblock=tocblock $$0 "\n"; if (/<\/nav>/){toc=0}; next} /<h2 /{printf "%s", tocblock; tocblock=""} {print}' \
 		help/help.html > help/help.html.tmp && mv help/help.html.tmp help/help.html
 	cp -a screenshots help/screenshots

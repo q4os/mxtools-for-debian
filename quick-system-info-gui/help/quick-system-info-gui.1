@@ -1,0 +1,25 @@
+.TH QUICK-SYSTEM-INFO-GUI 1 "2026-07-20" "MX Linux" "User Commands"
+.SH NAME
+quick-system-info-gui \- display Quick System Info reports
+.SH SYNOPSIS
+.B quick-system-info-gui
+.SH DESCRIPTION
+.B quick-system-info-gui
+is a graphical interface for displaying Quick System Info reports based on inxi and MX Linux-specific information. Select a report from the list to display it, copy a report in forum-ready format, save selected reports to an archive, or save the displayed text to a file.
+.PP
+On systems using systemd as PID 1, the Journald tab provides filters for user or system logs, priority, boot, and service. System-level logs require root privileges.
+.SH OPTIONS
+This application has no application-specific command-line options. Qt's standard
+.B --help
+and
+.B --version
+options are available.
+.SH FILES
+.TP
+.I /usr/share/doc/quick-system-info-gui
+Installed HTML help, images, license, and changelog documentation.
+.SH SEE ALSO
+.BR inxi (1),
+.BR journalctl (1)
+.SH AUTHOR
+MX Linux contributors.

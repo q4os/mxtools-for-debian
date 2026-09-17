@@ -13,7 +13,7 @@
     <message>
         <location filename="../mainwindow.ui" line="47"/>
         <source>Save the displayed system information to a text file.</source>
-        <translation>Tallenna järjestelmätiedot tekstitiedostoon.</translation>
+        <translation>Tallenna tiedot tekstitiedostoon.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="50"/>
@@ -24,12 +24,12 @@
     <message>
         <location filename="../mainwindow.ui" line="30"/>
         <source>Copy the displayed system information to the clipboard, encased in [CODE][/CODE] tags ready to use in a forum post.</source>
-        <translation>Kopioi järjestelmätiedot leikepöydälle [CODE][/CODE] tunnistein koteloituina. Valmis käytettäväksi vaikka foorumilla.</translation>
+        <translation>Kopioi tiedot leikepöydälle [CODE][/CODE] tunnistein koteloituina. Valmis käytettäväksi vaikka foorumilla.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="199"/>
         <source>Save the system information selected from the list to an archive file.</source>
-        <translation>Tallenna listalta valitut järjestelmätiedot tiedostoon.</translation>
+        <translation>Tallenna listalta valitut tiedot tiedostoon.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="202"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../mainwindow.ui" line="154"/>
         <source>About this application</source>
-        <translation>Tietoja tästä sovelluksesta</translation>
+        <translation>Tietoja sovelluksesta</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="157"/>
@@ -107,7 +107,7 @@
         <location filename="../mainwindow.ui" line="341"/>
         <source>Service Search</source>
         <extracomment>seek and ye shall find</extracomment>
-        <translation>Palveluhaku</translation>
+        <translation>Palveluiden haku</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="351"/>
@@ -130,7 +130,7 @@
         <location filename="../mainwindow.cpp" line="344"/>
         <location filename="../mainwindow.cpp" line="374"/>
         <source>Quick System Info</source>
-        <translation>Quick System Info</translation>
+        <translation>Tietokoneen tiedot</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="61"/>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="517"/>
         <source>Match &amp;whole word only</source>
-        <translation>Täsmää vain &amp;koko sanaa</translation>
+        <translation>Täsmää vain &amp;koko sanaan</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="520"/>
@@ -242,7 +242,7 @@
         <location filename="../mainwindow.cpp" line="710"/>
         <source>No journal entries found at this admin and priority level</source>
         <comment>no journal entries found at the options specified</comment>
-        <translation>Ei löytynyt järjestelmänvalvojan prioriteettitasolla journal merkintöjä</translation>
+        <translation>Ei löytynyt pääkäyttäjän prioriteettitasolla journal merkintöjä</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="712"/>

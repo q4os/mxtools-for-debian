@@ -57,30 +57,27 @@ validate_version() {
     echo "$version"
 }
 
-check_tag_exists() {
+tag_exists() {
     local version=$1
-
-    if git tag -l | grep -q "^${version}$"; then
-        print_error "Tag '$version' already exists locally"
-        return 1
-    fi
-
-    if git ls-remote --tags origin 2>/dev/null | grep -q "refs/tags/${version}$"; then
-        print_error "Tag '$version' already exists on remote"
-        return 1
-    fi
-
-    return 0
+    if git tag -l | grep -q "^${version}$"; then return 0; fi
+    if git ls-remote --tags origin 2>/dev/null | grep -q "refs/tags/${version}$"; then return 0; fi
+    return 1
 }
 
 get_latest_tag() {
-    local latest_tag
-    latest_tag=$(git tag -l | grep -E '^v?[0-9]+\.[0-9]+(\.[0-9]+)?[a-z]*$' | sort -V | tail -n1)
-    if [ -z "$latest_tag" ]; then
-        echo "0.0.0"
-    else
-        echo "${latest_tag#v}"
-    fi
+    {
+        git tag -l
+        git ls-remote --tags origin 2>/dev/null | awk '{sub("refs/tags/", "", $2); sub(/\^\{\}$/, "", $2); print $2}'
+    } | sort -u | while read -r tag; do
+        local clean_tag=${tag#v}
+        if [[ $clean_tag =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?[a-zA-Z0-9]*$ ]]; then printf '%s
+' "$tag"; fi
+    done | sort -V | tail -n1
+}
+
+get_tag_annotation() {
+    local version=$1
+    git for-each-ref --format='%(contents)' "refs/tags/${version}" 2>/dev/null || true
 }
 
 compare_versions() {
@@ -187,7 +184,7 @@ update_aur_package() {
             fi
         fi
 
-        if [ $i -lt $retries ]; then
+        if [ "$i" -lt "$retries" ]; then
             print_warning "Failed to download tarball, waiting 5 seconds before retry..."
             sleep 5
         fi
@@ -225,6 +222,7 @@ update_aur_package() {
 }
 
 show_push_instructions() {
+    local tag_status=${1:-created}
     echo
     echo -e "${BLUE}========================================${NC}"
     echo -e "${BLUE}  MANUAL PUSH REQUIRED${NC}"
@@ -237,6 +235,12 @@ show_push_instructions() {
         return
     fi
 
+    if [ "$tag_status" = "existing" ]; then
+        print_step "The existing tag was reused; no tag was created."
+    else
+        print_step "The tag has been created and pushed automatically."
+    fi
+
     print_warning "aur/ is packaged in this repo, not a separate AUR checkout."
     echo
     print_step "Copy or sync these files into your AUR repo before publishing:"
@@ -246,99 +250,69 @@ show_push_instructions() {
 
 main() {
     local version=""
-    local mode="release"
+    local tag_status="created"
 
-    if [ $# -eq 0 ]; then
-        print_error "Usage: $0 <version> [--update|--force]"
-        echo "Example: $0 26.01"
-        echo "         $0 26.01 --update"
-        exit 1
-    fi
-
-    version=$1
-    if [ $# -gt 1 ]; then
-        case "$2" in
+    while [ $# -gt 0 ]; do
+        case "$1" in
             --update|--force)
-                mode="update"
-                ;;
+                print_warning "$1 is no longer needed; existing tags are handled automatically" ;;
+            --*)
+                print_error "Unknown option: $1"; exit 1 ;;
             *)
-                print_error "Unknown option: $2"
-                exit 1
-                ;;
+                if [ -n "$version" ]; then print_error "Only one version may be specified"; exit 1; fi
+                version=$1 ;;
         esac
-    fi
+        shift
+    done
 
     print_header
-
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then print_error "Not in a git repository"; exit 1; fi
+    if [ -z "$version" ]; then
+        version=$(get_latest_tag)
+        if [ -z "$version" ]; then print_error "No version tag found; specify a version explicitly"; exit 1; fi
+        print_step "No version specified; using latest tag '$version'"
+    fi
     print_step "Validating version format..."
     version=$(validate_version "$version")
     print_success "Version format valid: $version"
-
-    if [ "$mode" = "update" ]; then
-        print_step "Update-only mode enabled: skipping tag checks and creation"
-        update_aur_package "$version" "Update AUR package to $version"
-        show_push_instructions
-        print_success "AUR update complete (no tag created)"
-        return 0
-    fi
-
-    if ! git rev-parse --git-dir > /dev/null 2>&1; then
-        print_error "Not in a git repository"
-        exit 1
-    fi
 
     local current_branch
     current_branch=$(git branch --show-current)
     if [ "$current_branch" != "$MAIN_BRANCH" ]; then
         print_warning "Not on $MAIN_BRANCH branch (currently on: $current_branch)"
-        echo "Continue anyway? (y/N)"
-        read -r response
-        if [[ ! "$response" =~ ^[Yy]$ ]]; then
-            print_step "Aborted by user"
-            exit 0
-        fi
+        echo "Continue anyway? (y/N)"; read -r response
+        if [[ ! "$response" =~ ^[Yy]$ ]]; then print_step "Aborted by user"; exit 0; fi
     fi
 
     print_step "Checking if tag '$version' already exists..."
-    if ! check_tag_exists "$version"; then
-        exit 1
+    if tag_exists "$version"; then
+        print_warning "Tag '$version' already exists; no new tag will be created"
+        tag_status="existing"
+        ANNOTATION=$(get_tag_annotation "$version")
+        if [ -z "$ANNOTATION" ]; then ANNOTATION="Update AUR package to $version"; fi
+    else
+        print_success "Tag '$version' is available"
+        print_step "Checking version progression..."
+        local latest_tag
+        latest_tag=$(get_latest_tag)
+        if [ -n "$latest_tag" ] && ! compare_versions "${version#v}" "$latest_tag"; then
+            print_error "Version ${version#v} is not higher than latest tag ${latest_tag#v}"; exit 1
+        fi
+        if [ -n "$latest_tag" ]; then print_success "Version $version > ${latest_tag#v}"; fi
+        prompt_annotation "$version"
     fi
-    print_success "Tag '$version' is available"
-
-    print_step "Checking version progression..."
-    local latest_tag
-    latest_tag=$(get_latest_tag)
-    if ! compare_versions "${version#v}" "$latest_tag"; then
-        print_error "Version ${version#v} is not higher than latest tag $latest_tag"
-        exit 1
-    fi
-    print_success "Version $version > $latest_tag"
-
-    prompt_annotation "$version"
     local annotation="$ANNOTATION"
 
-    echo
-    print_warning "About to create tag '$version' with annotation:"
-    echo "$annotation"
-    echo
-    echo "Continue? (y/N)"
-    read -r response
-    if [[ ! "$response" =~ ^[Yy]$ ]]; then
-        print_step "Aborted by user"
-        exit 0
+    if [ "$tag_status" = "created" ]; then
+        echo; print_warning "About to create tag '$version' with annotation:"; echo "$annotation"; echo
+        echo "Continue? (y/N)"; read -r response
+        if [[ ! "$response" =~ ^[Yy]$ ]]; then print_step "Aborted by user"; exit 0; fi
+        create_tag "$version" "$annotation"
+        print_step "Pushing tag to GitHub..."; git push origin "$version"; print_success "Tag pushed to GitHub"
     fi
-
-    create_tag "$version" "$annotation"
-
-    print_step "Pushing tag to GitHub..."
-    git push origin "$version"
-    print_success "Tag pushed to GitHub"
-
     update_aur_package "$version" "$annotation"
-    show_push_instructions
-
-    echo
-    print_success "Release preparation complete!"
+    show_push_instructions "$tag_status"
+    echo; print_success "Release preparation complete!"
 }
 
 main "$@"

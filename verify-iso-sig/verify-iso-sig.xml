@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-openpgp-signed-checksum">
+    <comment>OpenPGP checksum signature</comment>
+    <sub-class-of type="text/plain"/>
+    <icon name="verify-iso-sig"/>
+    <glob pattern="*.sha256.asc" weight="100"/>
+    <glob pattern="*.sha512.asc" weight="100"/>
+  </mime-type>
+  <mime-type type="application/x-openpgp-iso-signature">
+    <comment>OpenPGP ISO signature</comment>
+    <sub-class-of type="application/pgp-signature"/>
+    <icon name="verify-iso-sig"/>
+    <glob pattern="*.iso.sig" weight="100"/>
+  </mime-type>
+</mime-info>

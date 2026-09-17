@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2015 MX Authors
+ * Copyright (C) 2015-2026 MX Authors
  *
  * Authors: Dolphin Oracle, AK-47, Adrian
  *          MX Linux <http://mxlinux.org>

@@ -3,7 +3,7 @@
     <name>MainWindow</name>
     <message>
         <source>MX Welcome</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">ترحيب ام اكس</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="33"/>

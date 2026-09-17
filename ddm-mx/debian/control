@@ -9,5 +9,6 @@ Vcs-Git: https://github.com/mx-linux/ddm-mx
 Package: ddm-mx
 Architecture: all
 Depends: ${misc:Depends}, ${shlibs:Depends}, cli-shell-utils
-Recommends: mx-launcher-l10n 
+Recommends: mx-launcher-l10n
+Suggests: bash-completion
 Description: CLI app for installing nvidia drivers

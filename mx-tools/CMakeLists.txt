@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2017-2025 MX Authors
+# * Copyright (C) 2017-2026 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -53,11 +53,22 @@ else()
     endif()
 endif()
 
+# CMake's project() only accepts a dot-separated numeric version, but
+# debian/changelog may carry a non-numeric distro suffix (e.g. "26.09.5mx25"
+# for MX-25/Trixie builds), so strip it here; the full string with the
+# suffix is still used below for the version shown in the app.
+string(REGEX MATCH "^[0-9]+(\\.[0-9]+)*" PROJECT_VERSION_NUMERIC "${PROJECT_VERSION_FROM_CHANGELOG}")
+if(NOT PROJECT_VERSION_NUMERIC)
+    message(FATAL_ERROR "Could not extract a numeric version from '${PROJECT_VERSION_FROM_CHANGELOG}'")
+endif()
+
 project(mx-tools
-    VERSION ${PROJECT_VERSION_FROM_CHANGELOG}
+    VERSION ${PROJECT_VERSION_NUMERIC}
     DESCRIPTION "MX Tools - Dashboard application for configuration tools in MX Linux"
     LANGUAGES CXX
 )
+
+include(CTest)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -90,52 +101,89 @@ find_package(Qt6 REQUIRED COMPONENTS
     Core
     Gui
     Widgets
+    Qml
+    Quick
+    QuickControls2
     LinguistTools
 )
 
+if(BUILD_TESTING)
+    find_package(Qt6 REQUIRED COMPONENTS Test)
+endif()
+
+# These policies were introduced after the minimum Qt version available on
+# some supported distributions. Only set them when the installed Qt knows
+# about them.
+if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
+    qt6_policy(SET QTP0001 NEW)
+endif()
+if(Qt6_VERSION VERSION_GREATER_EQUAL 6.8)
+    qt6_policy(SET QTP0004 NEW)
+endif()
+
 # Enable automatic MOC, UIC, and RCC processing
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOUIC OFF)
 set(CMAKE_AUTORCC ON)
 
 # Define source files
 set(SOURCES
-    main.cpp
-    mainwindow.cpp
-    flatbutton.cpp
-    about.cpp
+    src/main.cpp
+    src/toolmodel.cpp
 )
 
 set(HEADERS
-    mainwindow.h
-    flatbutton.h
-    about.h
-)
-
-set(UI_FILES
-    mainwindow.ui
-)
-
-set(RESOURCE_FILES
-    images.qrc
+    src/toolmodel.h
 )
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/mx-tools_en_US\\.ts$")
 
 # Create the executable
 add_executable(mx-tools
     ${SOURCES}
     ${HEADERS}
-    ${UI_FILES}
-    ${RESOURCE_FILES}
+)
+
+# The Settings QML type moved from Qt.labs.settings into QtCore in Qt 6.5.
+# On older Qt (e.g. Debian Bookworm's 6.4), QtCore does not provide it yet,
+# so "import QtCore" leaves Main.qml unable to resolve Settings. Only rewrite
+# the import for those older Qt versions; Main.qml is embedded unmodified
+# everywhere else (e.g. Trixie's Qt 6.8).
+set(MX_TOOLS_MAIN_QML qml/Main.qml)
+if(Qt6_VERSION VERSION_LESS 6.5)
+    message(STATUS "Qt ${Qt6_VERSION} < 6.5: using Qt.labs.settings instead of QtCore Settings in Main.qml")
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/qml/Main.qml)
+    file(READ ${CMAKE_CURRENT_SOURCE_DIR}/qml/Main.qml MX_TOOLS_MAIN_QML_CONTENT)
+    string(REPLACE "import QtCore" "import Qt.labs.settings" MX_TOOLS_MAIN_QML_CONTENT "${MX_TOOLS_MAIN_QML_CONTENT}")
+    set(MX_TOOLS_MAIN_QML ${CMAKE_CURRENT_BINARY_DIR}/generated-qml/Main.qml)
+    file(WRITE ${MX_TOOLS_MAIN_QML} "${MX_TOOLS_MAIN_QML_CONTENT}")
+    set_source_files_properties(${MX_TOOLS_MAIN_QML} PROPERTIES QT_RESOURCE_ALIAS "qml/Main.qml")
+endif()
+
+qt6_add_qml_module(mx-tools
+    URI MxTools
+    VERSION 1.0
+    QML_FILES
+        ${MX_TOOLS_MAIN_QML}
+        qml/components/CategoryButton.qml
+        qml/components/ModernSwitch.qml
+        qml/components/SecondaryButton.qml
+        qml/components/ThemeToolTip.qml
+        qml/components/ToolCard.qml
+    RESOURCES
+        icons/logo.svg
 )
 
 # Link Qt6 libraries
-target_link_libraries(mx-tools
+target_link_libraries(mx-tools PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
 )
 
 # Set compiler flags
@@ -159,13 +207,13 @@ endif()
 target_compile_definitions(mx-tools PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
-    VERSION="${PROJECT_VERSION}"
+    VERSION="${PROJECT_VERSION_FROM_CHANGELOG}"
 )
 
 # Release-specific optimizations
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(mx-tools PRIVATE NDEBUG)
-    target_compile_options(mx-tools PRIVATE -O3)
+    target_compile_options(mx-tools PRIVATE -Os)
 
     # Add LTO - different flags for different compilers
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
@@ -199,3 +247,34 @@ set_target_properties(mx-tools PROPERTIES
 install(TARGETS mx-tools
     RUNTIME DESTINATION bin
 )
+
+if(BUILD_TESTING)
+    add_executable(test-toolmodel
+        tests/test_toolmodel.cpp
+        src/toolmodel.cpp
+        src/toolmodel.h
+    )
+    target_link_libraries(test-toolmodel PRIVATE
+        Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Qml Qt6::Quick Qt6::Test
+    )
+    target_compile_options(test-toolmodel PRIVATE
+        -Wpedantic
+        -pedantic
+        -Werror=return-type
+        -Werror=switch
+        -Werror=uninitialized
+        -Werror
+    )
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
+        target_compile_options(test-toolmodel PRIVATE -Werror=return-stack-address)
+    else()
+        target_compile_options(test-toolmodel PRIVATE -Werror=return-local-addr)
+    endif()
+    target_compile_definitions(test-toolmodel PRIVATE
+        MX_TOOLS_APPLICATIONS_PATH="${CMAKE_CURRENT_BINARY_DIR}/test-applications"
+        MX_TOOLS_TESTING
+    )
+    target_include_directories(test-toolmodel PRIVATE src)
+    add_test(NAME toolmodel COMMAND test-toolmodel)
+    set_tests_properties(toolmodel PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+endif()

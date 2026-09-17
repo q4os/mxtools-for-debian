@@ -5,7 +5,40 @@
 
 readadminfile(){
 
-zcat --force "$FILE"*
+    local -a numbered_rotations=() dated_rotations=() rotations=()
+
+    # Each rotated file contains entries oldest-first. Numbered rotations are
+    # named newest-first (.1, .2.gz, ...), while dateext rotations use ascending
+    # dates (-20260829, -20260830.gz, ...).
+    shopt -s nullglob
+    numbered_rotations=("$FILE".[0-9]*)
+    dated_rotations=("$FILE"-[0-9]*)
+    shopt -u nullglob
+
+    if ((${#numbered_rotations[@]} && ${#dated_rotations[@]})); then
+        # A logrotate configuration can change schemes while older rotations
+        # remain. Modification time gives one chronological order across both.
+        mapfile -d '' -t rotations < <(
+            for file in "${numbered_rotations[@]}" "${dated_rotations[@]}"; do
+                find "$file" -maxdepth 0 -printf '%T@ %p\0'
+            done | sort --zero-terminated --numeric-sort
+        )
+        for i in "${!rotations[@]}"; do
+            rotations[i]=${rotations[i]#* }
+        done
+    elif ((${#numbered_rotations[@]})); then
+        mapfile -d '' -t rotations < <(
+            printf '%s\0' "${numbered_rotations[@]}" |
+                sort --zero-terminated --version-sort --reverse
+        )
+    elif ((${#dated_rotations[@]})); then
+        mapfile -d '' -t rotations < <(
+            printf '%s\0' "${dated_rotations[@]}" |
+                sort --zero-terminated --version-sort
+        )
+    fi
+
+    zcat --force -- "${rotations[@]}" "$FILE"
 
 }
 
@@ -17,16 +50,16 @@ main()
 {
 
 case $1 in
-    readadminfile)  ACTION="$1"
+    readadminfile)  ACTION=("$1")
                     FILE="$2"
     ;;
-    journalctl_command) ACTION="$@"
+    journalctl_command) ACTION=("$@")
     ;;
     *) exit 1
     ;;
 esac
 
-$ACTION
+"${ACTION[@]}"
 }
 
 main "$@"

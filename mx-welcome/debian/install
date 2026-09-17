@@ -1,4 +1,3 @@
-autostart/mx-welcome.desktop	etc/skel/.config/autostart/
 autostart/mx-welcome.desktop	usr/share/mx-welcome
 icons/mx-welcome.png		usr/share/icons/hicolor/48x48/apps
 icons/mx-welcome.svg		usr/share/icons/hicolor/scalable/apps

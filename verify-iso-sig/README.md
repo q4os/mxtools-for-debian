@@ -8,21 +8,21 @@ changed by someone else - in just a few clicks.
 ## What is this?
 
 When you download a Linux ISO (for example MX Linux, antiX, or
-Debian), the makers also publish a small signed file next to it. This
-signed file proves the ISO is genuine and was not changed on the way.
+Debian), the makers also publish a small signature file next to it.
+This signature file proves the ISO is genuine and was not changed on
+the way.
 
-Checking this normally needs GPG commands and some GPG knowledge.
-**ISO Signature Verifier** does this check for you, with one simple
-window. No command line needed - but a command-line mode is there too,
-for scripts.
+Checking this normally means knowing your way around GnuPG - its
+commands, its keys, and how they fit together. **ISO Signature
+Verifier** does this check for you, with one simple window. No command
+line needed - but a command-line mode is there too, for scripts.
 
 ## Main features
 
 - Simple picker window: pick your ISO file, or its signature file. The
   tool finds the other one by itself, if it is in the same folder.
 - Or select 2 or 3 files at once - the ISO plus its checksum listing
-  and/or signature file - via a file manager's "Open With", for when
-  they're not all in the same folder.
+  and/or signature file - via a file manager's "Open With".
 - Optional drag-and-drop mode (X11 only) - turn it on with
   `--drag-and-drop`, or the "Verify with Drag & Drop" entry in your
   application menu.
@@ -33,24 +33,38 @@ for scripts.
 - Comes with a list of well-known, trusted signing keys built in.
 - Asks first before trusting a new, unknown key - and shows the Key ID
   and fingerprint, so you can check it yourself.
-- A "Manage Trusted Keys" window to see, remove, or export/import the
+- A "Manage Trusted Keys" window to see, untrust, or export/import the
   keys you already trust.
 
 ## Examples
 
 Different distros publish their signature/checksum files a bit
-differently - here's what to expect, using real filenames from
-well-known distros. Whichever one of these files you pick, the tool
-finds the other one(s) by itself, as long as they're in the same folder.
+differently - below is a table of the file pairings this tool
+supports, using real filenames from well-known distros. Whichever one
+of these files you pick, the tool finds the other one(s) by itself, as
+long as they're in the same folder.
 
 | You downloaded... | ...next to | What it is |
 |---|---|---|
-| `MX-25.2_July_x64.iso` | `MX-25.2_July_x64.iso.sig` | A direct signature - it signs the ISO itself. |
+| `MX-25.2_July_x64.iso` | `MX-25.2_July_x64.iso.sig` | A direct signature - it signs the ISO itself. This is how MX Linux/antiX traditionally publishes, together with an accompanying plain `.sha256`/`.sha512` (not needed once you have the `.sig` - see the FAQ below). |
+| `MX-25.2_August_x64.iso` | `MX-25.2_August_x64.iso.sha512.asc` | An alternative self-contained per-ISO checksum - one file carries both the hash and its own signature, no separate `.sig` or `.sha512` needed. |
 | `debian-live-13.6.0-amd64-cinnamon.iso` | `SHA256SUMS` and `SHA256SUMS.sign` | A checksum listing - the ISO's hash is one line in `SHA256SUMS`, which is itself signed by `SHA256SUMS.sign`. |
 | `ubuntucinnamon-26.04-desktop-amd64.iso` | `SHA256SUMS` and `SHA256SUMS.gpg` | Same idea, different extension - some distros sign the listing with a `.gpg` file instead of `.sign`. |
 | `lmde-7-cinnamon-64bit.iso` | `sha256sum.txt` and `sha256sum.txt.gpg` | Same idea again, different filename - the listing doesn't have to be called `SHA256SUMS` either. |
 | `Fedora-KDE-Desktop-Live-44-1.7.x86_64.iso` | `Fedora-KDE-44-1.7-x86_64-CHECKSUM` | An inline-signed checksum listing - the whole file carries its own signature, no separate `.sig` needed. |
 | `openSUSE-Tumbleweed-DVD-x86_64-Snapshot20260806-Media.iso` | `<same-name>.sha256` and `<same-name>.sha256.asc` | A per-ISO checksum - a small file with just this ISO's hash, signed separately. |
+
+Both direct ISO signing (`.sig`) and self-contained checksum signing
+(`.sha512.asc`) get their own icon and type in your file manager too:
+
+![MX-25.2_July_x64.iso.sig shown with its own icon and type in a file manager](screenshots/filemanager-sig.png)
+
+![MX-25.2_August_x64.iso.sha512.asc shown with its own icon and type in a file manager](screenshots/filemanager-checksum.png)
+
+Since this tool is the only one registered for these two file types, a
+click or double-click on the `.sig` or `.sha512.asc` file opens it
+directly, ready to verify - no need to open the picker and browse for
+the file yourself first.
 
 ## How to use it
 
@@ -120,14 +134,54 @@ checked that some other way - the tool shows you the Key ID,
 fingerprint, and claimed identity for a reason: for an unrecognized
 key, that's yours to judge.
 
-### What's the difference between a signature file and a checksum listing?
+### What's the difference between a signature file and a checksum file?
 
-A direct signature (`.sig`/`.asc`/`.gpg`/`.sign`) signs the ISO itself.
-A checksum listing (`SHA256SUMS`, `sha256sum.txt`, a distro-specific
-`CHECKSUM` file, ...) lists the ISO's hash among possibly many others,
-and it's the *listing* that's signed (separately, or inline). Either
-way, you don't need to know which kind you have - point the tool at
-whichever file you were given, and it works out the rest.
+For MX Linux/antiX, an ISO download usually comes with a `.sig` file
+(a direct signature of the ISO itself) plus a plain checksum file like
+`.sha256`/`.sha512` covering just that one ISO. The `.sig` is the one
+that actually proves it - see the next question for why.
+
+Some other distros do it differently: instead of signing the ISO
+directly, they publish one shared checksum *listing* (`SHA256SUMS`,
+`sha256sum.txt`, a distro-specific `CHECKSUM` file, ...) covering many
+files at once, and sign that listing instead. Either way, just pick
+the ISO and the signature file - the tool works out the rest.
+
+### What's a clearsigned `.sha256.asc`/`.sha512.asc` file?
+
+Some publish just one file instead of a `.sig` plus a checksum: a
+per-ISO checksum that carries its own signature in place (it starts
+with `-----BEGIN PGP SIGNED MESSAGE-----`). This tool supports either
+way - a direct `.sig`, or this self-contained alternative - whichever
+a distro or respin uses. It does the exact same job a `.sig` alone
+already does - proves the ISO is genuine - just packaged so the actual
+checksum value is visible in plain text too, combined with the
+signature in the one file.
+
+### Do I need to check both the signature and the checksum?
+
+No - the signature already covers everything a checksum does, and
+more. A `.sig` file already contains its own checksum of the ISO, but
+signed - so checking it does the same job as a plain checksum, plus it
+also confirms the ISO really came from the MX Linux/antiX team. A
+checksum alone can't do that. If you have the signature file, checking
+it is enough - no need to also check the checksum separately.
+
+### Can I just point the tool at the checksum file, not the ISO?
+
+Yes - a plain `.sha256`/`.sha512` file works as the sole file you pick
+too, not just as part of a pair. This is purely a convenience: the
+checksum file itself isn't signed, so it can't prove anything on its
+own - the tool just reads the ISO's name out of it, then finds and
+checks that ISO's real `.sig` (or a self-contained clearsigned
+checksum, if that's what's there instead) the normal way.
+
+### I got the ISO via the official .torrent - do I still need to check the signature or checksum?
+
+Yes. A `.torrent` file (and its tracker entry) isn't signed, same as a
+plain checksum file isn't - see above. It only guarantees you got the
+exact file it describes, not that the file itself is the genuine ISO.
+Checking the `.sig` is what actually confirms that.
 
 ### It says "Key not trusted" even though the signature looks valid - why?
 
@@ -192,7 +246,17 @@ of the tool. Run it as yourself instead.
 ### How do I un-trust a key I added by mistake?
 
 Open "Manage Trusted Keys" (from the picker, or your application
-menu), select the key, and remove it.
+menu), select the key, and click "Untrust Selected".
+
+### I double-clicked a file, but nothing opened - just a brief notification. Why?
+
+This tool only ever runs one window at a time - whichever one you
+already have open (the picker, or "Manage Trusted Keys") blocks a
+second one, even if you reach it a different way (a file's "Open
+With", the application menu, or a terminal). This also applies if you
+opened Manage Trusted Keys from inside the picker - the picker itself
+is gone at that point, but the same single window still counts.
+Close what's open first, then try again.
 
 ### Can I run this with no GUI at all, e.g. over SSH?
 
