@@ -1,0 +1,46 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Thu, 24 Sep 2026 20:10:56 -0400
+Source: formatusb
+Architecture: source
+Version: 26.09.01
+Distribution: mx
+Urgency: medium
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ formatusb (26.09.01) mx; urgency=medium
+ .
+   * make sure options are present (fixes issue with large gpt disks with no label)
+   * use partprobe to inform kernel rather than just using sleep
+Checksums-Sha1:
+ bdd40111a9005922a3dec6523634d2f003cbd523 1663 formatusb_26.09.01.dsc
+ 916194aef215c21dda3327a14e46b61059d13ce2 123052 formatusb_26.09.01.tar.xz
+ 9a48874f40b9add91f1d18e2eb0d49e920103a65 11799 formatusb_26.09.01_source.buildinfo
+Checksums-Sha256:
+ a672a34fb8cd1240cded322e86e96282f7338c6cb375ead792ef782586f918d2 1663 formatusb_26.09.01.dsc
+ 5d92bb0373c1915c51feaeef0807876b5ab2104dd3dc767eaeb103d95d50126a 123052 formatusb_26.09.01.tar.xz
+ 0753d580c91c3894c9d059b713e6530cb5ce28ad84d1b733b921831bcf4b60e7 11799 formatusb_26.09.01_source.buildinfo
+Files:
+ ade24479114c74944eb84306c3a1497c 1663 admin optional formatusb_26.09.01.dsc
+ 391b4e30bd8dbe5d526578a9d797e590 123052 admin optional formatusb_26.09.01.tar.xz
+ 2159407b6b2b92c1e35587bd885a6b89 11799 admin optional formatusb_26.09.01_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmq1vSkACgkQm2ih6Lm2
+N1xdvQ/+O4iVjTe6wT+eSlEBh7Cdc5QIYToOSp9YL3aN1Z9SqTW/i9AXqgjrPbhU
+yD4EDyofrwuy/ORrsZuXhAHLaaYiJ2OldKlu3rctCHFeQMRoobWHmS7jKeWveXHA
+ceUeny6eSfawId2Cg+6xB1NbL4jssiNvvt5W7WPtFuXNeONeSxLLLeGBn8UIYy3r
+iXTKxTDl2Nsf4fzcDeqvyXB4ICCvY1EIfQnzratCQaVqbc8FqJ0XmqAL5H0x2q7l
+XcN8/RtiwM6vMSjmsUyVuLB1aNdJdSfSV1DteVhlpUK37t95dL4ED5Xzzual1lSw
+83Vcv51E1DexR6r2/kRHvfUQcTbtgVFkGxXmg4hLxjUmje3TD3ypNy6A+qNGeVd+
+xJ6MgvercoPcXb6Pb6yi2OVpx9TnIWdGflgfrIfn2R/xmu51gYRfd6Qcbp0E/Oee
+ZP6nl/VqpHrDCjmQmm3ZvnOR0CkLV4HWCyiVQ6MtLcMJMwqy30y/Sq4pfFc+H2in
+lfyPUfTgumbgDYv2+UNy0C4ErcvU0ZoEGpAvLHRyxhXz2BJmWVaq0UlYiXfdgeCD
+JvMnbMR9UcxCHoC2TR4qfATJZ8HNs7+C+AKaYJqCMeXL5HXT5yhT/u5X8ici4RZS
+2KXfNXEh1RLOoEYBEijUKwomQzhQFa95U5xVSBdZWgOEf4jOTwg=
+=ztS4
+-----END PGP SIGNATURE-----

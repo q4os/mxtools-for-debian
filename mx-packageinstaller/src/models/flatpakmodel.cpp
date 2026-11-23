@@ -83,6 +83,15 @@ QVariant FlatpakModel::data(const QModelIndex &index, int role) const
         if (index.column() == FlatCol::Check && fp.status == Status::Installed) {
             return m_iconInstalled;
         }
+        if (index.column() == FlatCol::Info) {
+            return m_iconInfo;
+        }
+        return {};
+
+    case Qt::ToolTipRole:
+        if (index.column() == FlatCol::Info) {
+            return tr("More info");
+        }
         return {};
 
     case Qt::UserRole:
@@ -156,6 +165,8 @@ QVariant FlatpakModel::headerData(int section, Qt::Orientation orientation, int 
         return QString();
     case FlatCol::Name:
         return tr("Package");
+    case FlatCol::Info:
+        return tr("Info");
     case FlatCol::LongName:
         return tr("Full Name");
     case FlatCol::Version:
@@ -329,9 +340,10 @@ void FlatpakModel::setInstalledSizes(const QHash<QString, QString> &sizeMap)
     }
 }
 
-void FlatpakModel::setIcons(const QIcon &installed)
+void FlatpakModel::setIcons(const QIcon &installed, const QIcon &info)
 {
     m_iconInstalled = installed;
+    m_iconInfo = info;
 }
 
 quint64 FlatpakModel::sizeStringToBytes(const QString &size, bool *ok)

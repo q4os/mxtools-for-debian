@@ -1,0 +1,53 @@
+.TH MX-VIEWER 1 "August 2026" "mx-viewer" "User Commands"
+.SH NAME
+mx-viewer \- lightweight web browser and document viewer
+.SH SYNOPSIS
+.B mx-viewer
+.RI [ options ]
+.RI [ URL
+.RI [ title ]]
+.SH DESCRIPTION
+.B mx-viewer
+displays web content in a standalone Qt WebEngine window. It supports HTTP and
+HTTPS URLs as well as local files. An optional window title may be supplied
+after the URL.
+.SH OPTIONS
+.TP
+.BR \-f ", " \-\-full\-screen
+Start in full-screen mode.
+.TP
+.BR \-i ", " \-\-disable\-images
+Disable automatic loading of images from websites.
+.TP
+.BR \-j ", " \-\-disable\-js
+Disable JavaScript.
+.TP
+.BR \-n ", " \-\-force\-nobody
+When run as root, drop privileges to the
+.B nobody
+user instead of the login user. This can prevent the program from writing its
+cache and cookies and may limit functionality.
+.TP
+.BR \-s ", " \-\-enable\-spatial\-navigation
+Enable keyboard spatial navigation.
+.TP
+.BR \-h ", " \-\-help
+Display command-line help and exit.
+.TP
+.BR \-v ", " \-\-version
+Display version information and exit.
+.SH ARGUMENTS
+.TP
+.I URL
+The page to load, for example
+.BR https://example.com ,
+.BR example.com ,
+or
+.BR file:///home/user/document.html .
+.TP
+.I title
+An optional title for the viewer window.
+.SH AUTHORS
+MX Viewer was written by the MX Linux project.
+.SH COPYRIGHT
+Copyright \(co 2022\-2026 MX Authors. License GPLv3+: GNU GPL version 3 or later.

@@ -13,6 +13,7 @@ etc/mtab
 etc/live/live-dir
 etc/live/protect/remaster
 etc/live/version/rootfs.ver
+etc/machine-id
 etc/mtab
 etc/udev/rules.d/*-persistent-net.rules
 etc/X11/xorg-bus-id

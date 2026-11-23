@@ -13,7 +13,7 @@
 
 #include <optional>
 
-class QSettings;
+class QProcess;
 
 class ToolIconProvider final : public QQuickImageProvider
 {
@@ -24,6 +24,7 @@ public:
 
 private:
     QHash<QString, QIcon> m_icons;
+    QIcon m_fallbackIcon;
 };
 
 class ToolModel final : public QAbstractListModel
@@ -34,6 +35,7 @@ class ToolModel final : public QAbstractListModel
     Q_PROPERTY(QStringList categories READ categories CONSTANT)
     Q_PROPERTY(int totalCount READ totalCount CONSTANT)
     Q_PROPERTY(bool hideFromMenu READ hideFromMenu WRITE setHideFromMenu NOTIFY hideFromMenuChanged)
+    Q_PROPERTY(bool menuBusy READ menuBusy NOTIFY menuBusyChanged)
 
 public:
     enum Role {
@@ -41,13 +43,15 @@ public:
         CommentRole,
         CategoryRole,
         IconSourceRole,
-        FileNameRole
+        FileNameRole,
+        PinnedRole
     };
     Q_ENUM(Role)
 
-    explicit ToolModel(ToolIconProvider *iconProvider, QObject *parent = nullptr);
+    // The keys of a .desktop file's [Desktop Entry] group, with raw (still escaped) values.
+    using DesktopEntry = QHash<QString, QString>;
 
-    [[nodiscard]] static QIcon fallbackIcon();
+    explicit ToolModel(ToolIconProvider *iconProvider, QObject *parent = nullptr);
 
     [[nodiscard]] int rowCount(const QModelIndex &parent = {}) const override;
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
@@ -61,7 +65,9 @@ public:
     [[nodiscard]] int totalCount() const;
     [[nodiscard]] bool hideFromMenu() const;
     void setHideFromMenu(bool hide);
+    [[nodiscard]] bool menuBusy() const;
 
+    Q_INVOKABLE void setPinned(const QString &fileName, bool pinned);
     Q_INVOKABLE void launch(const QString &fileName);
     Q_INVOKABLE void openManual();
     Q_INVOKABLE void openLicense();
@@ -72,6 +78,7 @@ signals:
     void searchChanged();
     void selectedCategoryChanged();
     void hideFromMenuChanged();
+    void menuBusyChanged();
     void errorOccurred(const QString &title, const QString &message);
     void documentReady(const QString &title, const QString &content);
 
@@ -82,8 +89,10 @@ private:
         QString comment;
         QString keywords;
         QString iconSource;
-        QString exec;
-        QString category;
+        std::optional<QStringList> arguments; // The expanded Exec command, program first; nullopt if invalid.
+        QString workingDirectory;
+        QString category; // The first of categories, shown on the card.
+        QStringList categories;
         QString searchText;
         bool runInTerminal = false;
     };
@@ -92,25 +101,25 @@ private:
     QVector<int> m_visibleRows;
     QStringList m_categories;
     QStringList m_menuFiles;
+    QStringList m_pinnedTools;
     QString m_search;
     QString m_selectedCategory;
-    QHash<QString, qint64> m_runningTools;
+    struct RunningTool {
+        qint64 processId = 0;
+        quint64 startTime = 0;
+    };
+    QHash<QString, RunningTool> m_runningTools;
     ToolIconProvider *m_iconProvider;
+    QProcess *m_changelogProcess = nullptr;
     bool m_hideFromMenu = false;
-    bool m_legacyMenuState = false;
+    bool m_menuBusy = false;
 
     void loadTools();
     void refilter();
-    void detectMenuVisibility();
-    [[nodiscard]] bool hideMenuEntries();
-    [[nodiscard]] bool restoreMenuEntries();
-    [[nodiscard]] bool restoreLegacyMenuEntries();
-    void snapshotWhiskerMenuFavorites(QSettings &state);
-    void reconcileWhiskerMenuFavorites(QSettings &state);
-    [[nodiscard]] static QString value(const QString &text, const QString &key);
-    [[nodiscard]] static QString translatedValue(const QString &text, const QString &key);
-    [[nodiscard]] static QStringList desktopFilesForCategory(const QStringList &tokens);
-    [[nodiscard]] static bool visibleInCurrentEnvironment(const QString &text);
+    [[nodiscard]] static DesktopEntry parseDesktopEntry(const QString &text);
+    [[nodiscard]] static QString value(const DesktopEntry &entry, const QString &key);
+    [[nodiscard]] static QString translatedKey(const DesktopEntry &entry, const QString &key);
+    [[nodiscard]] static bool visibleInCurrentEnvironment(const DesktopEntry &entry, const QStringList &desktops);
     [[nodiscard]] static std::optional<QIcon> lookupIcon(const QString &iconName);
     static void openLocalOrReport(const QString &path, ToolModel *model, const QString &title);
 };

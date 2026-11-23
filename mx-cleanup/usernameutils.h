@@ -1,7 +1,7 @@
 /**********************************************************************
  *  usernameutils.h
  **********************************************************************
- * Copyright (C) 2026 MX Authors
+ * Copyright (C) 2026-2026 MX Authors
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,4 +56,14 @@ inline QString userScheduleFileId(const QString &user)
     }
     const QByteArray digest = QCryptographicHash::hash(user.toUtf8(), QCryptographicHash::Sha256).toHex().left(24);
     return QStringLiteral("u-") + QString::fromLatin1(digest);
+}
+
+// Escape underscores first so dotted and literal "_2e" names stay distinct.
+// Keep script filenames unchanged; only cron entry names need this encoding.
+inline QString userCronSuffix(const QString &user)
+{
+    QString id = userScheduleFileId(user);
+    id.replace('_', QStringLiteral("_5f"));
+    id.replace('.', QStringLiteral("_2e"));
+    return id.isEmpty() ? QString() : '-' + id;
 }

@@ -3,13 +3,23 @@
 mx-service-manager \- enable and disable system services
 .SH SYNOPSIS
 .B mx-service-manager
+.RI [ option ]
 .SH DESCRIPTION
 .B mx-service-manager
 is a graphical tool for managing services and daemons and controlling which services are started at boot time. Read the warning in the application before changing a service: disabling a required service can leave the system partially or completely inoperable.
 .PP
 The application displays the available services and their current state. Use it to enable or disable services manually and to inspect service descriptions before making changes.
 .SH OPTIONS
-This application has no documented command-line options. The graphical interface provides all operations.
+Each of the following options can be used on its own without a graphical session.
+.TP
+.BR \-h ", " \-\-help
+Print command-line help and exit.
+.TP
+.B \-\-help-all
+Print help including Qt-specific options and exit.
+.TP
+.BR \-v ", " \-\-version
+Print the application version and exit.
 .SH FILES
 .TP
 .I /usr/share/doc/mx-service-manager

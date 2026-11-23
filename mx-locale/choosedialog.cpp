@@ -43,7 +43,8 @@ void ChooseDialog::buildLocaleList()
         return;
     }
     QStringList availableLocales = locales.split(QRegularExpression(R"((\r\n)|(\n\r)|\r|\n)"), Qt::SkipEmptyParts)
-                                       .filter(QRegularExpression(R"(\.(utf8|UTF-8)$)"))
+                                       .filter(QRegularExpression(R"(\.utf-?8(?:@[^\s]+)?$)",
+                                                                  QRegularExpression::CaseInsensitiveOption))
                                        .replaceInStrings(".utf8", ".UTF-8", Qt::CaseInsensitive);
 
     if (!libFile.open(QIODevice::ReadOnly)) {
@@ -65,7 +66,7 @@ void ChooseDialog::buildLocaleList()
 
     for (const auto &locale : std::as_const(availableLocales)) {
         QString item = locale;
-        item.remove(QRegularExpression("\\..*$"));
+        item.remove(QRegularExpression(R"(\.[^@]+)"));
         QString line = locale.leftJustified(20, ' ');
         if (localeLib.contains(item)) {
             line.append('\t' + localeLib.value(item));

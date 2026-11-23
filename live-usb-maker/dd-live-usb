@@ -8,8 +8,8 @@
 # License: GPLv3 or later
 #==============================================================================
 
-     VERSION="1.10.02"
- VERSION_DATE="Wed 23 Oct 2019 09:32:25 PM MDT"
+     VERSION="2.41.29"
+ VERSION_DATE="Fri, 25 Sep 2026"
 
   GRAPHICAL_MENUS="true"
 
@@ -86,6 +86,8 @@ eval_argument() {
              -color=*)  COLOR_SCHEME=$val                ;;
               -from|f)  FROM=$val                        ;;
               -from=*)  FROM=$val                        ;;
+             -force|F)  FORCE="$FORCE,$val"              ;;
+             -force=*)  FORCE="$FORCE,$val"              ;;
           -progress=*)  PROGRESS_TYPE=$val               ;;
           -progress|P)  PROGRESS_TYPE=$val               ;;
                 -to|t)  TARGET=$val                      ;;
@@ -102,6 +104,7 @@ takes_param() {
           -color|C) return 0 ;;
         -progress|P) return 0 ;;
            -from|f) return 0 ;;
+          -force|F) return 0 ;;
              -to|t) return 0 ;;
     esac
     return 1
@@ -124,6 +127,8 @@ main() {
     read_params "$@"
 
     set_colors $COLOR_SCHEME
+
+    check_force FORCE "$ALL_FORCE"
 
     shift $SHIFT
     fatal_n0 $# "Extra command line arguments: %s" "$*"
@@ -196,7 +201,7 @@ main() {
     check_is_file "$FROM"
 
     local from_size=$(du_size "$FROM")
-    local targ_size=$(parted --script /dev/$TARGET unit MiB print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)MiB$/\1/p")
+    local targ_size=$(LC_ALL=C parted --script /dev/$TARGET unit MiB print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)MiB$/\1/p")
 
     local needed_size=$((from_size + SIZE_MARGIN))
 
@@ -237,6 +242,7 @@ select_target_device() {
     local var=$1  live_dev=$2  from_dev=${3#clone=}
 
     local menu=$(cli_drive_menu "$live_dev" "$from_dev")
+    menu=$(echo "$menu" | grep -Ev "^zram[0-9]*$P_IFS")
     local dev cnt=$(count_lines "$menu")
     case $cnt in
         0) fatal $"No available target usb devices were found" ;;
@@ -269,7 +275,7 @@ check_target() {
 #------------------------------------------------------------------------------
 clear_partition() {
     local dev=$1
-    local total=$(parted --script $dev unit KiB print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)kiB$/\1/ip")
+    local total=$(LC_ALL=C parted --script $dev unit KiB print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)kiB$/\1/ip")
 
     # Clear out previous primary partition table
     cmd_dd if=/dev/zero of=$dev bs=1K count=17

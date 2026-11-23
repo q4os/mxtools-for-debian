@@ -1,7 +1,7 @@
 /**********************************************************************
  *
  **********************************************************************
- * Copyright (C) 2023-2024 MX Authors
+ * Copyright (C) 2023-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -21,7 +21,66 @@
  **********************************************************************/
 #pragma once
 
+#include <QFileInfo>
+#include <QRegularExpression>
+#include <QStandardPaths>
 #include <QString>
+#include <QStringList>
+
+namespace ExecutableResolution
+{
+inline QString resolveExecutable(const QString &program)
+{
+    if (QFileInfo(program).isAbsolute()) {
+        return program;
+    }
+
+    const QString resolved = QStandardPaths::findExecutable(program, {"/usr/sbin", "/usr/bin", "/sbin", "/bin"});
+    return resolved.isEmpty() ? program : resolved;
+}
+} // namespace ExecutableResolution
+
+namespace LocaleValidation
+{
+inline bool isSafeLocaleToken(const QString &value)
+{
+    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+$)");
+    return regex.match(value).hasMatch();
+}
+
+inline bool isSafeLocaleGenLine(const QString &value)
+{
+    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+(?:\s+[A-Za-z0-9_.@-]+)?$)");
+    return regex.match(value).hasMatch();
+}
+
+inline QString canonicalLocaleName(QString value, const QString &defaultCharset = {})
+{
+    const qsizetype modifierIndex = value.indexOf('@');
+    const QString modifier = modifierIndex < 0 ? QString {} : value.mid(modifierIndex);
+    if (modifierIndex >= 0) {
+        value.truncate(modifierIndex);
+    }
+    const qsizetype charsetIndex = value.indexOf('.');
+    QString charset = charsetIndex < 0 ? defaultCharset : value.mid(charsetIndex + 1);
+    if (charsetIndex >= 0) {
+        value.truncate(charsetIndex);
+    }
+    charset = charset.toLower().remove('-').remove('_');
+    return value + (charset.isEmpty() ? QString {} : '.' + charset) + modifier;
+}
+
+inline bool localeMatchesGenLine(const QString &locale, const QString &line)
+{
+    const QStringList fields = line.simplified().split(' ', Qt::SkipEmptyParts);
+    if (fields.isEmpty()) {
+        return false;
+    }
+    const QString name = canonicalLocaleName(locale);
+    return name == canonicalLocaleName(fields.first())
+        || name == canonicalLocaleName(fields.first(), fields.value(1));
+}
+} // namespace LocaleValidation
 
 // System paths
 namespace Paths

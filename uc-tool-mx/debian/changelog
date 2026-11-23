@@ -1,8 +1,21 @@
-uc-tool-mx (26.07.1.1302) stable; urgency=medium
+uc-tool-mx (26.10.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:09 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:24 +0100
+
+uc-tool-mx (26.10.1) mx; urgency=medium
+
+  * Add --ucode=auto and make it the default: build microcode for each
+    vendor whose firmware (and for Intel: iucode_tool) is available,
+    skip the others with a warning, and fail only if none is available.
+    An explicit vendor list (amd, intel, amd,intel) stays strict.
+  * Remove stale amd-ucode.img/intel-ucode.img of vendors not built in
+    the current run from the output dir, so a leftover from an earlier
+    run is never silently injected into the initrd.
+  * Drop the unused ucode-*.img glob from the initrd update.
+
+ -- fehlix <fehlix@mxlinux.org>  Thu, 29 Oct 2026 20:04:47 -0400
 
 uc-tool-mx (26.07.1) mx; urgency=medium
 

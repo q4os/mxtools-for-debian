@@ -4,7 +4,12 @@ import QtQuick.Controls
 AbstractButton {
     id: control
 
-    SystemPalette { id: systemPalette }
+    // Follow the window's active state, as Main.qml's palette does, so these defaults
+    // match the colors Main.qml derives from it.
+    SystemPalette {
+        id: systemPalette
+        colorGroup: control.Window.active ? SystemPalette.Active : SystemPalette.Inactive
+    }
 
     property color accentColor: systemPalette.highlight
     property color inactiveColor: systemPalette.mid
@@ -18,7 +23,8 @@ AbstractButton {
     Accessible.role: Accessible.CheckBox
     Accessible.checked: checked
 
-    HoverHandler { cursorShape: Qt.PointingHandCursor }
+    opacity: enabled ? 1 : 0.5
+    HoverHandler { cursorShape: control.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor }
 
     background: Item {}
 

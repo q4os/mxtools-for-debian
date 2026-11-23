@@ -44,28 +44,23 @@ int main(int argc, char *argv[])
     if (QIcon::hasThemeIcon(windowIconName)) {
         QApplication::setWindowIcon(QIcon::fromTheme(windowIconName));
     } else {
-        const auto bundledIcon =
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
-            QStringLiteral(":/qt/qml/MxTools/icons/logo.svg");
-#else
-            QStringLiteral(":/MxTools/icons/logo.svg");
-#endif
-        QApplication::setWindowIcon(QIcon(bundledIcon));
+        QApplication::setWindowIcon(QIcon(QStringLiteral(MX_TOOLS_LOGO_RESOURCE)));
     }
 
+    // qt_ is a meta catalog that already includes qtbase_; the latter is only a fallback
+    // for languages that ship no meta catalog.
+    const QString qtTranslationsPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
     QTranslator qtTranslator;
-    if (qtTranslator.load(QStringLiteral("qt_") + QLocale::system().name(),
-                          QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+    if (qtTranslator.load(QStringLiteral("qt_") + QLocale::system().name(), qtTranslationsPath)
+        || qtTranslator.load(QStringLiteral("qtbase_") + QLocale::system().name(), qtTranslationsPath)) {
         QApplication::installTranslator(&qtTranslator);
     }
-    QTranslator qtBaseTranslator;
-    if (qtBaseTranslator.load(QStringLiteral("qtbase_") + QLocale::system().name(),
-                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
-        QApplication::installTranslator(&qtBaseTranslator);
-    }
+    // A development build finds its catalogs next to the binary; an installed one has none
+    // there and uses the packaged ones.
+    const QString appCatalog = QApplication::applicationName() + QLatin1Char('_') + QLocale::system().name();
     QTranslator appTranslator;
-    if (appTranslator.load(QApplication::applicationName() + QLatin1Char('_') + QLocale::system().name(),
-                           QStringLiteral("/usr/share/mx-tools/locale"))) {
+    if (appTranslator.load(appCatalog, QApplication::applicationDirPath())
+        || appTranslator.load(appCatalog, QStringLiteral(MX_TOOLS_LOCALE_DIR))) {
         QApplication::installTranslator(&appTranslator);
     }
 

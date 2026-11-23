@@ -101,11 +101,11 @@ void displayAboutMsgBox(QWidget *parent, const QString &title, const QString &me
     if (msgBox.clickedButton() == btnLicense) {
         displayDoc(parent, licensePath, licenseTitle);
     } else if (msgBox.clickedButton() == btnChangelog) {
-        auto *changelog = new QDialog(parent);
-        changelog->setWindowTitle(QObject::tr("Changelog"));
-        changelog->resize(width, height);
+        QDialog changelog(parent);
+        changelog.setWindowTitle(QObject::tr("Changelog"));
+        changelog.resize(width, height);
 
-        auto *text = new QTextEdit(changelog);
+        auto *text = new QTextEdit(&changelog);
         text->setReadOnly(true);
         QProcess proc;
         proc.start(
@@ -114,14 +114,14 @@ void displayAboutMsgBox(QWidget *parent, const QString &title, const QString &me
         proc.waitForFinished();
         text->setText(QString::fromLatin1(proc.readAllStandardOutput()));
 
-        auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
+        auto *btnClose = new QPushButton(QObject::tr("&Close"), &changelog);
         btnClose->setIcon(QIcon::fromTheme(QStringLiteral("window-close")));
-        QObject::connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
+        QObject::connect(btnClose, &QPushButton::clicked, &changelog, &QDialog::close);
 
-        auto *layout = new QVBoxLayout(changelog);
+        auto *layout = new QVBoxLayout(&changelog);
         layout->addWidget(text);
         layout->addWidget(btnClose);
-        changelog->setLayout(layout);
-        changelog->exec();
+        changelog.setLayout(layout);
+        changelog.exec();
     }
 }

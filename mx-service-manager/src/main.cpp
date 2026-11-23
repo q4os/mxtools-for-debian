@@ -22,13 +22,17 @@
 
 #define QT_USE_QSTRINGBUILDER
 #include <QApplication>
+#include <QCommandLineParser>
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
+#include <QSharedPointer>
 #include <QTranslator>
 
+#include "cmd.h"
 #include "common.h"
 #include "mainwindow.h"
 
@@ -40,23 +44,31 @@
 
 int main(int argc, char *argv[])
 {
-    if (getuid() == 0) {
-        qputenv("XDG_RUNTIME_DIR", "/run/user/0");
-        qunsetenv("SESSION_MANAGER");
-    }
-    // Set Qt platform to XCB (X11) if not already set and we're in X11 environment
-    if (qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
-        if (!qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
+    const QByteArray option = argc == 2 ? QByteArray(argv[1]) : QByteArray();
+    const bool informational = option == "-h" || option == "--help" || option == "--help-all"
+                               || option == "-v" || option == "--version";
+    QSharedPointer<QCoreApplication> app;
+    if (informational) {
+        app = QSharedPointer<QCoreApplication>::create(argc, argv);
+    } else {
+        if (qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
+            if (qEnvironmentVariableIsEmpty("DISPLAY")) {
+                qWarning("mx-service-manager: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
+                         "a graphical session is required to run this program.");
+                return EXIT_FAILURE;
+            }
             qputenv("QT_QPA_PLATFORM", "xcb");
         }
-    }
-
-    QApplication app(argc, argv);
-    if (getuid() == 0) {
-        qputenv("HOME", "/root");
+        if (getuid() == 0) {
+            qputenv("XDG_RUNTIME_DIR", "/run/user/0");
+            qunsetenv("SESSION_MANAGER");
+        }
+        app = QSharedPointer<QApplication>::create(argc, argv);
+        if (getuid() == 0) {
+            qputenv("HOME", "/root");
+        }
     }
     QApplication::setOrganizationName("MX-Linux");
-    QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
     QApplication::setApplicationVersion(VERSION);
 
     QTranslator qtTran;
@@ -70,10 +82,19 @@ int main(int argc, char *argv[])
     }
 
     QTranslator appTran;
-    if (appTran.load(QApplication::applicationName() + "_" + QLocale::system().name(),
-                     "/usr/share/" + QApplication::applicationName() + "/locale")) {
+    const QString catalog = QApplication::applicationName() + "_" + QLocale::system().name();
+    const QDir binaryDir(QCoreApplication::applicationDirPath());
+    if (appTran.load(catalog, binaryDir.filePath(QStringLiteral(APP_LOCALE_DIR)))
+        || appTran.load(catalog, binaryDir.absolutePath())) {
         QApplication::installTranslator(&appTran);
     }
+
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.process(*app);
+
+    QApplication::setWindowIcon(QIcon::fromTheme(QApplication::applicationName()));
 
     // Root guard
     QFile loginUidFile {"/proc/self/loginuid"};
@@ -94,6 +115,12 @@ int main(int argc, char *argv[])
                                   QObject::tr("You must run this program with admin access."));
             exit(EXIT_FAILURE);
         }
+    }
+    if (!Cmd().runAsRoot({"true"}, true)) {
+        QMessageBox::critical(nullptr, Cmd::tr("Administrator Access Required"),
+                              Cmd::tr("This operation requires administrator privileges. Please restart the application "
+                                      "and enter your password when prompted."));
+        return EXIT_FAILURE;
     }
     MainWindow w;
     w.show();

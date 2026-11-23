@@ -26,6 +26,9 @@
    </item>
    <item row="1" column="3">
     <widget class="QToolButton" name="pushChooseDirectory">
+     <property name="toolTip">
+      <string>Browse for a folder to share</string>
+     </property>
      <property name="text">
       <string>...</string>
      </property>
@@ -42,10 +45,17 @@
     </widget>
    </item>
    <item row="1" column="2">
-    <widget class="QLineEdit" name="textSharePath"/>
+    <widget class="QLineEdit" name="textSharePath">
+     <property name="toolTip">
+      <string>Full path to the folder to share</string>
+     </property>
+    </widget>
    </item>
    <item row="3" column="2">
     <widget class="QComboBox" name="comboGuestOK">
+     <property name="toolTip">
+      <string>Allow access without a username or password</string>
+     </property>
      <item>
       <property name="text">
        <string>Yes</string>
@@ -69,7 +79,11 @@
     </widget>
    </item>
    <item row="0" column="2">
-    <widget class="QLineEdit" name="textShareName"/>
+    <widget class="QLineEdit" name="textShareName">
+     <property name="toolTip">
+      <string>Name clients will see for this share</string>
+     </property>
+    </widget>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="labelGuestOK">
@@ -82,7 +96,24 @@
     </widget>
    </item>
    <item row="2" column="2">
-    <widget class="QLineEdit" name="textComment"/>
+    <widget class="QLineEdit" name="textComment">
+     <property name="toolTip">
+      <string>Optional description shown to clients</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="6">
+    <widget class="QLabel" name="labelEditNote">
+     <property name="visible">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Changes apply to new connections. Clients that are already connected keep their current access until they reconnect. Restart Samba to apply the change to everyone immediately.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="6" column="0" colspan="6">
     <widget class="QDialogButtonBox" name="buttonBox">

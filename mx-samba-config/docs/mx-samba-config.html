@@ -20,9 +20,11 @@
 
         <h2>Users</h2>
         <p>Use the user controls to add Samba passwords for existing system users or remove Samba access when it is no longer needed.</p>
+        <p>Most installations also enable the <code>[homes]</code> section in <code>/etc/samba/smb.conf</code>. It lets each Samba user open their own home folder over the network as <code>\\hostname\username</code>. Only that user can open it, with their Samba password; it is read-only by default and hidden from the list of shares clients browse. It is not a usershare, so it does not appear in the share list. When it is enabled, the Users tab shows a note. To turn it off, remove or comment out the <code>[homes]</code> section in <code>/etc/samba/smb.conf</code> as root and restart Samba.</p>
 
         <h2>Shares</h2>
-        <p>The share list shows folders exported through Samba usershares. Add a new share for a folder you own, or edit an existing share to change its name, comment, guest access, write access, or visibility.</p>
+        <p>The share list shows folders exported through Samba usershares. Add a new share for a folder you own, or edit an existing share to change its folder, comment, guest access, or access rights. An existing share keeps its name; to use a different name, remove it and create a new share.</p>
+        <p>Changes to a share take effect for new connections without restarting Samba. Clients that are already connected keep the access they had until they reconnect, so removing write access, for example, may not stop a connected client from writing right away. Restart Samba with the button below the share list to apply a change to everyone immediately; this disconnects all clients.</p>
 
         <h2>Service Controls</h2>
         <p>The Samba buttons at the bottom of the main window let you control whether the service starts automatically and whether it is currently running.</p>

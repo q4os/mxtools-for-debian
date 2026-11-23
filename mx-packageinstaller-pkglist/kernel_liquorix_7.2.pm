@@ -6,11 +6,11 @@ Kernels
 </category>
 
 <name>
-Liquorix 7.2.6-1
+Liquorix 7.2.15-2
 </name>
 
 <description>
-   Liquorix 7.2.6-1
+   Liquorix 7.2.15-2
 </description>
 
 <installable>
@@ -31,7 +31,7 @@ echo "realtek rtl package to remove are " ${RTL_PKGS[*]}
 apt-get purge ${RTL_PKGS[*]}
 DKMS_PKGS=($(dpkg-query -f '${db:Status-Abbrev}\t${Package}\n' -W  -- '*-dkms' | grep ^i | grep -- '-dkms$' | cut -d$'\t' -f2))
 apt-get purge rtl*-dkms
-apt-get install linux-image-7.2.6-1-liquorix-amd64 linux-headers-7.2.6-1-liquorix-amd64 ${DKMS_PKGS[*]}
+apt-get install linux-image-7.2.15-2-liquorix-amd64 linux-headers-7.2.15-2-liquorix-amd64 ${DKMS_PKGS[*]}
 </preinstall>
 
 <install_package_names>
@@ -40,7 +40,7 @@ apt-get install linux-image-7.2.6-1-liquorix-amd64 linux-headers-7.2.6-1-liquori
 
 
 <postinstall>
-rebuild_dkms_packages.sh linux-image-7.2.6-1-liquorix-amd64
+rebuild_dkms_packages.sh linux-image-7.2.15-2-liquorix-amd64
 if [ -f /etc/apt/sources.list.d/mxpitemp.list ]; then
 rm /etc/apt/sources.list.d/mxpitemp.list
 apt-get update
@@ -50,7 +50,7 @@ echo "...$(gettext -d apt -s ' Done')!"
 
 
 <uninstall_package_names>
-linux-image-7.2.6-1-liquorix-amd64
-linux-headers-7.2.6-1-liquorix-amd64
+linux-image-7.2.15-2-liquorix-amd64
+linux-headers-7.2.15-2-liquorix-amd64
 </uninstall_package_names>
 </app>

@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2018-2025 MX Authors
+# * Copyright (C) 2018-2026 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -166,6 +166,7 @@ set(RESOURCE_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/mx-cleanup_en_US\\.ts$")
 
 # Create the executable
 add_executable(mx-cleanup
@@ -309,4 +310,9 @@ if(BUILD_TESTS)
     )
 
     add_test(NAME test_utils COMMAND test_mx-cleanup)
+    find_package(Python3 QUIET COMPONENTS Interpreter)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME test_schedule_migration
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tests/test_schedule_migration.py)
+    endif()
 endif()

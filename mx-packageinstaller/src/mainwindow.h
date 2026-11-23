@@ -66,6 +66,7 @@ namespace Ui
 class MainWindow;
 }
 
+class QComboBox;
 class QNetworkReply;
 
 namespace Tab
@@ -178,6 +179,9 @@ private slots:
     void displayInfoTestOrBackport(QTreeView *tree, const QModelIndex &index);
     void displayPackageInfo(QTreeView *tree, QPoint pos);
     void displayPackageInfo(const QModelIndex &index);
+    void displayInfo(QTreeView *tree, const QModelIndex &index);
+    void displayFlatpakInfo(const QModelIndex &index);
+    void displaySnapInfo(const QModelIndex &index);
     void displayPopularInfo(const QModelIndex &index);
     void enableOutput();
     void filterChanged(const QString &arg1);
@@ -407,6 +411,21 @@ private:
 #endif
 
     QNetworkAccessManager manager;
+    // Store/appstream metadata shown by the Flatpak and Snap "More info" dialogs.
+    struct AppInfo {
+        QString title;
+        QString summary;
+        QString descriptionHtml;
+        QString developer;
+        QString license;
+        QString homepage;
+        QString screenshotHtml;
+    };
+    [[nodiscard]] QByteArray fetchUrl(const QUrl &url, const QList<QPair<QByteArray, QByteArray>> &headers = {});
+    [[nodiscard]] QString imageHtml(const QUrl &url, QSize size = QSize(400, 300),
+                                    Qt::AspectRatioMode mode = Qt::KeepAspectRatio);
+    [[nodiscard]] QString appInfoHtml(const AppInfo &app);
+    void showInfoBox(const QString &text, bool richText);
     QNetworkReply *activeDownloadReply {nullptr};
 
     [[nodiscard]] QHash<QString, PackageInfo> listInstalled();
@@ -414,10 +433,8 @@ private:
     [[nodiscard]] QString getMXTestRepoUrl();
     [[nodiscard]] QString getArchOption() const;
     [[nodiscard]] QString getLocalizedName(const QDomElement &element) const;
-    [[nodiscard]] QString getVersion(const QString &name) const;
     [[nodiscard]] QString mapArchToFormat(const QString &arch) const;
     [[nodiscard]] QStringList listFlatpaks(const QString &remote, const QString &scope, const QString &type = QString()) const;
-    [[nodiscard]] QStringList listInstalledFlatpaks(const QString &type = QString());
     [[nodiscard]] FlatpakData createFlatpakData(const QString &item, const QStringList &installedAll) const;
     [[nodiscard]] PackageData createPackageData(const QString &name, const QString &version,
                                                 const QString &description) const;
@@ -435,6 +452,8 @@ private:
         PackageModel *model = nullptr;
         PackageFilterProxy *proxy = nullptr;
         QHash<QString, PackageInfo> *list = nullptr;
+        QComboBox *filterCombo = nullptr;
+        CheckableHeaderView *header = nullptr;
     };
     // True once either a confirmation dialog was canceled or an elevated call was
     // dismissed anywhere during the current operation. Callers use this to abort
@@ -445,7 +464,13 @@ private:
         operationCanceled = false;
         Cmd::resetElevationDismissed();
     }
+    [[nodiscard]] AptTabContext aptTab(const QTreeView *tree);
     [[nodiscard]] AptTabContext currentAptTab();
+    // Package trees that have an AptTabContext, for code that handles all of them.
+    [[nodiscard]] QList<QTreeView *> aptTrees() const;
+    // Whether the current package tab's own filter combo is set to "Autoremovable",
+    // i.e. whether Install acts as "Mark keep" there.
+    [[nodiscard]] bool currentTabFiltersAutoremovable();
     [[nodiscard]] QHash<QString, PackageInfo> *getCurrentList();
     [[nodiscard]] PackageModel *getCurrentModel();
     [[nodiscard]] PackageFilterProxy *getCurrentProxy();
@@ -476,7 +501,12 @@ private:
     void cancelDownload();
     void centerWindow();
     void clearUi();
-    void displayAutoremovable();
+    void displayAutoremovable(const QTreeView *tree);
+    void ensureAutoremovableShown(const QTreeView *tree);
+#ifndef PACKAGE_BACKEND_PACMAN
+    void applyPreloadedEnabledList(QHash<QString, PackageInfo> loadedList);
+#endif
+    void updateAutoremovable(PackageModel *model);
     void displayFilteredFP(QStringList list, bool raw = false);
     void displayFlatpaks(bool forceUpdate = false);
     void displayPackages();

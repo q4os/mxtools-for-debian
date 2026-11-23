@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Get script directory and determine app name
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 APPNAME="$(basename "$PROJECT_DIR")"
 
-echodo() {
-  echo "${@}"
-  ${@}
-}
+cd "$SCRIPT_DIR"
+command -v tx >/dev/null || { echo "Transifex client (tx) is required" >&2; exit 1; }
 
 # Prepare transifex
 if [ ! -s  .tx/config ]; then
@@ -27,20 +27,9 @@ EOF
 fi
 
 # Migrate percent checking
-if [ -z "$(grep minimum_perc .tx/config)" ]; then
+if ! grep -q minimum_perc .tx/config; then
         echo "minimum_perc = 25" >> .tx/config
 fi
-
-# Remove existing translations
-find . -type f -name '*.ts' -not -name '*en.ts' -delete
-
-# Get all translations
-if command -v tx >/dev/null; then
-   echodo tx pull -r antix-development.$APPNAME --all
-fi
-
-# en_US duplicates the English source catalog and should not be shipped.
-rm -f "${APPNAME}_en_US.ts"
 
 # Find lupdate command in common locations
 LUPDATE=""
@@ -58,8 +47,33 @@ fi
 
 echo "Using lupdate: $LUPDATE"
 
-# Update all .ts files from source files
-SOURCE_FILES=$(find ../src -name "*.cpp" -o -name "*.h" -o -name "*.ui" 2>/dev/null)
-if [ -n "$SOURCE_FILES" ]; then
-    "$LUPDATE" $SOURCE_FILES -ts *en.ts
+# Download and update the English catalog before replacing any local files.
+# A sibling of translations keeps lupdate source locations relative to ../src.
+stage=$(mktemp -d "$PROJECT_DIR/.tx-pull.XXXXXXXX")
+trap 'rm -rf -- "$stage"' EXIT
+mkdir "$stage/.tx"
+cp .tx/config "$stage/.tx/config"
+cp "${APPNAME}_en.ts" "$stage/"
+(cd "$stage" && tx pull -r "antix-development.$APPNAME" --all)
+rm -f -- "$stage/${APPNAME}_en_US.ts"
+
+shopt -s nullglob
+catalogs=("$stage/${APPNAME}_"*.ts)
+if (( ${#catalogs[@]} < 2 )); then
+    echo "Transifex returned no translated catalogs" >&2
+    exit 1
 fi
+for catalog in "${catalogs[@]}"; do
+    if [[ ! -s "$catalog" ]]; then
+        echo "Empty catalog: ${catalog##*/}" >&2
+        exit 1
+    fi
+done
+"$LUPDATE" "$PROJECT_DIR/src" -ts "$stage/${APPNAME}_en.ts"
+
+for catalog in "${APPNAME}_"*.ts; do
+    if [[ ! -f "$stage/$catalog" ]]; then
+        rm -- "$catalog"
+    fi
+done
+mv -- "${catalogs[@]}" "$SCRIPT_DIR/"

@@ -29,7 +29,7 @@
 
 namespace FlatCol
 {
-enum { Check, Name, LongName, Version, Branch, Size, Status, Duplicate, FullName };
+enum { Check, Name, Info, LongName, Version, Branch, Size, Status, Duplicate, FullName };
 }
 
 struct FlatpakData {
@@ -77,7 +77,7 @@ public:
     void updateInstalledStatus(const QStringList &installedRefs);
     void setInstalledSizes(const QHash<QString, QString> &sizeMap);
 
-    void setIcons(const QIcon &installed);
+    void setIcons(const QIcon &installed, const QIcon &info = {});
 
     [[nodiscard]] static quint64 sizeStringToBytes(const QString &size, bool *ok = nullptr);
 
@@ -88,4 +88,5 @@ private:
     QVector<FlatpakData> m_flatpaks;
     QHash<QString, int> m_refToRow;
     QIcon m_iconInstalled;
+    QIcon m_iconInfo;
 };

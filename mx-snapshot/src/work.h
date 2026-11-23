@@ -34,7 +34,7 @@ class Work : public QObject
 {
     Q_OBJECT
 public:
-    enum HashType { md5, sha512 };
+    enum HashType { md5, sha256, sha512 };
     Q_ENUM(HashType)
 
     explicit Work(Settings *settings, QObject *parent = nullptr);
@@ -52,6 +52,9 @@ public:
     [[nodiscard]] bool isStarted() const { return started; }
     [[nodiscard]] bool isDone() const { return done; }
     [[nodiscard]] bool isCleaningUp() const { return cleanupStarted; }
+    // True only while cleanUp() is still tearing down (it runs nested event
+    // loops, so the UI stays live); false again once it has requested exit.
+    [[nodiscard]] bool isCleanupRunning() const { return cleanupRunning; }
     [[nodiscard]] qint64 getElapsedTime() const { return e_timer.elapsed(); }
     [[nodiscard]] const Settings& getSettings() const { return *settings; }
 
@@ -89,6 +92,7 @@ private:
     void cleanupBindRootOverlay();
     [[nodiscard]] bool ensureOverlayModuleLoaded();
     void teardownOverlayBase(const QString &overlayBase);
+    [[nodiscard]] bool resetSnapdIdentity();
 
     // File operations
     bool replaceStringInFile(const QString &old_text, const QString &new_text, const QString &file_path);
@@ -97,8 +101,8 @@ private:
     [[nodiscard]] bool makeChecksum(Work::HashType hash_type, const QString &folder, const QString &file_name);
 
     // Initrd operations
-    void closeInitrd(const QString &initrd_dir, const QString &file);
-    void openInitrd(const QString &file, const QString &initrd_dir);
+    [[nodiscard]] bool closeInitrd(const QString &initrd_dir, const QString &file);
+    [[nodiscard]] bool openInitrd(const QString &file, const QString &initrd_dir);
     [[nodiscard]] bool copyModules(const QString &to, const QString &kernel);
 
     // Arch initramfs helpers
@@ -119,6 +123,7 @@ private:
     bool started = false;
     bool done = false;
     bool cleanupStarted = false;
+    bool cleanupRunning = false;
     QTemporaryDir initrd_dir;
     QString bindRootPath = "/.bind-root";
     QString bindRootOverlayBase;

@@ -27,16 +27,49 @@
 #include <QDebug>
 #include <QRegularExpression>
 #include <QTextStream>
+#include <array>
 #include <chrono>
+#include <csignal>
 #include <cstdio>
 #include <cstdlib>
 
 #include "excludesutils.h"
 #include "log.h"
 #include "squashfsutils.h"
+#include "unitsecrets.h"
 #include "work.h"
 
 using namespace std::chrono_literals;
+
+namespace
+{
+// The excludes prompt blocks in read(2) with no event loop running, so the
+// self-pipe signal handler in main.cpp could never act on a signal there.
+// Nothing has been set up yet, so let SIGINT/SIGTERM/SIGHUP end the process
+// while waiting for an answer, then restore the previous handlers.
+class DefaultSignalsWhilePrompting
+{
+public:
+    DefaultSignalsWhilePrompting()
+    {
+        for (std::size_t i = 0; i < handledSignals.size(); ++i) {
+            previous[i] = std::signal(handledSignals[i], SIG_DFL);
+        }
+    }
+    ~DefaultSignalsWhilePrompting()
+    {
+        for (std::size_t i = 0; i < handledSignals.size(); ++i) {
+            std::signal(handledSignals[i], previous[i]);
+        }
+    }
+    DefaultSignalsWhilePrompting(const DefaultSignalsWhilePrompting &) = delete;
+    DefaultSignalsWhilePrompting &operator=(const DefaultSignalsWhilePrompting &) = delete;
+
+private:
+    static constexpr std::array<int, 3> handledSignals {SIGINT, SIGTERM, SIGHUP};
+    std::array<void (*)(int), 3> previous {};
+};
+} // namespace
 
 Batchprocessing::Batchprocessing(Settings *settings, QObject *parent)
     : QObject(parent),
@@ -45,9 +78,18 @@ Batchprocessing::Batchprocessing(Settings *settings, QObject *parent)
 {
     connect(qApp, &QCoreApplication::aboutToQuit, this, [this] { work.cleanUp(); });
     setConnections();
+}
 
+// cancel() can arrive from a signal during any step: Cmd waits in nested event
+// loops that still deliver it. Each step is therefore followed by an
+// isCleaningUp() check, so nothing runs against a torn-down environment.
+void Batchprocessing::run()
+{
     // Check updated excludes before any work
     checkUpdatedDefaultExcludesCli();
+    if (work.isCleaningUp()) {
+        return;
+    }
 
     if (!settings->checkCompression()) {
         qCritical().noquote() << tr("Error")
@@ -61,11 +103,34 @@ Batchprocessing::Batchprocessing(Settings *settings, QObject *parent)
     if (!settings->monthly && !settings->overrideSize) {
         qDebug() << "Unused space:" << settings->getUsedSpace();
     }
+    if (work.isCleaningUp()) {
+        return;
+    }
+
+    // Non-interactive: name services whose credentials go into the respin, but
+    // don't stop (see MainWindow::confirmUnitCredentials()).
+    if (settings->resetAccounts) {
+        const UnitSecrets::ScanResult scan = UnitSecrets::findCredentials(QStringLiteral("/etc/systemd/system"));
+        if (!scan.findings.isEmpty()) {
+            qWarning().noquote()
+                << tr("Warning: these services in /etc/systemd/system contain what look like passwords, tokens or "
+                      "keys, and will be included in the snapshot as they are:")
+                << scan.findings.join(", ");
+        }
+        if (!scan.unreadable.isEmpty()) {
+            qWarning().noquote() << tr("Warning: these service files or folders could not be checked for passwords, tokens "
+                                       "or keys, and will be included in the snapshot as they are:")
+                                 << scan.unreadable.join(", ");
+        }
+    }
 
     work.startTimer();
     Cmd::clearElevationDenied();
     if (!settings->checkSnapshotDir() || !settings->checkTempDir()) {
         work.cleanUp();
+        return;
+    }
+    if (work.isCleaningUp()) {
         return;
     }
     settings->otherExclusions();
@@ -115,9 +180,20 @@ Batchprocessing::Batchprocessing(Settings *settings, QObject *parent)
             work.cleanUp();
             return;
         }
+        if (work.isCleaningUp()) {
+            return;
+        }
     }
     disconnect(&timer, &QTimer::timeout, nullptr, nullptr);
     work.createIso(settings->snapshotName);
+}
+
+// SIGINT/SIGTERM/SIGHUP: cleanUp() kills mksquashfs, tears the bind-root down
+// and requests exit; it is a no-op once a teardown has started. run() sees
+// isCleaningUp() when the interrupted step returns.
+void Batchprocessing::cancel()
+{
+    work.cleanUp();
 }
 
 // A failed or refused root operation (the CLI normally runs as root, so this
@@ -260,6 +336,7 @@ void Batchprocessing::checkUpdatedDefaultExcludesCli()
 
     QTextStream out(stdout);
     QTextStream in(stdin);
+    const DefaultSignalsWhilePrompting defaultSignals;
 
     const QString showOptionKey = tr("s", "CLI excludes prompt: single-letter shortcut for 'show diff'");
     const QString useOptionKey = tr("u", "CLI excludes prompt: single-letter shortcut for 'use updated default'");

@@ -20,12 +20,17 @@
 // background-thread timing.
 #include <QtTest>
 
+#include <QAbstractButton>
 #include <QCommandLineParser>
 #include <QCoreApplication>
+#include <QMessageBox>
 #include <QProcess>
 #include <QScopeGuard>
 #include <QSemaphore>
+#include <QSignalBlocker>
 #include <QStandardPaths>
+#include <QThreadPool>
+#include <QTimer>
 
 #include <atomic>
 #include <memory>
@@ -74,6 +79,10 @@ private slots:
 
     void testDestructionDuringBackgroundWork();
     void testFlatpakGenerationStaleness();
+    void testMarkKeepFollowsCurrentTabFilter();
+    void testVersionDialogReturnsClickedRelease();
+    void testHeaderSelectAllChecksVisibleUpgradable();
+    void testListLoadKeepsAutoremovableFilter();
 #ifdef PACKAGE_BACKEND_PACMAN
     void testEnabledReposRenderedWithoutInstalledFlagFlow();
 #endif
@@ -234,6 +243,151 @@ void TestMainWindowAsync::testFlatpakGenerationStaleness()
     QVERIFY(!window.isFlatpakGenerationStale(generationAfterReload));
 }
 
+// Install turns into "Mark keep" only when the *current* package tab filters on
+// Autoremovable. Each tab has its own filter combo, and the combos are synced only
+// on a tab switch, so a stale Enabled Repos combo must not decide for MX Test.
+// pushInstall_clicked() picks markKeep() vs installSelected() with the same
+// predicate that sets this label.
+void TestMainWindowAsync::testMarkKeepFollowsCurrentTabFilter()
+{
+    QCommandLineParser parser;
+    setupTestParser(parser);
+    MainWindow window(parser, nullptr, {}, /*testSkipFlatpakPreload=*/true);
+
+    // Signals blocked: this sets the combos' state without running filterChanged().
+    const auto setFilter = [](QComboBox *combo, const QString &text) {
+        const QSignalBlocker blocker(combo);
+        combo->setCurrentText(text);
+        QCOMPARE(combo->currentText(), text);
+    };
+    const QString package = QStringLiteral("mxpi-test-package");
+    window.currentTree = window.ui->treeMXtest;
+    window.changeList.clear();
+
+    setFilter(window.ui->comboFilterEnabled, MainWindow::tr("Autoremovable"));
+    setFilter(window.ui->comboFilterMX, MainWindow::tr("Not installed"));
+    window.buildChangeList(package, Qt::Checked);
+    QVERIFY(window.ui->pushInstall->text() != MainWindow::tr("Mark keep"));
+    window.buildChangeList(package, Qt::Unchecked);
+
+    setFilter(window.ui->comboFilterEnabled, MainWindow::tr("All packages"));
+    setFilter(window.ui->comboFilterMX, MainWindow::tr("Autoremovable"));
+    window.buildChangeList(package, Qt::Checked);
+    QCOMPARE(window.ui->pushInstall->text(), MainWindow::tr("Mark keep"));
+}
+
+// The Debian version picker (shown when /etc/debian_version is unreadable or holds
+// an unknown codename) must return the release whose button was clicked.
+// QMessageBox::exec() returns an opaque code for custom buttons -- since Qt 6.5 not
+// the button index -- so reading it as an index always yielded Trixie.
+void TestMainWindowAsync::testVersionDialogReturnsClickedRelease()
+{
+    const auto pick = [](const QString &buttonText) {
+        QTimer clicker;
+        QObject::connect(&clicker, &QTimer::timeout, [&clicker, buttonText] {
+            const auto *box = qobject_cast<QMessageBox *>(QApplication::activeModalWidget());
+            if (!box) {
+                return;
+            }
+            for (QAbstractButton *button : box->buttons()) {
+                if (button->text() == buttonText) {
+                    clicker.stop();
+                    button->click();
+                    return;
+                }
+            }
+        });
+        clicker.start(10);
+        return static_cast<int>(MainWindow::showVersionDialog(QStringLiteral("Select your version")));
+    };
+    QCOMPARE(pick(QStringLiteral("Bookworm")), static_cast<int>(Release::Bookworm));
+    QCOMPARE(pick(QStringLiteral("Trixie")), static_cast<int>(Release::Trixie));
+}
+
+// On every package tab the Upgradable filter shows the header checkbox, and toggling
+// it checks exactly that tab's visible upgradable rows. The AUR tab's header used to
+// stay hidden, and its toggle checked nothing (no proxy was looked up for it).
+void TestMainWindowAsync::testHeaderSelectAllChecksVisibleUpgradable()
+{
+    QCommandLineParser parser;
+    setupTestParser(parser);
+    MainWindow window(parser, nullptr, {}, /*testSkipFlatpakPreload=*/true);
+
+    const QVector<PackageData> packages {
+        {.name = "pkg-upgradable-a", .repoVersion = "2", .installedVersion = "1", .status = Status::Upgradable,
+         .fromRepo = true},
+        {.name = "pkg-installed", .repoVersion = "1", .installedVersion = "1", .status = Status::Installed,
+         .fromRepo = true},
+        {.name = "pkg-upgradable-b", .repoVersion = "3", .installedVersion = "2", .status = Status::Upgradable,
+         .fromRepo = true},
+    };
+    const QString upgradable = MainWindow::tr("Upgradable");
+
+    for (QTreeView *tree : window.aptTrees()) {
+        const MainWindow::AptTabContext tab = window.aptTab(tree);
+        QVERIFY(tab.model && tab.proxy && tab.filterCombo && tab.header);
+        tab.model->setPackageData(packages);
+        window.currentTree = tree;
+        {
+            // Set the combo's state without its own filterChanged() round trip.
+            const QSignalBlocker blocker(tab.filterCombo);
+            tab.filterCombo->setCurrentText(upgradable);
+        }
+        window.filterChanged(upgradable);
+        QVERIFY2(tab.header->isCheckboxVisible(), qPrintable(tree->objectName()));
+
+        emit tab.header->toggled(true);
+        QStringList checked = window.changeList;
+        checked.sort();
+        QCOMPARE(checked, QStringList({"pkg-upgradable-a", "pkg-upgradable-b"}));
+    }
+}
+
+// Loading a list resets every status. When the tab is already filtered on
+// Autoremovable (selected before apt's startup preload finished, or before pacman's
+// first load, whose automatic check is skipped), the load must restore those
+// statuses or the filter shows nothing. Unfiltered loads stay lazy.
+void TestMainWindowAsync::testListLoadKeepsAutoremovableFilter()
+{
+    QCommandLineParser parser;
+    setupTestParser(parser);
+    MainWindow window(parser, nullptr, {}, /*testSkipFlatpakPreload=*/true);
+
+    // Let the window's own startup list load land first, so it cannot reset the
+    // model from inside the nested event loop autoremovableCandidates() runs below.
+#ifdef PACKAGE_BACKEND_PACMAN
+    QSignalSpy startupLoaded(&window, &MainWindow::displayPackagesFinished);
+    QTRY_VERIFY_WITH_TIMEOUT(startupLoaded.count() > 0, 60000);
+#else
+    QTRY_VERIFY_WITH_TIMEOUT(window.ui->tabWidget->isTabEnabled(Tab::Test), 60000);
+#endif
+
+    const auto setFilter = [&window](const QString &text) {
+        const QSignalBlocker blocker(window.ui->comboFilterEnabled);
+        window.ui->comboFilterEnabled->setCurrentText(text);
+    };
+    const auto loadList = [&window] {
+#ifdef PACKAGE_BACKEND_PACMAN
+        window.skipInitialAutoremovableCheck = true;
+        window.enabledModel->setPackageData({{.name = "mxpi-test-package", .repoVersion = "1"}});
+        window.displayAutoremovable(window.ui->treeEnabled);
+        QVERIFY(!window.skipInitialAutoremovableCheck);
+#else
+        QHash<QString, PackageInfo> list;
+        list.insert(QStringLiteral("mxpi-test-package"), PackageInfo {QStringLiteral("1"), QString()});
+        window.applyPreloadedEnabledList(list);
+#endif
+    };
+
+    setFilter(MainWindow::tr("All packages"));
+    loadList();
+    QVERIFY(!window.enabledModel->autoremovableKnown());
+
+    setFilter(MainWindow::tr("Autoremovable"));
+    loadList();
+    QVERIFY(window.enabledModel->autoremovableKnown());
+}
+
 #ifdef PACKAGE_BACKEND_PACMAN
 // See enabledReposRenderedWithoutInstalled's declaration in mainwindow.h (pacman
 // only): installedPackages ("pacman -Qi") and the Enabled Repos list ("pacman -Ss")
@@ -306,6 +460,11 @@ int main(int argc, char *argv[])
     QStandardPaths::setTestModeEnabled(true);
 
     TestMainWindowAsync tc;
-    return QTest::qExec(&tc, argc, argv);
+    const int result = QTest::qExec(&tc, argc, argv);
+    // Same as src/main.cpp: wait for background workers still running a command
+    // (tests destroy windows mid-startup) while the application can still deliver
+    // their process events, or the binary never exits.
+    QThreadPool::globalInstance()->waitForDone();
+    return result;
 }
 #include "test_mainwindow.moc"

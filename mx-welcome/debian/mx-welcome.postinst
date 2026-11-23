@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = configure ] && [ -n "${2:-}" ] && dpkg --compare-versions "$2" lt '26.11.1mx25~'; then
+    old_dir="${DPKG_ROOT:-}/etc/skel/.config/autostart/mx-welcome-first-run.desktop"
+    if [ -d "$old_dir" ]; then
+        rmdir --ignore-fail-on-non-empty "$old_dir"
+    fi
+fi

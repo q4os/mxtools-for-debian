@@ -10,10 +10,12 @@ Homepage: https://github.com/AdrianTM/mx-welcome
 Package: mx-welcome
 Architecture: any
 Depends: mx-welcome-data (>= 22.02.01),
-         qml6-module-qtcore,
+         qml6-module-qtqml-workerscript,
          qml6-module-qtquick,
          qml6-module-qtquick-controls,
          qml6-module-qtquick-layouts,
+         qml6-module-qtquick-templates,
+         qml6-module-qtquick-window,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: mx-docs

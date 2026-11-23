@@ -28,7 +28,7 @@
 
 namespace SnapCol
 {
-enum { Check, Name, Version, Publisher, Notes, Description, Status, Classic };
+enum { Check, Name, Info, Version, Publisher, Notes, Description, Status, Classic };
 }
 
 struct SnapData {
@@ -69,7 +69,7 @@ public:
 
     void updateInstalledStatus(const QStringList &installedNames);
 
-    void setIcons(const QIcon &installed);
+    void setIcons(const QIcon &installed, const QIcon &info = {});
 
 signals:
     void checkStateChanged(const QString &name, Qt::CheckState state, int status);
@@ -78,4 +78,5 @@ private:
     QVector<SnapData> m_snaps;
     QHash<QString, int> m_nameToRow;
     QIcon m_iconInstalled;
+    QIcon m_iconInfo;
 };

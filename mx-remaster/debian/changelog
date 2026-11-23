@@ -1,8 +1,21 @@
-mx-remaster (26.06.03mx25.1302) stable; urgency=medium
+mx-remaster (26.10.02mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:06 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:20 +0100
+
+mx-remaster (26.10.02mx25) mx; urgency=medium
+
+  * add hosts file to general-files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 10 Oct 2026 13:35:05 -0400
+
+mx-remaster (26.10.01mx25) mx; urgency=medium
+
+  * add support for custom live-files templates under /etc/live-files
+  * new readme under /usr/share/live-files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 08 Oct 2026 17:29:42 -0400
 
 mx-remaster (26.06.03mx25) mx; urgency=medium
 

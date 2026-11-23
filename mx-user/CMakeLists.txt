@@ -57,11 +57,27 @@ endif()
 set(PROJECT_VERSION_FULL "${PROJECT_VERSION_FROM_CHANGELOG}")
 string(REGEX REPLACE "[^0-9.].*$" "" PROJECT_VERSION_NUMERIC "${PROJECT_VERSION_FROM_CHANGELOG}")
 
+# Option to use clang for testing builds. The compiler must be chosen before
+# project() detects it; CMake then sets CMAKE_CXX_COMPILER_ID itself. An
+# explicit -DCMAKE_CXX_COMPILER takes precedence.
+option(USE_CLANG "Use clang compiler" OFF)
+if(USE_CLANG AND NOT CMAKE_CXX_COMPILER)
+    set(CMAKE_CXX_COMPILER clang++)
+    message(STATUS "Using clang compiler")
+endif()
+
 project(mx-user
     VERSION ${PROJECT_VERSION_NUMERIC}
     DESCRIPTION "MX User Manager - Graphical tool for managing user accounts"
     LANGUAGES CXX
 )
+
+# (A clang CMAKE_CXX_COMPILER with a stale ID is a pending switch that CMake
+# completes by reconfiguring, so no warning then.)
+if(USE_CLANG AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT "$CACHE{CMAKE_CXX_COMPILER}" MATCHES "clang")
+    message(WARNING "USE_CLANG is ON but this build directory uses ${CMAKE_CXX_COMPILER_ID}; "
+                    "configure a fresh build directory or pass -DCMAKE_CXX_COMPILER=clang++")
+endif()
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -78,15 +94,6 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         add_compile_options(-fcolor-diagnostics)
     endif()
-endif()
-
-# Option to use clang for testing builds
-option(USE_CLANG "Use clang compiler" OFF)
-if(USE_CLANG)
-    set(CMAKE_C_COMPILER clang)
-    set(CMAKE_CXX_COMPILER clang++)
-    set(CMAKE_CXX_COMPILER_ID "Clang")
-    message(STATUS "Using clang compiler")
 endif()
 
 # Find Qt6 components
@@ -210,7 +217,7 @@ target_compile_options(helper PRIVATE
 )
 
 # Add compiler-specific flags
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options(mx-user PRIVATE -Werror=return-stack-address)
     target_compile_options(helper PRIVATE -Werror=return-stack-address)
 else()
@@ -239,7 +246,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_options(helper PRIVATE -O3)
 
     # Add LTO - different flags for different compilers
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         target_compile_options(mx-user PRIVATE -flto=thin)
         target_link_options(mx-user PRIVATE -flto=thin)
         target_compile_options(helper PRIVATE -flto=thin)

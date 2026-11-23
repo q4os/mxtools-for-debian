@@ -8,5 +8,5 @@ Exec=mx-locale
 Terminal=false
 Type=Application
 Icon=preferences-desktop-locale
-Categories=System;MX-Setup;X-antiX;
+Categories=System;X-MX-Setup;X-antiX;
 NoDisplay=false

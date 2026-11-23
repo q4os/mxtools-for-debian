@@ -1,8 +1,16 @@
-formatusb (26.07.01.1302) stable; urgency=medium
+formatusb (26.09.01.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:04 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:16 +0100
+
+formatusb (26.09.01) mx; urgency=medium
+
+  * make sure options are present (fixes issue with large gpt disks with no label)
+  * use partprobe to inform kernel rather than just using sleep
+  * fix command window display when running a second format
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 24 Sep 2026 20:10:56 -0400
 
 formatusb (26.07.01) mx; urgency=medium
 

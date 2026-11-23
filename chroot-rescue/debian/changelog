@@ -1,8 +1,24 @@
-chroot-rescue (0.2.6+5.1302) stable; urgency=medium
+chroot-rescue (0.2.6+6.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:03 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:13 +0100
+
+chroot-rescue (0.2.6+6) mx; urgency=medium
+
+  * add translations to desktop file  
+  * Fix boolean value: NoDisplay=False -> NoDisplay=false.
+  * Categories: MX-Maintenance -> X-MX-Maintenance.
+  * Shorten Name[de], GenericName[de], Name[pt_BR], GenericName[pt_BR]
+    to "Chroot Rescue Scan"; drop redundant "system repair" wording.
+  * Add Keywords= and translated Keywords[*] taken from antiX
+    reservoir desktop file.
+  * Fix Comment[kn] and Comment[te]: literal text "u200c" replaced by
+    the real U+200C (zero width non-joiner) character.
+  * Sort Name, Comment, GenericName and Keywords: default entry first,
+    then localized entries sorted by locale.
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 21 Oct 2026 19:30:29 -0400
 
 chroot-rescue (0.2.6+5) mx; urgency=medium
 

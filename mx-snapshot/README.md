@@ -53,7 +53,9 @@ recommend it for anything other than MX or antiX compatible systems.
     Output directory
 
   - **-f**, **--file** \<name\>  
-    Output filename
+    Output filename. `.iso` is added if missing; when `-f` is omitted or empty,
+    a default name is used. The name must not be blank or contain any of
+    `< > : " / | ? *`; the GUI applies the same rules to the name field.
 
   - **-k**, **--kernel** \<ver, or path\>  
     Name a different kernel to use other than the default running
@@ -98,6 +100,61 @@ recommend it for anything other than MX or antiX compatible systems.
 
   - **-z**, **--compression** \<format\>  
     Compression format, valid choices: lz4, lzo, gzip, xz, zstd
+
+# CANCELLING A RUN
+
+SIGINT, SIGTERM and SIGHUP cancel a running snapshot in both the CLI and the
+GUI: a running mksquashfs is stopped, the bind-root environment is torn down,
+the log is archived, and the program exits with a failure status. A signal
+that arrives before the snapshot starts, including while waiting for
+authentication, exits without starting it. At the CLI exclusion-file prompt a
+signal ends the program immediately, since nothing has been set up yet.
+
+In the GUI, Next, Back and Cancel are disabled while the first authentication
+request is pending, and the window cannot be closed while it is pending or
+while cleanup is still tearing the snapshot down; the program exits on its own
+when cleanup finishes. `--month` runs start once the window is shown.
+
+# ARCH PACKAGING AND RELEASES
+
+`./build.sh --arch` builds in `build/arch-package` and clears that directory
+before configuration. Developer builds in `build/` are preserved, and their
+cached compiler flags and test options do not affect the package.
+
+`./release.sh` publishes the requested tag before updating the AUR recipe,
+including when a previous attempt left the tag only in the local repository.
+Invalid versions report their error on stderr. AUR archive directories track
+`pkgver`; a leading `v` remains in the GitHub tag URL but is removed from the
+package version and archive directory name. `--no-push` skips the AUR push;
+it still publishes the GitHub tag and commits the AUR update.
+
+# USER CONFIGURATION
+
+When loading configuration, the application repairs ownership of the
+`~/.config/MX-Linux` directory and its config and exclude files for the logged-in
+user. System exclude lists keep their existing ownership. If a custom exclude list is missing or the default
+user copy cannot be created, the application uses `/etc/<app>-exclude.list`
+when available, then the packaged list under `/usr/local/share/excludes` or
+`/usr/share/excludes`.
+
+# ARCH SNAPSHOT SAFETY
+
+Arch cleanup state is stored only in `/run/<app>/cleanup-arch.state`.
+Legacy state in `/tmp` is ignored; do not move it into `/run` without verifying
+its contents. Leftover mounts from an interrupted legacy run need manual cleanup.
+State directories and files must be root-owned, must not be
+symlinks, and must not be writable by group or other users.
+
+The plain-bind fallback preserves the host timezone symlink and does not add
+an installer shortcut to the host's `/etc/skel`. Reset snapshots still receive
+the shortcut in the staged demo Desktop. Personal snapshots preserve any
+existing `minstall.desktop` file or symlink on the user's Desktop.
+
+When `/boot/archiso.img` is rebuilt, the new image must be built for the
+selected kernel. An archiso preset that builds for a different kernel is
+followed by a direct `mkinitcpio -k <selected kernel>` build. If that also
+fails, a stale image stops the snapshot, and a missing one falls back to the
+regular initramfs with a warning, as before.
 
 # SEE ALSO
 

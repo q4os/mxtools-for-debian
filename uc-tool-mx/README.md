@@ -39,7 +39,7 @@ When updating an initrd the tool:
 | Package | Purpose |
 |---------|---------|
 | `cpio`, `coreutils`, `findutils` | required |
-| `iucode-tool` | required for Intel microcode |
+| `iucode-tool` | required for Intel microcode (skipped with a warning in `-u auto` mode if missing) |
 | `mount` | required only when `-F` points to a squashfs file |
 
 ## Installation
@@ -59,8 +59,12 @@ sudo install -m 0755 uc-tool /usr/bin/uc-tool
 ```
 Usage:  uc-tool [options]
 
-  -u  --ucode=<list>       Vendors to build: amd, intel, or amd,intel
-                           [default: amd,intel]
+  -u  --ucode=<list>       Vendors to build: auto, amd, intel, or amd,intel
+                             auto   build each vendor whose firmware (and
+                                    for Intel: iucode_tool) is available;
+                                    skip the others with a warning,
+                                    fail only if none is available
+                           [default: auto]
   -d  --directory=<dir>    Directory for .img files (generate/extract output)
                            or sections to repack (repack input)
   -D  --default            Set directory and initrd from current boot mode:
@@ -97,7 +101,7 @@ Usage:  uc-tool [options]
                              uses <name>.D/ if it exists, else the raw file
   -h  --help               Show this usage
   -n  --no-color           Suppress ANSI color codes in output
-  -q  --quiet              Suppress all progress output; only fatal errors shown
+  -q  --quiet              Suppress all progress output; only warnings and errors shown
   -s  --silent             Only show error messages
   -V  --verbose            Show commands as they run
   -v  --version            Show version and exit
@@ -129,7 +133,7 @@ cp ../../uc-tool .
 debuild -uc -us
 ```
 
-To bump the version before building, only the changelog needs updating —
+To bump the version before building, only the changelog needs updating --
 version and date are injected into the installed script and man page automatically:
 ```sh
 cd deb-src/uc-tool-mx
@@ -139,7 +143,7 @@ Then run `make` from `deb-src/`.
 
 ## License
 
-GNU General Public License v3 — see [debian/copyright](deb-src/uc-tool-mx/debian/copyright)
+GNU General Public License v3 -- see [debian/copyright](deb-src/uc-tool-mx/debian/copyright)
 or <https://www.gnu.org/licenses/gpl-3.0.html>.
 
 Copyright © 2026 fehlix (MX Linux)  

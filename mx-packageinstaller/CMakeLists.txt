@@ -167,6 +167,7 @@ set(SOURCES
     src/log.cpp
     src/main.cpp
     src/mainwindow.cpp
+    src/mainwindow_snap.cpp
     src/checkableheaderview.cpp
     src/pmfiles.cpp
     src/versionnumber.cpp
@@ -191,6 +192,7 @@ set(HELPER_SOURCES
 set(HEADERS
     src/log.h
     src/mainwindow.h
+    src/mainwindow_helpers.h
     src/checkableheaderview.h
     src/lockfile.h
     src/pmfiles.h
@@ -218,7 +220,7 @@ set(HEADERS
 # manager's own semantics (apt: dpkg frontend + raw lock check, dpkg-query/apt-mark/
 # apt-get; pacman: direct lockf() probe, pacman -Qi/-D/-Qtdq).
 if(PACKAGE_BACKEND STREQUAL "pacman")
-    list(APPEND SOURCES src/lockfile_pacman.cpp src/packagebackend_pacman.cpp)
+    list(APPEND SOURCES src/lockfile_pacman.cpp src/packagebackend_pacman.cpp src/mainwindow_aur.cpp)
 else()
     list(APPEND SOURCES src/lockfile_apt.cpp src/packagebackend_apt.cpp)
     # Hand-parses raw Debian archive Packages files -- no pacman equivalent.

@@ -1,0 +1,25 @@
+# The source package is the git tree; keep build output and local files out of it.
+# The bare line keeps dpkg-source's default excludes (.git, .gitignore, ...).
+tar-ignore
+tar-ignore = build
+tar-ignore = build-*
+tar-ignore = obj-*
+tar-ignore = debs
+tar-ignore = debug
+tar-ignore = release
+tar-ignore = arch/pkg
+tar-ignore = arch/src
+tar-ignore = arch/*.tar.*
+tar-ignore = .cache
+tar-ignore = .claude
+tar-ignore = .codex
+tar-ignore = .agents
+tar-ignore = .vscode
+tar-ignore = .qtcreator
+tar-ignore = .qtc_clangd
+tar-ignore = .tx
+tar-ignore = *.pro.user
+tar-ignore = CMakeLists.txt.user
+tar-ignore = AGENTS.md
+tar-ignore = CLAUDE.md
+tar-ignore = CODE_REVIEW*.md

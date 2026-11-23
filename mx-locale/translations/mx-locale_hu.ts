@@ -183,7 +183,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="79"/>
         <source>MX Locale</source>
-        <translation>MX területi beállítások</translation>
+        <translation>MX Területi beállítások</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="153"/>

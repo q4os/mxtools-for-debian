@@ -1,8 +1,28 @@
-live-usb-maker (2.41.28.1302) stable; urgency=medium
+live-usb-maker (2.41.29.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:04 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:17 +0100
+
+live-usb-maker (2.41.29) mx; urgency=low
+
+  [ dd-live-usb ]
+
+  * Force LC_ALL=C on parted calls in target_size() and clear_partition()
+    -- parted's "Disk" label is localized and can fail size parsing
+    under a non-English locale.
+
+  * Fix -F/--force=<xxx>: eval_argument() was missing the force case,
+    so any use of -F or --force crashed with "Unknown parameter".
+    Also added it to takes_param() (bare -F usb form) and check_force
+    to catch invalid force values instead of ignoring them.
+
+  [ live-usb-maker & dd-live-usb ]
+
+  * Filter zram devices out of the target device menu (only visible
+    when --force=usb is used).
+
+ -- fehlix <fehlix@mxlinux.org>  Fri, 25 Sep 2026 18:54:08 -0400
 
 live-usb-maker (2.41.28) mx; urgency=low
 

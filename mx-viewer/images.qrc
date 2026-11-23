@@ -7,5 +7,6 @@
         <file>icons/zoom-out.svg</file>
         <file>icons/system-search.png</file>
         <file>icons/open-menu.png</file>
+        <file>readability/Readability.js</file>
     </qresource>
 </RCC>

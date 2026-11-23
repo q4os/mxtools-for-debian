@@ -29,7 +29,7 @@ _uc_tool() {
 
     case "$prev" in
         -u|--ucode)
-            COMPREPLY=( $(compgen -W "amd intel amd,intel" -- "$cur") )
+            COMPREPLY=( $(compgen -W "auto amd intel amd,intel" -- "$cur") )
             return ;;
         -d|--directory)
             _filedir -d

@@ -24,6 +24,8 @@
 
 #include <QCoreApplication>
 #include <QDialog>
+#include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QProcess>
@@ -105,13 +107,23 @@ void displayAboutMsgBox(QWidget *parent, const QString &title, const QString &me
 
         auto *text = new QTextEdit(changelog);
         text->setReadOnly(true);
-        QProcess proc;
-        proc.start(
-            "zless",
-            {"/usr/share/doc/" % QFileInfo(QCoreApplication::applicationFilePath()).fileName() % "/changelog.gz"},
-            QIODevice::ReadOnly);
-        proc.waitForFinished();
-        text->setText(proc.readAllStandardOutput());
+        const QDir appDir(QCoreApplication::applicationDirPath());
+        QFile plain(appDir.filePath(QStringLiteral(APP_DOC_DIR "/changelog")));
+        if (plain.open(QIODevice::ReadOnly)) {
+            text->setPlainText(QString::fromUtf8(plain.readAll()));
+        } else {
+            QProcess proc;
+            QString compressed = appDir.filePath(QStringLiteral(APP_DOC_DIR "/changelog.gz"));
+            if (!QFileInfo::exists(compressed)) {
+                compressed = QStringLiteral("/usr/share/doc/mx-service-manager/changelog.gz");
+            }
+            proc.start("gzip", {"-cd", compressed});
+            if (proc.waitForFinished() && proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0) {
+                text->setPlainText(QString::fromUtf8(proc.readAllStandardOutput()));
+            } else {
+                text->setPlainText(QObject::tr("Could not load the changelog."));
+            }
+        }
 
         auto *btnClose = new QPushButton(QObject::tr("&Close"), changelog);
         btnClose->setIcon(QIcon::fromTheme("window-close"));

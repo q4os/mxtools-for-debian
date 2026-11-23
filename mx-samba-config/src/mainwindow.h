@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2021 MX Authors
+ * Copyright (C) 2021-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          Dolphin_Oracle
@@ -61,10 +61,13 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QProcess proc;
+    bool commandRunning = false;
     QSettings settings;
     QStringList listUsers();
     int run(const QString &, const QStringList &, const QByteArray &input = {});
     void buildUserList(EditShare *);
+    QString netbiosName();
+    void checkHomesShare();
     void checkSambashareGroup();
     void checksamba();
     void disablesamba();

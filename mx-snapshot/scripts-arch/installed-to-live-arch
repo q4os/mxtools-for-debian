@@ -21,6 +21,7 @@
 # *     empty=<dir>         mount empty tmpdir           → bindRoot/<dir>
 # *     live-files          ship /usr/share/live-files/files
 # *     general             live-files + general-files + passwd + timezone
+# *                         + fresh pacman keyring on first boot
 # *     version-file[=t]    write /etc/live/version/linuxfs.ver template
 # *     adjtime             zero-out /etc/adjtime in template
 # *
@@ -45,7 +46,6 @@ APP_NAME=${APP_NAME:-mx-snapshot}
 
 LIVE_FILES_DIR=/usr/share/live-files
 PRIMARY_STATE_DIR=/run/$APP_NAME
-FALLBACK_STATE_DIR=/tmp/$APP_NAME
 STATE_FILE_NAME=cleanup-arch.state
 
 # Globals populated by argument parsing / start.
@@ -70,26 +70,30 @@ require_root() {
 
 # ------------------------------------------------------------------- state
 state_dir() {
-    if [[ -d $PRIMARY_STATE_DIR && -w $PRIMARY_STATE_DIR ]] || install -d -m 0755 "$PRIMARY_STATE_DIR" 2>/dev/null; then
-        printf '%s\n' "$PRIMARY_STATE_DIR"
-        return 0
+    # /run is root-controlled; never consume legacy state from world-writable /tmp.
+    [[ ! -L $PRIMARY_STATE_DIR ]] || fatal "state directory is a symlink"
+    if [[ ! -e $PRIMARY_STATE_DIR ]]; then
+        install -d -m 0755 "$PRIMARY_STATE_DIR" 2>/dev/null || fatal "cannot create state dir"
     fi
-    install -d -m 0755 "$FALLBACK_STATE_DIR" 2>/dev/null || fatal "cannot create state dir"
-    printf '%s\n' "$FALLBACK_STATE_DIR"
+    [[ -d $PRIMARY_STATE_DIR ]] || fatal "state directory is not a directory"
+    local owner mode
+    read -r owner mode < <(stat -c '%u %a' "$PRIMARY_STATE_DIR")
+    [[ $owner == 0 && $((8#$mode & 0022)) == 0 ]] || fatal "unsafe state directory"
+    printf '%s\n' "$PRIMARY_STATE_DIR"
 }
 
 state_file() {
-    local d
-    if [[ -f $PRIMARY_STATE_DIR/$STATE_FILE_NAME ]]; then
-        printf '%s\n' "$PRIMARY_STATE_DIR/$STATE_FILE_NAME"
-        return 0
+    local d f
+    d=$(state_dir) || return 1
+    f=$d/$STATE_FILE_NAME
+    [[ ! -L $f ]] || fatal "state file is a symlink"
+    if [[ -e $f ]]; then
+        local owner mode
+        [[ -f $f ]] || fatal "state is not a regular file"
+        read -r owner mode < <(stat -c '%u %a' "$f")
+        [[ $owner == 0 && $((8#$mode & 0022)) == 0 ]] || fatal "unsafe state file"
     fi
-    if [[ -f $FALLBACK_STATE_DIR/$STATE_FILE_NAME ]]; then
-        printf '%s\n' "$FALLBACK_STATE_DIR/$STATE_FILE_NAME"
-        return 0
-    fi
-    d=$(state_dir)
-    printf '%s\n' "$d/$STATE_FILE_NAME"
+    printf '%s\n' "$f"
 }
 
 # Lines:
@@ -382,14 +386,15 @@ action_timezone() {
 
     bind_mount_template "$tz_dir"
 
-    # Also fix up the bind-root copies so live tools see the right values
-    # even if their bind-mount source was stale.
+    # Only replace localtime in an isolated overlay. A plain bind shares the
+    # host symlink; bind_mount_template intentionally leaves it untouched.
     local bind_localtime=${BIND_ROOT%/}/etc/localtime
-    if [[ ! -e $bind_localtime || -L $bind_localtime ]]; then
+    if [[ $(findmnt -n -o FSTYPE --target "$BIND_ROOT") == overlay \
+        && $(stat -c %d "$BIND_ROOT") != "$(stat -c %d "$REAL_ROOT")" ]] \
+        && [[ ! -e $bind_localtime || -L $bind_localtime ]]; then
         rm -f "$bind_localtime"
         cp -a "$zone_file" "$bind_localtime"
     fi
-    printf '%s\n' "$tz" > "${BIND_ROOT%/}/etc/timezone"
 }
 
 # Hash a password with SHA-512 crypt. openssl is the primary tool (a declared
@@ -755,9 +760,11 @@ action_passwd() {
 # display manager configured to autologin the original user is carried through
 # unchanged — so the live ISO tries to autologin a now-nonexistent account and
 # drops to a confusing greeter. Point every DM autologin we can find at demo.
-# The live-files package ships a demo-autologin /etc/sddm.conf, but that only
-# helps SDDM; Plasma 6.5's plasmalogin (and lightdm/gdm) need the same fix, and
-# drop-ins under *.conf.d/ can still override a shipped config. Staged and
+# The general-files template ships demo-autologin configs for SDDM
+# (/etc/sddm.conf) and plasmalogin (/etc/plasmalogin.conf.d/autologin.conf), so
+# autologin works even when the host has none configured; this covers the rest:
+# lightdm/gdm, the main plasmalogin.conf, and other *.conf.d/ drop-ins that
+# could still override a shipped config. Staged and
 # bind-mounted like the other rewrites so it is safe on the overlay and on the
 # plain-bind fallback bind-root alike.
 action_reset_autologin() {
@@ -794,12 +801,114 @@ action_reset_autologin() {
     return 0
 }
 
+# ------------------------------------------------------------------- pacman keyring
+# The host's /etc/pacman.d/gnupg holds the local master signing key generated
+# by `pacman-key --init`. Shipping it in a distribution ISO would give every
+# install the same private key, so (like archiso's pacman-init.service) the
+# snapshot gets an empty keyring that a oneshot unit rebuilds on first boot.
+#
+# --populate restores the distro keyrings under /usr/share/pacman/keyrings, but
+# not keys the host trusts for extra repos (e.g. a third-party repo key added
+# with `pacman-key --add` + `--lsign-key`). Those are exported here and
+# re-added and locally signed by the unit, so the host's pacman.conf repos
+# keep working on the live system.
+action_reset_pacman_keyring() {
+    local keyring=/etc/pacman.d/gnupg
+    [[ -f $keyring/trustdb.gpg ]] || return 0
+
+    local stage=$WORK_DIR/pacman-keyring
+    local gpgtmp=$WORK_DIR/pacman-keyring-gpg
+    local keys_rel=etc/pacman.d/mx-snapshot-keys.gpg
+    local unit_name=mx-snapshot-pacman-init.service
+    mkdir -p "$stage/etc/pacman.d" "$stage/etc/systemd/system/multi-user.target.d" "$gpgtmp" || return 1
+    chmod 700 "$gpgtmp"
+
+    # Work on a copy so listing keys can't touch the host's trustdb or start an
+    # agent in its keyring dir.
+    cp -a "$keyring"/pubring.* "$keyring"/trustdb.gpg "$gpgtmp"/ 2>/dev/null \
+        || { warn "pacman-keyring: cannot copy $keyring"; return 1; }
+    local gpg=(gpg --homedir "$gpgtmp" --batch --no-permission-warning --with-colons)
+
+    # Key discovery must not fail silently: a failed listing would look like
+    # "no extra keys" and the ISO would lose the host's repo keys once the
+    # keyring is masked below.
+    local out
+
+    # Every fingerprint --populate will bring back on its own.
+    local -A distro=()
+    local f fpr
+    for f in /usr/share/pacman/keyrings/*.gpg; do
+        [[ -f $f ]] || continue
+        out=$("${gpg[@]}" --show-keys "$f" 2>&1) \
+            || { warn "pacman-keyring: cannot read $f: $out"; return 1; }
+        while IFS=: read -r rec _ _ _ _ _ _ _ _ fpr _; do
+            [[ $rec == fpr && -n $fpr ]] && distro[$fpr]=1
+        done <<< "$out"
+    done
+
+    # Fully trusted (validity f) primary keys that aren't distro keys; this
+    # leaves out the ultimately trusted (u) local master key itself.
+    out=$("${gpg[@]}" --no-auto-check-trustdb --list-keys 2>/dev/null) \
+        || { warn "pacman-keyring: cannot list keys in $keyring"; return 1; }
+    local extra=() rec validity want=0
+    while IFS=: read -r rec validity _ _ _ _ _ _ _ fpr _; do
+        case $rec in
+            pub) if [[ $validity == f ]]; then want=1; else want=0; fi ;;
+            fpr) if ((want)) && [[ -z ${distro[$fpr]:-} ]]; then extra+=("$fpr"); fi
+                 want=0 ;;
+        esac
+    done <<< "$out"
+
+    # Gate on a marker written only after every step succeeds: trustdb.gpg
+    # appears as soon as --init runs, so a failure in a later step would
+    # otherwise never be retried. Each step is safe to repeat.
+    local done_marker=$keyring/.mx-snapshot-keyring-ready
+    {
+        cat <<UNIT
+# Installed by mx-snapshot's installed-to-live-arch.
+# Build a fresh pacman keyring on first boot (the snapshot ships it empty).
+[Unit]
+Description=Initialize pacman keyring
+ConditionPathExists=!$done_marker
+After=time-sync.target
+Before=archlinux-keyring-wkd-sync.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/pacman-key --init
+ExecStart=/usr/bin/pacman-key --populate
+UNIT
+        if ((${#extra[@]})); then
+            printf 'ExecStart=/usr/bin/pacman-key --add /%s\n' "$keys_rel"
+            printf 'ExecStart=/usr/bin/pacman-key --lsign-key %s\n' "${extra[*]}"
+        fi
+        printf 'ExecStart=/usr/bin/touch %s\n' "$done_marker"
+    } > "$stage/etc/systemd/system/$unit_name" || return 1
+
+    printf '[Unit]\nWants=%s\n' "$unit_name" \
+        > "$stage/etc/systemd/system/multi-user.target.d/$unit_name.conf" || return 1
+
+    if ((${#extra[@]})); then
+        "${gpg[@]}" --export "${extra[@]}" > "$stage/$keys_rel" 2>/dev/null && [[ -s $stage/$keys_rel ]] \
+            || { warn "pacman-keyring: failed to export extra repo keys"; return 1; }
+        log "pacman-keyring: carrying over ${#extra[@]} extra repo key(s)"
+    fi
+
+    gpgconf --homedir "$gpgtmp" --kill all 2>/dev/null || true
+    rm -rf "$gpgtmp"
+
+    action_empty "$keyring" || return 1
+    bind_mount_template "$stage"
+}
+
 # ------------------------------------------------------------------- general
 action_general() {
     action_empty_dirs_general
     action_live_files || return 1
     action_general_files || return 1
     action_passwd || return 1
+    action_reset_pacman_keyring || return 1
     action_reset_autologin
     # doRepo is Debian-only (apt sources). Skipped here.
     action_timezone || return 1
@@ -857,11 +966,16 @@ action_adjtime() {
 #                                      machine-id on every run.
 #   * systemd-firstboot.service.d    — neutralise the firstboot prompts by
 #                                      overriding ExecStart to /bin/true.
-#   * getty@tty1.service.d           — autologin demo on tty1 so the user
-#                                      can use the live system even when
-#                                      the graphical session manager fails
-#                                      to start.
+#   * getty@tty1.service.d           — only with live-setup=autologin
+#                                      (reset snapshots, where action_passwd
+#                                      creates demo): autologin demo on tty1
+#                                      so the user can use the live system
+#                                      even when the graphical session
+#                                      manager fails to start. A personal
+#                                      backup has no demo account, so it
+#                                      keeps the normal login prompt.
 action_live_setup() {
+    local autologin=$1
     local template_dir=$WORK_DIR/live-setup
     local etc=$template_dir/etc
 
@@ -873,16 +987,17 @@ action_live_setup() {
     cat > "$firstboot_dropin_dir/00-disable.conf" <<'CONF'
 # Installed by mx-snapshot's installed-to-live-arch.
 # Neutralise systemd-firstboot's interactive prompts on the live ISO; the
-# live user (demo) is preconfigured by action_passwd, and locale/keymap/
-# timezone come from the snapshotted host.
+# accounts and locale/keymap/timezone come from the snapshotted host (or,
+# for a reset snapshot, from action_passwd's demo user).
 [Service]
 ExecStart=
 ExecStart=/bin/true
 CONF
 
-    local autologin_dir=$etc/systemd/system/getty@tty1.service.d
-    mkdir -p "$autologin_dir"
-    cat > "$autologin_dir/autologin.conf" <<'CONF'
+    if [[ $autologin == autologin ]]; then
+        local autologin_dir=$etc/systemd/system/getty@tty1.service.d
+        mkdir -p "$autologin_dir"
+        cat > "$autologin_dir/autologin.conf" <<'CONF'
 # Installed by mx-snapshot's installed-to-live-arch.
 # Autologin the live user on tty1 so the system is usable even when the
 # display manager can't start (e.g. inside a VM without GPU acceleration).
@@ -890,6 +1005,7 @@ CONF
 ExecStart=
 ExecStart=-/usr/bin/agetty --autologin demo --noclear %I $TERM
 CONF
+    fi
 
     bind_mount_template "$template_dir"
 }
@@ -948,9 +1064,12 @@ Actions for 'start':
   empty=<dir>         mount empty tmpdir       → bindRoot/<dir>
   live-files          ship /usr/share/live-files/files
   general             live-files + general-files + passwd + timezone
+                      + fresh pacman keyring on first boot
   version-file[=t]    write /etc/live/version/linuxfs.ver template
   adjtime             zero out /etc/adjtime in template
-  live-setup          empty machine-id + systemd-firstboot/getty drop-ins
+  live-setup          empty machine-id + systemd-firstboot drop-in
+  live-setup=autologin
+                      live-setup + autologin demo on tty1 (reset only)
 EOF
 }
 
@@ -986,7 +1105,8 @@ main() {
                     version-file) action_version_file "" || { warn "version-file action failed"; rc=1; } ;;
                     version-file=*) action_version_file "${action#version-file=}" || { warn "version-file action failed"; rc=1; } ;;
                     adjtime) action_adjtime || { warn "adjtime action failed"; rc=1; } ;;
-                    live-setup) action_live_setup || { warn "live-setup action failed"; rc=1; } ;;
+                    live-setup) action_live_setup "" || { warn "live-setup action failed"; rc=1; } ;;
+                    live-setup=autologin) action_live_setup autologin || { warn "live-setup action failed"; rc=1; } ;;
                     *) warn "unknown action: $action"; rc=1 ;;
                 esac
             done

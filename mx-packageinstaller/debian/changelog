@@ -1,8 +1,45 @@
-mx-packageinstaller (26.07.5.1302) stable; urgency=medium
+mx-packageinstaller (26.10.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:06 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:19 +0100
+
+mx-packageinstaller (26.10) mx; urgency=medium
+
+  * Decide between Install and "Mark keep" from the current tab's own filter
+  * Fill the Autoremovable filter right after startup and after installing
+    or removing popular applications
+  * Make the "select all" header checkbox work on the AUR tab, and hide it
+    while its column is scrolled out of view
+  * Set up Bookworm repositories when Bookworm is chosen in the Debian
+    version prompt
+  * Remove a popular application's temporary repository as soon as its
+    install is cancelled
+  * Detect when apt or pacman is already in use before starting an install
+  * AUR tab: search only the AUR, and show an empty list instead of an error
+    when there is nothing to show
+  * Show the version pacman will install when a testing repository is
+    enabled
+  * Snaps tab: double-click or Space checks a row, and cancelling the
+    password prompt during setup stops the setup
+  * Fix removing Flatpak remotes that have extra options
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 04 Oct 2026 08:19:24 -0400
+
+mx-packageinstaller (26.09) mx; urgency=medium
+
+  * Show a description, screenshot, developer, license and homepage for
+    Flatpak and Snap applications, using Flathub and Snap Store listings
+  * Add an Info icon to the Flatpak and Snap lists, and a right-click
+    "More info..." menu, as on the Popular Applications tab
+  * Press Ctrl+I to show information about the selected package on any
+    tab that has package details
+  * Show a clear message instead of crashing when the program is started
+    without a graphical display
+  * Stop with an error instead of trying a missing tool when no way to get
+    administrator rights is installed
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 24 Sep 2026 09:08:18 -0400
 
 mx-packageinstaller (26.07.5) mx; urgency=medium
 

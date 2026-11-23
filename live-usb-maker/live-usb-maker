@@ -8,8 +8,8 @@
 # License: GPLv3 or later
 #==============================================================================
 
-      VERSION="2.41.28"
- VERSION_DATE="Tue, 9 Jun 2026"
+      VERSION="2.41.29"
+ VERSION_DATE="Fri, 25 Sep 2026"
 
         ME=${0##*/}
     MY_DIR=$(dirname "$(readlink -f $0)")
@@ -1445,6 +1445,7 @@ select_target_device() {
     fi
 
     local menu=$(cli_drive_menu "$live_dev" "$from_dev")
+    menu=$(echo "$menu" | grep -Ev "^zram[0-9]*$P_IFS")
     local dev cnt=$(count_lines "$menu")
 
     if ultra_fit_detected; then
@@ -1454,6 +1455,7 @@ select_target_device() {
                 if yes_NO $"Do you want to use it anyway?"; then
                     FORCE="$FORCE,ultra-fit"
                     menu=$(cli_drive_menu "$live_dev" "$from_dev")
+                    menu=$(echo "$menu" | grep -Ev "^zram[0-9]*$P_IFS")
                     cnt=$(count_lines "$menu")
                 else
                     exit 0
@@ -1464,6 +1466,7 @@ select_target_device() {
                 if yes_NO $"Do you want it included in the menu anyway"; then
                     FORCE="$FORCE,ultra-fit"
                     menu=$(cli_drive_menu "$live_dev" "$from_dev")
+                    menu=$(echo "$menu" | grep -Ev "^zram[0-9]*$P_IFS")
                     cnt=$(count_lines "$menu")
                 fi ;;
         esac

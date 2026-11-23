@@ -53,9 +53,9 @@ Comment[sq]=Parës dokumentesh dhe shfletues elementar
 Comment[sv]=Enkel dokumentvisare och läsare
 Comment[tr]=Temel belge görüntüleyici ve tarayıcı
 Comment=Basic document viewer and browser
-Exec=mx-viewer %U
+Exec=mx-viewer %u
 Icon=mx-viewer
 NoDisplay=false
-Categories=Network;Utilities;
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
 Type=Application
-

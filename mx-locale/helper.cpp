@@ -12,41 +12,18 @@
 
 #include "common.h"
 
+#include <algorithm>
 #include <unistd.h>
 
 namespace {
-QString resolveExecutable(const QString &program)
-{
-    if (QFileInfo(program).isAbsolute()) {
-        return program;
-    }
-
-    const QStringList searchPaths {"/usr/sbin", "/usr/bin", "/sbin", "/bin"};
-    for (const QString &path : searchPaths) {
-        const QString candidate = QDir(path).filePath(program);
-        if (QFileInfo::exists(candidate)) {
-            return candidate;
-        }
-    }
-    return program;
-}
+using ExecutableResolution::resolveExecutable;
+using LocaleValidation::isSafeLocaleGenLine;
+using LocaleValidation::isSafeLocaleToken;
 
 bool fail(const QString &message)
 {
     QTextStream(stderr) << message << Qt::endl;
     return false;
-}
-
-bool isSafeLocaleToken(const QString &value)
-{
-    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+$)");
-    return regex.match(value).hasMatch();
-}
-
-bool isSafeLocaleGenLine(const QString &value)
-{
-    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+(?:\s+[A-Za-z0-9_.@-]+)?$)");
-    return regex.match(value).hasMatch();
 }
 
 bool isSafeLocaleKey(const QString &value)
@@ -61,9 +38,23 @@ bool isSafePackageName(const QString &value)
     return regex.match(value).hasMatch();
 }
 
-QString normalizeLocaleValue(QString value)
+bool parseLocaleAssignment(const QString &line, QString &key, QString &value)
 {
-    return value.trimmed().replace(".utf8", ".UTF-8", Qt::CaseInsensitive);
+    static const QRegularExpression regex(
+        R"re(^\s*(?:export\s+)?([A-Z_]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^#\s]+))\s*(?:#.*)?$)re");
+    const auto match = regex.match(line);
+    if (!match.hasMatch()) {
+        return false;
+    }
+    key = match.captured(1);
+    value = match.captured(2);
+    if (value.isEmpty()) {
+        value = match.captured(3);
+    }
+    if (value.isEmpty()) {
+        value = match.captured(4);
+    }
+    return isSafeLocaleToken(value);
 }
 
 QString resolveWritablePath(const QString &path)
@@ -177,7 +168,14 @@ bool resetSubvariables(const QStringList &arguments)
     }
 
 #ifdef MX_LOCALE_ARCH
-    return runExternal("localectl", {"set-locale", "LANG=" + arguments.at(0)});
+    QStringList localeArguments {"set-locale", "LANG=" + arguments.at(0)};
+    const QStringList categories {"LC_CTYPE", "LC_NUMERIC", "LC_TIME", "LC_COLLATE", "LC_MONETARY", "LC_MESSAGES",
+                                  "LC_PAPER", "LC_NAME", "LC_ADDRESS", "LC_TELEPHONE", "LC_MEASUREMENT",
+                                  "LC_IDENTIFICATION"};
+    for (const QString &category : categories) {
+        localeArguments.append(category + '=' + arguments.at(0));
+    }
+    return runExternal("localectl", localeArguments);
 #else
     const QString localeConf = QStringLiteral("/etc/locale.conf");
     const QString targetPath = QFile::exists(localeConf) ? localeConf : Paths::defaultLocale;
@@ -203,18 +201,30 @@ bool filterLocaleGen(const QStringList &arguments)
         return false;
     }
 
+    QStringList localeSettings;
+    if (!readLines(Paths::defaultLocale, localeSettings, true)) {
+        return false;
+    }
+    QStringList protectedLocales = arguments;
+    for (const QString &line : std::as_const(localeSettings)) {
+        QString key;
+        QString value;
+        if (parseLocaleAssignment(line, key, value) && key.startsWith("LC_")) {
+            protectedLocales.append(value);
+        }
+    }
+
     QStringList updatedLines;
-    const QString currentLang = arguments.at(0);
-    const QString sessionLang = arguments.size() == 2 ? arguments.at(1) : QString {};
     bool changed = false;
 
     for (const QString &line : std::as_const(lines)) {
         const QString trimmed = line.trimmed();
         const bool commented = trimmed.startsWith('#');
         const QString body = commented ? trimmed.mid(1).trimmed() : trimmed;
-        const QString localeCode = body.section(' ', 0, 0);
-        if (trimmed.isEmpty() || commented || localeCode == currentLang
-            || (!sessionLang.isEmpty() && localeCode == sessionLang)) {
+        if (trimmed.isEmpty() || commented
+            || std::any_of(protectedLocales.cbegin(), protectedLocales.cend(), [&body](const QString &locale) {
+                   return LocaleValidation::localeMatchesGenLine(locale, body);
+               })) {
             updatedLines.append(line);
             continue;
         }
@@ -238,7 +248,7 @@ bool enableLocale(const QStringList &arguments)
         return false;
     }
 
-    const QString entry = arguments.at(0);
+    const QString entry = arguments.at(0).simplified();
     QStringList updatedLines;
     bool found = false;
     bool changed = false;
@@ -247,7 +257,7 @@ bool enableLocale(const QStringList &arguments)
         const QString trimmed = line.trimmed();
         const bool commented = trimmed.startsWith('#');
         const QString body = commented ? trimmed.mid(1).trimmed() : trimmed;
-        if (body == entry) {
+        if (body.simplified() == entry) {
             if (!found) {
                 updatedLines.append(entry);
                 found = true;
@@ -274,14 +284,7 @@ bool disableLocale(const QStringList &arguments)
         return fail(QObject::tr("Invalid locale value"));
     }
 
-    const QString entry = arguments.at(0);
-    const QString localeCode = normalizeLocaleValue(entry.section(' ', 0, 0));
-    QStringList localeValues {localeCode};
-    if (localeCode.contains('@') && !localeCode.contains(".UTF-8@")) {
-        const QString utf8Variant = QString(localeCode).replace('@', ".UTF-8@");
-        localeValues.append(utf8Variant);
-    }
-
+    const QString entry = arguments.at(0).simplified();
     QStringList localeGenLines;
     if (!readLines(Paths::localeGen, localeGenLines)) {
         return false;
@@ -294,7 +297,7 @@ bool disableLocale(const QStringList &arguments)
         const QString trimmed = line.trimmed();
         const bool commented = trimmed.startsWith('#');
         const QString body = commented ? trimmed.mid(1).trimmed() : trimmed;
-        if (body == entry) {
+        if (body.simplified() == entry) {
             if (!handled) {
                 const QString commentedLine = "# " + entry;
                 updatedLocaleGen.append(commentedLine);
@@ -320,13 +323,9 @@ bool disableLocale(const QStringList &arguments)
     QStringList updatedSettings;
     bool settingsChanged = false;
     for (const QString &line : std::as_const(localeSettings)) {
-        const QString trimmed = line.trimmed();
-        if (trimmed.startsWith('#') || !trimmed.contains('=')) {
-            updatedSettings.append(line);
-            continue;
-        }
-        const QString settingValue = normalizeLocaleValue(trimmed.mid(trimmed.indexOf('=') + 1).trimmed());
-        if (localeValues.contains(settingValue)) {
+        QString key;
+        QString value;
+        if (parseLocaleAssignment(line, key, value) && LocaleValidation::localeMatchesGenLine(value, entry)) {
             settingsChanged = true;
             continue;
         }

@@ -2,10 +2,22 @@
 
 #include <QDebug>
 #include <QDirIterator>
+#include <QFile>
 #include <QRegularExpression>
 #include <QStringView>
 
 #include "versionnumber.h"
+
+QString debconfFrontend()
+{
+    if (QFile::exists("/usr/share/doc/debconf-kde-helper")) {
+        return QStringLiteral("kde");
+    }
+    if (QFile::exists("/usr/share/doc/debconf-gnome")) {
+        return QStringLiteral("gnome");
+    }
+    return QStringLiteral("noninteractive");
+}
 
 AptCache::AptCache()
     : arch(getArch())

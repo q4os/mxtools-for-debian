@@ -1,6 +1,15 @@
 #!/bin/bash
-#this script is applied to SSE drives for sustained long-term performance and wear-leveling
+#this script is applied to SSD drives for sustained long-term performance and wear-leveling
 
 LOG=/var/log/trim.log
+
+#do not run if system is booted with system and systemd built-in fstrim.timer exists and is enabled
+if [ "$(readlink /etc/systemd/system/timers.target.wants/fstrim.timer)" = "/lib/systemd/system/fstrim.timer" ] && [ -d /run/systemd/system ]; then
+    #do nothing
+    exit 0
+fi
+
+#other init situations or fstim.timer is disabled, still run weekly trim
+
 echo "*** $(date -R) ***" >> $LOG
 fstrim --all --verbose >> $LOG

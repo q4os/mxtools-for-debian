@@ -32,5 +32,10 @@ is enabled.
 .TP
 .I ~/.config/autostart/mx-welcome.desktop
 Per-user autostart entry managed by the application.
+.TP
+.I /etc/skel/.config/autostart/mx-welcome-once.desktop
+Seeded into new user accounts so the welcome dialog is shown once on first
+login. Removed automatically after that single run, independent of the
+per-user autostart entry above.
 .SH SEE ALSO
 .BR inxi (1)

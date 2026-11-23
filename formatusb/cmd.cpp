@@ -30,10 +30,10 @@
 Cmd::Cmd(QObject *parent)
     : QProcess(parent)
 {
-    connect(this, &Cmd::readyReadStandardOutput, [=]() { emit outputAvailable(readAllStandardOutput()); });
-    connect(this, &Cmd::readyReadStandardError, [=]() { emit errorAvailable(readAllStandardError()); });
-    connect(this, &Cmd::outputAvailable, [=](const QString &out) { outBuffer += out; });
-    connect(this, &Cmd::errorAvailable, [=](const QString &out) { outBuffer += out; });
+    connect(this, &Cmd::readyReadStandardOutput, [this]() { emit outputAvailable(readAllStandardOutput()); });
+    connect(this, &Cmd::readyReadStandardError, [this]() { emit errorAvailable(readAllStandardError()); });
+    connect(this, &Cmd::outputAvailable, [this](const QString &out) { outBuffer += out; });
+    connect(this, &Cmd::errorAvailable, [this](const QString &out) { outBuffer += out; });
 }
 
 void Cmd::halt()
@@ -78,4 +78,3 @@ bool Cmd::run(const QString &cmd, QString &output, bool quiet)
     output = outBuffer.trimmed();
     return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
 }
-

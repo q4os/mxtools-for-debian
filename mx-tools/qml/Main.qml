@@ -12,6 +12,28 @@ ApplicationWindow {
         colorGroup: root.active ? SystemPalette.Active : SystemPalette.Inactive
     }
 
+    // Quick Controls styles keep their own palette, which can disagree with the desktop's:
+    // under qt6gtk2 the forced Fusion style assumes a light scheme because GTK2 reports none,
+    // leaving default dialog backgrounds and titles light behind dark-theme text. Feed the
+    // system palette in so every default-styled control, popups included, follows the theme.
+    palette {
+        window: systemPalette.window
+        windowText: systemPalette.windowText
+        base: systemPalette.base
+        alternateBase: systemPalette.alternateBase
+        text: systemPalette.text
+        placeholderText: systemPalette.placeholderText
+        button: systemPalette.button
+        buttonText: systemPalette.buttonText
+        highlight: systemPalette.highlight
+        highlightedText: systemPalette.highlightedText
+        light: systemPalette.light
+        midlight: systemPalette.midlight
+        mid: systemPalette.mid
+        dark: systemPalette.dark
+        shadow: systemPalette.shadow
+    }
+
     width: 1080
     height: 720
     minimumWidth: 720
@@ -22,16 +44,15 @@ ApplicationWindow {
 
     readonly property color backgroundColor: systemPalette.window
     readonly property color surfaceColor: systemPalette.base
-    readonly property color raisedSurfaceColor: Qt.tint(systemPalette.base, Qt.alpha(systemPalette.highlight, 0.08))
     readonly property color primaryTextColor: systemPalette.text
     readonly property color secondaryTextColor: Qt.alpha(systemPalette.text, 0.82)
     readonly property color borderColor: Qt.alpha(systemPalette.text, 0.18)
     readonly property color accentColor: systemPalette.highlight
     readonly property color accentWash: Qt.alpha(systemPalette.highlight, 0.13)
-    readonly property color inactiveControlColor: systemPalette.mid
     readonly property real baseFontSize: Application.font.pixelSize > 0 ? Application.font.pixelSize : 13
     readonly property bool compactNavigation: width < 900
-    property bool condensedView: false
+    readonly property bool hasSearchTerms: searchField.text.trim().length > 0
+    property bool condensedView: true
     property bool hideCategories: false
     required property var backend
     required property string version
@@ -44,6 +65,27 @@ ApplicationWindow {
         property alias windowHeight: root.height
         property alias condensedView: root.condensedView
         property alias hideCategories: root.hideCategories
+    }
+
+    // Monitors can change between runs, so a restored position may be off every screen.
+    // Settings has restored it by now; unless the title bar is on some screen, fit the
+    // window to its screen and center it. (On Wayland the compositor places windows.)
+    // Qt < 6.5 exposes Application.screens as a list object without array methods.
+    Component.onCompleted: {
+        const titleBarVisible = Array.from(Application.screens).some(screen =>
+            root.x + root.width > screen.virtualX + 100 && root.x < screen.virtualX + screen.width - 100
+            && root.y >= screen.virtualY && root.y < screen.virtualY + screen.height - 50)
+        if (!titleBarVisible) {
+            root.width = Math.min(root.width, Screen.width)
+            root.height = Math.min(root.height, Screen.height)
+            root.x = Screen.virtualX + (Screen.width - root.width) / 2
+            root.y = Screen.virtualY + (Screen.height - root.height) / 2
+        }
+    }
+
+    function chooseCategory(category) {
+        searchField.clear()
+        root.backend.selectedCategory = category
     }
 
     // Hiding the category list also hides the only way back to "All tools",
@@ -124,13 +166,32 @@ ApplicationWindow {
                     border.color: searchField.activeFocus ? root.accentColor : root.borderColor
                 }
 
-                Text {
+                // A drawn magnifier: the U+2315 glyph used before is missing from many fonts.
+                Item {
                     anchors.left: parent.left
                     anchors.leftMargin: 15
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "⌕"
-                    color: root.secondaryTextColor
-                    font.pixelSize: root.baseFontSize + 11
+                    width: 18
+                    height: 18
+
+                    Rectangle {
+                        width: 13
+                        height: 13
+                        radius: width / 2
+                        color: "transparent"
+                        border.width: 2
+                        border.color: root.secondaryTextColor
+                    }
+                    Rectangle {
+                        x: 10
+                        y: 13
+                        width: 8
+                        height: 2
+                        radius: 1
+                        rotation: 45
+                        transformOrigin: Item.Left
+                        color: root.secondaryTextColor
+                    }
                 }
 
                 Text {
@@ -164,19 +225,11 @@ ApplicationWindow {
             SecondaryButton {
                 visible: root.width >= 820
                 text: qsTr("Manual")
-                textColor: root.primaryTextColor
-                hoverColor: root.accentWash
-                borderColor: root.borderColor
-                accentColor: root.accentColor
                 onClicked: root.backend.openManual()
             }
 
             SecondaryButton {
                 text: qsTr("About")
-                textColor: root.primaryTextColor
-                hoverColor: root.accentWash
-                borderColor: root.borderColor
-                accentColor: root.accentColor
                 onClicked: aboutDialog.open()
             }
         }
@@ -211,24 +264,11 @@ ApplicationWindow {
                     font.letterSpacing: 1.1
                 }
 
-                Repeater {
-                    model: root.backend.categories
-                    CategoryButton {
-                        required property string modelData
-                        required property int index
-                        Layout.fillWidth: true
-                        text: modelData
-                        selected: searchField.text.length === 0
-                                  && (root.backend.selectedCategory === modelData
-                                      || (index === 0 && root.backend.selectedCategory === ""))
-                        accentColor: root.accentColor
-                        mutedTextColor: root.secondaryTextColor
-                        hoverColor: root.accentWash
-                        onClicked: {
-                            searchField.clear()
-                            root.backend.selectedCategory = modelData
-                        }
-                    }
+                CategoryRepeater {
+                    backend: root.backend
+                    searching: root.hasSearchTerms
+                    fillWidth: true
+                    onCategoryChosen: (category) => root.chooseCategory(category)
                 }
 
                 Item { Layout.fillHeight: true }
@@ -239,39 +279,12 @@ ApplicationWindow {
                     color: root.borderColor
                 }
 
-                RowLayout {
+                MenuVisibilityToggle {
                     Layout.fillWidth: true
                     Layout.topMargin: 6
-                    spacing: 7
-
-                    Text {
-                        id: sidebarMenuVisibilityLabel
-                        Layout.fillWidth: true
-                        text: qsTr("Hide those tools from the system menu")
-                        color: root.secondaryTextColor
-                        font.pixelSize: Math.max(10, root.baseFontSize - 1)
-                        wrapMode: Text.Wrap
-                        HoverHandler { id: sidebarMenuVisibilityLabelHover }
-                        ThemeToolTip {
-                            visible: sidebarMenuVisibilityLabelHover.hovered
-                            text: qsTr("They'll still be available here in MX Tools")
-                        }
-                    }
-
-                    ModernSwitch {
-                        id: sidebarMenuVisibilitySwitch
-                        checked: root.backend.hideFromMenu
-                        accentColor: root.accentColor
-                        inactiveColor: root.inactiveControlColor
-                        knobColor: checked ? systemPalette.highlightedText : systemPalette.button
-                        knobBorderColor: Qt.alpha(systemPalette.shadow, 0.25)
-                        Accessible.name: qsTr("Hide those tools from the system menu")
-                        ThemeToolTip {
-                            visible: sidebarMenuVisibilitySwitch.hovered
-                            text: qsTr("They'll still be available here in MX Tools")
-                        }
-                        onToggled: root.backend.hideFromMenu = checked
-                    }
+                    backend: root.backend
+                    wrapLabel: true
+                    fontPixelSize: Math.max(10, root.baseFontSize - 1)
                 }
             }
         }
@@ -308,24 +321,10 @@ ApplicationWindow {
                 Row {
                     id: compactCategories
                     spacing: 7
-                    Repeater {
-                        model: root.backend.categories
-                        CategoryButton {
-                            required property string modelData
-                            required property int index
-                            width: Math.max(92, implicitWidth)
-                            text: modelData
-                            selected: searchField.text.length === 0
-                                      && (root.backend.selectedCategory === modelData
-                                          || (index === 0 && root.backend.selectedCategory === ""))
-                            accentColor: root.accentColor
-                            mutedTextColor: root.secondaryTextColor
-                            hoverColor: root.accentWash
-                            onClicked: {
-                                searchField.clear()
-                                root.backend.selectedCategory = modelData
-                            }
-                        }
+                    CategoryRepeater {
+                        backend: root.backend
+                        searching: root.hasSearchTerms
+                        onCategoryChosen: (category) => root.chooseCategory(category)
                     }
                 }
             }
@@ -333,10 +332,16 @@ ApplicationWindow {
             RowLayout {
                 Layout.fillWidth: true
 
+                // The heading gives up width first (eliding) so the switch labels on the right
+                // keep their full, translated text.
                 ColumnLayout {
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: 0
                     spacing: 2
                     Text {
-                        text: searchField.text.length > 0
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        text: root.hasSearchTerms
                               ? qsTr("Search results")
                               : (root.backend.selectedCategory.length > 0
                                  ? root.backend.selectedCategory : qsTr("All tools"))
@@ -345,15 +350,15 @@ ApplicationWindow {
                         font.weight: Font.Bold
                     }
                     Text {
-                        text: searchField.text.length > 0
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        text: root.hasSearchTerms
                               ? qsTr("Results matching “%1”").arg(searchField.text)
                               : qsTr("Choose a tool to configure or maintain your system")
                         color: root.secondaryTextColor
                         font.pixelSize: root.baseFontSize
                     }
                 }
-
-                Item { Layout.fillWidth: true }
 
                 Text {
                     text: qsTr("%n tool(s)", "", toolsGrid.count)
@@ -370,19 +375,17 @@ ApplicationWindow {
                 }
 
                 Text {
-                    Layout.maximumWidth: 130
+                    Layout.maximumWidth: 190
                     text: qsTr("Condensed view")
                     color: root.secondaryTextColor
                     font.pixelSize: Math.max(10, root.baseFontSize - 1)
+                    wrapMode: Text.WordWrap
+                    maximumLineCount: 2
                     elide: Text.ElideRight
                 }
                 ModernSwitch {
                     id: condensedSwitch
                     checked: root.condensedView
-                    accentColor: root.accentColor
-                    inactiveColor: root.inactiveControlColor
-                    knobColor: checked ? systemPalette.highlightedText : systemPalette.button
-                    knobBorderColor: Qt.alpha(systemPalette.shadow, 0.25)
                     Accessible.name: qsTr("Use condensed tool view")
                     ThemeToolTip {
                         visible: condensedSwitch.hovered
@@ -400,19 +403,17 @@ ApplicationWindow {
                 }
 
                 Text {
-                    Layout.maximumWidth: 130
+                    Layout.maximumWidth: 190
                     text: qsTr("Hide categories")
                     color: root.secondaryTextColor
                     font.pixelSize: Math.max(10, root.baseFontSize - 1)
+                    wrapMode: Text.WordWrap
+                    maximumLineCount: 2
                     elide: Text.ElideRight
                 }
                 ModernSwitch {
                     id: hideCategoriesSwitch
                     checked: root.hideCategories
-                    accentColor: root.accentColor
-                    inactiveColor: root.inactiveControlColor
-                    knobColor: checked ? systemPalette.highlightedText : systemPalette.button
-                    knobBorderColor: Qt.alpha(systemPalette.shadow, 0.25)
                     Accessible.name: qsTr("Hide the category list")
                     ThemeToolTip {
                         visible: hideCategoriesSwitch.hovered
@@ -422,70 +423,96 @@ ApplicationWindow {
                 }
             }
 
-            GridView {
-                id: toolsGrid
+            Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                clip: true
-                boundsBehavior: Flickable.StopAtBounds
-                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AlwaysOn }
-                model: root.backend
-                cellWidth: width / Math.max(1, Math.floor(width / (root.condensedView ? 230 : 300)))
-                cellHeight: root.condensedView ? 112 : 154
 
-                onCellWidthChanged: Qt.callLater(toolsGrid.returnToBounds)
-                onCellHeightChanged: Qt.callLater(toolsGrid.returnToBounds)
-
-                // See the comment on the compact category Flickable above: bypass the default
-                // flick-momentum wheel handling so touchpad scrolling can reverse direction
-                // immediately instead of needing a full stop first.
-                WheelHandler {
-                    target: null
-                    acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-                    onWheel: (event) => {
-                        const minimumY = toolsGrid.originY
-                        const maximumY = Math.max(minimumY,
-                                                  minimumY + toolsGrid.contentHeight - toolsGrid.height)
-                        toolsGrid.contentY = Math.max(minimumY, Math.min(
-                            maximumY,
-                            toolsGrid.contentY - event.angleDelta.y))
+                GridView {
+                    id: toolsGrid
+                    anchors.fill: parent
+                    anchors.rightMargin: toolsScrollBar.width
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
+                    // Keep the themed scrollbar outside the clipped grid. The cards' trailing
+                    // spacing then remains a gap even with wider desktop scrollbars.
+                    ScrollBar.vertical: ScrollBar {
+                        id: toolsScrollBar
+                        parent: toolsGrid.parent
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.right: parent.right
+                        policy: ScrollBar.AlwaysOn
                     }
-                }
+                    model: root.backend
+                    cellWidth: width / Math.max(1, Math.floor(width / (root.condensedView ? 230 : 300)))
+                    cellHeight: root.condensedView ? 112 : 154
 
-                delegate: ToolCard {
-                    required property string name
-                    required property string comment
-                    required property string category
-                    required property string fileName
+                    // The grid is a single Tab stop: only the delegates in view exist, so tabbing
+                    // through cards couldn't reach the rest or scroll. The arrow keys move the
+                    // current card instead (GridView scrolls to it), and that card holds the focus
+                    // inside the grid, so its focus ring, Return and accessibility work as before.
+                    activeFocusOnTab: true
+                    keyNavigationEnabled: true
 
-                    width: toolsGrid.cellWidth - 12
-                    height: toolsGrid.cellHeight - 12
-                    toolName: name
-                    description: comment
-                    categoryName: category
-                    condensed: root.condensedView
-                    surfaceColor: root.surfaceColor
-                    hoverSurfaceColor: root.raisedSurfaceColor
-                    primaryTextColor: root.primaryTextColor
-                    secondaryTextColor: root.secondaryTextColor
-                    accentColor: root.accentColor
-                    borderColor: root.borderColor
-                    onClicked: root.backend.launch(fileName)
-                }
+                    onCellWidthChanged: Qt.callLater(toolsGrid.returnToBounds)
+                    onCellHeightChanged: Qt.callLater(toolsGrid.returnToBounds)
 
-                displaced: Transition {
-                    NumberAnimation { properties: "x,y"; duration: 160; easing.type: Easing.OutCubic }
-                }
+                    // See the comment on the compact category Flickable above: bypass the default
+                    // flick-momentum wheel handling so touchpad scrolling can reverse direction
+                    // immediately instead of needing a full stop first.
+                    WheelHandler {
+                        target: null
+                        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+                        onWheel: (event) => {
+                            const minimumY = toolsGrid.originY
+                            const maximumY = Math.max(minimumY,
+                                                      minimumY + toolsGrid.contentHeight - toolsGrid.height)
+                            toolsGrid.contentY = Math.max(minimumY, Math.min(
+                                maximumY,
+                                toolsGrid.contentY - event.angleDelta.y))
+                        }
+                    }
 
-                Text {
-                    visible: toolsGrid.count === 0
-                    anchors.centerIn: parent
-                    width: Math.min(parent.width - 40, 420)
-                    text: qsTr("No tools found\nTry a different search or category.")
-                    color: root.secondaryTextColor
-                    horizontalAlignment: Text.AlignHCenter
-                    font.pixelSize: root.baseFontSize + 3
-                    lineHeight: 1.5
+                    delegate: ToolCard {
+                        required property string name
+                        required property string comment
+                        required property string category
+                        required property string fileName
+                        required property int index
+
+                        focus: GridView.isCurrentItem
+                        activeFocusOnTab: false
+                        // A card focused by the mouse becomes the current one for the arrow keys.
+                        onActiveFocusChanged: {
+                            if (activeFocus) {
+                                toolsGrid.currentIndex = index
+                            }
+                        }
+
+                        width: toolsGrid.cellWidth - 12
+                        height: toolsGrid.cellHeight - 12
+                        toolName: name
+                        description: comment
+                        categoryName: category
+                        condensed: root.condensedView
+                        onClicked: root.backend.launch(fileName)
+                        onPinRequested: pin => root.backend.setPinned(fileName, pin)
+                    }
+
+                    displaced: Transition {
+                        NumberAnimation { properties: "x,y"; duration: 160; easing.type: Easing.OutCubic }
+                    }
+
+                    Text {
+                        visible: toolsGrid.count === 0
+                        anchors.centerIn: parent
+                        width: Math.min(parent.width - 40, 420)
+                        text: qsTr("No tools found\nTry a different search or category.")
+                        color: root.secondaryTextColor
+                        horizontalAlignment: Text.AlignHCenter
+                        font.pixelSize: root.baseFontSize + 3
+                        lineHeight: 1.5
+                    }
                 }
             }
 
@@ -495,30 +522,9 @@ ApplicationWindow {
                 spacing: 7
 
                 Item { Layout.fillWidth: true }
-                Text {
-                    id: compactMenuVisibilityLabel
-                    text: qsTr("Hide those tools from the system menu")
-                    color: root.secondaryTextColor
-                    font.pixelSize: Math.max(10, root.baseFontSize - 1)
-                    HoverHandler { id: compactMenuVisibilityLabelHover }
-                    ThemeToolTip {
-                        visible: compactMenuVisibilityLabelHover.hovered
-                        text: qsTr("They'll still be available here in MX Tools")
-                    }
-                }
-                ModernSwitch {
-                    id: compactMenuVisibilitySwitch
-                    checked: root.backend.hideFromMenu
-                    accentColor: root.accentColor
-                    inactiveColor: root.inactiveControlColor
-                    knobColor: checked ? systemPalette.highlightedText : systemPalette.button
-                    knobBorderColor: Qt.alpha(systemPalette.shadow, 0.25)
-                    Accessible.name: qsTr("Hide those tools from the system menu")
-                    ThemeToolTip {
-                        visible: compactMenuVisibilitySwitch.hovered
-                        text: qsTr("They'll still be available here in MX Tools")
-                    }
-                    onToggled: root.backend.hideFromMenu = checked
+                MenuVisibilityToggle {
+                    backend: root.backend
+                    fontPixelSize: Math.max(10, root.baseFontSize - 1)
                 }
             }
         }
@@ -536,12 +542,7 @@ ApplicationWindow {
             alignment: Qt.AlignRight
             padding: 12
             background: Item {}
-            delegate: SecondaryButton {
-                textColor: root.primaryTextColor
-                hoverColor: root.accentWash
-                borderColor: root.borderColor
-                accentColor: root.accentColor
-            }
+            delegate: SecondaryButton {}
             onRejected: aboutDialog.reject()
         }
 
@@ -586,26 +587,14 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignHCenter
                 SecondaryButton {
                     text: qsTr("Website")
-                    textColor: root.primaryTextColor
-                    hoverColor: root.accentWash
-                    borderColor: root.borderColor
-                    accentColor: root.accentColor
                     onClicked: root.backend.openWebsite()
                 }
                 SecondaryButton {
                     text: qsTr("License")
-                    textColor: root.primaryTextColor
-                    hoverColor: root.accentWash
-                    borderColor: root.borderColor
-                    accentColor: root.accentColor
                     onClicked: root.backend.openLicense()
                 }
                 SecondaryButton {
                     text: qsTr("Changelog")
-                    textColor: root.primaryTextColor
-                    hoverColor: root.accentWash
-                    borderColor: root.borderColor
-                    accentColor: root.accentColor
                     onClicked: root.backend.openChangelog()
                 }
             }
@@ -621,19 +610,33 @@ ApplicationWindow {
     Dialog {
         id: errorDialog
         property string message: ""
+        // Errors queue up instead of replacing one that is still shown, and are shown
+        // oldest first; an item leaves the queue only when it is displayed.
+        property var pending: []
+        function show(title, message) {
+            pending = pending.concat([{ title: title, message: message }])
+            showNext()
+        }
+        function showNext() {
+            if (visible || pending.length === 0) {
+                return
+            }
+            const next = pending[0]
+            pending = pending.slice(1)
+            errorDialog.title = next.title
+            errorDialog.message = next.message
+            open()
+        }
         modal: true
+        width: Math.min(root.width - 80, 480)
         anchors.centerIn: Overlay.overlay
+        onClosed: Qt.callLater(showNext)
         footer: DialogButtonBox {
             standardButtons: DialogButtonBox.Ok
             alignment: Qt.AlignRight
             padding: 12
             background: Item {}
-            delegate: SecondaryButton {
-                textColor: root.primaryTextColor
-                hoverColor: root.accentWash
-                borderColor: root.borderColor
-                accentColor: root.accentColor
-            }
+            delegate: SecondaryButton {}
             onAccepted: errorDialog.accept()
         }
         contentItem: Text {
@@ -655,12 +658,7 @@ ApplicationWindow {
             alignment: Qt.AlignRight
             padding: 12
             background: Item {}
-            delegate: SecondaryButton {
-                textColor: root.primaryTextColor
-                hoverColor: root.accentWash
-                borderColor: root.borderColor
-                accentColor: root.accentColor
-            }
+            delegate: SecondaryButton {}
             onRejected: documentDialog.reject()
         }
 
@@ -679,9 +677,7 @@ ApplicationWindow {
     Connections {
         target: root.backend
         function onErrorOccurred(title, message) {
-            errorDialog.title = title
-            errorDialog.message = message
-            errorDialog.open()
+            errorDialog.show(title, message)
         }
         function onDocumentReady(title, content) {
             documentDialog.title = title
@@ -690,6 +686,7 @@ ApplicationWindow {
         }
     }
 
-    Shortcut { sequence: StandardKey.Find; onActivated: searchField.forceActiveFocus() }
+    // StandardKey.Find can map to several key combinations; sequences binds them all.
+    Shortcut { sequences: [StandardKey.Find]; onActivated: searchField.forceActiveFocus() }
     Shortcut { sequence: "Escape"; onActivated: searchField.text.length > 0 ? searchField.clear() : root.close() }
 }

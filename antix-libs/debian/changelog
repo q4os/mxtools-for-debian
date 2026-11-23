@@ -1,8 +1,14 @@
-antix-libs (0.8.14+11mx25.1302) stable; urgency=medium
+antix-libs (0.8.14+12mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:02 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:13 +0100
+
+antix-libs (0.8.14+12mx25) mx; urgency=medium
+
+  * exclude /etc/machine-id by default from remaster (created by live init )
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Oct 2026 20:23:45 -0400
 
 antix-libs (0.8.14+11mx25) mx; urgency=medium
 

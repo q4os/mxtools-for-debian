@@ -1,8 +1,40 @@
-mx-welcome (26.09.5mx25.1302) stable; urgency=medium
+mx-welcome (26.11.1mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:08 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:22 +0100
+
+mx-welcome (26.11.1mx25) mx; urgency=medium
+
+  * show MX Welcome once at first login for new accounts, including those
+    created after an upgrade
+  * keep the startup checkbox in sync with the desktop's login settings,
+    even when a change cannot be saved
+  * restore startup on Debian 12 (Bookworm) systems using Qt 6.4
+  * reopen the window at its saved size and fit it to the current screen
+  * keep the dashboard responsive while it gathers system information and
+    show a message if the report is unavailable
+  * show an error when a built-in dashboard tool cannot be started
+  * make command-line help and version information available without a
+    graphical session and show help in the user's language when available
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 20 Nov 2026 14:54:21 -0500
+
+mx-welcome (26.11mx25) mx; urgency=medium
+
+  * preserve automatic startup enabled through the desktop session settings
+  * keep translations for the automatic startup entry in sync with the
+    application menu entry
+  * hide default live-session passwords when root persistence is enabled or
+    password changes are required at startup
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 10 Nov 2026 08:42:17 -0500
+
+mx-welcome (26.09.6mx25) mx; urgency=medium
+
+  * restore autostart entry for newly created user accounts
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 19 Sep 2026 14:20:28 -0400
 
 mx-welcome (26.09.5mx25) mx; urgency=medium
 

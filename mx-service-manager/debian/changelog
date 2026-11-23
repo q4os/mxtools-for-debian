@@ -1,15 +1,44 @@
-mx-service-manager (26.08.1302) stable; urgency=medium
+mx-service-manager (26.11.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:06 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:21 +0100
+
+mx-service-manager (26.11) mx; urgency=medium
+
+  * List installed systemd services that are disabled and currently unloaded
+    so they can be enabled from the service list.
+  * Show system and user services separately when they share a name, and
+    use the full service name for actions so they reach the selected service.
+  * Show the current SysV boot settings after a refresh and keep disabled
+    services disabled across package upgrades.
+  * Let users change SysV boot settings even when a service cannot report
+    whether it is running.
+  * Confirm that boot settings took effect before reporting success, and
+    explain when disabling a systemd service also blocks manual starts.
+  * Report it correctly when enabling a systemd service does not take
+    effect, and keep a blocked service blocked if enabling it fails.
+  * Show the correct status after starting a systemd service that runs
+    once and exits.
+  * Keep the window open when a password prompt is cancelled after startup.
+  * Prevent crashes when refreshing during a service action or searching
+    for a name that has no matches.
+  * Report an error instead of waiting forever when a needed system tool
+    cannot be started.
+  * Show a clear message when started without a graphical display.
+  * Install the manual page and changelog in Arch Linux packages.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 20 Nov 2026 14:54:13 -0500
 
 mx-service-manager (26.08) mx; urgency=medium
 
-  * Keep the application responsive while loading or refreshing the service list and service details
-  * Prevent crashes when refreshing the service list or using service actions while it is still loading
+  * Keep the application responsive while loading or refreshing the service
+    list and service details
+  * Prevent crashes when refreshing the service list or using service
+    actions while it is still loading
   * Correctly read service dependency targets on SysVinit systems
-  * Stop service commands that remain stuck for more than two minutes and report the timeout
+  * Stop service commands that remain stuck for more than two minutes and
+    report the timeout
   * Install the mx-service-manager manual page with the package
 
  -- Adrian <adrian@mxlinux.org>  Wed, 26 Aug 2026 09:18:47 -0400

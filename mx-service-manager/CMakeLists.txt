@@ -60,6 +60,8 @@ project(mx-service-manager
     LANGUAGES CXX
 )
 
+include(GNUInstallDirs)
+
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -107,6 +109,9 @@ if(NOT IS_ABSOLUTE "${HELPER_INSTALL_DIR}")
     message(FATAL_ERROR "HELPER_INSTALL_DIR must be an absolute path, got: ${HELPER_INSTALL_DIR}")
 endif()
 set(HELPER_PATH "${HELPER_INSTALL_DIR}/helper")
+set(POLKIT_ACTION_DIR "/usr/share/polkit-1/actions" CACHE PATH "System polkit action directory")
+file(RELATIVE_PATH APP_LOCALE_DIR "${CMAKE_INSTALL_FULL_BINDIR}" "${CMAKE_INSTALL_FULL_DATADIR}/mx-service-manager/locale")
+file(RELATIVE_PATH APP_DOC_DIR "${CMAKE_INSTALL_FULL_BINDIR}" "${CMAKE_INSTALL_FULL_DOCDIR}")
 
 configure_file(
     scripts/org.mxlinux.pkexec.mxsm-helper.policy.in
@@ -178,6 +183,8 @@ endif()
 # Set compile definitions
 target_compile_definitions(mx-service-manager PRIVATE
     HELPER_PATH="${HELPER_PATH}"
+    APP_LOCALE_DIR="${APP_LOCALE_DIR}"
+    APP_DOC_DIR="${APP_DOC_DIR}"
 )
 
 target_compile_definitions(mx-service-manager PRIVATE
@@ -205,6 +212,12 @@ endif()
 option(BUILD_TESTS "Build tests" OFF)
 if(BUILD_TESTS)
     enable_testing()
+    foreach(option IN ITEMS -h --help --help-all -v --version)
+        add_test(NAME cli${option} COMMAND ${CMAKE_COMMAND} -E env
+            --unset=DISPLAY --unset=WAYLAND_DISPLAY --unset=QT_QPA_PLATFORM
+            $<TARGET_FILE:mx-service-manager> ${option})
+        set_tests_properties(cli${option} PROPERTIES TIMEOUT 10)
+    endforeach()
     add_test(NAME helper_smoke COMMAND helper true)
 endif()
 
@@ -261,12 +274,13 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     endif()
 endif()
 
-# Install targets (required by Debian build system)
-# Other files are handled by debian/install
-install(TARGETS mx-service-manager
-    RUNTIME DESTINATION bin
-)
-
-install(TARGETS helper
-    RUNTIME DESTINATION ${HELPER_INSTALL_DIR}
-)
+install(TARGETS mx-service-manager RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
+install(TARGETS helper RUNTIME DESTINATION "${HELPER_INSTALL_DIR}")
+install(FILES "${CMAKE_BINARY_DIR}/org.mxlinux.pkexec.mxsm-helper.policy" DESTINATION "${POLKIT_ACTION_DIR}")
+install(FILES ${qm_files} DESTINATION "${CMAKE_INSTALL_DATADIR}/mx-service-manager/locale")
+install(FILES mx-service-manager.desktop DESTINATION "${CMAKE_INSTALL_DATADIR}/applications")
+install(FILES mx-service-manager.png DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor/64x64/apps")
+install(FILES mx-service-manager.png DESTINATION "${CMAKE_INSTALL_DATADIR}/pixmaps")
+install(DIRECTORY docs/ DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+install(FILES debian/changelog DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+install(FILES help/mx-service-manager.1 DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")

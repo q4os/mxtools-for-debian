@@ -21,6 +21,7 @@
 #include <QtGlobal>
 
 #include <cstdlib>
+#include <memory>
 #include <unistd.h>
 
 static QString bundledIconPath()
@@ -54,7 +55,10 @@ public:
 
 int main(int argc, char *argv[])
 {
-    if (qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
+    const QByteArray option = argc == 2 ? QByteArray(argv[1]) : QByteArray();
+    const bool informational = option == "-h" || option == "--help" || option == "--help-all"
+                               || option == "-v" || option == "--version";
+    if (!informational && qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
         && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
         qWarning("mx-welcome: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
                 "a graphical session is required to run this program.");
@@ -66,19 +70,12 @@ int main(int argc, char *argv[])
     QApplication::setApplicationDisplayName(QStringLiteral("MX Welcome"));
     QApplication::setApplicationVersion(QStringLiteral(VERSION));
 
-    QApplication app(argc, argv);
-    QApplication::setWindowIcon(
-        QIcon::fromTheme(QStringLiteral("mx-welcome"), QIcon(bundledIconPath())));
-
-    QCommandLineParser parser;
-    parser.setApplicationDescription(QObject::tr("This tool displays the MX Linux welcome screen."));
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.addOption({{"a", "about"},
-                      QObject::tr("Start with About selected. The About page provides basic information about the "
-                                  "current MX Linux version, the user's hardware, and access to a full system report.")});
-    parser.addOption({{"t", "test"}, QObject::tr("Run a test mode.")});
-    parser.process(app);
+    std::unique_ptr<QCoreApplication> app;
+    if (informational) {
+        app = std::make_unique<QCoreApplication>(argc, argv);
+    } else {
+        app = std::make_unique<QApplication>(argc, argv);
+    }
 
     QTranslator qtTranslator;
     if (qtTranslator.load(QStringLiteral("qt_") + QLocale().name(),
@@ -95,6 +92,19 @@ int main(int argc, char *argv[])
                            QStringLiteral("/usr/share/mx-welcome/locale"))) {
         QApplication::installTranslator(&appTranslator);
     }
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription(QObject::tr("This tool displays the MX Linux welcome screen."));
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addOption({{"a", "about"},
+                      QObject::tr("Start with About selected. The About page provides basic information about the "
+                                  "current MX Linux version, the user's hardware, and access to a full system report.")});
+    parser.addOption({{"t", "test"}, QObject::tr("Run a test mode.")});
+    parser.process(*app);
+
+    QApplication::setWindowIcon(
+        QIcon::fromTheme(QStringLiteral("mx-welcome"), QIcon(bundledIconPath())));
 
     if (getuid() == 0) {
         QApplication::beep();
@@ -116,7 +126,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("icons"), new ThemeIconProvider);
     engine.setInitialProperties({{QStringLiteral("backend"), QVariant::fromValue(&backend)}});
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed, &app,
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed, app.get(),
                      [] { QCoreApplication::exit(EXIT_FAILURE); }, Qt::QueuedConnection);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     engine.loadFromModule(QStringLiteral("MxWelcome"), QStringLiteral("Main"));

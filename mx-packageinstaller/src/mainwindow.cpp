@@ -54,6 +54,7 @@
 #include "about.h"
 #include "aptcache.h"
 #include "checkableheaderview.h"
+#include "mainwindow_helpers.h"
 #include "outputrender.h"
 #include "packagebackend.h"
 #include "versionnumber.h"
@@ -74,21 +75,13 @@ QHash<QString, PackageInfo> pacmanAvailablePackages(bool *ok = nullptr);
 #endif
 
 namespace {
-constexpr auto MxpiLibPath = "/usr/lib/mx-packageinstaller/mxpi-lib";
 constexpr auto MxpiMaintenancePath = "/usr/lib/mx-packageinstaller/mxpi-maintenance";
 
+using MainWindowHelpers::MxpiLibPath;
+using MainWindowHelpers::appendFlatpakStatusMessage;
+using MainWindowHelpers::runMxpiLibAsRoot;
+using MainWindowHelpers::runScriptAsRoot;
 using OutputRender::sanitizeOutputForDisplay;
-
-QString debconfFrontend()
-{
-    if (QFile::exists("/usr/share/doc/debconf-kde-helper")) {
-        return QStringLiteral("kde");
-    }
-    if (QFile::exists("/usr/share/doc/debconf-gnome")) {
-        return QStringLiteral("gnome");
-    }
-    return QStringLiteral("noninteractive");
-}
 
 QStringList packageArgs(const QString &names)
 {
@@ -228,36 +221,6 @@ QString shellCommandFromArgs(const QStringList &args)
         quoted.append(shellSingleQuote(arg));
     }
     return quoted.join(QLatin1Char(' '));
-}
-
-void appendFlatpakStatusMessage(QPlainTextEdit *outputBox, const QString &message)
-{
-    if (!outputBox) {
-        return;
-    }
-
-    QTextCursor cursor = outputBox->textCursor();
-    cursor.movePosition(QTextCursor::End);
-    if (outputBox->document()->characterCount() > 1) {
-        const QString lastLine = outputBox->document()->lastBlock().text();
-        if (!lastLine.isEmpty()) {
-            cursor.insertText("\n");
-        }
-    }
-    cursor.insertText(message + "\n");
-    outputBox->setTextCursor(cursor);
-    outputBox->verticalScrollBar()->setValue(outputBox->verticalScrollBar()->maximum());
-}
-
-bool runScriptAsRoot(Cmd &cmd, const char *scriptPath, const QString &action, Cmd::QuietMode quiet)
-{
-    const QString path = QString::fromLatin1(scriptPath);
-    return cmd.procScriptAsRoot(path, {action}, nullptr, nullptr, quiet);
-}
-
-bool runMxpiLibAsRoot(Cmd &cmd, const QString &action, Cmd::QuietMode quiet = Cmd::QuietMode::Yes)
-{
-    return runScriptAsRoot(cmd, MxpiLibPath, action, quiet);
 }
 
 bool runMxpiLib(Cmd &cmd, const QString &action, Cmd::QuietMode quiet = Cmd::QuietMode::Yes)
@@ -530,46 +493,7 @@ MainWindow::MainWindow(const QCommandLineParser &argParser, QWidget *parent)
 #endif
         // Set the model on main thread after preload — all member access happens on the GUI thread
         QMetaObject::invokeMethod(
-            this,
-            [this, loadedList = std::move(loadedList)]() mutable {
-                enabledList = std::move(loadedList);
-                if (enabledModel && !enabledList.isEmpty()) {
-                    QVector<PackageData> packages;
-                    packages.reserve(enabledList.size() + installedPackages.size());
-
-                    for (const auto &[name, info] : std::as_const(enabledList).asKeyValueRange()) {
-                        packages.append(createPackageData(name, info.version, info.description));
-                    }
-
-                    for (const auto &[name, info] : std::as_const(installedPackages).asKeyValueRange()) {
-                        if (!enabledList.contains(name)) {
-                            packages.append(createPackageData(name, QString(), info.description));
-                        }
-                    }
-
-                    enabledModel->setPackageData(packages);
-
-                    // Update installed versions
-                    const auto installedVersions = listInstalledVersions();
-                    QHash<QString, QString> versionStrings;
-                    versionStrings.reserve(installedVersions.size());
-                    for (const auto &[name, version] : installedVersions.asKeyValueRange()) {
-                        versionStrings.insert(name, version.toString());
-                    }
-                    enabledModel->updateInstalledVersions(versionStrings);
-
-                    // Ensure enabled tree is sorted after background load
-                    if (enabledProxy) {
-                        enabledProxy->sort(TreeCol::Name, Qt::AscendingOrder);
-                    }
-
-                    // Mark as not dirty since we just loaded it
-                    dirtyEnabledRepos = false;
-                }
-
-                ui->tabWidget->setTabEnabled(Tab::Test, true);
-                ui->tabWidget->setTabEnabled(Tab::Backports, true);
-            },
+            this, [this, loadedList = std::move(loadedList)]() mutable { applyPreloadedEnabledList(std::move(loadedList)); },
             Qt::QueuedConnection);
     });
 #endif
@@ -969,6 +893,27 @@ void MainWindow::setup()
     auto *shortcutToggle = new QShortcut(Qt::Key_Space, this);
     connect(shortcutToggle, &QShortcut::activated, this, &MainWindow::checkUncheckItem);
 
+    // Ctrl+I shows info for the current row of whichever list tab is open
+    auto *shortcutInfo = new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_I), this);
+    connect(shortcutInfo, &QShortcut::activated, this, [this] {
+        if (currentTree && currentTree->isVisible()) {
+            displayInfo(currentTree, currentTree->currentIndex());
+        }
+    });
+
+    // Clicking the Info icon opens the same dialog as "More info..." (Popular Apps
+    // is wired in setConnections())
+    connect(ui->treeFlatpak, &QTreeView::clicked, this, [this](const QModelIndex &index) {
+        if (index.column() == FlatCol::Info) {
+            displayFlatpakInfo(index);
+        }
+    });
+    connect(ui->treeSnap, &QTreeView::clicked, this, [this](const QModelIndex &index) {
+        if (index.column() == SnapCol::Info) {
+            displaySnapInfo(index);
+        }
+    });
+
     // Connect tree views for double-click toggle
     QList<QTreeView *> listTree {ui->treePopularApps, ui->treeEnabled, ui->treeMXtest, ui->treeBackports,
                                   ui->treeFlatpak, ui->treeSnap};
@@ -976,9 +921,7 @@ void MainWindow::setup()
     listTree.append(ui->treeAUR);
 #endif
     for (auto *tree : listTree) {
-        if (tree != ui->treeFlatpak && tree != ui->treeSnap) {
-            tree->setContextMenuPolicy(Qt::CustomContextMenu);
-        }
+        tree->setContextMenuPolicy(Qt::CustomContextMenu);
         connect(tree, &QTreeView::doubleClicked, this, &MainWindow::checkUncheckItem);
         // treePopularApps has its own context-menu handler wired in setConnections();
         // wiring the generic one too would pop up two menus.
@@ -1067,8 +1010,8 @@ void MainWindow::setupModels()
     enabledModel->setIcons(qiconInstalled, qiconUpgradable);
     mxtestModel->setIcons(qiconInstalled, qiconUpgradable);
     backportsModel->setIcons(qiconInstalled, qiconUpgradable);
-    flatpakModel->setIcons(qiconInstalled);
-    snapModel->setIcons(qiconInstalled);
+    flatpakModel->setIcons(qiconInstalled, QIcon::fromTheme("dialog-information"));
+    snapModel->setIcons(qiconInstalled, QIcon::fromTheme("dialog-information"));
     popularModel->setIcons(qiconInstalled, QIcon::fromTheme("folder"), QIcon::fromTheme("dialog-information"));
 #ifdef PACKAGE_BACKEND_PACMAN
     aurModel->setIcons(qiconInstalled, qiconUpgradable);
@@ -1324,17 +1267,19 @@ uchar MainWindow::showVersionDialog(const QString &message)
     QMessageBox msgBox;
     msgBox.setWindowTitle(tr("Debian Version"));
     msgBox.setText(message);
-    msgBox.addButton("Bookworm", QMessageBox::AcceptRole);
+    const QAbstractButton *bookwormButton = msgBox.addButton("Bookworm", QMessageBox::AcceptRole);
     msgBox.addButton("Trixie", QMessageBox::AcceptRole);
-    msgBox.addButton(QMessageBox::Cancel);
+    const QAbstractButton *cancelButton = msgBox.addButton(QMessageBox::Cancel);
     msgBox.show();
 
-    int ret = msgBox.exec();
+    // exec()'s return value is opaque for custom buttons (since Qt 6.5 it is no
+    // longer the button's index), so identify the choice by the clicked button.
+    msgBox.exec();
 
-    if (ret == QMessageBox::Cancel) {
+    if (msgBox.clickedButton() == cancelButton) {
         exit(EXIT_FAILURE);
     }
-    return ret == 0 ? Release::Bookworm : Release::Trixie;
+    return msgBox.clickedButton() == bookwormButton ? Release::Bookworm : Release::Trixie;
 }
 
 QString MainWindow::getDebianVerName(uchar version)
@@ -1442,6 +1387,14 @@ void MainWindow::checkUncheckItem()
             Qt::CheckState currentState = static_cast<Qt::CheckState>(checkIndex.data(Qt::CheckStateRole).toInt());
             Qt::CheckState newState = (currentState == Qt::Checked) ? Qt::Unchecked : Qt::Checked;
             flatpakModel->setData(checkIndex, newState, Qt::CheckStateRole);
+        }
+    } else if (currentTreeView == ui->treeSnap) {
+        if (snapModel) {
+            QModelIndex sourceIndex = snapProxy->mapToSource(currentIndex);
+            QModelIndex checkIndex = snapModel->index(sourceIndex.row(), SnapCol::Check);
+            Qt::CheckState currentState = static_cast<Qt::CheckState>(checkIndex.data(Qt::CheckStateRole).toInt());
+            Qt::CheckState newState = (currentState == Qt::Checked) ? Qt::Unchecked : Qt::Checked;
+            snapModel->setData(checkIndex, newState, Qt::CheckStateRole);
         }
     } else {
         // APT trees
@@ -1866,12 +1819,14 @@ void MainWindow::setProgressDialog()
 
 void MainWindow::setSearchFocus() const
 {
-    static const QMap<int, QLineEdit *> searchBoxMap {{Tab::EnabledRepos, ui->searchBoxEnabled},
-                                                      {Tab::Test, ui->searchBoxMX},
-                                                      {Tab::Backports, ui->searchBoxBP},
-                                                      {Tab::Flatpak, ui->searchBoxFlatpak},
-                                                      {Tab::Snap, ui->searchBoxSnap},
-                                                      {Tab::Popular, ui->searchPopular}};
+    // Not static: the pointers belong to this window's ui (the test suite creates
+    // several MainWindows in one process).
+    const QMap<int, QLineEdit *> searchBoxMap {{Tab::EnabledRepos, ui->searchBoxEnabled},
+                                               {Tab::Test, ui->searchBoxMX},
+                                               {Tab::Backports, ui->searchBoxBP},
+                                               {Tab::Flatpak, ui->searchBoxFlatpak},
+                                               {Tab::Snap, ui->searchBoxSnap},
+                                               {Tab::Popular, ui->searchPopular}};
     const auto index = ui->tabWidget->currentIndex();
     if (auto *searchBox = searchBoxMap.value(index)) {
         searchBox->setFocus();
@@ -2042,7 +1997,9 @@ void MainWindow::displayPackages()
         currentTree->setUpdatesEnabled(true);
     }
 
-    QMetaObject::invokeMethod(this, [this] { displayAutoremovable(); }, Qt::QueuedConnection);
+    // Bind the tree now: callers such as rebuildPackageViews() switch currentTree
+    // temporarily and restore it before this queued call runs.
+    QMetaObject::invokeMethod(this, [this, tree = currentTree] { displayAutoremovable(tree); }, Qt::QueuedConnection);
 
     QApplication::restoreOverrideCursor();
 
@@ -2073,45 +2030,131 @@ void MainWindow::handleInstalledPackagesArrived()
 }
 #endif
 
-void MainWindow::displayAutoremovable()
+#ifndef PACKAGE_BACKEND_PACMAN
+// GUI-thread half of the constructor's background AptCache preload: fills the
+// Enabled Repos model from the list the worker read.
+void MainWindow::applyPreloadedEnabledList(QHash<QString, PackageInfo> loadedList)
+{
+    enabledList = std::move(loadedList);
+    if (enabledModel && !enabledList.isEmpty()) {
+        QVector<PackageData> packages;
+        packages.reserve(enabledList.size() + installedPackages.size());
+
+        for (const auto &[name, info] : std::as_const(enabledList).asKeyValueRange()) {
+            packages.append(createPackageData(name, info.version, info.description));
+        }
+
+        for (const auto &[name, info] : std::as_const(installedPackages).asKeyValueRange()) {
+            if (!enabledList.contains(name)) {
+                packages.append(createPackageData(name, QString(), info.description));
+            }
+        }
+
+        enabledModel->setPackageData(packages);
+
+        // Update installed versions
+        const auto installedVersions = listInstalledVersions();
+        QHash<QString, QString> versionStrings;
+        versionStrings.reserve(installedVersions.size());
+        for (const auto &[name, version] : installedVersions.asKeyValueRange()) {
+            versionStrings.insert(name, version.toString());
+        }
+        enabledModel->updateInstalledVersions(versionStrings);
+        // Loading reset every status; restore the autoremovable ones if the tab is
+        // already filtered on them.
+        ensureAutoremovableShown(ui->treeEnabled);
+
+        // Ensure enabled tree is sorted after background load
+        if (enabledProxy) {
+            enabledProxy->sort(TreeCol::Name, Qt::AscendingOrder);
+        }
+
+        // Mark as not dirty since we just loaded it
+        dirtyEnabledRepos = false;
+    }
+
+    ui->tabWidget->setTabEnabled(Tab::Test, true);
+    ui->tabWidget->setTabEnabled(Tab::Backports, true);
+}
+#endif
+
+void MainWindow::displayAutoremovable(const QTreeView *tree)
 {
 #ifdef PACKAGE_BACKEND_PACMAN
     if (skipInitialAutoremovableCheck) {
         skipInitialAutoremovableCheck = false;
+        // The skip only saves startup time; a list already shown filtered on
+        // Autoremovable still needs the statuses.
+        ensureAutoremovableShown(tree);
         return;
     }
 #endif
+    if (PackageModel *model = aptTab(tree).model) {
+        updateAutoremovable(model);
+    }
+}
+
+// Computes the autoremovable statuses of `tree`'s model when its tab is filtered on
+// Autoremovable and a list (re)load left them out of date; otherwise that filter
+// would show nothing until it is selected again.
+void MainWindow::ensureAutoremovableShown(const QTreeView *tree)
+{
+    const AptTabContext tab = aptTab(tree);
+    if (tab.model && tab.filterCombo && tab.filterCombo->currentText() == tr("Autoremovable")
+        && !tab.model->autoremovableKnown()) {
+        updateAutoremovable(tab.model);
+    }
+}
+
+// Recomputes the autoremovable candidates and marks them in `model`. An empty result
+// is applied too, so the model records that its statuses are current.
+void MainWindow::updateAutoremovable(PackageModel *model)
+{
     const QStringList names = PackageBackend::autoremovableCandidates(cmd);
-
     ui->pushRemoveAutoremovable->setVisible(!names.isEmpty());
-    if (names.isEmpty()) {
-        return;
-    }
+    model->setAutoremovable(names);
+}
 
-    // Update autoremovable status in the current model
-    auto *model = getCurrentModel();
-    if (model) {
-        model->setAutoremovable(names);
+MainWindow::AptTabContext MainWindow::aptTab(const QTreeView *tree)
+{
+    if (tree == nullptr) {
+        return {};
     }
+    if (tree == ui->treeMXtest) {
+        return {mxtestModel, mxtestProxy, &mxList, ui->comboFilterMX, headerMX};
+    }
+    if (tree == ui->treeBackports) {
+        return {backportsModel, backportsProxy, &backportsList, ui->comboFilterBP, headerBP};
+    }
+    if (tree == ui->treeEnabled) {
+        return {enabledModel, enabledProxy, &enabledList, ui->comboFilterEnabled, headerEnabled};
+    }
+#ifdef PACKAGE_BACKEND_PACMAN
+    if (tree == ui->treeAUR) {
+        return {aurModel, aurProxy, &aurList, ui->comboFilterAUR, headerAUR};
+    }
+#endif
+    return {};
 }
 
 MainWindow::AptTabContext MainWindow::currentAptTab()
 {
-    if (currentTree == ui->treeMXtest) {
-        return {mxtestModel, mxtestProxy, &mxList};
-    }
-    if (currentTree == ui->treeBackports) {
-        return {backportsModel, backportsProxy, &backportsList};
-    }
-    if (currentTree == ui->treeEnabled) {
-        return {enabledModel, enabledProxy, &enabledList};
-    }
+    return aptTab(currentTree);
+}
+
+QList<QTreeView *> MainWindow::aptTrees() const
+{
+    QList<QTreeView *> trees {ui->treeEnabled, ui->treeMXtest, ui->treeBackports};
 #ifdef PACKAGE_BACKEND_PACMAN
-    if (currentTree == ui->treeAUR) {
-        return {aurModel, aurProxy, &aurList};
-    }
+    trees.append(ui->treeAUR);
 #endif
-    return {};
+    return trees;
+}
+
+bool MainWindow::currentTabFiltersAutoremovable()
+{
+    const QComboBox *filterCombo = currentAptTab().filterCombo;
+    return filterCombo && filterCombo->currentText() == tr("Autoremovable");
 }
 
 PackageModel *MainWindow::getCurrentModel()
@@ -2914,6 +2957,16 @@ bool MainWindow::installPopularApp(const QString &name)
         }
     }
     enableOutput();
+    // A preinstall hook can add a temporary third-party repo (tempList). Remove it on
+    // every return path below, including cancellation and lock failures, so it never
+    // stays an active apt source for the rest of the session.
+    const auto removeTempList = qScopeGuard([this] {
+        if (QFile::exists(tempList)) {
+            Cmd helperCmd;
+            runMxpiMaintenanceAsRoot(helperCmd, QStringLiteral("cleanup_temp"));
+            updateApt();
+        }
+    });
     // Preinstall
     if (!preinstall.isEmpty()) {
         qDebug() << "Pre-install";
@@ -2922,11 +2975,6 @@ bool MainWindow::installPopularApp(const QString &name)
             return false;
         }
         if (!cmd.runHookAsRoot(preinstall)) {
-            if (QFile::exists(tempList)) {
-                Cmd helperCmd;
-                runMxpiMaintenanceAsRoot(helperCmd, QStringLiteral("cleanup_temp"));
-                updateApt();
-            }
             return false;
         }
     }
@@ -2949,11 +2997,6 @@ bool MainWindow::installPopularApp(const QString &name)
         if (!cmd.runHookAsRoot(postinstall)) {
             result = false;
         }
-    }
-    if (QFile::exists(tempList)) {
-        Cmd helperCmd;
-        runMxpiMaintenanceAsRoot(helperCmd, QStringLiteral("cleanup_temp"));
-        updateApt();
     }
     return result;
 }
@@ -3594,11 +3637,6 @@ void MainWindow::cleanup()
                       fpUser.startsWith(QLatin1String("--user")) ? QStringLiteral("user") : QStringLiteral("system"));
 }
 
-QString MainWindow::getVersion(const QString &name) const
-{
-    return Cmd().getOut({{"LANG", "C"}}, "dpkg-query", {"-f", "${Version}", "-W", name});
-}
-
 // Return true if all the packages listed are installed
 bool MainWindow::checkInstalled(const QVariant &names) const
 {
@@ -3698,52 +3736,6 @@ QStringList MainWindow::listFlatpaks(const QString &remote, const QString &fpUse
     return listFlatpaksImpl(remote, fpUserScope, getArchOption(), type);
 }
 
-// List installed flatpaks by type: apps, runtimes, or all (if no type is provided)
-QStringList MainWindow::listInstalledFlatpaks(const QString &type)
-{
-    QStringList lines;
-    if (cachedInstalledScope == fpUser && cachedInstalledFetched) {
-        lines = cachedInstalledFlatpaks;
-    } else {
-        QStringList args = flatpakArgsWithScope(fpUser, {"list"});
-        if (!type.isEmpty()) {
-            args << type;
-        }
-        args << QStringLiteral("--columns=ref");
-        QScopedValueRollback<bool> guard(suppressCmdOutput, true);
-        lines = cmd.getOut("flatpak", args, Cmd::QuietMode::No, /*discardStderr=*/true).split('\n', Qt::SkipEmptyParts);
-
-        if (type.isEmpty()) {
-            cachedInstalledFlatpaks = lines;
-            cachedInstalledScope = fpUser;
-            cachedInstalledFetched = true;
-        }
-    }
-
-    QStringList refs;
-    for (const QString &lineRaw : lines) {
-        if (lineRaw.startsWith(QLatin1String("Ref"))) { // skip header if present
-            continue;
-        }
-        const QString line = lineRaw.section('\t', 0, 0);
-
-        const ParsedFlatpakRef parsed = parseInstalledFlatpakLine(line);
-        if (parsed.ref.isEmpty()) {
-            continue;
-        }
-
-        if (type == QLatin1String("--app") && parsed.isRuntime) {
-            continue;
-        }
-        if (type == QLatin1String("--runtime") && !parsed.isRuntime) {
-            continue;
-        }
-
-        refs.append(parsed.ref);
-    }
-    return refs;
-}
-
 PackageData MainWindow::createPackageData(const QString &name, const QString &version,
                                           const QString &description) const
 {
@@ -3841,35 +3833,10 @@ QHash<QString, VersionNumber> MainWindow::listInstalledVersions()
 
 QUrl MainWindow::getScreenshotUrl(const QString &name)
 {
-    QUrl url(QString("https://screenshots.debian.net/json/package/%1").arg(name));
-    QNetworkProxyQuery query(url);
-    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
-    if (!proxies.isEmpty()) {
-        manager.setProxy(proxies.first());
-    }
-
-    QNetworkRequest request(url);
-    // Bounds the request (Qt aborts it and emits finished() with
-    // QNetworkReply::TimeoutError if it fires), so the error() check below
-    // correctly distinguishes a timeout from a genuine successful reply --
-    // unlike a bare QTimer::singleShot() that only quits the event loop
-    // without touching the still in-flight reply. Use the int-milliseconds
-    // overload: the std::chrono one needs Qt 6.7+, and this project doesn't
-    // pin a Qt minimum above 6.4.
-    request.setTransferTimeout(5000);
-    QNetworkReply *screenshotReply = manager.get(request);
-
-    QEventLoop loop;
-    connect(screenshotReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec();
-
-    if (screenshotReply->error() != QNetworkReply::NoError) {
-        screenshotReply->deleteLater();
+    const QByteArray response = fetchUrl(QUrl(QString("https://screenshots.debian.net/json/package/%1").arg(name)));
+    if (response.isEmpty()) {
         return {};
     }
-
-    QByteArray response = screenshotReply->readAll();
-    screenshotReply->deleteLater();
 
     QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
     if (jsonDoc.isObject()) {
@@ -4003,20 +3970,207 @@ void MainWindow::displayPackageInfo(QTreeView *tree, QPoint pos)
     }
 
     // treePopularApps is handled by treePopularApps_customContextMenuRequested; this
-    // path only serves the APT trees (Enabled repos, MX Test, Backports).
+    // path serves the APT trees (Enabled repos, MX Test, Backports), Flatpak and Snap.
     QMenu menu(this);
     // Parented to &menu (not this) so it's destroyed along with the menu below --
     // QMenu::addAction(QAction*) doesn't take ownership, so parenting to the
     // long-lived MainWindow would leak one QAction per invocation.
     auto *action = new QAction(QIcon::fromTheme("dialog-information"), tr("More &info..."), &menu);
+    action->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_I)); // hint only; the QShortcut handles the key
     menu.addAction(action);
-    if (tree == ui->treeEnabled) {
-        connect(action, &QAction::triggered, this, [this, currentIdx] { displayPackageInfo(currentIdx); });
-    } else {
-        connect(action, &QAction::triggered, this,
-                [this, tree, currentIdx] { displayInfoTestOrBackport(tree, currentIdx); });
-    }
+    connect(action, &QAction::triggered, this, [this, tree, currentIdx] { displayInfo(tree, currentIdx); });
     menu.exec(tree->mapToGlobal(pos));
+}
+
+// Shows the info dialog that fits the tree the row belongs to.
+void MainWindow::displayInfo(QTreeView *tree, const QModelIndex &index)
+{
+    if (!tree || !index.isValid()) {
+        return;
+    }
+    if (tree == ui->treePopularApps) {
+        displayPopularInfo(index);
+    } else if (tree == ui->treeFlatpak) {
+        displayFlatpakInfo(index);
+    } else if (tree == ui->treeSnap) {
+        displaySnapInfo(index);
+    } else if (tree == ui->treeMXtest || tree == ui->treeBackports) {
+        displayInfoTestOrBackport(tree, index);
+    } else {
+        displayPackageInfo(index); // Enabled repos, and AUR on the pacman backend
+    }
+}
+
+QByteArray MainWindow::fetchUrl(const QUrl &url, const QList<QPair<QByteArray, QByteArray>> &headers)
+{
+    QNetworkProxyQuery query(url);
+    const QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
+    if (!proxies.isEmpty()) {
+        manager.setProxy(proxies.first());
+    }
+    QNetworkRequest request(url);
+    for (const auto &[name, value] : headers) {
+        request.setRawHeader(name, value);
+    }
+    // Bounds the request (Qt aborts it and emits finished() with
+    // QNetworkReply::TimeoutError if it fires), so the error() check below
+    // correctly distinguishes a timeout from a genuine successful reply --
+    // unlike a bare QTimer::singleShot() that only quits the event loop
+    // without touching the still in-flight reply. Use the int-milliseconds
+    // overload: the std::chrono one needs Qt 6.7+, and this project doesn't
+    // pin a Qt minimum above 6.4.
+    request.setTransferTimeout(5000);
+    QNetworkReply *reply = manager.get(request);
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    QByteArray data;
+    if (reply->error() == QNetworkReply::NoError) {
+        data = reply->readAll();
+    } else {
+        qDebug() << "Download of" << url.url() << "failed:" << qPrintable(reply->errorString());
+    }
+    reply->deleteLater();
+    return data;
+}
+
+// Downloads an image and returns it as an inline <img> tag (empty on failure).
+QString MainWindow::imageHtml(const QUrl &url, QSize size, Qt::AspectRatioMode mode)
+{
+    if (!url.isValid() || url.isEmpty()) {
+        return {};
+    }
+    QByteArray raw = fetchUrl(url);
+    if (raw.isEmpty()) {
+        return {};
+    }
+    QBuffer inBuffer(&raw);
+    QImageReader imageReader(&inBuffer);
+    QImage image = imageReader.read();
+    if (image.isNull()) {
+        qDebug() << "loading screenshot:" << imageReader.errorString();
+        return {};
+    }
+    image = image.scaled(size, mode, Qt::SmoothTransformation);
+    QByteArray png;
+    QBuffer outBuffer(&png);
+    image.save(&outBuffer, "PNG");
+    return QStringLiteral("<p><img src='data:image/png;base64, %1'>").arg(QString(png.toBase64()));
+}
+
+// Formats store/appstream metadata the same way for Flatpak and Snap.
+QString MainWindow::appInfoHtml(const AppInfo &app)
+{
+    QString msg = QStringLiteral("<b>") + app.title.toHtmlEscaped() + QStringLiteral("</b>");
+    if (!app.summary.isEmpty()) {
+        msg += QStringLiteral("<br><i>") + app.summary.toHtmlEscaped() + QStringLiteral("</i>");
+    }
+    msg += app.descriptionHtml;
+    QStringList meta;
+    if (!app.developer.isEmpty()) {
+        meta << tr("Developer: %1").arg(app.developer.toHtmlEscaped());
+    }
+    if (!app.license.isEmpty()) {
+        meta << tr("License: %1").arg(app.license.toHtmlEscaped());
+    }
+    if (!app.homepage.isEmpty()) {
+        const QString link = app.homepage.toHtmlEscaped();
+        meta << tr("Homepage: %1").arg(QStringLiteral("<a href='%1'>%1</a>").arg(link));
+    }
+    if (!meta.isEmpty()) {
+        msg += QStringLiteral("<p>") + meta.join(QStringLiteral("<br>"));
+    }
+    return msg + app.screenshotHtml;
+}
+
+void MainWindow::showInfoBox(const QString &text, bool richText)
+{
+    QMessageBox info(QMessageBox::NoIcon, tr("Package info"), text, QMessageBox::Close, this);
+    if (richText) {
+        info.setTextFormat(Qt::RichText);
+        info.setTextInteractionFlags(Qt::TextBrowserInteraction);
+    } else {
+        // Make it wider
+        auto *horizontalSpacer = new QSpacerItem(width(), 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        if (auto *layout = qobject_cast<QGridLayout *>(info.layout())) {
+            layout->addItem(horizontalSpacer, 0, 1);
+        }
+    }
+    info.exec();
+}
+
+void MainWindow::displayFlatpakInfo(const QModelIndex &index)
+{
+    if (!index.isValid() || !flatpakProxy || !flatpakModel) {
+        return;
+    }
+    const FlatpakData *data = flatpakModel->flatpakAt(flatpakProxy->mapToSource(index).row());
+    if (!data || data->canonicalRef.isEmpty()) {
+        return;
+    }
+    const QString appId = data->longName;
+    const bool installed = data->status == Status::Installed;
+    const QString remote = ui->comboRemote->currentText();
+
+    QString text;
+    bool richText = false;
+    {
+        // The network/Cmd calls below spin nested event loops; disable the window
+        // meanwhile so they can't be reentered (see displayPackageInfo()).
+        setEnabled(false);
+        QApplication::setOverrideCursor(Qt::BusyCursor);
+        auto restore = qScopeGuard([this] {
+            QApplication::restoreOverrideCursor();
+            setEnabled(true);
+        });
+
+        // Flathub's appstream API has the user-facing description and screenshots.
+        // Runtimes and apps from other remotes aren't there, so those fall back to
+        // flatpak's own (technical) info.
+        const QJsonObject json
+            = QJsonDocument::fromJson(fetchUrl(QUrl(QStringLiteral("https://flathub.org/api/v2/appstream/") + appId)))
+                  .object();
+        if (!json.value(QStringLiteral("name")).toString().isEmpty()) {
+            AppInfo app;
+            app.title = json.value(QStringLiteral("name")).toString();
+            app.summary = json.value(QStringLiteral("summary")).toString();
+            app.descriptionHtml = json.value(QStringLiteral("description")).toString().trimmed();
+            app.developer = json.value(QStringLiteral("developer_name")).toString();
+            app.license = json.value(QStringLiteral("project_license")).toString();
+            app.homepage = json.value(QStringLiteral("urls")).toObject().value(QStringLiteral("homepage")).toString();
+
+            // Pick the default screenshot (else the first), at the largest size that
+            // still fits the dialog comfortably (else whatever is listed first).
+            const QJsonArray screenshots = json.value(QStringLiteral("screenshots")).toArray();
+            QJsonObject shot = screenshots.isEmpty() ? QJsonObject() : screenshots.first().toObject();
+            for (const auto &value : screenshots) {
+                if (value.toObject().value(QStringLiteral("default")).toBool()) {
+                    shot = value.toObject();
+                    break;
+                }
+            }
+            QString shotUrl;
+            int bestWidth = -1;
+            for (const auto &value : shot.value(QStringLiteral("sizes")).toArray()) {
+                const QJsonObject size = value.toObject();
+                const int w = size.value(QStringLiteral("width")).toVariant().toInt(); // sent as a string
+                if (shotUrl.isEmpty() || (w <= 800 && w > bestWidth)) {
+                    shotUrl = size.value(QStringLiteral("src")).toString();
+                    bestWidth = w <= 800 ? w : -1;
+                }
+            }
+            app.screenshotHtml = imageHtml(QUrl(shotUrl));
+            text = appInfoHtml(app);
+            richText = true;
+        } else {
+            QStringList args = installed ? QStringList {"info"} : QStringList {"remote-info", remote};
+            args << data->canonicalRef;
+            Cmd shell;
+            text = shell.getOut("flatpak", flatpakArgsWithScope(fpUser, args), Cmd::QuietMode::Yes).trimmed();
+        }
+    }
+    showInfoBox(text.isEmpty() ? tr("No information available.") : text, richText);
 }
 
 void MainWindow::displayPopularInfo(const QModelIndex &index)
@@ -4035,71 +4189,32 @@ void MainWindow::displayPopularInfo(const QModelIndex &index)
         msg += tr("Packages to be installed: ") + installNames;
     }
 
-    QUrl url = index.sibling(index.row(), PopCol::Description).data(Qt::UserRole).toString(); // screenshot url
-
-    if (!url.isValid() || url.isEmpty() || url.url() == QLatin1String("none")) {
-        url = getScreenshotUrl(installNames.split(' ').first());
-    }
-
-    if (!url.isValid() || url.isEmpty() || url.url() == QLatin1String("none")) {
-        qDebug() << "no screenshot for: " << title;
-    } else {
-        QNetworkProxyQuery query {QUrl(url)};
-        QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(query);
-        if (!proxies.isEmpty()) {
-            manager.setProxy(proxies.first());
+    // Block the tree's signals while the downloads spin their event loops, so a
+    // second click on the Info column can't reenter this.
+    QString screenshot;
+    {
+        const QSignalBlocker blocker(ui->treePopularApps);
+        const auto isUsable = [](const QUrl &url) {
+            return url.isValid() && !url.isEmpty() && url.url() != QLatin1String("none");
+        };
+        const QString firstPackage = installNames.split(' ').first();
+        // Prefer the screenshot URL from the popular-apps list, falling back to
+        // screenshots.debian.net if it is missing or fails to download.
+        const QUrl listUrl(index.sibling(index.row(), PopCol::Description).data(Qt::UserRole).toString());
+        if (isUsable(listUrl)) {
+            screenshot = imageHtml(listUrl, QSize(200, 300), Qt::KeepAspectRatioByExpanding);
         }
-        QNetworkRequest imgRequest(url);
-        // See getScreenshotUrl(): setTransferTimeout() makes Qt abort the
-        // reply itself and surface QNetworkReply::TimeoutError if the timer
-        // fires, so the error() check below (and thus the retry path)
-        // correctly treats a timeout the same as any other failed fetch,
-        // instead of reading/decoding a reply that may still be in flight.
-        imgRequest.setTransferTimeout(5000);
-        QNetworkReply *imgReply = manager.get(imgRequest);
-
-        QEventLoop loop;
-        connect(imgReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-        ui->treePopularApps->blockSignals(true);
-        loop.exec();
-        ui->treePopularApps->blockSignals(false);
-
-        if (imgReply->error() != QNetworkReply::NoError) {
-            qDebug() << "Download of " << url.url() << " failed: " << qPrintable(imgReply->errorString());
-            imgReply->deleteLater();
-            imgReply = nullptr;
-            url = getScreenshotUrl(installNames.split(' ').first());
-            if (url.isValid() && !url.isEmpty() && url.url() != QLatin1String("none")) {
-                QNetworkRequest retryRequest(url);
-                retryRequest.setTransferTimeout(5000);
-                imgReply = manager.get(retryRequest);
-                connect(imgReply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-                ui->treePopularApps->blockSignals(true);
-                loop.exec();
-                ui->treePopularApps->blockSignals(false);
+        if (screenshot.isEmpty()) {
+            const QUrl debianUrl = getScreenshotUrl(firstPackage);
+            if (isUsable(debianUrl) && debianUrl != listUrl) {
+                screenshot = imageHtml(debianUrl, QSize(200, 300), Qt::KeepAspectRatioByExpanding);
             }
         }
-
-        if (imgReply && imgReply->error() == QNetworkReply::NoError) {
-            QImage image;
-            QByteArray data;
-            QBuffer buffer(&data);
-            QImageReader imageReader(imgReply);
-            image = imageReader.read();
-            if (imageReader.error() != 0) {
-                qDebug() << "loading screenshot: " << imageReader.errorString();
-            } else {
-                image = image.scaled(QSize(200, 300), Qt::KeepAspectRatioByExpanding);
-                image.save(&buffer, "PNG");
-                msg += QString("<p><img src='data:image/png;base64, %0'>").arg(QString(data.toBase64()));
-            }
-        }
-        if (imgReply) {
-            imgReply->deleteLater();
+        if (screenshot.isEmpty()) {
+            qDebug() << "no screenshot for: " << title;
         }
     }
-    QMessageBox info(QMessageBox::NoIcon, tr("Package info"), msg, QMessageBox::Close);
-    info.exec();
+    showInfoBox(msg + screenshot, true);
 }
 
 void MainWindow::displayPackageInfo(const QModelIndex &index)
@@ -4430,7 +4545,7 @@ void MainWindow::pushInstall_clicked()
         bool success = false;
         if (currentTree == ui->treePopularApps) {
             success = installPopularApps();
-        } else if (ui->comboFilterEnabled->currentText() == tr("Autoremovable")) {
+        } else if (currentTabFiltersAutoremovable()) {
             success = markKeep();
         } else {
             success = installSelected();
@@ -4885,189 +5000,6 @@ void MainWindow::handleEnabledReposTab(const QString &searchStr)
     }
 }
 
-#ifdef PACKAGE_BACKEND_PACMAN
-QString MainWindow::getParuPath()
-{
-    if (cachedParuPathFetched) {
-        return cachedParuPath;
-    }
-    cachedParuPath = QStandardPaths::findExecutable("paru");
-    if (cachedParuPath.isEmpty()) {
-        const QStringList fallbackPaths = {"/usr/bin/paru", "/bin/paru", "/usr/local/bin/paru"};
-        for (const QString &path : fallbackPaths) {
-            if (QFile::exists(path)) {
-                cachedParuPath = path;
-                break;
-            }
-        }
-    }
-    cachedParuPathFetched = true;
-    return cachedParuPath;
-}
-
-// Populates aurList: with an empty search term, the AUR-origin ("foreign") installed
-// packages, showing an available-upgrade version where paru reports one; otherwise a
-// live AUR search via paru. No async caching (unlike the arch branch this was ported
-// from) -- this always re-queries, matching how every other list in this app already
-// works synchronously.
-bool MainWindow::buildAurList(const QString &searchTerm)
-{
-    aurList.clear();
-    const QString term = searchTerm.trimmed();
-    const QString paruPath = getParuPath();
-    if (paruPath.isEmpty()) {
-        return false;
-    }
-
-    Cmd shell;
-    QScopedValueRollback<bool> guard(suppressCmdOutput, true);
-    if (term.isEmpty()) {
-        const QStringList installed
-            = shell.getOut({{"LANG", "C"}}, "pacman", {"-Qm", "--color", "never"}).split('\n', Qt::SkipEmptyParts);
-        if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0) {
-            return false;
-        }
-        if (installed.isEmpty()) {
-            return true;
-        }
-        if (installedPackages.isEmpty()) {
-            installedPackages = listInstalled();
-        }
-
-        QHash<QString, QString> aurUpdates;
-        const QStringList updates
-            = shell.getOut({{"LANG", "C"}}, paruPath, {"-Qua", "--color", "never"}).split('\n', Qt::SkipEmptyParts);
-        if (shell.exitStatus() == QProcess::NormalExit && shell.exitCode() == 0) {
-            for (const QString &line : updates) {
-                const QString name = line.section(' ', 0, 0).trimmed();
-                const QString newVersion = line.section("->", 1).trimmed();
-                if (!name.isEmpty() && !newVersion.isEmpty()) {
-                    aurUpdates.insert(name, newVersion);
-                }
-            }
-        }
-
-        for (const QString &line : installed) {
-            const QStringList parts = line.split(' ', Qt::SkipEmptyParts);
-            if (parts.size() < 2) {
-                continue;
-            }
-            const QString repoVersion = aurUpdates.value(parts.at(0), parts.at(1));
-            const QString description = installedPackages.value(parts.at(0)).description;
-            aurList.insert(parts.at(0), {repoVersion, description});
-        }
-        return true;
-    }
-
-    if (!isOnline()) {
-        return false;
-    }
-    QStringList results = shell.getOut({{"LANG", "C"}}, paruPath, {"-Ssq", "--color", "never", term})
-                              .split('\n', Qt::SkipEmptyParts);
-    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0) {
-        return false;
-    }
-    if (results.isEmpty()) {
-        return true;
-    }
-    constexpr int maxResults = 200;
-    if (results.size() > maxResults) {
-        results = results.mid(0, maxResults);
-    }
-
-    QStringList infoArgs {"-Si", "--color", "never"};
-    infoArgs += results;
-    const QString infoOutput = shell.getOut({{"LANG", "C"}}, paruPath, infoArgs);
-    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0 || infoOutput.trimmed().isEmpty()) {
-        for (const QString &name : std::as_const(results)) {
-            aurList.insert(name, {QString(), QString()});
-        }
-        return true;
-    }
-
-    QString packageName;
-    QString version;
-    QString description;
-    auto flushPackage = [&]() {
-        if (!packageName.isEmpty()) {
-            aurList.insert(packageName, {version, description});
-        }
-        packageName.clear();
-        version.clear();
-        description.clear();
-    };
-    for (const QString &line : infoOutput.split('\n')) {
-        if (line.startsWith("Name")) {
-            flushPackage();
-            packageName = line.section(':', 1).trimmed();
-        } else if (line.startsWith("Version")) {
-            version = line.section(':', 1).trimmed();
-        } else if (line.startsWith("Description")) {
-            description = line.section(':', 1).trimmed();
-        }
-    }
-    flushPackage();
-    return true;
-}
-
-void MainWindow::showAurPackageInfo(const QString &packageName)
-{
-    const QString paruPath = getParuPath();
-    if (paruPath.isEmpty()) {
-        QMessageBox::critical(this, tr("Error"),
-                              tr("paru is not installed.\n\nInstall it with: pacman -S paru"));
-        return;
-    }
-    Cmd shell;
-    QString info = shell.getOut({{"LANG", "C"}}, paruPath, {"-Si", "--color", "never", packageName});
-    if (shell.exitStatus() != QProcess::NormalExit || shell.exitCode() != 0 || info.trimmed().isEmpty()) {
-        info = shell.getOut({{"LANG", "C"}}, "pacman", {"-Qi", "--color", "never", packageName});
-    }
-    QMessageBox::information(this, packageName,
-                             info.trimmed().isEmpty() ? tr("No information available.") : info.trimmed());
-}
-
-// AUR's data isn't "downloaded once, rarely dirty" like the other apt tabs -- an
-// empty search means "installed AUR packages" and a non-empty one means "live AUR
-// search", so this always rebuilds rather than reusing buildPackageLists()'s
-// cache-until-dirty model.
-void MainWindow::handleAurTab(const QString &searchStr)
-{
-    ui->searchBoxAUR->setText(searchStr);
-    changeList.clear();
-    displayWarning("aur");
-    if (displayPackagesIsRunning) {
-        progress->show();
-        if (!timer.isActive()) {
-            timer.start(100ms);
-        }
-        connect(this, &MainWindow::displayPackagesFinished, this, &MainWindow::updateInterface,
-                Qt::SingleShotConnection);
-        return;
-    }
-    if (!buildAurList(searchStr)) {
-        QMessageBox::critical(this, tr("Error"),
-                              tr("Could not query AUR packages. Please check that paru is installed and you are "
-                                 "online."));
-        currentTree->blockSignals(false);
-        return;
-    }
-    displayPackages();
-    if (ui->comboFilterAUR->currentIndex() != savedComboIndex) {
-        ui->comboFilterAUR->setCurrentIndex(savedComboIndex);
-    }
-    filterChanged(ui->comboFilterAUR->currentText());
-    currentTree->blockSignals(false);
-}
-
-void MainWindow::pushForceUpdateAUR_clicked()
-{
-    beginOperation();
-    ui->searchBoxAUR->clear();
-    ui->comboFilterAUR->setCurrentIndex(0);
-    handleAurTab(QString());
-}
-#endif
 
 void MainWindow::handleTab(const QString &searchStr, QLineEdit *searchBox, const QString &warningMessage,
                            bool dirtyFlag)
@@ -5263,485 +5195,9 @@ void MainWindow::installFlatpak()
     enableTabs(true);
 }
 
-// ---------------------------------------------------------------------------
-// Snap support
-// ---------------------------------------------------------------------------
 
-// Show a critical error dialog with a short, fixed message. Any long/raw output
-// (command logs, backend errors) goes into the collapsible "Show Details" box so
-// it never bloats the title or the message body.
-void MainWindow::showError(const QString &message, const QString &details)
-{
-    QMessageBox box(QMessageBox::Critical, tr("Error"), message, QMessageBox::Ok, this);
-    const QString trimmed = details.trimmed();
-    if (!trimmed.isEmpty()) {
-        box.setDetailedText(trimmed);
-    }
-    box.exec();
-}
 
-// snapd is a systemd-only service; the Snap tab is hidden on non-systemd systems.
-bool MainWindow::isSystemdInit()
-{
-    QFile comm {"/proc/1/comm"};
-    if (comm.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        const QString init = QString::fromLatin1(comm.readLine()).trimmed();
-        if (!init.isEmpty()) {
-            return init == QLatin1String("systemd");
-        }
-    }
-    // Fallback: systemd populates this directory only when it is the init system
-    return QFileInfo::exists(QStringLiteral("/run/systemd/system"));
-}
 
-// snapd is usable once the package is installed and its socket unit is active.
-bool MainWindow::isSnapdReady() const
-{
-    return checkInstalled(QStringLiteral("snapd")) && QFile::exists(QStringLiteral("/run/snapd.socket"));
-}
-
-QStringList MainWindow::listInstalledSnaps() const
-{
-    Cmd shell;
-    const QString out = shell.getOut({{"LANG", "C"}}, "snap", {"list"}, Cmd::QuietMode::Yes, /*discardStderr=*/true);
-    QStringList names;
-    static const QRegularExpression ws {QStringLiteral("\\s+")};
-    const QStringList lines = out.split('\n', Qt::SkipEmptyParts);
-    for (const QString &line : lines) {
-        const QStringList parts = line.split(ws, Qt::SkipEmptyParts);
-        if (parts.isEmpty() || parts.at(0) == QLatin1String("Name")) {
-            continue;
-        }
-        names << parts.at(0);
-    }
-    return names;
-}
-
-// Parse the tabular output of `snap list` (installed=true) or `snap find` (installed=false).
-QVector<SnapData> MainWindow::parseSnapList(const QString &output, bool installed) const
-{
-    QVector<SnapData> result;
-    static const QRegularExpression ws {QStringLiteral("\\s+")};
-    const QStringList lines = output.split('\n', Qt::SkipEmptyParts);
-    for (const QString &line : lines) {
-        const QStringList parts = line.split(ws, Qt::SkipEmptyParts);
-        if (parts.isEmpty() || parts.at(0) == QLatin1String("Name")) {
-            continue; // header row
-        }
-        SnapData data;
-        if (installed) {
-            // Columns: Name Version Rev Tracking Publisher Notes
-            if (parts.size() < 2) {
-                continue;
-            }
-            data.name = parts.at(0);
-            data.version = parts.value(1);
-            data.publisher = parts.value(4);
-            data.notes = parts.value(5);
-        } else {
-            // Columns: Name Version Publisher Notes Summary...
-            if (parts.size() < 4) {
-                continue;
-            }
-            data.name = parts.at(0);
-            data.version = parts.value(1);
-            data.publisher = parts.value(2);
-            data.notes = parts.value(3);
-            data.description = parts.size() > 4 ? parts.mid(4).join(' ') : QString();
-        }
-        // Strip the verification markers snap appends to trusted publishers (✓, *, **)
-        data.publisher.remove(QChar(0x2713));
-        while (data.publisher.endsWith(QLatin1Char('*'))) {
-            data.publisher.chop(1);
-        }
-        data.isClassic = data.notes.contains(QLatin1String("classic"));
-        result.append(data);
-    }
-    return result;
-}
-
-void MainWindow::handleSnapTab(const QString &searchStr)
-{
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    ui->searchBoxSnap->setText(searchStr);
-    setCurrentTree();
-    ui->searchBoxSnap->setFocus();
-    // changeList is shared across tabs; start the Snap tab with a clean slate so
-    // install/remove only ever act on snaps selected here.
-    changeList.clear();
-
-    const bool ready = isSnapdReady();
-    ui->frameSnapSetup->setVisible(!ready);
-    ui->comboFilterSnap->setEnabled(ready);
-    ui->searchBoxSnap->setEnabled(ready);
-    ui->pushRefreshSnap->setEnabled(ready);
-    ui->pushUpgradeSnap->setEnabled(ready);
-    ui->pushInstall->setEnabled(false);
-    ui->pushUninstall->setEnabled(false);
-
-    if (!ready) {
-        if (snapModel) {
-            snapModel->clear();
-        }
-        updateSnapCounts();
-        currentTree->blockSignals(false);
-        return;
-    }
-
-    snapStoreMode = (ui->comboFilterSnap->currentText() == tr("Search store"));
-
-    // Arriving from another tab with a pending search term: default to searching the
-    // store for it (searchSnapStore() flips the combo to "Search store" itself).
-    if (!searchStr.isEmpty()) {
-        firstRunSnap = false;
-        ui->searchBoxSnap->setFocus();
-        QMetaObject::invokeMethod(this, [this] { searchSnapStore(); }, Qt::QueuedConnection);
-        currentTree->blockSignals(false);
-        return;
-    }
-
-    if (firstRunSnap || (snapModel && snapModel->rowCount() == 0 && !snapStoreMode)) {
-        firstRunSnap = false;
-        setCursor(QCursor(Qt::BusyCursor));
-        displaySnaps(true);
-        setCursor(QCursor(Qt::ArrowCursor));
-    }
-    currentTree->blockSignals(false);
-}
-
-void MainWindow::displaySnaps(bool /*forceUpdate*/)
-{
-    if (!snapModel) {
-        return;
-    }
-    if (!isSnapdReady()) {
-        snapModel->clear();
-        updateSnapCounts();
-        return;
-    }
-    snapStoreMode = false;
-    loadSnapData();
-    populateSnapTree();
-    updateSnapCounts();
-}
-
-void MainWindow::loadSnapData()
-{
-    Cmd shell;
-    const QString out = shell.getOut({{"LANG", "C"}}, "snap", {"list"}, Cmd::QuietMode::Yes, /*discardStderr=*/true);
-    const QVector<SnapData> data = parseSnapList(out, true);
-    snapModel->setSnapData(data);
-    snapModel->updateInstalledStatus(listInstalledSnaps());
-    if (snapProxy) {
-        snapProxy->setStatusFilter(0);
-    }
-}
-
-void MainWindow::populateSnapTree()
-{
-    ui->treeSnap->sortByColumn(SnapCol::Name, Qt::AscendingOrder);
-    if (snapModel) {
-        for (int i = 0; i < snapModel->columnCount(); ++i) {
-            if (!ui->treeSnap->isColumnHidden(i)) {
-                ui->treeSnap->resizeColumnToContents(i);
-            }
-        }
-    }
-}
-
-void MainWindow::updateSnapCounts()
-{
-    const int total = snapProxy ? snapProxy->rowCount() : 0;
-    int installed = 0;
-    if (snapModel) {
-        for (int i = 0; i < snapModel->rowCount(); ++i) {
-            const SnapData *snap = snapModel->snapAt(i);
-            if (snap && snap->status == Status::Installed) {
-                ++installed;
-            }
-        }
-    }
-    ui->labelNumAppSnap->setText(QString::number(total));
-    ui->labelNumInstSnap->setText(QString::number(installed));
-}
-
-// Triggered by pressing Enter in the snap search box: query the snap store.
-void MainWindow::searchSnapStore()
-{
-    if (currentTree != ui->treeSnap || !snapModel || !isSnapdReady()) {
-        return;
-    }
-    const QString query = ui->searchBoxSnap->text().trimmed();
-    if (query.isEmpty()) {
-        ui->comboFilterSnap->setCurrentText(tr("Installed snaps"));
-        return;
-    }
-    if (ui->comboFilterSnap->currentText() != tr("Search store")) {
-        ui->comboFilterSnap->blockSignals(true);
-        ui->comboFilterSnap->setCurrentText(tr("Search store"));
-        ui->comboFilterSnap->blockSignals(false);
-    }
-    snapStoreMode = true;
-    setCursor(QCursor(Qt::BusyCursor));
-    Cmd shell;
-    const QString out
-        = shell.getOut({{"LANG", "C"}}, "snap", {"find", query}, Cmd::QuietMode::Yes, /*discardStderr=*/true);
-    QVector<SnapData> data = parseSnapList(out, false);
-    snapModel->setSnapData(data);
-    snapModel->updateInstalledStatus(listInstalledSnaps());
-    if (snapProxy) {
-        snapProxy->setStatusFilter(0);
-        snapProxy->setSearchText(QString()); // store results already match; don't filter them locally
-    }
-    populateSnapTree();
-    updateSnapCounts();
-    changeList.clear();
-    ui->pushInstall->setEnabled(false);
-    ui->pushUninstall->setEnabled(false);
-    setCursor(QCursor(Qt::ArrowCursor));
-    if (data.isEmpty()) {
-        QMessageBox::information(this, tr("No results"), tr("No snaps found matching \"%1\".").arg(query));
-    }
-}
-
-// Install snapd and bring the service up, elevating through the MXPI helper.
-void MainWindow::setupSnapd()
-{
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    beginOperation();
-    ui->tabWidget->setTabEnabled(Tab::Output, true);
-    ui->tabWidget->setCurrentWidget(ui->tabOutput);
-    showOutput();
-    setCursor(QCursor(Qt::BusyCursor));
-    enableOutput();
-
-    if (!checkInstalled(QStringLiteral("snapd"))) {
-        // Refresh the package lists first so the install pulls the current snapd
-        // candidate; a stale cache can make the install fail or fetch nothing.
-        if (!updateApt()) {
-            setCursor(QCursor(Qt::ArrowCursor));
-            ui->tabWidget->setCurrentWidget(ui->tabSnap);
-            enableTabs(true);
-            return;
-        }
-        QTreeView *savedTree = currentTree;
-#ifdef PACKAGE_BACKEND_PACMAN
-        // snapd is not in the official Arch repos -- it's AUR-only, so route this
-        // through install()'s paru/AUR branch by pretending the AUR tree is current.
-        currentTree = ui->treeAUR;
-#else
-        // Reuse the standard APT install path (uses default repo flags).
-        currentTree = ui->treeEnabled;
-#endif
-        const bool ok = install(QStringLiteral("snapd"));
-        const QString installOutput = cmd.readAllOutput();
-        currentTree = savedTree;
-        if (operationWasCanceled()) {
-            setCursor(QCursor(Qt::ArrowCursor));
-            ui->tabWidget->setCurrentWidget(ui->tabSnap);
-            enableTabs(true);
-            return;
-        }
-        // Refresh the in-memory installed-package list BEFORE verifying, otherwise
-        // checkInstalled() still consults the pre-install snapshot and reports a
-        // false "not installed" even though dpkg has just configured snapd.
-        installedPackages = listInstalled();
-        setDirty();
-        if (!ok || !checkInstalled(QStringLiteral("snapd"))) {
-            setCursor(QCursor(Qt::ArrowCursor));
-            showError(tr("snapd was not installed. Click \"Show Details\" for more information."), installOutput);
-            ui->tabWidget->setCurrentWidget(ui->tabSnap);
-            enableTabs(true);
-            return;
-        }
-    }
-
-    // Enable the snapd service (runs as root through the MXPI helper). Capture its
-    // output, but don't depend on it: on Debian, installing the snapd package already
-    // enables snapd.socket, and an outdated helper would produce nothing here.
-    runMxpiLibAsRoot(cmd, QStringLiteral("snapd_setup"), Cmd::QuietMode::No);
-    QString setupOutput = cmd.readAllOutput();
-    setCursor(QCursor(Qt::ArrowCursor));
-
-    firstRunSnap = false;
-    displaySnaps(true);
-    bool ready = isSnapdReady();
-    bool coreInstalled = listInstalledSnaps().contains(QStringLiteral("core"));
-
-    // Install the base "core" snap directly from here (not via the helper) so the real
-    // outcome is always captured for the user, regardless of which helper is deployed.
-    if (ready && !coreInstalled) {
-        setCursor(QCursor(Qt::BusyCursor));
-        enableOutput();
-        appendFlatpakStatusMessage(ui->outputBox, tr("Installing the base \"core\" snap..."));
-        // Remember where this attempt's output starts so a transient first-try failure
-        // can be discarded before retrying, keeping it from reaching the user.
-        const int outputAnchor = ui->outputBox->document()->characterCount() - 1;
-
-        // Just after snapd is enabled the daemon is often not ready yet: the first
-        // install can fail with "too early for operation, device not yet seeded" or a
-        // transient connection error even though a later attempt succeeds. Wait for
-        // seeding, then retry a few times with a short backoff, surfacing only the last
-        // attempt's output so the user never sees the transient error.
-        constexpr int maxAttempts = 3;
-        QString coreOutput;
-        for (int attempt = 1; attempt <= maxAttempts && !coreInstalled; ++attempt) {
-            // Bounded, read-only wait for seeding (needs no elevation). A stale helper
-            // skips its own wait, hence doing it here too.
-            Cmd waitCmd;
-            waitCmd.proc(QStringLiteral("timeout"), {"120", "snap", "wait", "system", "seed.loaded"}, nullptr,
-                        nullptr, Cmd::QuietMode::Yes);
-            if (attempt > 1) {
-                // Give snapd a moment to finish coming up before trying again,
-                // without blocking the event loop.
-                QEventLoop backoffLoop;
-                QTimer::singleShot(3s, &backoffLoop, &QEventLoop::quit);
-                backoffLoop.exec();
-            }
-            // Route through the MXPI helper (auth_admin_keep) so the password cached by
-            // the snapd apt install is reused instead of prompting again.
-            cmd.procAsRoot(QStringLiteral("snap"), {QStringLiteral("install"), QStringLiteral("core")});
-            if (Cmd::elevationDismissed()) {
-                setCursor(QCursor(Qt::ArrowCursor));
-                ui->tabWidget->setCurrentWidget(ui->tabSnap);
-                enableTabs(true);
-                return;
-            }
-            coreOutput = cmd.readAllOutput().trimmed();
-            coreInstalled = listInstalledSnaps().contains(QStringLiteral("core"));
-            if (coreInstalled) {
-                break;
-            }
-            // Failed and a retry remains: drop this attempt's output so the next try
-            // starts clean and the transient error is not surfaced.
-            if (attempt < maxAttempts) {
-                QTextCursor cursor(ui->outputBox->document());
-                cursor.setPosition(outputAnchor);
-                cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-                cursor.removeSelectedText();
-                outputRenderer.reset();
-            }
-        }
-        if (!coreOutput.isEmpty()) {
-            setupOutput = coreOutput;
-        }
-        setCursor(QCursor(Qt::ArrowCursor));
-        displaySnaps(true);
-    }
-
-    ready = isSnapdReady();
-    ui->frameSnapSetup->setVisible(!ready);
-    ui->comboFilterSnap->setEnabled(ready);
-    ui->searchBoxSnap->setEnabled(ready);
-    ui->pushRefreshSnap->setEnabled(ready);
-    ui->pushUpgradeSnap->setEnabled(ready);
-    ui->tabWidget->setCurrentWidget(ui->tabSnap);
-
-    // Make sure the details box always has content so the "Show Details" button appears.
-    const QString details = setupOutput.trimmed().isEmpty()
-                                ? tr("No output was captured. Run 'sudo snap install core' in a terminal to see "
-                                     "the underlying error.")
-                                : setupOutput;
-
-    if (!ready) {
-        showError(tr("snapd was installed but its service could not be started. You may need to reboot or log out "
-                     "and back in, then reopen the Snap tab. Click \"Show Details\" for more information."),
-                  details);
-    } else if (!coreInstalled) {
-        showError(tr("Snap support was enabled, but the base \"core\" snap could not be installed, so most snaps will "
-                     "not work yet. Click \"Show Details\" for the underlying error."),
-                  details);
-    } else {
-        QMessageBox::warning(this, tr("Needs re-login"),
-                             tr("Log out and back in to see installed items in the menu and use snap commands from "
-                                "/snap/bin. These changes do not apply to your current session."));
-    }
-    enableTabs(true);
-}
-
-void MainWindow::onSnapCheckStateChanged(const QString &name, Qt::CheckState state, int status)
-{
-    buildSnapChangeList(name, state, status);
-}
-
-void MainWindow::buildSnapChangeList(const QString &name, Qt::CheckState state, int /*status*/)
-{
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (state == Qt::Checked) {
-        changeList.append(name);
-    } else {
-        changeList.removeOne(name);
-    }
-
-    // Enable each action based on the whole selection, not just the last toggle:
-    // Install if any selected snap is not installed, Remove if any is installed.
-    // The install/remove handlers split the selection by status accordingly.
-    bool anyInstalled = false;
-    bool anyNotInstalled = false;
-    for (const QString &selectedName : std::as_const(changeList)) {
-        const int row = snapModel ? snapModel->findSnapRow(selectedName) : -1;
-        const SnapData *snap = (row >= 0) ? snapModel->snapAt(row) : nullptr;
-        if (snap && snap->status == Status::Installed) {
-            anyInstalled = true;
-        } else {
-            anyNotInstalled = true;
-        }
-    }
-
-    ui->pushInstall->setText(tr("Install"));
-    ui->pushInstall->setEnabled(!changeList.isEmpty() && anyNotInstalled);
-    ui->pushUninstall->setEnabled(!changeList.isEmpty() && anyInstalled);
-    ui->treeSnap->setFocus();
-}
-
-void MainWindow::pushRefreshSnap_clicked()
-{
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (!isSnapdReady()) {
-        handleSnapTab(QString());
-        return;
-    }
-    ui->searchBoxSnap->clear();
-    ui->comboFilterSnap->blockSignals(true);
-    ui->comboFilterSnap->setCurrentText(tr("Installed snaps"));
-    ui->comboFilterSnap->blockSignals(false);
-    setCursor(QCursor(Qt::BusyCursor));
-    displaySnaps(true);
-    setCursor(QCursor(Qt::ArrowCursor));
-}
-
-void MainWindow::pushUpgradeSnap_clicked()
-{
-    qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    if (!isSnapdReady()) {
-        return;
-    }
-    Cmd::resetElevationDismissed();
-    showOutput();
-    setCursor(QCursor(Qt::BusyCursor));
-    enableOutput();
-    if (cmd.procAsRoot(QStringLiteral("snap"), {QStringLiteral("refresh")})) {
-        appendFlatpakStatusMessage(ui->outputBox, tr("Update complete."));
-        displaySnaps(true);
-        setCursor(QCursor(Qt::ArrowCursor));
-        QMessageBox::information(this, tr("Done"), tr("Processing finished successfully."));
-        ui->tabWidget->setCurrentWidget(ui->tabSnap);
-    } else if (!Cmd::elevationDismissed()) {
-        const QString errorDetails = cmd.readAllOutput();
-        setCursor(QCursor(Qt::ArrowCursor));
-        showError(tr("Problem detected while updating snaps. Click \"Show Details\" for more information."),
-                  errorDetails);
-    } else {
-        setCursor(QCursor(Qt::ArrowCursor));
-        ui->tabWidget->setCurrentWidget(ui->tabSnap);
-    }
-    enableTabs(true);
-}
-
-void MainWindow::pushSetupSnapd_clicked()
-{
-    setupSnapd();
-}
 
 void MainWindow::handleOutputTab()
 {
@@ -5871,20 +5327,12 @@ void MainWindow::filterChanged(const QString &arg1)
         ui->checkHideLibsMX->blockSignals(block);
     };
 
-
-
     // Hide and reset all header checkboxes by default
-    if (headerEnabled) {
-        headerEnabled->setCheckboxVisible(false);
-        headerEnabled->setChecked(false);
-    }
-    if (headerMX) {
-        headerMX->setCheckboxVisible(false);
-        headerMX->setChecked(false);
-    }
-    if (headerBP) {
-        headerBP->setCheckboxVisible(false);
-        headerBP->setChecked(false);
+    for (const QTreeView *tree : aptTrees()) {
+        if (CheckableHeaderView *header = aptTab(tree).header) {
+            header->setCheckboxVisible(false);
+            header->setChecked(false);
+        }
     }
 
     bool isAutoremovable = (arg1 == tr("Autoremovable"));
@@ -5956,35 +5404,26 @@ void MainWindow::filterChanged(const QString &arg1)
 
         if (auto itStatus = statusMap.find(arg1); itStatus != statusMap.end()) {
             savedComboIndex = itStatus.value();
-            auto *proxy = getCurrentProxy();
-            if (proxy) {
-                proxy->setStatusFilter(itStatus.value());
+            const AptTabContext tab = currentAptTab();
+            // Loading a list resets every status, and not every load recomputes the
+            // autoremovable ones (apt's startup preload, pacman's skipped first check),
+            // so compute them the first time this filter needs them.
+            if (itStatus.value() == Status::Autoremovable && tab.model && !tab.model->autoremovableKnown()) {
+                updateAutoremovable(tab.model);
             }
-            bool hasVisibleMatches = proxy ? proxy->rowCount() > 0 : false;
+            if (tab.proxy) {
+                tab.proxy->setStatusFilter(itStatus.value());
+            }
+            bool hasVisibleMatches = tab.proxy ? tab.proxy->rowCount() > 0 : false;
             // Show the header checkbox when filtering Upgradable or Autoremovable
-            if (itStatus.value() == Status::Upgradable || itStatus.value() == Status::Autoremovable) {
+            if (tab.header && (itStatus.value() == Status::Upgradable || itStatus.value() == Status::Autoremovable)) {
                 const QString tip = (itStatus.value() == Status::Upgradable) ? tr("Select/deselect all upgradable")
                                                                              : tr("Select/deselect all autoremovable");
                 const bool allowAutoremovableCheckbox = itStatus.value() != Status::Autoremovable || hasVisibleMatches;
-
-                if (currentTree == ui->treeEnabled && headerEnabled) {
-                    headerEnabled->setCheckboxVisible(allowAutoremovableCheckbox);
-                    if (allowAutoremovableCheckbox) {
-                        headerEnabled->setToolTip(tip);
-                        headerEnabled->resizeSection(TreeCol::Check, qMax(headerEnabled->sectionSize(0), 22));
-                    }
-                } else if (currentTree == ui->treeMXtest && headerMX) {
-                    headerMX->setCheckboxVisible(allowAutoremovableCheckbox);
-                    if (allowAutoremovableCheckbox) {
-                        headerMX->setToolTip(tip);
-                        headerMX->resizeSection(TreeCol::Check, qMax(headerMX->sectionSize(0), 22));
-                    }
-                } else if (currentTree == ui->treeBackports && headerBP) {
-                    headerBP->setCheckboxVisible(allowAutoremovableCheckbox);
-                    if (allowAutoremovableCheckbox) {
-                        headerBP->setToolTip(tip);
-                        headerBP->resizeSection(TreeCol::Check, qMax(headerBP->sectionSize(0), 22));
-                    }
+                tab.header->setCheckboxVisible(allowAutoremovableCheckbox);
+                if (allowAutoremovableCheckbox) {
+                    tab.header->setToolTip(tip);
+                    tab.header->resizeSection(TreeCol::Check, qMax(tab.header->sectionSize(0), 22));
                 }
             }
         }
@@ -5998,75 +5437,45 @@ void MainWindow::filterChanged(const QString &arg1)
     currentTree->blockSignals(false);
 }
 
-// Toggle selection of all visible upgradable items in the current tab
+// Toggle selection of all visible upgradable (or autoremovable) items in the tab
+// whose header checkbox was clicked
 void MainWindow::selectAllUpgradable_toggled(bool checked)
 {
     QTreeView *tree = nullptr;
-    PackageModel *model = nullptr;
-    QObject *s = sender();
-    if (s == headerEnabled) {
-        tree = ui->treeEnabled;
-        model = enabledModel;
-    } else if (s == headerMX) {
-        tree = ui->treeMXtest;
-        model = mxtestModel;
-    } else if (s == headerBP) {
-        tree = ui->treeBackports;
-        model = backportsModel;
-#ifdef PACKAGE_BACKEND_PACMAN
-    } else if (s == headerAUR) {
-        tree = ui->treeAUR;
-        model = aurModel;
-#endif
-    } else {
+    AptTabContext tab;
+    for (QTreeView *candidate : aptTrees()) {
+        const AptTabContext candidateTab = aptTab(candidate);
+        if (candidateTab.header != nullptr && candidateTab.header == sender()) {
+            tree = candidate;
+            tab = candidateTab;
+            break;
+        }
+    }
+    if (tree == nullptr || tab.model == nullptr || tab.proxy == nullptr) {
         return;
     }
+    PackageModel *model = tab.model;
 
     // Batch update: avoid emitting itemChanged for every item
     tree->setUpdatesEnabled(false);
     tree->blockSignals(true);
-    // Determine desired status based on current filter text
-    int targetStatus = Status::Upgradable;
-    QString filterText;
-    if (tree == ui->treeEnabled) {
-        filterText = ui->comboFilterEnabled->currentText();
-    } else if (tree == ui->treeMXtest) {
-        filterText = ui->comboFilterMX->currentText();
-    } else if (tree == ui->treeBackports) {
-        filterText = ui->comboFilterBP->currentText();
-    }
-    if (filterText == tr("Autoremovable")) {
-        targetStatus = Status::Autoremovable;
-    }
-
-    // Get proxy for the tree to respect filters (search, hide libraries, etc.)
-    PackageFilterProxy *proxy = nullptr;
-    if (tree == ui->treeEnabled) {
-        proxy = enabledProxy;
-    } else if (tree == ui->treeMXtest) {
-        proxy = mxtestProxy;
-    } else if (tree == ui->treeBackports) {
-        proxy = backportsProxy;
-    }
+    // Determine desired status based on this tab's filter
+    const int targetStatus = (tab.filterCombo->currentText() == tr("Autoremovable")) ? Status::Autoremovable
+                                                                                       : Status::Upgradable;
 
     // Only check VISIBLE rows (respecting search and other filters)
-    if (proxy) {
-        QVector<int> visibleRows = proxy->visibleSourceRows();
-        model->setCheckedForVisible(visibleRows, checked);
-    }
+    model->setCheckedForVisible(tab.proxy->visibleSourceRows(), checked);
 
     // Rebuild changeList and update buttons once, instead of per-item
     changeList = model->checkedPackageNames();
 
     // Update action buttons coherently after batch toggle
     ui->pushInstall->setEnabled(!changeList.isEmpty());
-    if (tree != ui->treeFlatpak) {
-        ui->pushUninstall->setEnabled(checkInstalled(changeList));
-        if (targetStatus == Status::Autoremovable) {
-            ui->pushInstall->setText(tr("Mark keep"));
-        } else {
-            ui->pushInstall->setText(checkUpgradable(changeList) ? tr("Upgrade") : tr("Install"));
-        }
+    ui->pushUninstall->setEnabled(checkInstalled(changeList));
+    if (targetStatus == Status::Autoremovable) {
+        ui->pushInstall->setText(tr("Mark keep"));
+    } else {
+        ui->pushInstall->setText(checkUpgradable(changeList) ? tr("Upgrade") : tr("Install"));
     }
 
     tree->blockSignals(false);
@@ -6126,7 +5535,7 @@ void MainWindow::buildChangeList(const QString &packageName, Qt::CheckState stat
 
     ui->pushUninstall->setEnabled(checkInstalled(changeList));
     ui->pushInstall->setText(checkUpgradable(changeList) ? tr("Upgrade") : tr("Install"));
-    if (ui->comboFilterEnabled->currentText() == tr("Autoremovable")) {
+    if (currentTabFiltersAutoremovable()) {
         ui->pushInstall->setText(tr("Mark keep"));
     }
 
@@ -6485,6 +5894,7 @@ void MainWindow::treePopularApps_customContextMenuRequested(QPoint pos)
     // QMenu::addAction(QAction*) doesn't take ownership, so parenting to the
     // long-lived MainWindow would leak one QAction per invocation.
     auto *action = new QAction(QIcon::fromTheme("dialog-information"), tr("More &info..."), &menu);
+    action->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_I)); // hint only; the QShortcut handles the key
     menu.addAction(action);
     connect(action, &QAction::triggered, this, [this, index] { displayPopularInfo(index); });
     menu.exec(ui->treePopularApps->mapToGlobal(pos));

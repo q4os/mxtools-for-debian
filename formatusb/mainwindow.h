@@ -70,6 +70,7 @@ private slots:
     void updateOutput(const QString &output);
     void on_buttonAbout_clicked();
     void on_buttonBack_clicked();
+    void on_buttonCancel_clicked();
     void on_buttonHelp_clicked();
     void on_buttonNext_clicked();
     void on_buttonRefresh_clicked();
@@ -83,6 +84,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Cmd *cmd;
+    bool cancelRequested {false};
     QString device;
     QString label;
 };

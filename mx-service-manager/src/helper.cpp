@@ -27,6 +27,8 @@
 #include <QRegularExpression>
 #include <QStringList>
 
+#include "serviceunit.h"
+
 #include <cstdio>
 
 namespace
@@ -81,14 +83,53 @@ void printError(const QString &message)
     return {};
 }
 
-// Allows flags (starting with -), service names, and option values.
-// Covers: systemctl actions, service names (letters/digits/._@:-), flag values like
-// "Description", "json", unit names like "ssh.service", "user@1000.service".
-[[nodiscard]] bool isValidArg(const QString &arg)
+[[nodiscard]] bool validateArguments(const QString &command, QStringList &args)
 {
-    static const QRegularExpression safeRx(
-        QRegularExpression::anchoredPattern(QStringLiteral(R"([-A-Za-z0-9_.@:/=]+)")));
-    return !arg.isEmpty() && safeRx.match(arg).hasMatch();
+    static const QRegularExpression scriptName(
+        QRegularExpression::anchoredPattern(QStringLiteral(R"([A-Za-z0-9_][A-Za-z0-9_.@:+-]*)")));
+    if (command == "true") {
+        return args.isEmpty();
+    }
+    if (command == "service") {
+        return args == QStringList{"--status-all"}
+               || (args.size() == 2 && scriptName.match(args[0]).hasMatch()
+                   && (args[1] == "start" || args[1] == "stop"));
+    }
+    if (command == "update-rc.d") {
+        return args.size() == 2 && scriptName.match(args[0]).hasMatch()
+               && (args[1] == "defaults" || args[1] == "enable" || args[1] == "disable");
+    }
+    if (command != "systemctl" || args.isEmpty()) {
+        return false;
+    }
+
+    static const QStringList actions {"start", "stop", "status", "enable", "disable", "mask", "unmask"};
+    qsizetype unitIndex;
+    if (args.size() == 2 && actions.contains(args[0])) {
+        unitIndex = 1;
+    } else if (args.size() == 3 && args[0] == "mask" && args[1] == "--runtime") {
+        unitIndex = 2;
+    } else if (args.size() == 5 && args.mid(0, 4) == QStringList{"show", "-p", "Description", "--value"}) {
+        unitIndex = 4;
+    } else if (args.size() == 4 && args[0] == "list-units" && args[2] == "-o" && args[3] == "json") {
+        unitIndex = 1;
+    } else {
+        return false;
+    }
+
+    QString unit = args[unitIndex];
+    if (!unit.endsWith(".service")) {
+        if (!scriptName.match(unit).hasMatch()) {
+            return false;
+        }
+        unit += ".service";
+    }
+    if (!isServiceUnit(unit)) {
+        return false;
+    }
+    args.removeAt(unitIndex);
+    args.append({"--", unit});
+    return true;
 }
 
 [[nodiscard]] ProcessResult runProcess(const QString &program, const QStringList &args)
@@ -155,11 +196,9 @@ int main(int argc, char *argv[])
         return 127;
     }
 
-    for (const QString &arg : std::as_const(arguments)) {
-        if (!isValidArg(arg)) {
-            printError(QStringLiteral("Invalid argument: %1").arg(arg));
-            return 1;
-        }
+    if (!validateArguments(command, arguments)) {
+        printError(QStringLiteral("Invalid arguments for %1").arg(command));
+        return 1;
     }
 
     const QString binary = resolveBinary(it.value());

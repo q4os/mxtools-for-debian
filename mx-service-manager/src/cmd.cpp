@@ -1,12 +1,9 @@
 #define QT_USE_QSTRINGBUILDER
 #include "cmd.h"
 
-#include <QApplication>
 #include <QDebug>
 #include <QEventLoop>
 #include <QFile>
-#include <QMessageBox>
-#include <QMetaObject>
 
 #include <unistd.h>
 
@@ -17,9 +14,9 @@ Cmd::Cmd(QObject *parent)
 {
 }
 
-QString Cmd::getOut(const QString &cmd, bool quiet, bool waitForFinish)
+QString Cmd::getOut(const QStringList &command, bool quiet, bool waitForFinish)
 {
-    run(cmd, quiet, waitForFinish);
+    run(command, quiet, waitForFinish);
     return readAll();
 }
 
@@ -29,74 +26,57 @@ QString Cmd::getOutAsRoot(const QStringList &helperArgs, bool quiet, bool waitFo
     return readAll();
 }
 
-bool Cmd::run(const QString &cmd, bool quiet, bool waitForFinish)
+bool Cmd::run(const QStringList &command, bool quiet, bool waitForFinish)
 {
     if (state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << program() << arguments();
         return false;
     }
+    if (command.isEmpty() || command.first().isEmpty()) {
+        return false;
+    }
     if (!quiet) {
-        qDebug().noquote() << cmd;
+        qDebug().noquote() << command;
     }
     QEventLoop loop;
     connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
-    start(QStringLiteral("/bin/bash"), {QStringLiteral("-c"), cmd});
-    if (!waitForFinish) {
-        loop.exec();
-    } else {
-        waitForFinished();
+    connect(this, &QProcess::errorOccurred, &loop, [&loop](QProcess::ProcessError error) {
+        if (error == QProcess::FailedToStart) {
+            loop.quit();
+        }
+    });
+    start(command.first(), command.mid(1));
+    bool completed = true;
+    if (state() != QProcess::NotRunning) {
+        if (waitForFinish) {
+            completed = waitForFinished();
+        } else {
+            loop.exec();
+        }
     }
     emit done();
-    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
+    return completed && state() == QProcess::NotRunning && error() != QProcess::FailedToStart
+           && exitStatus() == QProcess::NormalExit && exitCode() == 0;
 }
 
 bool Cmd::runAsRoot(const QStringList &helperArgs, bool quiet, bool waitForFinish)
 {
-    if (state() != QProcess::NotRunning) {
-        qDebug() << "Process already running:" << program() << arguments();
-        return false;
-    }
-    if (!quiet) {
-        qDebug().noquote() << helperArgs.join(QLatin1Char(' '));
-    }
-    QEventLoop loop;
-    connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
+    QStringList command {helper};
     if (getuid() != 0) {
-        start(elevate, QStringList{helper} + helperArgs);
-    } else {
-        start(helper, helperArgs);
+        command.prepend(elevate);
     }
-    if (!waitForFinish) {
-        loop.exec();
-    } else {
-        waitForFinished();
-    }
-    if (getuid() != 0
-        && (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND)) {
-        const QByteArray errOut = readAllStandardError();
-        const QByteArray stdOut = readAllStandardOutput();
+    const bool ok = run(command + helperArgs, quiet, waitForFinish);
+    if (elevationUnavailable()) {
         qWarning().noquote() << "Elevation failed for" << program() << arguments()
                              << "exitCode:" << exitCode()
-                             << "stderr:" << QString::fromUtf8(errOut).trimmed()
-                             << "stdout:" << QString::fromUtf8(stdOut).trimmed();
-        handleElevationError();
+                             << "stderr:" << QString::fromUtf8(readAllStandardError()).trimmed();
     }
-    emit done();
-    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
+    return ok;
 }
 
-void Cmd::handleElevationError()
+bool Cmd::elevationUnavailable() const
 {
-    // runAsRoot() can be called from a background thread (e.g. QtConcurrent service
-    // discovery), but QMessageBox must only be created on the GUI thread. Compute the
-    // translated text here (translation lookup itself is thread-safe) and marshal the
-    // actual dialog/quit onto the main thread; QMetaObject::invokeMethod runs it
-    // synchronously if we're already there.
-    const QString title = tr("Administrator Access Required");
-    const QString message = tr("This operation requires administrator privileges. Please restart the application "
-                                "and enter your password when prompted.");
-    QMetaObject::invokeMethod(qApp, [title, message] {
-        QMessageBox::critical(nullptr, title, message);
-        exit(EXIT_FAILURE);
-    });
+    return program() == elevate && state() == QProcess::NotRunning && error() != QProcess::FailedToStart
+           && exitStatus() == QProcess::NormalExit
+           && (exitCode() == EXIT_CODE_PERMISSION_DENIED || exitCode() == EXIT_CODE_COMMAND_NOT_FOUND);
 }

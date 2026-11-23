@@ -41,6 +41,13 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    if (qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
+        && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
+        qWarning("formatusb: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
+                "a graphical session is required to run this program.");
+        return EXIT_FAILURE;
+    }
+
     // Set Qt platform to XCB (X11) if not already set and we're in X11 environment
     if (qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
         if (!qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
@@ -58,8 +65,9 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon::fromTheme("media-removable"));
 
     QTranslator qtTran;
-    qtTran.load(QStringLiteral("qt_") + QLocale::system().name());
-    a.installTranslator(&qtTran);
+    if (qtTran.load(QStringLiteral("qt_") + QLocale::system().name())) {
+        a.installTranslator(&qtTran);
+    }
 
     QString logName = sessionLogPath();
     // Set the logging files
@@ -77,8 +85,9 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 
     QTranslator appTran;
-    appTran.load(QStringLiteral("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale");
-    a.installTranslator(&appTran);
+    if (appTran.load(QStringLiteral("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale")) {
+        a.installTranslator(&appTran);
+    }
 
     qDebug() << "Program Version:" << VERSION;
 

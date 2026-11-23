@@ -46,6 +46,9 @@
             <layout class="QGridLayout" name="gridLayout">
              <item row="1" column="0">
               <widget class="QPushButton" name="pushRemoveShare">
+               <property name="toolTip">
+                <string>Remove the selected share</string>
+               </property>
                <property name="text">
                 <string>&amp;Remove</string>
                </property>
@@ -53,6 +56,9 @@
              </item>
              <item row="0" column="0">
               <widget class="QPushButton" name="pushAddShare">
+               <property name="toolTip">
+                <string>Create a new Samba share</string>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -66,6 +72,9 @@
              </item>
              <item row="2" column="0">
               <widget class="QPushButton" name="pushEditShare">
+               <property name="toolTip">
+                <string>Edit the selected share</string>
+               </property>
                <property name="text">
                 <string>&amp;Edit</string>
                </property>
@@ -153,6 +162,9 @@
          </item>
          <item row="2" column="1">
           <widget class="QPushButton" name="pushRemoveUser">
+           <property name="toolTip">
+            <string>Remove the selected Samba user</string>
+           </property>
            <property name="text">
             <string>&amp;Remove</string>
            </property>
@@ -160,6 +172,9 @@
          </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="pushAddUser">
+           <property name="toolTip">
+            <string>Add a Samba user (must match an existing Linux user)</string>
+           </property>
            <property name="text">
             <string>&amp;Add</string>
            </property>
@@ -167,6 +182,9 @@
          </item>
          <item row="3" column="1">
           <widget class="QPushButton" name="pushUserPassword">
+           <property name="toolTip">
+            <string>Change the selected user's Samba password</string>
+           </property>
            <property name="text">
             <string>&amp;Password</string>
            </property>
@@ -176,6 +194,19 @@
           <widget class="QListWidget" name="listWidgetUsers"/>
          </item>
          <item row="6" column="0" colspan="2">
+          <widget class="QLabel" name="labelHomesNote">
+           <property name="visible">
+            <bool>false</bool>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::PlainText</enum>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0" colspan="2">
           <spacer name="verticalSpacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
@@ -215,6 +246,9 @@
      <layout class="QGridLayout" name="gridLayout_6">
       <item row="1" column="1">
        <widget class="QPushButton" name="pushEnableDisableSamba">
+        <property name="toolTip">
+         <string>Enable or disable starting Samba automatically at boot</string>
+        </property>
         <property name="text">
          <string>E&amp;nable Automatic Samba Startup</string>
         </property>
@@ -222,6 +256,9 @@
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="pushStartStopSamba">
+        <property name="toolTip">
+         <string>Start or stop the Samba service</string>
+        </property>
         <property name="text">
          <string>Star&amp;t Samba</string>
         </property>

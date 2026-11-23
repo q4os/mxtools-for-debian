@@ -4,175 +4,177 @@
 <context>
     <name>Backend</name>
     <message>
-        <location filename="../src/backend.cpp" line="74"/>
-        <location filename="../src/backend.cpp" line="95"/>
-        <location filename="../src/backend.cpp" line="118"/>
-        <location filename="../src/backend.cpp" line="315"/>
+        <location filename="../src/backend.cpp" line="183"/>
+        <location filename="../src/backend.cpp" line="208"/>
+        <location filename="../src/backend.cpp" line="211"/>
+        <location filename="../src/backend.cpp" line="234"/>
+        <location filename="../src/backend.cpp" line="435"/>
         <source>Error</source>
         <translation>Eroare</translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="74"/>
+        <location filename="../src/backend.cpp" line="183"/>
         <source>Could not update the login startup setting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="95"/>
+        <location filename="../src/backend.cpp" line="211"/>
         <source>Could not open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="106"/>
+        <location filename="../src/backend.cpp" line="222"/>
         <source>System information is unavailable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="118"/>
+        <location filename="../src/backend.cpp" line="234"/>
         <source>Could not start Quick System Info.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="129"/>
+        <location filename="../src/backend.cpp" line="245"/>
         <source>Could not load the Terms of Use.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="136"/>
+        <location filename="../src/backend.cpp" line="252"/>
         <source>Could not load %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="146"/>
+        <location filename="../src/backend.cpp" line="262"/>
         <source>Could not load changelog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="197"/>
+        <location filename="../src/backend.cpp" line="311"/>
         <source>The name “MX Linux” is covered by Linux Foundation Sublicense No. 20140605-0483. We develop software that is covered by a free license that can be examined in the Wiki list. We also include software developed by others that is under a free license.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="208"/>
+        <location filename="../src/backend.cpp" line="322"/>
         <source>User demo, password: demo. Superuser root, password: root.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="228"/>
+        <location filename="../src/backend.cpp" line="341"/>
         <source>%1 “%2”</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="262"/>
+        <location filename="../src/backend.cpp" line="358"/>
         <source>Install MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="262"/>
+        <location filename="../src/backend.cpp" line="358"/>
         <source>Install MX Linux on this computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="263"/>
+        <location filename="../src/backend.cpp" line="359"/>
         <source>FAQ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="263"/>
+        <location filename="../src/backend.cpp" line="359"/>
         <source>Find answers to frequently asked questions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="264"/>
+        <location filename="../src/backend.cpp" line="360"/>
         <source>Forums</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="264"/>
+        <location filename="../src/backend.cpp" line="360"/>
         <source>Ask questions and join the MX Linux community.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="265"/>
+        <location filename="../src/backend.cpp" line="361"/>
         <source>Users Manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="265"/>
+        <location filename="../src/backend.cpp" line="361"/>
         <source>Read the documentation for your MX Linux release.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="266"/>
+        <location filename="../src/backend.cpp" line="362"/>
         <source>Videos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="266"/>
+        <location filename="../src/backend.cpp" line="362"/>
         <source>Watch MX Linux tutorials and demonstrations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="267"/>
+        <location filename="../src/backend.cpp" line="363"/>
         <source>Wiki</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="267"/>
+        <location filename="../src/backend.cpp" line="363"/>
         <source>Browse community-maintained guides and reference material.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="268"/>
+        <location filename="../src/backend.cpp" line="364"/>
         <source>Contribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="268"/>
+        <location filename="../src/backend.cpp" line="364"/>
         <source>Learn how to support and contribute to MX Linux.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="269"/>
+        <location filename="../src/backend.cpp" line="365"/>
         <source>Tools</source>
         <translation>Unelte</translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="269"/>
+        <location filename="../src/backend.cpp" line="365"/>
         <source>Open the collection of MX system utilities.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="270"/>
+        <location filename="../src/backend.cpp" line="366"/>
         <source>Popular Apps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="270"/>
+        <location filename="../src/backend.cpp" line="366"/>
         <source>Discover and install popular applications.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="271"/>
+        <location filename="../src/backend.cpp" line="367"/>
         <source>Tweak (Panel, etc...)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="271"/>
+        <location filename="../src/backend.cpp" line="367"/>
         <source>Adjust desktop, panel, and system preferences.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="272"/>
+        <location filename="../src/backend.cpp" line="368"/>
         <source>Tour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="272"/>
+        <location filename="../src/backend.cpp" line="368"/>
         <source>Take a guided tour of MX Linux.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/backend.cpp" line="315"/>
+        <location filename="../src/backend.cpp" line="208"/>
+        <location filename="../src/backend.cpp" line="435"/>
         <source>Could not start the requested action.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -180,123 +182,123 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../qml/Main.qml" line="17"/>
-        <location filename="../qml/Main.qml" line="103"/>
-        <location filename="../qml/Main.qml" line="458"/>
+        <location filename="../qml/Main.qml" line="14"/>
+        <location filename="../qml/Main.qml" line="90"/>
+        <location filename="../qml/Main.qml" line="451"/>
         <source>MX Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="136"/>
+        <location filename="../qml/Main.qml" line="123"/>
         <source>Manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="146"/>
+        <location filename="../qml/Main.qml" line="133"/>
         <source>About</source>
         <translation>Despre</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="119"/>
+        <location filename="../qml/Main.qml" line="106"/>
         <source>Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="119"/>
-        <location filename="../qml/Main.qml" line="295"/>
+        <location filename="../qml/Main.qml" line="106"/>
+        <location filename="../qml/Main.qml" line="288"/>
         <source>About this system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="258"/>
+        <location filename="../qml/Main.qml" line="248"/>
         <source>No actions are available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="268"/>
+        <location filename="../qml/Main.qml" line="258"/>
         <source>Show this dialog at start up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="312"/>
+        <location filename="../qml/Main.qml" line="305"/>
         <source>MX version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="313"/>
+        <location filename="../qml/Main.qml" line="306"/>
         <source>Debian version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="314"/>
+        <location filename="../qml/Main.qml" line="307"/>
         <source>Desktop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="315"/>
+        <location filename="../qml/Main.qml" line="308"/>
         <source>Supported until</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="341"/>
+        <location filename="../qml/Main.qml" line="334"/>
         <source>Unavailable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="355"/>
-        <location filename="../qml/Main.qml" line="371"/>
+        <location filename="../qml/Main.qml" line="348"/>
+        <location filename="../qml/Main.qml" line="364"/>
         <source>Short system report</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="366"/>
+        <location filename="../qml/Main.qml" line="359"/>
         <source>Loading system information…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="381"/>
+        <location filename="../qml/Main.qml" line="374"/>
         <source>Quick-System-Info Full Report</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="390"/>
-        <location filename="../qml/Main.qml" line="399"/>
+        <location filename="../qml/Main.qml" line="383"/>
+        <location filename="../qml/Main.qml" line="392"/>
         <source>Terms of Use</source>
         <translation>Termeni de folosire</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="425"/>
+        <location filename="../qml/Main.qml" line="418"/>
         <source>About MX Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="466"/>
+        <location filename="../qml/Main.qml" line="459"/>
         <source>Version: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="472"/>
+        <location filename="../qml/Main.qml" line="465"/>
         <source>Program for displaying a welcome screen in MX Linux</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="479"/>
+        <location filename="../qml/Main.qml" line="472"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="486"/>
+        <location filename="../qml/Main.qml" line="479"/>
         <source>License</source>
         <translation>Licență</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="492"/>
+        <location filename="../qml/Main.qml" line="485"/>
         <source>MX Welcome License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="495"/>
-        <location filename="../qml/Main.qml" line="501"/>
+        <location filename="../qml/Main.qml" line="488"/>
+        <location filename="../qml/Main.qml" line="494"/>
         <source>Changelog</source>
         <translation>Changelog</translation>
     </message>
@@ -492,27 +494,27 @@ li.checked::marker { content: &quot;\2612&quot;; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/main.cpp" line="74"/>
+        <location filename="../src/main.cpp" line="97"/>
         <source>This tool displays the MX Linux welcome screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="78"/>
+        <location filename="../src/main.cpp" line="101"/>
         <source>Start with About selected. The About page provides basic information about the current MX Linux version, the user&apos;s hardware, and access to a full system report.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="80"/>
+        <location filename="../src/main.cpp" line="103"/>
         <source>Run a test mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="101"/>
+        <location filename="../src/main.cpp" line="111"/>
         <source>Error</source>
         <translation>Eroare</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="102"/>
+        <location filename="../src/main.cpp" line="112"/>
         <source>You must run this program as normal user.</source>
         <translation type="unfinished"></translation>
     </message>

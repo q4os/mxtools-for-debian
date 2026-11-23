@@ -12,6 +12,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          ${qml:SettingsDepends},
+         ${qml:SvgDepends},
          qml6-module-qtqml-workerscript,
          qml6-module-qtquick,
          qml6-module-qtquick-controls,
@@ -29,7 +30,8 @@ Recommends: apt-notifier,
             mx-repo-manager,
             mx-select-sound,
             mx-user,
-            mx-launcher-l10n
+            mx-launcher-l10n,
+            x-terminal-emulator
 Description: MX Tools Launcher for MX Linux
  MX Tools is a graphical utility that provides a centralized launcher for
  accessing various MX Linux configuration and system management tools.

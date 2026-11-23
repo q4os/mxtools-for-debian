@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtCore
 import "components"
 
 ApplicationWindow {
@@ -10,8 +9,6 @@ ApplicationWindow {
     required property var backend
 
     visible: false
-    width: Math.min(windowSettings.windowWidth, 760)
-    height: windowSettings.windowHeight
     minimumWidth: 680
     minimumHeight: 560
     title: qsTr("MX Welcome")
@@ -34,17 +31,7 @@ ApplicationWindow {
 
     property int currentPage: root.backend.startOnAbout ? 1 : 0
 
-    Settings {
-        id: windowSettings
-        category: "Window"
-        property int windowWidth: 760
-        property int windowHeight: 720
-    }
-
-    onClosing: function(close) {
-        windowSettings.windowWidth = width
-        windowSettings.windowHeight = height
-    }
+    onClosing: root.backend.saveWindowSize(Qt.size(width, height))
 
     function showDocument(title, text, richText) {
         documentDialog.title = title
@@ -248,7 +235,10 @@ ApplicationWindow {
                                 }
                             }
 
-                            ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
+                            ScrollBar.vertical: ScrollBar {
+                                policy: actionGrid.contentHeight > actionGrid.height
+                                        ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
+                            }
                         }
 
                         Text {
@@ -268,7 +258,10 @@ ApplicationWindow {
                             text: qsTr("Show this dialog at start up")
                             palette.windowText: root.primaryTextColor
                             checked: root.backend.autoStartup
-                            onToggled: root.backend.autoStartup = checked
+                            nextCheckState: function() {
+                                root.backend.autoStartup = !checked
+                                return root.backend.autoStartup ? Qt.Checked : Qt.Unchecked
+                            }
 
                             HoverHandler { cursorShape: Qt.PointingHandCursor }
                         }
@@ -576,6 +569,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        root.width = Math.max(minimumWidth, Math.min(backend.initialWindowSize.width, Screen.desktopAvailableWidth, Screen.width))
+        root.height = Math.max(minimumHeight, Math.min(backend.initialWindowSize.height, Screen.desktopAvailableHeight, Screen.height))
         root.x = Screen.virtualX + Math.round((Screen.desktopAvailableWidth - root.width) / 2)
         root.y = Screen.virtualY + Math.round((Screen.desktopAvailableHeight - root.height) / 2)
         root.visible = true

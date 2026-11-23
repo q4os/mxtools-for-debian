@@ -34,6 +34,7 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QSettings>
+#include <QScopeGuard>
 #include <QStandardPaths>
 #include <QStorageInfo>
 #include <QTemporaryDir>
@@ -45,10 +46,13 @@
 #include <optional>
 #include <stdexcept>
 
+#include <unistd.h>
+
 #include "checksumutils.h"
 #include "elevationbroker.h"
 #include "filesystemutils.h"
 #include "log.h"
+#include "snapdstate.h"
 #include "squashfsutils.h"
 
 namespace
@@ -108,6 +112,72 @@ void requestPowerOff(Cmd &shell)
     if (!shell.runAsRoot("poweroff")) {
         qWarning() << "Failed to request poweroff.";
     }
+}
+
+// Run one command as the session user. Only meaningful when we are root: the
+// installer link lives at a path whose every component the user controls, so
+// touching it with root's privileges is the thing to avoid, not a convenience.
+// Writing as the user makes a redirected path fail harmlessly instead of
+// becoming a root-privileged write somewhere else on the filesystem.
+bool runAsSessionUser(Cmd &shell, const QString &user, const QString &cmd, const QStringList &args)
+{
+    return shell.proc("runuser", QStringList {"-u", user, "--", cmd} + args, nullptr, nullptr, Cmd::QuietMode::Yes);
+}
+
+// Place the installer Desktop symlink at linkPath (a path inside the user's own
+// Desktop, either on the real filesystem or the same path seen through the
+// bind-root overlay).
+//
+// The link must end up owned by the session user: XFCE and Thunar refuse to
+// launch a .desktop file the user does not own, which is what left the live
+// installer icon startable only from a terminal.
+//
+// So it is always created with the session user's credentials, never root's.
+// Unprivileged that is just us; under sudo (the CLI's normal mode) we drop to
+// the user rather than creating a root-owned link -- and rather than pointing a
+// root-privileged write at a path the user controls. `ln -n` only guards the
+// final component, so a root `ln` here would still follow a symlink planted at
+// Desktop/ itself and land the link in whatever directory that names; dropping
+// privileges is what actually closes that, since the user cannot write there.
+bool placeInstallerLink(Cmd &shell, const QString &source, const QString &linkPath, const QString &user)
+{
+    // Preserve existing files and symlinks, including dangling symlinks.
+    const QFileInfo linkInfo(linkPath);
+    if (linkInfo.exists() || linkInfo.isSymLink()) {
+        return false; // Nothing was created, so cleanup must not remove it.
+    }
+    if (geteuid() != 0) {
+        if (QFile::link(source, linkPath)) {
+            return true;
+        }
+        qDebug() << "Could not create installer link:" << linkPath;
+        return false;
+    }
+    // No -f: do not replace a file created after the existence check.
+    // -T: never create a link inside an existing directory.
+    if (!runAsSessionUser(shell, user, "ln", {"-sT", "--", source, linkPath})) {
+        qDebug() << "Could not create installer link as" << user << "at" << linkPath;
+        return false;
+    }
+    return true;
+}
+
+// Counterpart to placeInstallerLink: unlink it with the same credentials that
+// created it. As root this would otherwise be an unlink through user-controlled
+// path components, i.e. an arbitrary root-privileged delete.
+void removeInstallerLink(Cmd &shell, const QString &linkPath, const QString &user)
+{
+    if (geteuid() != 0) {
+        QFile::remove(linkPath);
+        return;
+    }
+    if (user.isEmpty()) {
+        // Removing it as root would be an unlink through path components the user
+        // controls, so leave it rather than risk an arbitrary privileged delete.
+        qWarning() << "No session user to remove the installer link as; leaving" << linkPath;
+        return;
+    }
+    runAsSessionUser(shell, user, "rm", {"-f", "--", linkPath});
 }
 } // namespace
 
@@ -226,12 +296,18 @@ void Work::cleanUp()
         return;
     }
     cleanupStarted = true;
+    // Cleared on every return below, after requestExit() has asked the event
+    // loop to stop, so a window close during teardown can be refused without
+    // ever trapping the user once cleanup is over.
+    cleanupRunning = true;
+    const auto cleanupFinished = qScopeGuard([this] { cleanupRunning = false; });
 
     // Stop a running mksquashfs before queueing any other privileged request:
     // the broker executes FIFO, so anything queued below would otherwise wait
     // for the squash to finish on its own. The out-of-band KILL terminates the
-    // currently running child; snapshot-lib's pkill remains the catch-all (and
-    // covers root/CLI runs, which bypass the broker).
+    // currently running child; snapshot-lib's kill_mksquashfs remains the
+    // catch-all for mksquashfs on our bind-root (and covers root/CLI runs,
+    // which bypass the broker).
     if (started) {
         ElevationBroker::instance().killActiveChild();
         Cmd().procAsRoot("snapshot-lib", {"kill_mksquashfs"}, nullptr, nullptr, Cmd::QuietMode::Yes);
@@ -254,17 +330,16 @@ void Work::cleanUp()
     // Remove the installer Desktop link from the real (bind-mounted) /home; the
     // overlay copy is discarded with the rest of the bind-root state.
     if (!installerLinkToRemove.isEmpty()) {
-        QFile::remove(installerLinkToRemove);
+        removeInstallerLink(shell, installerLinkToRemove, loggedInUserName());
         installerLinkToRemove.clear();
     }
     // Two possible bind-root setups, two cleanup paths:
     //   - mx-remaster's installed-to-live (Debian) drops a marker at
     //     /tmp/installed-to-live/cleanup.conf and is undone via snapshot-lib;
     //   - installed-to-live-arch persists state at /run/<app>/cleanup-arch.state
-    //     (or /tmp/<app>/...) and undoes itself via its own `cleanup` subcmd.
+    //     and undoes itself via its own `cleanup` subcmd.
     const QString appName = QCoreApplication::applicationName();
-    const bool archStatePresent = QFileInfo::exists("/run/" + appName + "/cleanup-arch.state")
-                                  || QFileInfo::exists("/tmp/" + appName + "/cleanup-arch.state");
+    const bool archStatePresent = QFileInfo::exists("/run/" + appName + "/cleanup-arch.state");
     if (archStatePresent) {
         shell.procAsRoot("installed-to-live-arch", {"cleanup"}, nullptr, nullptr, Cmd::QuietMode::Yes);
     }
@@ -277,8 +352,9 @@ void Work::cleanUp()
     settings->tmpdir.reset();
     if (done) {
         emit message(tr("Done"));
-        Cmd().procAsRoot("snapshot-lib", {"copy_log", QCoreApplication::applicationName()}, nullptr, nullptr,
-                         Cmd::QuietMode::Yes);
+        Cmd().procAsRoot("snapshot-lib",
+                         {"copy_log", QCoreApplication::applicationName(), QDir::cleanPath(Log::getLog())}, nullptr,
+                         nullptr, Cmd::QuietMode::Yes);
         if (settings->shutdown) {
             const QString logDestination = settings->snapshotDir + "/" + settings->snapshotName + ".log";
             if (!QFile::copy(Log::getLog(), logDestination)) {
@@ -291,8 +367,9 @@ void Work::cleanUp()
         return;
     }
     emit message(tr("Interrupted or failed to complete"));
-    Cmd().procAsRoot("snapshot-lib", {"copy_log", QCoreApplication::applicationName()}, nullptr, nullptr,
-                     Cmd::QuietMode::Yes);
+    Cmd().procAsRoot("snapshot-lib",
+                     {"copy_log", QCoreApplication::applicationName(), QDir::cleanPath(Log::getLog())}, nullptr,
+                     nullptr, Cmd::QuietMode::Yes);
     requestExit(EXIT_FAILURE);
 }
 
@@ -322,8 +399,7 @@ bool Work::checkAndMoveWorkDir(const QString &dir, quint64 req_size)
         // See Work::cleanUp for the rationale on the dual cleanup paths
         // (installed-to-live for Debian, installed-to-live-arch for Arch).
         const QString appName = QCoreApplication::applicationName();
-        if (QFileInfo::exists("/run/" + appName + "/cleanup-arch.state")
-            || QFileInfo::exists("/tmp/" + appName + "/cleanup-arch.state")) {
+        if (QFileInfo::exists("/run/" + appName + "/cleanup-arch.state")) {
             shell.procAsRoot("installed-to-live-arch", {"cleanup"}, nullptr, nullptr, Cmd::QuietMode::Yes);
         }
         if (QFileInfo::exists("/tmp/installed-to-live/cleanup.conf")) {
@@ -474,6 +550,40 @@ void Work::teardownOverlayBase(const QString &overlayBase)
     }
 }
 
+// A respin must not carry this computer's snap store registration (see
+// SnapdState). The device key and serial assertion are excluded in
+// Settings::otherExclusions(); the state that refers to them is replaced here
+// by a copy without them, bind-mounted over the bind-root's state.json so the
+// host's file is never touched. The cleanup of installed-to-live(-arch)
+// unmounts everything under the bind-root, this mount included.
+bool Work::resetSnapdIdentity()
+{
+    const QString statePath = bindRootPath + "/var/lib/snapd/state.json";
+    if (!shell.procAsRoot("stat", {"-c", "%n", statePath}, nullptr, nullptr, Cmd::QuietMode::Yes)) {
+        return true; // snapd isn't installed or never ran
+    }
+    // The state holds the store session: read it with a Cmd whose output
+    // doesn't reach the log or the window.
+    Cmd reader;
+    reader.setOutputSuppressed(true);
+    QString state;
+    if (!reader.procAsRoot("cat", {statePath}, &state, nullptr, Cmd::QuietMode::Yes)) {
+        qWarning() << "Cannot read" << statePath;
+        return false;
+    }
+    const std::optional<QByteArray> cleaned = SnapdState::withoutDeviceIdentity(state.toUtf8());
+    if (!cleaned) {
+        qWarning() << "Not a snapd state file:" << statePath;
+        return false;
+    }
+    // Written by root with a private umask: the bind source's owner and mode
+    // are what end up in the snapshot.
+    const QString cleanedPath = settings->workDir + "/snapd-state.json";
+    return shell.procAsRoot("sh", {"-c", "umask 077 && cat > \"$1\"", "sh", cleanedPath}, nullptr, &*cleaned,
+                            Cmd::QuietMode::Yes)
+        && shell.procAsRoot("mount", {"--bind", cleanedPath, statePath}, nullptr, nullptr, Cmd::QuietMode::Yes);
+}
+
 bool Work::ensureOverlayModuleLoaded()
 {
     auto overlayRegistered = []() {
@@ -511,18 +621,27 @@ void Work::cleanupBindRootOverlay()
     bindRootPath = "/.bind-root";
 }
 
-void Work::closeInitrd(const QString &initrd_dir, const QString &file)
+// Repack the edited initrd. False when the archive could not be fully written
+// (e.g. the work partition is full), so a truncated initrd is never shipped.
+bool Work::closeInitrd(const QString &initrd_dir, const QString &file)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
-    QDir::setCurrent(initrd_dir);
-    shell.run("(find . |cpio -o -H newc --owner root:root |gzip -9) >\"" + file + "\"");
+    if (!QDir::setCurrent(initrd_dir)) {
+        qWarning() << "Cannot enter the initrd directory" << initrd_dir;
+        return false;
+    }
+    // pipefail: a failing find or cpio must fail the repack too, not only gzip.
+    // The output path is passed as $1 so the shell never parses it.
+    return shell.proc("/bin/bash",
+                      {"-c", R"(set -o pipefail; (find . |cpio -o -H newc --owner root:root |gzip -9) >"$1")", "_",
+                       file});
 }
 
 // copyModules(mod_dir/kernel kernel)
 bool Work::copyModules(const QString &to, const QString &kernel)
 {
-    if (!shell.run(QString(R"(/usr/share/%1/scripts/copy-initrd-modules -e -t="%2" -k="%3")")
-                       .arg(qApp->applicationName(), to, kernel))) {
+    if (!shell.proc("/usr/share/" + qApp->applicationName() + "/scripts/copy-initrd-modules",
+                    {"-e", "--to=" + to, "--kernel=" + kernel})) {
         return false;
     }
     // -F/--force: missing optional initrd programs (ntfs-3g, eject, cryptsetup, ...)
@@ -569,7 +688,7 @@ void Work::copyNewIso()
 
     if (settings->isArch) {
         QDir().mkpath("iso-template");
-        if (!shell.run("tar xf \"" + templateTar + "\" -C iso-template")) {
+        if (!shell.proc("tar", {"xf", templateTar, "-C", "iso-template"})) {
             emit messageBox(BoxType::critical, tr("Error"), tr("Could not extract the ISO template: ") + templateTar);
             cleanUp();
             return;
@@ -622,7 +741,7 @@ void Work::copyNewIso()
             shell.procAsRoot("chown", {cpUser + ":", archBootPath + "/vmlinuz-linux"}, nullptr, nullptr,
                              Cmd::QuietMode::Yes);
         }
-        shell.run("chmod a+r \"" + archBootPath + "/vmlinuz-linux\"");
+        shell.proc("chmod", {"a+r", archBootPath + "/vmlinuz-linux"});
 
         QString initramfsSource;
         const QString archisoPath = "/boot/archiso.img";
@@ -642,17 +761,23 @@ void Work::copyNewIso()
             if (needsRebuild) {
                 emit message(tr("Stale archiso initramfs detected, rebuilding..."));
                 if (!rebuildArchisoInitramfs(archisoPath, kernelPath)) {
-                    QString details = tr("Found /boot/archiso.img built for kernel %1, but the selected kernel is %2.")
-                                          .arg(archisoKernel,
-                                               expectedKernel.isEmpty() ? settings->kernel : expectedKernel);
+                    const QString selectedKernel = expectedKernel.isEmpty() ? settings->kernel : expectedKernel;
+                    QString details = archisoKernel.isEmpty()
+                                          ? tr("Could not determine the kernel version of /boot/archiso.img "
+                                               "(selected kernel is %1).")
+                                                .arg(selectedKernel)
+                                          : tr("Found /boot/archiso.img built for kernel %1, but the selected "
+                                               "kernel is %2.")
+                                                .arg(archisoKernel, selectedKernel);
                     details += "\n"
-                               + tr("Rebuilding /boot/archiso.img failed. Please rebuild it manually or remove the "
-                                    "stale file.");
+                               + tr("Rebuilding /boot/archiso.img failed; check the mkinitcpio output in the log "
+                                    "for errors (e.g. a missing hook). Please fix them and rebuild it manually, "
+                                    "or remove the stale file.");
                     emit messageBox(BoxType::critical, tr("Error"), details);
                     cleanUp();
                     return;
                 }
-                // mkinitcpio already verified the target kernel; skip post-rebuild probing.
+                // rebuildArchisoInitramfs() only succeeds for the selected kernel.
             }
             initramfsSource = archisoPath;
         } else {
@@ -687,9 +812,9 @@ void Work::copyNewIso()
             shell.procAsRoot("chown", {cpUser + ":", archBootPath + "/archiso.img"}, nullptr, nullptr,
                              Cmd::QuietMode::Yes);
         }
-        shell.run("chmod a+r \"" + archBootPath + "/archiso.img\"");
+        shell.proc("chmod", {"a+r", archBootPath + "/archiso.img"});
     } else {
-        if (!shell.run("tar xf \"" + templateTar + "\"")) {
+        if (!shell.proc("tar", {"xf", templateTar})) {
             emit messageBox(BoxType::critical, tr("Error"), tr("Could not extract the ISO template: ") + templateTar);
             cleanUp();
             return;
@@ -740,7 +865,13 @@ void Work::copyNewIso()
             return;
         }
 
-        openInitrd(settings->workDir + "/iso-template/antiX/initrd.gz", path);
+        if (!openInitrd(settings->workDir + "/iso-template/antiX/initrd.gz", path)) {
+            if (!cleanupStarted) {
+                emit messageBox(BoxType::critical, tr("Error"), tr("Could not extract the template initrd."));
+                cleanUp();
+            }
+            return;
+        }
 
         // Strip modules, but only inside our own temp dir so a wrong path can never
         // remove a real /lib/modules. Key the guard on the actual temp base
@@ -781,7 +912,15 @@ void Work::copyNewIso()
                 }
                 return;
             }
-            closeInitrd(path, settings->workDir + "/iso-template/antiX/initrd.gz");
+            const QString initrdFile = settings->workDir + "/iso-template/antiX/initrd.gz";
+            if (!closeInitrd(path, initrdFile)) {
+                if (!cleanupStarted) {
+                    emit messageBox(BoxType::critical, tr("Error"),
+                                    tr("Could not create the new initrd: %1").arg(initrdFile));
+                    cleanUp();
+                }
+                return;
+            }
             const QStringList ucToolDirs = {"/usr/bin", "/usr/local/bin"};
             if (!QStandardPaths::findExecutable("uc-tool", ucToolDirs).isEmpty()) {
                 qDebug() << "uc-tool found, injecting ucode into initrd";
@@ -906,8 +1045,7 @@ bool Work::createIso(const QString &filename)
     }
 
     const QString appName = QCoreApplication::applicationName();
-    const bool archStatePresent = QFileInfo::exists("/run/" + appName + "/cleanup-arch.state")
-                                  || QFileInfo::exists("/tmp/" + appName + "/cleanup-arch.state");
+    const bool archStatePresent = QFileInfo::exists("/run/" + appName + "/cleanup-arch.state");
     if (archStatePresent) {
         shell.procAsRoot("installed-to-live-arch", {"cleanup"}, nullptr, nullptr, Cmd::QuietMode::Yes);
     }
@@ -1047,10 +1185,10 @@ bool Work::createIso(const QString &filename)
         }
         return false;
     }
-    if (settings->makeSha512sum && !makeChecksum(HashType::sha512, settings->snapshotDir, filename)) {
+    if (settings->makeSha256sum && !makeChecksum(HashType::sha256, settings->snapshotDir, filename)) {
         if (!cleanupStarted) {
             emit messageBox(BoxType::critical, tr("Error"),
-                            tr("Could not create the %1 checksum for the ISO.").arg("SHA512"));
+                            tr("Could not create the %1 checksum for the ISO.").arg("SHA256"));
             cleanUp();
         }
         return false;
@@ -1082,17 +1220,22 @@ bool Work::installPackage(const QString &package)
             archPackage = "gazelle-installer";
         }
         emit message(tr("Installing ") + archPackage);
-        // gazelle-installer lives in the AUR, not the official repos, so it
-        // needs an AUR helper. paru runs as the regular user (AUR helpers
-        // refuse root) and escalates internally for the install step. If paru
-        // is missing or the build fails, warn and carry on — the snapshot is
-        // still valid, just without the installer on the ISO.
-        bool installed = false;
-        if (!QStandardPaths::findExecutable("paru").isEmpty()) {
-            installed = shell.proc("paru", {"-S", "--noconfirm", "--needed", archPackage}, nullptr, nullptr,
-                                   Cmd::QuietMode::No);
-        } else {
-            emit message(tr("paru not found; cannot install %1 from the AUR.").arg(archPackage));
+        // Try an enabled repo first (e.g. archPackage ships on arch.mxrepo.com) -
+        // it needs no extra tooling and doesn't touch the AUR. Only fall back to
+        // an AUR helper if pacman can't find it in any configured repo. paru
+        // runs as the regular user (AUR helpers refuse root) and escalates
+        // internally for the install step. If both are unavailable or fail,
+        // warn and carry on — the snapshot is still valid, just without the
+        // installer on the ISO.
+        bool installed = shell.procAsRoot("pacman", {"-S", "--noconfirm", "--needed", archPackage}, nullptr,
+                                          nullptr, Cmd::QuietMode::No);
+        if (!installed) {
+            if (!QStandardPaths::findExecutable("paru").isEmpty()) {
+                installed = shell.proc("paru", {"-S", "--noconfirm", "--needed", archPackage}, nullptr, nullptr,
+                                       Cmd::QuietMode::No);
+            } else {
+                emit message(tr("paru not found; cannot install %1 from the AUR.").arg(archPackage));
+            }
         }
         if (!installed) {
             emit messageBox(BoxType::warning, tr("Warning"),
@@ -1169,35 +1312,48 @@ bool Work::makeChecksum(Work::HashType hash_type, const QString &folder, const Q
     return commandOk && ChecksumUtils::verifyChecksumFile(folder, file_name, ce);
 }
 
-void Work::openInitrd(const QString &file, const QString &initrd_dir)
+// Unpack the template initrd into initrd_dir. False when it could not be
+// fully extracted, so a broken template never gets repacked into the ISO.
+bool Work::openInitrd(const QString &file, const QString &initrd_dir)
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
     emit message(tr("Building new initrd..."));
-    shell.run("chmod a+rx \"" + initrd_dir + "\"");
-    QDir::setCurrent(initrd_dir);
-    shell.run(QString("gunzip -c \"%1\" |cpio -idum").arg(file));
+    shell.proc("chmod", {"a+rx", initrd_dir});
+    // Without this check a failed chdir would unpack into the work directory.
+    if (!QDir::setCurrent(initrd_dir)) {
+        qWarning() << "Cannot enter the initrd directory" << initrd_dir;
+        return false;
+    }
+    // pipefail: a corrupt archive must fail even if cpio exits cleanly.
+    // The archive path is passed as $1 so the shell never parses it.
+    if (!shell.proc("/bin/bash", {"-c", R"(set -o pipefail; gunzip -c -- "$1" |cpio -idum)", "_", file})) {
+        qWarning() << "Could not extract the initrd" << file;
+        return false;
+    }
+    // A truncated archive can still extract "successfully"; the boot script is
+    // the part the initrd cannot do without.
+    if (!QFileInfo(initrd_dir + "/init").isFile()) {
+        qWarning() << "Extracted initrd has no init script:" << file;
+        return false;
+    }
+    return true;
 }
 
 QString Work::initramfsKernelVersion(const QString &initramfsPath) const
 {
-    if (!QFileInfo::exists(initramfsPath)) {
+    if (!QFileInfo::exists(initramfsPath) || QStandardPaths::findExecutable("lsinitcpio").isEmpty()) {
         return {};
     }
-
-    QString listCmd;
-    const QString lsinitcpio = QStandardPaths::findExecutable("lsinitcpio");
-    if (lsinitcpio.isEmpty()) {
-        if (QStandardPaths::findExecutable("cpio").isEmpty()) {
-            return {};
-        }
-        listCmd = QString("cpio -it < \"%1\" 2>/dev/null").arg(initramfsPath);
-    } else {
-        listCmd = QString("\"%1\" -a \"%2\" 2>/dev/null").arg(lsinitcpio, initramfsPath);
+    // Images in /boot are root-only (0600), so the probe must run elevated.
+    // The analysis header reports the kernel as "==> Kernel: <version>".
+    const QString output
+        = Cmd().getOutAsRoot("lsinitcpio", {"-a", "-n", initramfsPath}, Cmd::QuietMode::Yes);
+    static const QRegularExpression kernelRegex(R"(^==> Kernel: (\S+))", QRegularExpression::MultilineOption);
+    const auto match = kernelRegex.match(output);
+    if (!match.hasMatch() || match.captured(1) == "unknown") {
+        return {};
     }
-    const QString cmd
-        = listCmd + " | awk -F/ '{for (i=1; i<=NF; i++) if ($i == \"modules\" && (i+1) <= NF) {print $(i+1); exit}}'";
-
-    return Cmd().getOut(cmd, Cmd::QuietMode::Yes).trimmed();
+    return match.captured(1);
 }
 
 QString Work::kernelImageVersion(const QString &kernelPath) const
@@ -1208,12 +1364,16 @@ QString Work::kernelImageVersion(const QString &kernelPath) const
     if (QStandardPaths::findExecutable("file").isEmpty()) {
         return {};
     }
-    const QString output = Cmd().getOut("file -b \"" + kernelPath + "\"", Cmd::QuietMode::Yes);
+    QString output;
+    Cmd().proc("file", {"-b", kernelPath}, &output, nullptr, Cmd::QuietMode::Yes);
     const QRegularExpression versionRegex(R"(version\s+([^\s,]+))");
     const auto match = versionRegex.match(output);
     return match.hasMatch() ? match.captured(1) : QString();
 }
 
+// Rebuild /boot/archiso.img for the selected kernel. Succeeds only when the new
+// image is (as far as lsinitcpio can tell) built for that kernel: a preset builds
+// for its own ALL_kver, which need not be the kernel chosen for the snapshot.
 bool Work::rebuildArchisoInitramfs(const QString &archisoPath, const QString &kernelPath)
 {
     if (QStandardPaths::findExecutable("mkinitcpio").isEmpty()) {
@@ -1224,6 +1384,23 @@ bool Work::rebuildArchisoInitramfs(const QString &archisoPath, const QString &ke
         qWarning() << "Kernel image not found:" << kernelPath;
         return false;
     }
+
+    const QString expectedKernel = kernelImageVersion(kernelPath);
+    const auto buildMatchesKernel = [&](const QStringList &mkinitcpioArgs) {
+        emit message(tr("Rebuilding initramfs with: mkinitcpio %1").arg(mkinitcpioArgs.join(' ')));
+        if (!shell.procAsRoot("mkinitcpio", mkinitcpioArgs, nullptr, nullptr, Cmd::QuietMode::No)
+            || !QFileInfo::exists(archisoPath)) {
+            return false;
+        }
+        // An unreadable version cannot be checked; only a definite mismatch fails.
+        const QString builtKernel = initramfsKernelVersion(archisoPath);
+        if (!expectedKernel.isEmpty() && !builtKernel.isEmpty() && builtKernel != expectedKernel) {
+            qWarning() << "mkinitcpio" << mkinitcpioArgs << "built" << archisoPath << "for kernel" << builtKernel
+                       << "but the selected kernel is" << expectedKernel;
+            return false;
+        }
+        return true;
+    };
 
     QString presetName;
     const QDir presetDir("/etc/mkinitcpio.d");
@@ -1251,35 +1428,32 @@ bool Work::rebuildArchisoInitramfs(const QString &archisoPath, const QString &ke
             }
         }
     }
-
-    QStringList mkinitcpioArgs;
     if (!presetName.isEmpty()) {
-        mkinitcpioArgs = {"-p", presetName};
-    } else {
-        const QStringList configCandidates {
-            "/usr/lib/archiso/mkinitcpio.conf",
-            "/etc/mkinitcpio-archiso.conf",
-            "/usr/share/archiso/configs/releng/airootfs/etc/mkinitcpio.conf.d/archiso.conf",
-            "/usr/share/archiso/configs/baseline/airootfs/etc/mkinitcpio.conf.d/archiso.conf",
-        };
-        QString configPath;
-        for (const QString &candidate : configCandidates) {
-            if (QFileInfo::exists(candidate)) {
-                configPath = candidate;
-                break;
-            }
+        if (buildMatchesKernel({"-p", presetName})) {
+            return true;
         }
-        if (configPath.isEmpty()) {
-            qWarning() << "No archiso preset or config found for rebuilding archiso initramfs.";
-            return false;
-        }
-        mkinitcpioArgs = {"-c", configPath, "-k", kernelPath, "-g", archisoPath};
+        qWarning() << "The archiso preset" << presetName
+                   << "did not produce an initramfs for the selected kernel; building it directly.";
     }
-    emit message(tr("Rebuilding initramfs with: mkinitcpio %1").arg(mkinitcpioArgs.join(' ')));
-    if (!shell.procAsRoot("mkinitcpio", mkinitcpioArgs, nullptr, nullptr, Cmd::QuietMode::No)) {
+
+    const QStringList configCandidates {
+        "/usr/lib/archiso/mkinitcpio.conf",
+        "/etc/mkinitcpio-archiso.conf",
+        "/usr/share/archiso/configs/releng/airootfs/etc/mkinitcpio.conf.d/archiso.conf",
+        "/usr/share/archiso/configs/baseline/airootfs/etc/mkinitcpio.conf.d/archiso.conf",
+    };
+    QString configPath;
+    for (const QString &candidate : configCandidates) {
+        if (QFileInfo::exists(candidate)) {
+            configPath = candidate;
+            break;
+        }
+    }
+    if (configPath.isEmpty()) {
+        qWarning() << "No archiso config found for rebuilding archiso initramfs.";
         return false;
     }
-    return QFileInfo::exists(archisoPath);
+    return buildMatchesKernel({"-c", configPath, "-k", kernelPath, "-g", archisoPath});
 }
 
 // Replace text in menu items in grub.cfg, syslinux.cfg, isolinux.cfg
@@ -1481,15 +1655,7 @@ void Work::setupEnv()
         } else if (QFileInfo::exists("/usr/share/applications/minstall.desktop")) {
             installerSource = "/usr/share/applications/minstall.desktop";
         }
-        // Drop the link in /etc/skel before the installer flow so any skel-to-demo
-        // copy step picks it up.
-        if (!installerSource.isEmpty()) {
-            const QString skelDesktopDir = bindRootPath + "/etc/skel/Desktop";
-            shell.procAsRoot("mkdir", {"-p", skelDesktopDir}, nullptr, nullptr, Cmd::QuietMode::Yes);
-            shell.procAsRoot("ln", {"-sf", installerSource, skelDesktopDir + "/minstall.desktop"}, nullptr, nullptr,
-                             Cmd::QuietMode::Yes);
-            qDebug() << "Created installer link in skel:" << skelDesktopDir << "->" << installerSource;
-        } else {
+        if (installerSource.isEmpty()) {
             qDebug() << "No installer desktop file found";
         }
     }
@@ -1510,11 +1676,12 @@ void Work::setupEnv()
         }
         if (!settings->isArch) {
             shell.procAsRoot("mkdir", {"-p", "/var/lib/mxdebian/"}, nullptr, nullptr, Cmd::QuietMode::Yes);
-            shell.procAsRoot("touch", {"-p", "/var/lib/mxdebian/.mxsnapshot_accounts_reset.stp"}, nullptr, nullptr, Cmd::QuietMode::Yes);
+            shell.procAsRoot("touch", {"/var/lib/mxdebian/.mxsnapshot_accounts_reset.stp"}, nullptr, nullptr, Cmd::QuietMode::Yes);
         }
         args << "empty=/home" << "general" << "version-file";
         if (settings->isArch) {
-            args << "live-setup";
+            // Only a reset snapshot has the demo account to autologin on tty1.
+            args << "live-setup=autologin";
         } else {
             args << "grubdefault" << "resumedisable" << "tdmnoautologin" << "sddmnoautologin";
         }
@@ -1533,6 +1700,12 @@ void Work::setupEnv()
                              Cmd::QuietMode::Yes);
             shell.procAsRoot("chown", {"-R", "1000:1000", demoDesktop}, nullptr, nullptr, Cmd::QuietMode::Yes);
         }
+        if (!resetSnapdIdentity()) {
+            emit messageBox(BoxType::critical, tr("Error"),
+                            tr("Could not remove this computer's snap store registration from the snapshot."));
+            cleanUp();
+            return;
+        }
     } else {
         QStringList args {"-F", "-b", bindRootPath, "start", "bind=/home"};
         if (bootIsMount) {
@@ -1550,9 +1723,8 @@ void Work::setupEnv()
             cleanUp();
             return;
         }
-        // Drop a link in the current user's Desktop too. If /home is a bind mount,
-        // we have to write to the real filesystem (not the overlay) and remember to
-        // remove it during cleanup.
+        // Drop a link in the current user's Desktop too, so a personal snapshot
+        // boots live with a working installer icon.
         if (!installerSource.isEmpty()) {
             const QString currentUser = loggedInUserName();
             if (!currentUser.isEmpty()) {
@@ -1560,17 +1732,30 @@ void Work::setupEnv()
                 if (QFileInfo::exists(userDesktop)) {
                     const bool homeIsMountpoint = shell.run("mountpoint -q /home", Cmd::QuietMode::Yes);
                     const QString installerLinkPath = userDesktop + "/minstall.desktop";
-                    if (homeIsMountpoint) {
-                        shell.procAsRoot("ln", {"-sf", installerSource, installerLinkPath}, nullptr, nullptr,
-                                         Cmd::QuietMode::Yes);
+                    // Only a live overlay keeps this out of the running system. A
+                    // separate /home is bind-mounted into the snapshot, and the
+                    // overlay fallback binds / itself, so in both of those cases the
+                    // write reaches the real filesystem and has to be taken back out
+                    // on cleanup -- by its real path, which stays valid after the
+                    // bind is gone.
+                    const bool writesToRealFs = homeIsMountpoint || !bindRootOverlayActive;
+                    const QString linkPath
+                        = homeIsMountpoint ? installerLinkPath : bindRootPath + installerLinkPath;
+                    if (placeInstallerLink(shell, installerSource, linkPath, currentUser) && writesToRealFs) {
                         installerLinkToRemove = installerLinkPath;
-                    } else {
-                        shell.procAsRoot("ln", {"-sf", installerSource, bindRootPath + installerLinkPath}, nullptr,
-                                         nullptr, Cmd::QuietMode::Yes);
                     }
                 }
             }
         }
+    }
+    // Setup has mounted the snapshot root. Only change skel in an isolated
+    // overlay; plain binds share the host skel. Reset snapshots already have
+    // the installer link in the staged demo Desktop above.
+    if (!installerSource.isEmpty() && bindRootOverlayActive) {
+        const QString skelDesktopDir = bindRootPath + "/etc/skel/Desktop";
+        shell.procAsRoot("mkdir", {"-p", skelDesktopDir}, nullptr, nullptr, Cmd::QuietMode::Yes);
+        shell.procAsRoot("ln", {"-sf", installerSource, skelDesktopDir + "/minstall.desktop"}, nullptr, nullptr,
+                         Cmd::QuietMode::Yes);
     }
     if (!bindRootOverlayActive) {
         shell.procAsRoot(installedToLive, {"-b", bindRootPath, "read-only"}, nullptr, nullptr,
@@ -1670,8 +1855,11 @@ quint64 Work::getRequiredSpace()
         // isRoot() is true exactly when /home shares the root filesystem, which
         // means device() == rootDevice always holds in that case — the intended
         // check is the opposite: /home is a separate partition (!isRoot()) whose
-        // usage must be added to the required-space estimate below.
-        if (homeInfo.isValid() && !homeInfo.isRoot() && homeInfo.device() != rootDevice) {
+        // usage must be added to the required-space estimate below. A reset
+        // snapshot mounts an empty /home (empty=/home in setupEnv()), so nothing
+        // from that partition ends up in it.
+        if (!settings->resetAccounts && homeInfo.isValid() && !homeInfo.isRoot()
+            && homeInfo.device() != rootDevice) {
             homeDevice = homeInfo.device();
             includeHomeDevice = true;
         }

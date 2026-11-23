@@ -2,7 +2,7 @@
 
 #include "actionmodel.h"
 
-#include <QSettings>
+#include <QSize>
 
 class QCommandLineParser;
 
@@ -13,7 +13,7 @@ class Backend final : public QObject
     Q_PROPERTY(QString distroTitle READ distroTitle CONSTANT)
     Q_PROPERTY(QString distroVersion READ distroVersion CONSTANT)
     Q_PROPERTY(QString debianVersion READ debianVersion CONSTANT)
-    Q_PROPERTY(QString desktopVersion READ desktopVersion CONSTANT)
+    Q_PROPERTY(QString desktopVersion READ desktopVersion NOTIFY desktopVersionChanged)
     Q_PROPERTY(QString supportedUntil READ supportedUntil CONSTANT)
     Q_PROPERTY(QString termsSummary READ termsSummary CONSTANT)
     Q_PROPERTY(QString liveUserInfo READ liveUserInfo CONSTANT)
@@ -24,6 +24,7 @@ class Backend final : public QObject
     Q_PROPERTY(bool liveSession READ liveSession CONSTANT)
     Q_PROPERTY(bool showLiveUserInfo READ showLiveUserInfo CONSTANT)
     Q_PROPERTY(bool startOnAbout READ startOnAbout CONSTANT)
+    Q_PROPERTY(QSize initialWindowSize READ initialWindowSize CONSTANT)
     Q_PROPERTY(QString version READ version CONSTANT)
 
 public:
@@ -44,11 +45,13 @@ public:
     [[nodiscard]] bool liveSession() const;
     [[nodiscard]] bool showLiveUserInfo() const;
     [[nodiscard]] bool startOnAbout() const;
+    [[nodiscard]] QSize initialWindowSize() const;
     [[nodiscard]] QString version() const;
 
     void setAutoStartup(bool enabled);
 
     Q_INVOKABLE void activate(const QString &identifier);
+    Q_INVOKABLE void saveWindowSize(const QSize &size);
     Q_INVOKABLE void requestSystemInfo();
     Q_INVOKABLE void openFullSystemReport();
     Q_INVOKABLE QString termsText();
@@ -56,6 +59,7 @@ public:
     Q_INVOKABLE QString changelogText() const;
 
 signals:
+    void desktopVersionChanged();
     void systemInfoChanged();
     void autoStartupChanged();
     void errorOccurred(const QString &title, const QString &message);
@@ -70,16 +74,16 @@ private:
     };
 
     static QString runCommand(const QString &program, const QStringList &arguments, int timeoutMs = 10000);
-    static QString commandOutput(const QString &command);
     static QUrl localSource(const QString &path);
     void loadConfiguration(bool testMode);
+    void updateDesktopVersion(const QString &sessionInfo);
     void rebuildActions();
     void launchCommand(const QString &command);
     [[nodiscard]] const ActionDefinition *findAction(const QString &identifier) const;
 
     ActionModel m_actions;
+    QSize m_initialWindowSize;
     QVector<ActionDefinition> m_definitions;
-    QSettings m_userSettings;
     QString m_distroTitle;
     QString m_distroVersion;
     QString m_debianVersion;
@@ -96,4 +100,7 @@ private:
     bool m_showLiveUserInfo = false;
     bool m_startOnAbout = false;
     bool m_isFluxbox = false;
+    bool m_desktopProbePending = true;
+    bool m_manualRequested = false;
+    bool m_reportRequested = false;
 };

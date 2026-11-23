@@ -493,6 +493,7 @@ void TestFlatpakModel::testHeaderData()
     // Check header labels
     QCOMPARE(model.headerData(FlatCol::Name, Qt::Horizontal, Qt::DisplayRole).toString(),
              QString("Package"));
+    QCOMPARE(model.headerData(FlatCol::Info, Qt::Horizontal, Qt::DisplayRole).toString(), QString("Info"));
     QCOMPARE(model.headerData(FlatCol::LongName, Qt::Horizontal, Qt::DisplayRole).toString(),
              QString("Full Name"));
     QCOMPARE(model.headerData(FlatCol::Version, Qt::Horizontal, Qt::DisplayRole).toString(),

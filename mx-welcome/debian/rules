@@ -1,5 +1,6 @@
 #!/usr/bin/make -f
 export QT_SELECT=6
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -25,6 +26,11 @@ override_dh_auto_test:
 override_dh_auto_install:
 	# Install is handled by debian/install file
 	dh_auto_install
+	# Derive the autostart entry from the main desktop file so translations
+	# never drift out of sync; only the delayed Exec differs.
+	mkdir -p autostart
+	sed 's|^Exec=mx-welcome$$|Exec=bash -c "sleep 5 \&\& mx-welcome"|' mx-welcome.desktop > autostart/mx-welcome.desktop
+	install -Dm644 autostart/mx-welcome.desktop debian/mx-welcome/etc/skel/.config/autostart/mx-welcome-once.desktop
 
 %:
 	dh $@ --buildsystem=cmake+ninja --no-automatic-dbgsym

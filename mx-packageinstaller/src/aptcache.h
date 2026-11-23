@@ -11,6 +11,10 @@
 inline static const QMap<QString, QString> archNames {
     {"x86_64", "amd64"}, {"i386", "i386"}, {"arm", "armhf"}, {"arm64", "arm64"}};
 
+// DEBIAN_FRONTEND value matching whichever debconf helper (if any) is installed,
+// so debconf prompts render consistently with the desktop's own dialog toolkit.
+[[nodiscard]] QString debconfFrontend();
+
 class AptCache
 {
 public:

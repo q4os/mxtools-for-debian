@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.h
  **********************************************************************
- * Copyright (C) 2024 MX Authors
+ * Copyright (C) 2024-2026 MX Authors
  *
  * Authors: Dolphin Oracle
  *          MX Linux <http://mxlinux.org>
@@ -84,6 +84,7 @@ private:
     QButtonGroup *buttonGroup;
     QHash<QString, QString> hashLocale;
     bool localeGenChanged {false};
+    bool localeOperationInProgress {false};
     int countEnabled {};
 
     [[nodiscard]] QString getCurrentLang() const;

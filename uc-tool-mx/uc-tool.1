@@ -10,8 +10,20 @@ Optionally update an existing initrd in\-place with the new images (\fB\-i\fR).
 .SH OPTIONS
 .TP
 \fB\-u\fR  \fB\-\-ucode=\fR<list>
-Vendors to build: amd, intel, or amd,intel
-[default: amd,intel]
+Vendors to build: auto, amd, intel, or amd,intel
+[default: auto]
+.RS
+.PD 0
+.TP 8
+\fBauto\fR
+build each vendor whose firmware (and for Intel: \fB\%iucode_tool\fR)
+is available; skip the others with a warning; fail only if none is
+available
+.PD
+.RE
+.IP
+An explicit vendor list is strict: any missing firmware or
+\fB\%iucode_tool\fR is a fatal error.
 .TP
 \fB\-d\fR  \fB\-\-directory=\fR<dir>
 Directory for .img files (generate/extract output)
@@ -116,7 +128,7 @@ Show this usage
 Suppress ANSI color codes in output (useful in scripts or log files)
 .TP
 \fB\-q\fR  \fB\-\-quiet\fR
-Suppress all progress output; only fatal errors are shown
+Suppress all progress output; only warnings and errors are shown
 .TP
 \fB\-s\fR  \fB\-\-silent\fR
 Only show error messages
@@ -129,8 +141,8 @@ Show version and exit
 .SH EXAMPLES
 .TP
 \fBuc\-tool \-i /live/boot-dev/antiX/initrd.gz\fR
-Update the live USB initrd in\-place with AMD and Intel microcode
-from the running system's firmware.
+Update the live USB initrd in\-place with AMD and/or Intel microcode
+from the running system's firmware (whichever is available).
 .TP
 \fBuc\-tool \-F /live/linux/lib/firmware \-i /live/boot\-dev/antiX/initrd.gz\fR
 Same, but take the firmware from the live squashfs image rather than

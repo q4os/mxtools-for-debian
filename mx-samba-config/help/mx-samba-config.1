@@ -1,0 +1,21 @@
+.TH MX-SAMBA-CONFIG 1 "2026-07-20" "MX Linux" "User Commands"
+.SH NAME
+mx-samba-config \- manage Samba users and user shares
+.SH SYNOPSIS
+.B mx-samba-config
+.SH DESCRIPTION
+.B mx-samba-config
+is a graphical tool for managing Samba users and user shares. It can add or remove Samba users, create or edit shared folders, and control whether Samba starts automatically and whether the service is running.
+.PP
+Shares can be configured with a name, comment, guest access, write access, and visibility. Shares normally need to refer to folders owned by the user creating them. Remote systems may need to reconnect after share or permission changes.
+.SH OPTIONS
+This application has no documented command-line options. The graphical interface provides all operations.
+.SH FILES
+.TP
+.I /usr/share/doc/mx-samba-config
+Installed HTML help, license, and changelog documentation.
+.SH SEE ALSO
+.BR smb.conf (5),
+.BR smbpasswd (8)
+.SH AUTHOR
+MX Linux contributors.

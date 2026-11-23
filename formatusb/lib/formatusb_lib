@@ -111,6 +111,23 @@ unmount_partitions()
 	fi
 }
 
+# Re-read the partition table once udev has finished processing events, and
+# retry a few times: right after a wipe/mklabel, udev or automount may still
+# hold the old partitions briefly, making partprobe fail with EBUSY.
+refresh_partitions()
+{
+	local dev="$1" i
+	udevadm settle 2>/dev/null
+	for i in 1 2 3; do
+		if partprobe "$dev"; then
+			udevadm settle 2>/dev/null
+			return 0
+		fi
+		sleep 1
+	done
+	return 1
+}
+
 ##clear_partitions from live-usb-maker by James Bowlin (BitJam) for antiX
 clear_partitions()
 {
@@ -147,13 +164,10 @@ clear_partitions()
 
     checkerrorcode "secondary partition table clear"
 
-    sleep 1
     # Tell kernel the partition table has changed
     echo "refresh partitions info $dev"
-    partprobe -s $dev
-
+    refresh_partitions "$dev"
     checkerrorcode "refresh partitions info"
-    sleep 1
 }
 
 create_partition()
@@ -199,32 +213,26 @@ create_partition()
 		sleep 1
 	fi
 
-	# Use the filesystem label as the GPT partition name (if set)
+	# GPT mkpart always takes a NAME argument: use the filesystem label, or an
+	# explicit empty name ('""' in parted's syntax) when no label is set.
+	# Otherwise parted reads "1" as the name and fails for lack of an end.
 	if [ "$parttabletype" = "gpt" ]; then
-		option="$label"
+		option="${label:-\"\"}"
 	fi
 
+	udevadm settle 2>/dev/null
 	parted -s "$dev" mklabel "$parttabletype"
-
 	checkerrorcode "making new partition table"
-	sleep 1
-	partprobe "$dev"
-	checkerrorcode "refresh partitions info"
-	sleep 1
-	# Create partition. $option is "primary" (msdos), the label (gpt), or empty (gpt, no label).
-	# Quote it when present so it can't word-split, but keep the original
-	# argument vector when empty so parted's gpt "no name" case is unchanged.
-	if [ -n "$option" ]; then
-		parted -s -a optimal "$dev" mkpart "$option" 1 100%
-	else
-		parted -s -a optimal "$dev" mkpart 1 100%
-	fi
-	checkerrorcode "create new partition"
-	sleep 1
 
-	partprobe $dev
+	refresh_partitions "$dev"
 	checkerrorcode "refresh partitions info"
-	sleep 1
+
+	# Create partition. $option is "primary" (msdos), the label (gpt), or '""' (gpt, no label).
+	parted -s -a optimal "$dev" mkpart "$option" 1MiB 100%
+	checkerrorcode "create new partition"
+
+	refresh_partitions "$dev"
+	checkerrorcode "refresh partitions info"
 }
 
 

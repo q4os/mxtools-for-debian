@@ -22,6 +22,20 @@ set(CMAKE_AUTOMOC ON)
 # globally since AUTOUIC only acts on targets whose SOURCES actually list a .ui file.
 set(CMAKE_AUTOUIC ON)
 
+# Keep the warning policy consistent across every test target in this directory.
+add_compile_options(
+    -Wpedantic
+    -pedantic
+    -Werror=return-type
+    -Werror=switch
+    -Werror=uninitialized
+)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
+    add_compile_options(-Werror=return-stack-address)
+else()
+    add_compile_options(-Werror=return-local-addr)
+endif()
+
 # PACKAGE_BACKEND is inherited from the top-level CMakeLists.txt; propagate it to every
 # test target so backend-conditional code (e.g. PackageFilterProxy::isLibraryPackage())
 # builds against the same variant being tested.
@@ -41,21 +55,6 @@ target_link_libraries(test_versionnumber
     Qt6::Core
     Qt6::Test
 )
-
-target_compile_options(test_versionnumber PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-# Add compiler-specific flags for tests
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_versionnumber PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_versionnumber PRIVATE -Werror=return-local-addr)
-endif()
 
 add_test(NAME VersionNumberTest COMMAND test_versionnumber)
 
@@ -87,20 +86,6 @@ if(PACKAGE_BACKEND STREQUAL "pacman")
         HELPER_PATH="${HELPER_PATH}"
     )
 
-    target_compile_options(test_packagebackend_pacman PRIVATE
-        -Wpedantic
-        -pedantic
-        -Werror=return-type
-        -Werror=switch
-        -Werror=uninitialized
-    )
-
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-        target_compile_options(test_packagebackend_pacman PRIVATE -Werror=return-stack-address)
-    else()
-        target_compile_options(test_packagebackend_pacman PRIVATE -Werror=return-local-addr)
-    endif()
-
     add_test(NAME PackageBackendPacmanTest COMMAND test_packagebackend_pacman)
 endif()
 
@@ -117,21 +102,6 @@ if(NOT PACKAGE_BACKEND STREQUAL "pacman")
         Qt6::Core
         Qt6::Test
     )
-
-    target_compile_options(test_aptcache PRIVATE
-        -Wpedantic
-        -pedantic
-        -Werror=return-type
-        -Werror=switch
-        -Werror=uninitialized
-    )
-
-    # Add compiler-specific flags for tests
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-        target_compile_options(test_aptcache PRIVATE -Werror=return-stack-address)
-    else()
-        target_compile_options(test_aptcache PRIVATE -Werror=return-local-addr)
-    endif()
 
     add_test(NAME AptCacheTest COMMAND test_aptcache)
 endif()
@@ -172,20 +142,6 @@ if(PACKAGE_BACKEND STREQUAL "pacman")
     )
 endif()
 
-target_compile_options(test_packagemodel PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_packagemodel PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_packagemodel PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME PackageModelTest COMMAND test_packagemodel)
 
 # Test for FlatpakModel class
@@ -199,20 +155,6 @@ target_link_libraries(test_flatpakmodel
     Qt6::Test
     Qt6::Widgets
 )
-
-target_compile_options(test_flatpakmodel PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_flatpakmodel PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_flatpakmodel PRIVATE -Werror=return-local-addr)
-endif()
 
 add_test(NAME FlatpakModelTest COMMAND test_flatpakmodel)
 
@@ -250,20 +192,6 @@ if(PACKAGE_BACKEND STREQUAL "pacman")
     )
 endif()
 
-target_compile_options(test_packagefilterproxy PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_packagefilterproxy PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_packagefilterproxy PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME PackageFilterProxyTest COMMAND test_packagefilterproxy)
 
 # Test for FlatpakFilterProxy class
@@ -280,20 +208,6 @@ target_link_libraries(test_flatpakfilterproxy
     Qt6::Widgets
 )
 
-target_compile_options(test_flatpakfilterproxy PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_flatpakfilterproxy PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_flatpakfilterproxy PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME FlatpakFilterProxyTest COMMAND test_flatpakfilterproxy)
 
 # Test for SnapModel class
@@ -307,20 +221,6 @@ target_link_libraries(test_snapmodel
     Qt6::Test
     Qt6::Widgets
 )
-
-target_compile_options(test_snapmodel PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_snapmodel PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_snapmodel PRIVATE -Werror=return-local-addr)
-endif()
 
 add_test(NAME SnapModelTest COMMAND test_snapmodel)
 
@@ -338,20 +238,6 @@ target_link_libraries(test_snapfilterproxy
     Qt6::Widgets
 )
 
-target_compile_options(test_snapfilterproxy PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_snapfilterproxy PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_snapfilterproxy PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME SnapFilterProxyTest COMMAND test_snapfilterproxy)
 
 # Test for PopularModel class
@@ -365,20 +251,6 @@ target_link_libraries(test_popularmodel
     Qt6::Test
     Qt6::Widgets
 )
-
-target_compile_options(test_popularmodel PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_popularmodel PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_popularmodel PRIVATE -Werror=return-local-addr)
-endif()
 
 add_test(NAME PopularModelTest COMMAND test_popularmodel)
 
@@ -395,20 +267,6 @@ target_link_libraries(test_popularfilterproxy
     Qt6::Widgets
 )
 
-target_compile_options(test_popularfilterproxy PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_popularfilterproxy PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_popularfilterproxy PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME PopularFilterProxyTest COMMAND test_popularfilterproxy)
 
 # Test for the Output-tab rendering helpers (carriage-return / progress handling)
@@ -421,20 +279,6 @@ target_link_libraries(test_outputrender
     Qt6::Test
     Qt6::Widgets
 )
-
-target_compile_options(test_outputrender PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_outputrender PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_outputrender PRIVATE -Werror=return-local-addr)
-endif()
 
 add_test(NAME OutputRenderTest COMMAND test_outputrender)
 
@@ -455,20 +299,6 @@ target_compile_definitions(test_cmd PRIVATE
     HELPER_PATH="${HELPER_PATH}"
 )
 
-target_compile_options(test_cmd PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_cmd PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_cmd PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME CmdTest COMMAND test_cmd)
 
 # Test for the backend-agnostic scaffolding behind src/helper.cpp (process
@@ -486,20 +316,6 @@ target_link_libraries(test_helperengine
     Qt6::Test
     util
 )
-
-target_compile_options(test_helperengine PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_helperengine PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_helperengine PRIVATE -Werror=return-local-addr)
-endif()
 
 add_test(NAME HelperEngineTest COMMAND test_helperengine)
 
@@ -523,20 +339,6 @@ target_compile_definitions(test_helper PRIVATE
     HELPER_BINARY_PATH="$<TARGET_FILE:helper>"
 )
 
-target_compile_options(test_helper PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_helper PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_helper PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME HelperTest COMMAND test_helper)
 
 add_executable(test_packagelistparser
@@ -555,20 +357,6 @@ target_link_libraries(test_sizeutils
     Qt6::Test
 )
 
-target_compile_options(test_sizeutils PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_sizeutils PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_sizeutils PRIVATE -Werror=return-local-addr)
-endif()
-
 add_test(NAME SizeUtilsTest COMMAND test_sizeutils)
 
 # Test for MainWindow's asynchronous orchestration -- the destruction-safety guard
@@ -583,8 +371,10 @@ add_test(NAME SizeUtilsTest COMMAND test_sizeutils)
 set(MAINWINDOW_TEST_SOURCES
     test_mainwindow.cpp
     ../src/mainwindow.cpp
+    ../src/mainwindow_snap.cpp
     ../src/mainwindow.ui
     ../src/checkableheaderview.cpp
+    ../src/pmfiles.cpp
     ../src/versionnumber.cpp
     ../src/remotes.cpp
     ../src/about.cpp
@@ -602,6 +392,7 @@ if(PACKAGE_BACKEND STREQUAL "pacman")
     list(APPEND MAINWINDOW_TEST_SOURCES
         ../src/lockfile_pacman.cpp
         ../src/packagebackend_pacman.cpp
+        ../src/mainwindow_aur.cpp
     )
 else()
     list(APPEND MAINWINDOW_TEST_SOURCES
@@ -638,20 +429,6 @@ target_compile_definitions(test_mainwindow PRIVATE
     HELPER_PATH="${HELPER_PATH}"
     MXPI_TESTING
 )
-
-target_compile_options(test_mainwindow PRIVATE
-    -Wpedantic
-    -pedantic
-    -Werror=return-type
-    -Werror=switch
-    -Werror=uninitialized
-)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(test_mainwindow PRIVATE -Werror=return-stack-address)
-else()
-    target_compile_options(test_mainwindow PRIVATE -Werror=return-local-addr)
-endif()
 
 add_test(NAME MainWindowAsyncTest COMMAND test_mainwindow)
 # Safety net, not an expected runtime: this test's whole point is racing background

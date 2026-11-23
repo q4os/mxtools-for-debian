@@ -79,6 +79,15 @@ QVariant SnapModel::data(const QModelIndex &index, int role) const
         if (index.column() == SnapCol::Check && snap.status == Status::Installed) {
             return m_iconInstalled;
         }
+        if (index.column() == SnapCol::Info) {
+            return m_iconInfo;
+        }
+        return {};
+
+    case Qt::ToolTipRole:
+        if (index.column() == SnapCol::Info) {
+            return tr("More info");
+        }
         return {};
 
     case Qt::UserRole:
@@ -144,6 +153,8 @@ QVariant SnapModel::headerData(int section, Qt::Orientation orientation, int rol
         return QString();
     case SnapCol::Name:
         return tr("Package");
+    case SnapCol::Info:
+        return tr("Info");
     case SnapCol::Version:
         return tr("Version");
     case SnapCol::Publisher:
@@ -235,7 +246,8 @@ void SnapModel::updateInstalledStatus(const QStringList &installedNames)
     }
 }
 
-void SnapModel::setIcons(const QIcon &installed)
+void SnapModel::setIcons(const QIcon &installed, const QIcon &info)
 {
     m_iconInstalled = installed;
+    m_iconInfo = info;
 }

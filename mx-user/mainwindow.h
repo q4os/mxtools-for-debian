@@ -118,6 +118,7 @@ private:
     QSettings settings;
     QStringList users;
     DisplayManager displayManager = DisplayManager::None;
+    bool autologinLoaded = false; // autologin state read for the user selected in userComboBox
     class PassEdit *passChange;
     class PassEdit *passUser;
     void setConnections();

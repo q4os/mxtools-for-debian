@@ -1,0 +1,5 @@
+# New accounts get a one-shot autostart entry so MX Welcome opens on their
+# first login; the application removes it after that launch.
+mx-welcome: package-contains-file-in-etc-skel [etc/skel/.config/]
+mx-welcome: package-contains-file-in-etc-skel [etc/skel/.config/autostart/]
+mx-welcome: package-contains-file-in-etc-skel [etc/skel/.config/autostart/mx-welcome-once.desktop]

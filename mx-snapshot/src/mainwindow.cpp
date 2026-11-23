@@ -54,6 +54,7 @@
 #include "excludesutils.h"
 #include "settings.h"
 #include "squashfsutils.h"
+#include "unitsecrets.h"
 #include "work.h"
 #include <chrono>
 
@@ -74,8 +75,12 @@ MainWindow::MainWindow(Settings *settings, QWidget *parent)
     setExclusions();
     setOtherOptions();
     if (settings->monthly) {
-        ui->btnNext->click();
-        ui->btnNext->click();
+        // Run inside exec(): Work::cleanUp() ends with QCoreApplication::exit(),
+        // which exec() discards if it is requested before the loop starts.
+        QTimer::singleShot(0, this, [this] {
+            ui->btnNext->click();
+            ui->btnNext->click();
+        });
     } else {
         listUsedSpace();
     }
@@ -286,7 +291,7 @@ void MainWindow::setOtherOptions()
 {
     ui->cbCompression->setCurrentIndex(ui->cbCompression->findText(settings->compression, Qt::MatchStartsWith));
     ui->checkMd5->setChecked(settings->makeMd5sum);
-    ui->checkSha512->setChecked(settings->makeSha512sum);
+    ui->checkSha256->setChecked(settings->makeSha256sum);
     ui->radioRespin->setChecked(settings->resetAccounts);
     ui->spinCPU->setMaximum(static_cast<int>(settings->maxCores));
     ui->spinCPU->setValue(static_cast<int>(settings->cores));
@@ -326,7 +331,7 @@ void MainWindow::setConnections()
             &MainWindow::cbCompression_currentIndexChanged);
     connect(ui->checkMd5, &QCheckBox::toggled, this, &MainWindow::checkMd5_toggled);
     connect(ui->checkShutdownOutput, &QCheckBox::toggled, this, [this](bool checked) { settings->shutdown = checked; });
-    connect(ui->checkSha512, &QCheckBox::toggled, this, &MainWindow::checkSha512_toggled);
+    connect(ui->checkSha256, &QCheckBox::toggled, this, &MainWindow::checkSha256_toggled);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDesktop, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDocuments, &QCheckBox::setChecked);
     connect(ui->excludeAll, &QCheckBox::clicked, ui->excludeDownloads, &QCheckBox::setChecked);
@@ -468,13 +473,22 @@ void MainWindow::cleanUp()
     if (!work.isStarted() || work.isCleaningUp()) {
         return;
     }
-    if (cleanupInProgress) {
-        return;
-    }
-    cleanupInProgress = true;
-
     ui->stackedWidget->setCurrentWidget(ui->outputPage);
     work.cleanUp();
+}
+
+void MainWindow::cancelFromSignal()
+{
+    // cleanUp() exits the application when the teardown finishes and is a
+    // no-op while one is already running.
+    if (work.isStarted()) {
+        cleanUp();
+        return;
+    }
+    // Not started: quit. handleSettingsPage() may be inside its elevated
+    // checks; when their nested waits unwind it must not start the run.
+    quitRequested = true;
+    QCoreApplication::quit();
 }
 
 // Once the snapshot pipeline is underway a denied re-authentication (the polkit
@@ -596,6 +610,17 @@ void MainWindow::btnNext_clicked()
     QString file_name = ui->lineEditName->text();
     appendIsoExtension(file_name);
 
+    const bool onSetupPage = ui->stackedWidget->currentWidget() == ui->selectionPage
+                             || ui->stackedWidget->currentWidget() == ui->settingsPage;
+    if (onSetupPage) {
+        // Same rules as the CLI: a bad name (e.g. "dir/name") would only fail in
+        // xorriso, after the whole squashfs pass.
+        if (const QString nameError = Settings::snapshotNameError(file_name); !nameError.isEmpty()) {
+            QMessageBox::critical(this, tr("Error"), nameError);
+            return;
+        }
+    }
+
     if (QFile::exists(settings->snapshotDir + "/" + file_name)) {
         showErrorMessageBox(settings->snapshotDir + "/" + file_name);
         return;
@@ -643,6 +668,7 @@ void MainWindow::handleSelectionPage(const QString &file_name)
     ui->labelSummary->setText("\n" + tr("- Snapshot directory:") + " " + settings->snapshotDir + "\n" + "- "
                               + tr("Snapshot name:") + " " + file_name + "\n" + tr("- Kernel to be used:") + " "
                               + settings->kernel + "\n");
+    settings->snapshotName = file_name; // e.g. Work::cleanUp() names the saved log after it
     settings->codename = ui->textCodename->text();
     settings->distroVersion = ui->textDistroVersion->text();
     settings->projectName = ui->textProjectName->text();
@@ -726,19 +752,34 @@ void MainWindow::handleSettingsPage(const QString &file_name)
         return;
     }
 
-    if (!confirmStart()) {
+    if (!confirmUnitCredentials() || !confirmStart()) {
         return;
     }
 
     // These are the first operations that ask for administrator access. If the
     // user cancels the authentication dialog (or it fails otherwise), stay on
     // the settings page so they can simply press Next again — don't kill the app.
+    // While authentication is pending the nested event loop still delivers
+    // clicks: disable the buttons so Next cannot start a second run, and
+    // closeApp() refuses to quit underneath the wait.
+    elevatedSetupInProgress = true;
+    ui->btnNext->setEnabled(false);
+    ui->btnBack->setEnabled(false);
+    ui->btnCancel->setEnabled(false);
     Cmd::clearElevationDenied();
     const bool dirsOk = settings->checkSnapshotDir() && settings->checkTempDir();
     if (dirsOk) {
         applyExclusions();
     }
+    elevatedSetupInProgress = false;
+    if (quitRequested) {
+        settings->tmpdir.reset();
+        return;
+    }
+    ui->btnCancel->setEnabled(true);
     if (Cmd::elevationDenied() || !dirsOk) {
+        ui->btnNext->setEnabled(true);
+        ui->btnBack->setEnabled(true);
         settings->tmpdir.reset(); // Drop any created work dir; a retry recreates it
         if (Cmd::elevationDenied()) {
             processMsgBox(BoxType::warning, tr("Cancelled"),
@@ -755,6 +796,42 @@ void MainWindow::handleSettingsPage(const QString &file_name)
     prepareForOutput(file_name);
 }
 
+// A respin is meant for other computers, but services the admin set up in
+// /etc/systemd/system go into it as they are, including any tokens or keys in
+// their Environment= lines. Name them (and any files this unelevated scan
+// couldn't read, which are copied all the same) and let the user stop.
+bool MainWindow::confirmUnitCredentials()
+{
+    if (!settings->resetAccounts) {
+        return true;
+    }
+    const UnitSecrets::ScanResult scan = UnitSecrets::findCredentials(QStringLiteral("/etc/systemd/system"));
+    if (scan.findings.isEmpty() && scan.unreadable.isEmpty()) {
+        return true;
+    }
+    QString text;
+    if (!scan.findings.isEmpty()) {
+        qWarning().noquote() << "Services with credentials will be included in the snapshot:"
+                             << scan.findings.join(", ");
+        text += tr("These services in /etc/systemd/system contain what look like passwords, tokens or keys, and "
+                   "will be included in the snapshot as they are:")
+                + "\n\n" + scan.findings.join('\n') + "\n\n";
+    }
+    if (!scan.unreadable.isEmpty()) {
+        qWarning().noquote() << "Could not check these service files for credentials:" << scan.unreadable.join(", ");
+        text += tr("These service files or folders could not be checked for passwords, tokens or keys, and will be included "
+                   "in the snapshot as they are:")
+                + "\n\n" + scan.unreadable.join('\n') + "\n\n";
+    }
+    text += tr("Every system started or installed from this ISO will have them. If the ISO will be shared, remove "
+               "the credentials from these files or add the files to the exclusion list. Disabling a service is "
+               "not enough: its files are still copied.")
+            + "\n\n" + tr("Continue anyway?");
+    return QMessageBox::Yes
+           == QMessageBox::warning(this, tr("Credentials in services"), text, QMessageBox::Yes | QMessageBox::No,
+                                   QMessageBox::No);
+}
+
 bool MainWindow::confirmStart()
 {
     QMessageBox messageBox(this);
@@ -765,8 +842,8 @@ bool MainWindow::confirmStart()
         + tr("It will take some time to finish, depending on the size of the installed system and the capacity of "
              "your computer.")
         + "\n\n" + tr("OK to start?"));
-    messageBox.addButton(QMessageBox::Ok);
-    auto *pushCancel = messageBox.addButton(QMessageBox::Cancel);
+    auto *pushOk = messageBox.addButton(QMessageBox::Ok);
+    messageBox.addButton(QMessageBox::Cancel);
     auto *checkShutdown = new QCheckBox(this);
     checkShutdown->setText(tr("Shutdown computer when done."));
     if (settings->shutdown) {
@@ -774,7 +851,9 @@ bool MainWindow::confirmStart()
     }
     messageBox.setCheckBox(checkShutdown);
     messageBox.exec();
-    if (messageBox.clickedButton() == pushCancel) {
+    // Only an explicit OK starts the run: a box closed because the application
+    // is quitting returns with no button clicked.
+    if (messageBox.clickedButton() != pushOk) {
         return false;
     }
     settings->shutdown = checkShutdown->isChecked();
@@ -1049,12 +1128,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    // If cleanup is already running, don't second-guess it.
-    if (cleanupInProgress) {
-        event->accept();
-        return;
-    }
-    // Programmatic close (e.g. our own close() at the end of closeApp): just let it through.
+    // Programmatic close (our own close() at the end of closeApp, or the
+    // application quitting): just let it through.
     if (!event->spontaneous()) {
         event->accept();
         return;
@@ -1070,7 +1145,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 bool MainWindow::closeApp(bool fromCloseEvent)
 {
-    if (cleanupInProgress) {
+    // Closing the last window quits the event loops that the running teardown
+    // or authentication wait depends on. cleanUp() exits the app when it is
+    // done; a pending authentication returns control to the settings page.
+    if (work.isCleanupRunning() || elevatedSetupInProgress) {
         return false;
     }
     // Ask for confirmation when on outputPage and not done
@@ -1120,10 +1198,10 @@ void MainWindow::checkMd5_toggled(bool checked)
     settings->makeMd5sum = checked;
 }
 
-void MainWindow::checkSha512_toggled(bool checked)
+void MainWindow::checkSha256_toggled(bool checked)
 {
-    qt_settings.setValue("make_sha512sum", checked ? "yes" : "no");
-    settings->makeSha512sum = checked;
+    qt_settings.setValue("make_sha256sum", checked ? "yes" : "no");
+    settings->makeSha256sum = checked;
 }
 
 

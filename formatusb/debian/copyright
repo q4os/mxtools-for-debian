@@ -1,5 +1,14 @@
-Copyright (2019-2026) by Dolphin Oracle; MX Linux <http://mxlinux.org>
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: formatusb
+Source: https://github.com/DolphinOracle/formatusb
 
-and released under the GPL 3
-
+Files: *
+Copyright: 2019-2026 Dolphin Oracle; MX Linux <http://mxlinux.org>
+License: GPL-3
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License version 3 as
+ published by the Free Software Foundation.
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ version 3 can be found in "/usr/share/common-licenses/GPL-3".
 

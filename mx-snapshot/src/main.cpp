@@ -30,12 +30,14 @@
 #include <QLocale>
 #include <QTranslator>
 
+#include <QScopeGuard>
 #include <QSocketNotifier>
 
 #include <cstdio>
 #include <csignal>
 #include <cstring>
 #include <exception>
+#include <functional>
 #include <sys/socket.h>
 #include <unistd.h>
 
@@ -49,6 +51,7 @@
 #include "batchprocessing.h"
 #include "common.h"
 #include "log.h"
+#include "instancelock.h"
 #include "messagehandler.h"
 #include "cmd.h"
 
@@ -61,10 +64,20 @@ static QTranslator qtTran, qtBaseTran, appTran;
 // number to signalFd[1]; a QSocketNotifier on signalFd[0] does the Qt work on
 // the event loop (qDebug/quit are not async-signal-safe).
 static int signalFd[2] = {-1, -1};
+// Cancel action of the running front end (CLI pipeline or main window) for
+// SIGINT/SIGTERM/SIGHUP. QCoreApplication::quit() cannot do this: it does
+// nothing outside exec(), where the CLI pipeline runs, and exiting the event
+// loops mid-step would make every later Cmd wait return without waiting.
+static std::function<void()> cancelRun;
+// Set by a signal that arrives before a front end can cancel, e.g. while
+// Settings waits for authentication: QCoreApplication::exit() ended those
+// nested waits, and no run may start afterwards.
+static bool quitRequested = false;
 QString currentKernel {};
 
 void checkSquashfs();
 void setTranslation();
+bool takeInstanceLock();
 void signalHandler(int signal);
 
 int main(int argc, char *argv[])
@@ -246,7 +259,12 @@ int main(int argc, char *argv[])
         }
         const auto signame = strsignal(sig);
         qDebug() << "\nReceived signal:" << (signame != nullptr ? signame : "Unknown signal");
-        QCoreApplication::quit();
+        if (cancelRun) {
+            cancelRun();
+        } else {
+            quitRequested = true;
+            QCoreApplication::exit(EXIT_FAILURE);
+        }
     });
 
     int exitCode = EXIT_FAILURE;
@@ -264,6 +282,8 @@ int main(int argc, char *argv[])
             const bool hasAuthTools = !Cmd::elevationTool().isEmpty();
             if (getuid() != 0 && (!isGuiApp || !hasAuthTools)) {
                 qDebug().noquote() << QObject::tr("You must run this program with sudo or pkexec.");
+            } else if (!takeInstanceLock()) {
+                exitCode = EXIT_FAILURE;
             } else {
                 const Log setLog(Log::defaultLogPath(app->applicationName()));
                 qInstallMessageHandler(Log::messageHandler);
@@ -275,15 +295,19 @@ int main(int argc, char *argv[])
                 // Create settings instance for dependency injection
                 Settings settings(parser, isGuiApp);
 
-                if (!isGuiApp) {
+                if (quitRequested) {
+                    qDebug().noquote() << QObject::tr("Cancelled before the snapshot started.");
+                } else if (!isGuiApp) {
                     Batchprocessing batch(&settings);
-                    // The whole pipeline already ran synchronously inside the
-                    // constructor above (Cmd::proc uses its own nested QEventLoop
-                    // per call), so exec()'s return value here is meaningless:
-                    // QCoreApplication::exit() called before exec() starts has no
-                    // effect, and the queued quit() below always makes exec()
-                    // return 0 regardless of what Work::cleanUp() requested. Read
-                    // the real outcome from Batchprocessing instead.
+                    cancelRun = [&batch] { batch.cancel(); };
+                    const auto clearCancel = qScopeGuard([] { cancelRun = nullptr; });
+                    batch.run();
+                    // QCoreApplication::exit() requested by Work::cleanUp() inside
+                    // run() has no effect before exec() starts, and the queued
+                    // quit() below always makes exec() return 0. Read the real
+                    // outcome from Batchprocessing instead. exec() also emits
+                    // aboutToQuit, which tears down a successful run; signals stay
+                    // routed to cancel() until then.
                     QTimer::singleShot(0, app, &QCoreApplication::quit);
                     app->exec();
                     exitCode = batch.succeeded() ? EXIT_SUCCESS : EXIT_FAILURE;
@@ -291,8 +315,12 @@ int main(int argc, char *argv[])
 #ifndef CLI_BUILD
                 else {
                     MainWindow w(&settings);
-                    w.show();
-                    exitCode = app->exec();
+                    if (!quitRequested) {
+                        cancelRun = [&w] { w.cancelFromSignal(); };
+                        const auto clearCancel = qScopeGuard([] { cancelRun = nullptr; });
+                        w.show();
+                        exitCode = app->exec();
+                    }
                 }
 #endif
             }
@@ -307,6 +335,35 @@ int main(int argc, char *argv[])
     delete app;
     app = nullptr;
     return exitCode;
+}
+
+// Taken before the log is opened (a second instance would truncate the first
+// one's log) and before Settings, whose constructor tears down whatever a
+// previous run left behind and must never mistake a live run for leftovers.
+// Fails closed: running unlocked would let this instance tear down another
+// one's live snapshot, which is exactly what the lock prevents. Any local user
+// can hold the lock anyway, so failing open would not protect availability.
+bool takeInstanceLock()
+{
+    QString error;
+    switch (InstanceLock::acquire(InstanceLock::defaultPath, &error)) {
+    case InstanceLock::Result::Acquired:
+        return true;
+    case InstanceLock::Result::Busy:
+        MessageHandler::showMessage(
+            MessageHandler::Critical, QObject::tr("Error"),
+            QObject::tr("Another snapshot is already running (MX Snapshot or iso-snapshot-cli). "
+                        "Wait for it to finish, then try again."));
+        return false;
+    case InstanceLock::Result::Unavailable:
+        MessageHandler::showMessage(
+            MessageHandler::Critical, QObject::tr("Error"),
+            QObject::tr("Cannot use the lock file %1 (%2). It keeps two snapshots from running at once. "
+                        "Restarting the computer clears it, or an administrator can delete the file.")
+                .arg(QString::fromLatin1(InstanceLock::defaultPath), error));
+        return false;
+    }
+    return false;
 }
 
 void setTranslation()

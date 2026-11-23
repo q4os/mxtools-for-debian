@@ -1,5 +1,6 @@
 #!/usr/bin/make -f
 export QT_SELECT=6
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
@@ -23,8 +24,8 @@ override_dh_auto_test:
 	# Tests available via -DBUILD_TESTS=ON (default OFF in Debian builds)
 
 override_dh_auto_install:
-	# Install is handled by debian/install file
-	dh_auto_install
+	# debian/install stages the package files directly from the build tree.
+	@:
 
 %:
 	dh $@ --buildsystem=cmake+ninja --no-automatic-dbgsym

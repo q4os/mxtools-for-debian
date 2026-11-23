@@ -3,9 +3,9 @@
 Name=MX Viewer
 # # The desktop entry comment will be shown within the menu.
 Comment=Basic document viewer and browser
-Exec=mx-viewer %U
+Exec=mx-viewer %u
 Icon=mx-viewer
 NoDisplay=false
-Categories=Qt;Network;Utilities;
+Categories=Qt;Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
 Type=Application
-

@@ -235,7 +235,7 @@ if [ "$ARCH" = "amd64" ]; then
 		IDFILE=$IDLISTDIRDDM/$PCIIDFILE
 	fi
 
-	if grep -q -i $NVGA $IDLISTDIR/nvidia-tesla-470.ids 2>/dev/null
+	if grep -q -i $NVGA $IDFILE 2>/dev/null
 	then
 	VERSIONS[471]=470.xx
 	fi

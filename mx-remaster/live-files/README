@@ -1,0 +1,10 @@
+Users may use custom versions of the live-files if they wish, placed under /etc/live-files.  the live-files are utilized by both mx(iso)-snapshot and live-remaster and replace certain files on the system being snapshot or remastered to ensure a given set of defaults are available on the new system.
+
+/usr/share/live-files/files are used for all remasters and snapshots, both personal and general.
+/usr/share/live-files/general-files are only used for General (or resetting) remasters and snapshots.
+
+To use custom live-files under /etc/live-files, both the /etc/live-files/files/
+and /etc/live-files/general-files/ folders must exist for the template to be used in favor
+of the the templates under /usr/share/live-files/.  the suggestion would be then to copy /usr/share/live-files to /etc/live-files and then modify the contents as desired.
+
+if the /etc/live-files/files and /etc/live-files/general-files folders exist, the files under /usr/share/live-files are ignored

@@ -1,8 +1,86 @@
-mx-snapshot (26.08.1302) stable; urgency=medium
+mx-snapshot (26.11.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:07 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:21 +0100
+
+mx-snapshot (26.11) mx; urgency=medium
+
+  * ISOs made for distribution no longer carry this computer's Tailscale
+    connection, snap store registration and logins, root's private files
+    such as shell history, keys and saved logins, or (on Arch) its SSH
+    host keys.
+  * Before making an ISO for distribution, warn when system services hold
+    passwords or keys that would be copied into it; MX Snapshot asks
+    whether to continue.
+  * Only one snapshot can run at a time: starting MX Snapshot or
+    iso-snapshot-cli while another snapshot is running now shows a message
+    instead of breaking the running one.
+  * Stop with an error instead of making an ISO that may not boot when the
+    startup files cannot be unpacked or a kernel driver cannot be copied.
+  * Work folders whose names contain quotes or dollar signs no longer break
+    the snapshot.
+  * On Arch, personal backup ISOs show a normal login prompt on the text
+    console instead of repeatedly failing to log in a "demo" user.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 07 Nov 2026 11:55:39 -0500
+
+mx-snapshot (26.10.2) mx; urgency=medium
+
+  * Create a SHA-256 checksum file (.sha256) for the ISO instead of SHA-512,
+    the kind most distributions publish, which is also faster to make.
+  * On Arch, ISOs made for distribution keep the package repositories set up
+    on your system, including the MX Arch repository, instead of replacing
+    them with the default Arch ones.
+  * On Arch, each system started from an ISO made for distribution creates
+    its own package signing key on first start, instead of all of them
+    sharing the key copied from your system.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 26 Oct 2026 22:31:14 -0400
+
+mx-snapshot (26.10.1) mx; urgency=medium
+
+  * On Arch, fix a security problem in snapshot cleanup, leave the running
+    system's timezone and Desktop icons alone, and make sure ISOs built with
+    another kernel (such as linux-lts) start correctly.
+  * Ctrl+C, stopping the program or logging out now cancels a running
+    snapshot cleanly, and the window can no longer freeze, start a second
+    snapshot or close before cleanup has finished.
+  * Stop with a clear error instead of producing an ISO that does not boot
+    when the disk fills up, and fix false "not enough free space" errors.
+  * Check the ISO name before starting, so an invalid name is rejected right
+    away instead of at the end.
+  * Save the right log after each run, in /var/log and, with "Shutdown
+    computer when done", next to the ISO.
+  * Keep your settings and exclude list working after using the command-line
+    tool with sudo.
+  * Do not add an unneeded keyboard boot option.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 Oct 2026 15:18:44 -0400
+
+mx-snapshot (26.10) mx; urgency=medium
+
+  * On Arch, log in automatically as the demo user when booting an ISO made
+    with reset accounts on KDE systems that use the Plasma login screen,
+    instead of asking for the demo password.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 Oct 2026 08:58:08 -0400
+
+mx-snapshot (26.09.3) mx; urgency=medium
+
+  * On Arch, leave the login screen and display-manager settings alone when
+    creating a distribution snapshot with reset accounts, instead of
+    overwriting them with generic defaults.
+  * On Arch, install the OS installer from an enabled software repository
+    when possible, instead of always building it from the AUR.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 21 Sep 2026 08:37:09 -0400
+
+mx-snapshot (26.09.2) mx; urgency=medium
+
+  * Brand the Arch lightdm/greeter templates instead of shipping stock defaults
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 17 Sep 2026 16:24:10 -0400
 
 mx-snapshot (26.08) mx; urgency=medium
 

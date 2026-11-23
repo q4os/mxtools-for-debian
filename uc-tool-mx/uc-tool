@@ -35,7 +35,7 @@ ME=${0##*/}
 
 AMD_FW_DIR="/lib/firmware/amd-ucode"
 INTEL_FW_DIR="/lib/firmware/intel-ucode"
-UCODE_LIST="amd,intel"
+UCODE_LIST="auto"
 OUT_DIR=""
 INITRD_FILE=""
 FIRMWARE_BASE=""
@@ -95,7 +95,11 @@ Generate microcode early CPIO images from system firmware into -d <dir>.
 Optionally update an existing initrd in-place with the new images (-i).
 
 Options:
-  -u  --ucode=<list>       Vendors to build: amd, intel, or amd,intel
+  -u  --ucode=<list>       Vendors to build: auto, amd, intel, or amd,intel
+                             auto   build each vendor whose firmware (and
+                                    for Intel: iucode_tool) is available;
+                                    skip the others with a warning,
+                                    fail only if none is available
                            [default: $UCODE_LIST]
   -d  --directory=<dir>    Directory for .img files (generate/extract output)
                            or sections to repack (repack input)
@@ -413,25 +417,33 @@ do_generate() {
     fi
 
     # -- parse vendor list -------------------------------------------------
-    local do_amd=false do_intel=false v rest
+    local do_amd=false do_intel=false do_auto=false v rest
     rest="$UCODE_LIST,"
     while [ -n "$rest" ]; do
         v="${rest%%,*}"
         rest="${rest#*,}"
         v=$(echo "$v" | tr '[:upper:]' '[:lower:]')
         case "$v" in
+            auto)  do_auto=true  ;;
             amd)   do_amd=true   ;;
             intel) do_intel=true ;;
-            *)     fatal "Unknown vendor '%s' in --ucode -- use amd, intel, or amd,intel" "$v" ;;
+            *)     fatal "Unknown vendor '%s' in --ucode -- use auto, amd, intel, or amd,intel" "$v" ;;
         esac
     done
+    if $do_auto; then
+        $do_amd || $do_intel \
+            && fatal "--ucode=auto cannot be combined with amd or intel"
+        do_amd=true do_intel=true
+    fi
     $do_amd || $do_intel \
-        || fatal "No vendors selected -- use -u amd, -u intel, or -u amd,intel"
+        || fatal "No vendors selected -- use -u auto, -u amd, -u intel, or -u amd,intel"
 
     # -- check prerequisites -----------------------------------------------
-    local _need_squashfs=false
+    # auto: a missing iucode_tool only skips Intel (checked below)
+    local _need_squashfs=false _need_iucode=$do_intel
     [ -n "$FIRMWARE_BASE" ] && [ -f "$FIRMWARE_BASE" ] && _need_squashfs=true
-    check_prereqs "$do_intel" "$_need_squashfs"
+    $do_auto && _need_iucode=false
+    check_prereqs "$_need_iucode" "$_need_squashfs"
 
     # -- resolve firmware source from -F ----------------------------------
     if [ -n "$FIRMWARE_BASE" ]; then
@@ -448,6 +460,30 @@ do_generate() {
             fatal "Firmware path not found: %s" "$FIRMWARE_BASE"
         fi
     fi
+
+    # -- auto: skip vendors whose prerequisites are missing -----------------
+    # Only missing prerequisites are tolerated; real build failures stay fatal.
+    if $do_auto; then
+        local reason reasons=""
+        if reason=$(ucode_unavailable amd); then
+            do_amd=false
+            reasons="$reasons"$'\n'"  AMD:   $reason"
+            [ "$SILENT" ] || warn "Skipping AMD ucode -- %s" "$reason"
+        fi
+        if reason=$(ucode_unavailable intel); then
+            do_intel=false
+            reasons="$reasons"$'\n'"  Intel: $reason"
+            [ "$SILENT" ] || warn "Skipping Intel ucode -- %s" "$reason"
+        fi
+        $do_amd || $do_intel \
+            || fatal "No microcode could be built (--ucode=auto):$reasons"
+    fi
+
+    # -- remove stale images of vendors not built in this run --------------
+    # update_initrd injects amd/intel-ucode.img found in OUT_DIR, so a leftover
+    # from an earlier run would otherwise be silently prepended.
+    $do_amd   || rm -f "$OUT_DIR/amd-ucode.img"
+    $do_intel || rm -f "$OUT_DIR/intel-ucode.img"
 
     ssay "Generate ucode CPIOs  -->  %s/" "$(pq "$OUT_DIR")"
 
@@ -1248,6 +1284,26 @@ section_compress() {
 }
 
 #------------------------------------------------------------------------------
+# Check build prerequisites for one vendor without failing.
+# $1: amd | intel
+# Prints the reason and returns 0 if the vendor cannot be built, else returns 1.
+#------------------------------------------------------------------------------
+ucode_unavailable() {
+    local dir
+    case "$1" in
+        amd)   dir=$AMD_FW_DIR
+               test -d "$dir" || { echo "AMD firmware dir not found: $dir"; return 0; } ;;
+        intel) dir=$INTEL_FW_DIR
+               test -d "$dir" || { echo "Intel firmware dir not found: $dir"; return 0; }
+               command -v iucode_tool >/dev/null 2>&1 \
+                   || { echo "iucode_tool not found -- install package: iucode-tool"; return 0; } ;;
+    esac
+    [ -n "$(find "$dir" -type f -print -quit)" ] \
+        || { echo "No firmware files in $dir"; return 0; }
+    return 1
+}
+
+#------------------------------------------------------------------------------
 # Build amd-ucode.img from AMD_FW_DIR.
 # Sorted concatenation of all firmware blobs -> AuthenticAMD.bin inside the CPIO.
 #------------------------------------------------------------------------------
@@ -1255,11 +1311,11 @@ make_amd_ucode() {
     local out="$OUT_DIR/amd-ucode.img"
 
     qsay "--- AMD ucode  %s" "$(pq "$AMD_FW_DIR")"
-    test -d "$AMD_FW_DIR" || fatal "AMD firmware dir not found: %s" "$AMD_FW_DIR"
+    local reason
+    reason=$(ucode_unavailable amd) && fatal "%s" "$reason"
 
     local count
     count=$(find "$AMD_FW_DIR" -type f | wc -l)
-    [ "$count" -eq 0 ] && fatal "No firmware files in %s" "$AMD_FW_DIR"
     qsay "    %s firmware file(s)" "$(nq "$count")"
 
     local tmpdir
@@ -1298,14 +1354,11 @@ make_intel_ucode() {
     local out="$OUT_DIR/intel-ucode.img"
 
     qsay "--- Intel ucode  %s" "$(pq "$INTEL_FW_DIR")"
-    test -d "$INTEL_FW_DIR" || fatal "Intel firmware dir not found: %s" "$INTEL_FW_DIR"
-
-    command -v iucode_tool >/dev/null 2>&1 \
-        || fatal "iucode_tool not found -- install package: iucode-tool"
+    local reason
+    reason=$(ucode_unavailable intel) && fatal "%s" "$reason"
 
     local count
     count=$(find "$INTEL_FW_DIR" -type f | wc -l)
-    [ "$count" -eq 0 ] && fatal "No firmware files in %s" "$INTEL_FW_DIR"
     qsay "    %s firmware file(s)" "$(nq "$count")"
 
     if [ "$QUIET$SILENT" ]; then
@@ -1402,7 +1455,7 @@ update_initrd() {
     fi
 
     local img
-    for img in "$OUT_DIR/amd-ucode.img" "$OUT_DIR/intel-ucode.img" "$OUT_DIR"/ucode-*.img; do
+    for img in "$OUT_DIR/amd-ucode.img" "$OUT_DIR/intel-ucode.img"; do
         [ -f "$img" ] || continue
         ssay "  + %s  [%s]  (%s)" "$(pq "$(basename "$img")")" \
              "$(pq "$(ucode_vendor "$img")")" \
@@ -1417,7 +1470,7 @@ update_initrd() {
     new_initrd=$(mktemp -p "$(dirname "$INITRD_FILE")" .uc-tool.XXXXXXXX)
     _INITRD_NEW_TMP="$new_initrd"
 
-    { for img in "$OUT_DIR/amd-ucode.img" "$OUT_DIR/intel-ucode.img" "$OUT_DIR"/ucode-*.img; do
+    { for img in "$OUT_DIR/amd-ucode.img" "$OUT_DIR/intel-ucode.img"; do
           [ -f "$img" ] && cat "$img"
       done
       cmd_dd if="$INITRD_FILE" bs=512 skip=$(( ucode_end / 512 ))

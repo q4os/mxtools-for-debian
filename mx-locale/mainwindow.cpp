@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2024 MX Authors
+ * Copyright (C) 2024-2026 MX Authors
  *
  * Authors: Dolphin Oracle
  *          MX Linux <http://mxlinux.org>
@@ -24,11 +24,15 @@
 #include "about.h"
 #include "ui_mainwindow.h"
 
+#include <QApplication>
 #include <QDebug>
 #include <QDirIterator>
 #include <QFileDialog>
 #include <QProgressDialog>
+#include <QPointer>
 #include <QScrollBar>
+#include <QScopedValueRollback>
+#include <QScopeGuard>
 #include <QSignalBlocker>
 #include <QTextStream>
 #include <QUrl>
@@ -39,17 +43,8 @@
 #include <unistd.h>
 
 namespace {
-bool isSafeLocaleToken(const QString &value)
-{
-    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+$)");
-    return regex.match(value).hasMatch();
-}
-
-bool isSafeLocaleGenLine(const QString &value)
-{
-    static const QRegularExpression regex(R"(^[A-Za-z0-9_.@-]+(?:\s+[A-Za-z0-9_.@-]+)?$)");
-    return regex.match(value).hasMatch();
-}
+using LocaleValidation::isSafeLocaleGenLine;
+using LocaleValidation::isSafeLocaleToken;
 
 void showCommandError(QWidget *parent, Cmd &cmd, const QString &fallback = QObject::tr("Operation failed."))
 {
@@ -113,10 +108,11 @@ void MainWindow::setup()
 // Check if there are subvariables different than LANG
 bool MainWindow::anyDifferentSubvars() const
 {
-    // Skip the first button: ButtonID::LANG
     const auto buttons = buttonGroup->buttons();
-    return std::any_of(std::next(buttons.begin()), buttons.end(),
-                       [this](const auto *button) { return button->text() != ui->buttonLang->text(); });
+    const auto *langButton = buttonGroup->button(ButtonID::Lang);
+    return std::any_of(buttons.cbegin(), buttons.cend(), [langButton](const auto *button) {
+        return button != langButton && button->text() != langButton->text();
+    });
 }
 
 void MainWindow::disableGUI(bool disable)
@@ -228,6 +224,19 @@ QString MainWindow::getCurrentSessionLang() const
 
 void MainWindow::disableAllButCurrent()
 {
+    if (localeOperationInProgress) {
+        return;
+    }
+    const QScopedValueRollback<bool> operationGuard(localeOperationInProgress, true);
+    const QPointer<QWidget> previousFocus = QApplication::focusWidget();
+    disableGUI(true);
+    const auto restoreGui = qScopeGuard([this, previousFocus] {
+        disableGUI(false);
+        if (previousFocus && previousFocus->isEnabled() && previousFocus->isVisible()) {
+            previousFocus->setFocus();
+        }
+    });
+
     const QString currentLang = ui->buttonLang->text();
     const QString sessionLang = getCurrentSessionLang();
     if (!isSafeLocaleToken(currentLang)) {
@@ -370,10 +379,25 @@ void MainWindow::onFilterChanged(const QString &text)
 
 void MainWindow::listItemChanged(QListWidgetItem *item)
 {
+    if (localeOperationInProgress) {
+        return;
+    }
+    const QScopedValueRollback<bool> operationGuard(localeOperationInProgress, true);
+    const QPointer<QWidget> previousFocus = QApplication::focusWidget();
+    disableGUI(true);
+    const auto restoreGui = qScopeGuard([this, previousFocus] {
+        disableGUI(false);
+        if (previousFocus && previousFocus->isEnabled() && previousFocus->isVisible()) {
+            previousFocus->setFocus();
+        }
+    });
+
     // Check for disabling of running locale
     QString localeCode = item->text().section(' ', 0, 0);
+    QString text = item->text().section(QRegularExpression(R"(\s*\t)"), 0, 0);
     if (item->checkState() == Qt::Unchecked
-        && (localeCode == getCurrentLang() || localeCode == getCurrentSessionLang())) {
+        && (LocaleValidation::localeMatchesGenLine(getCurrentLang(), text)
+            || LocaleValidation::localeMatchesGenLine(getCurrentSessionLang(), text))) {
         const QSignalBlocker blocker(ui->listWidget);
         item->setCheckState(Qt::Checked);
         QMessageBox::warning(this, tr("Error"),
@@ -383,7 +407,6 @@ void MainWindow::listItemChanged(QListWidgetItem *item)
         return;
     }
     ui->listWidget->disconnect();
-    QString text = item->text().section(QRegularExpression(R"(\s*\t)"), 0, 0);
     if (!isSafeLocaleGenLine(text) || !isSafeLocaleToken(localeCode)) {
         QMessageBox::critical(this, tr("Error"), tr("Invalid locale value."));
         connect(ui->listWidget, &QListWidget::itemChanged, this, &MainWindow::listItemChanged);
@@ -466,7 +489,7 @@ bool MainWindow::readEnabledLocales(const QString &filePath, QStringList &enable
     QRegularExpression localeRegex("^[a-z]{2,3}([^_]|_[A-Z]{2})");
 
     while (!in.atEnd()) {
-        QString line = in.readLine().trimmed();
+        QString line = in.readLine().simplified();
         if (localeRegex.match(line).hasMatch()) {
             enabledLocales.append(line);
         }
@@ -559,7 +582,7 @@ void MainWindow::readLocaleFile(QFile &file, const QStringList &enabledLocale)
     QTextStream in(&file);
     QRegularExpression localeRegex("^[a-z]{2,3}([^_]|_[A-Z]{2})");
     while (!in.atEnd()) {
-        QString line = in.readLine().trimmed();
+        QString line = in.readLine().simplified();
         if (localeRegex.match(line).hasMatch()) {
             auto item = new QListWidgetItem;
             item->setCheckState(enabledLocale.contains(line) ? Qt::Checked : Qt::Unchecked);
@@ -575,7 +598,13 @@ void MainWindow::readLocaleFile(QFile &file, const QStringList &enabledLocale)
 
 void MainWindow::removeManuals()
 {
-    QString lang = ui->buttonLang->text().section('.', 0, 0);
+    const QString locale = ui->buttonLang->text();
+    if (!isSafeLocaleToken(locale)) {
+        QMessageBox::critical(this, tr("Error"), tr("Invalid locale value."));
+        return;
+    }
+
+    QString lang = locale.section('.', 0, 0);
 
     // Fix for pt_BR, others use base language
     if (lang == "pt_BR") {
@@ -588,11 +617,17 @@ void MainWindow::removeManuals()
         return;
     }
 
-    QString exclusionPattern
-        = QString("mx-(docs|faq)-(en|common%1)").arg(lang == "en" || lang == "C" ? "" : QString("|%1").arg(lang));
+    const QString exclusionPattern = QString("mx-(docs|faq)-(en|common%1)")
+                                         .arg(lang == "en" || lang == "C"
+                                                  ? ""
+                                                  : QString("|%1").arg(QRegularExpression::escape(lang)));
 
     Cmd queryCmd;
     const QRegularExpression exclusionRegex(exclusionPattern);
+    if (!exclusionRegex.isValid()) {
+        QMessageBox::critical(this, tr("Error"), tr("Invalid locale value."));
+        return;
+    }
     QStringList packageList
         = queryCmd.getOut("dpkg-query", {"-W", "--showformat=${Package}\n", "--", "mx-docs-*", "mx-faq-*"}, true)
               .split('\n', Qt::SkipEmptyParts);
@@ -633,6 +668,19 @@ void MainWindow::removeManuals()
 
 void MainWindow::resetLocaleGen()
 {
+    if (localeOperationInProgress) {
+        return;
+    }
+    const QScopedValueRollback<bool> operationGuard(localeOperationInProgress, true);
+    const QPointer<QWidget> previousFocus = QApplication::focusWidget();
+    disableGUI(true);
+    const auto restoreGui = qScopeGuard([this, previousFocus] {
+        disableGUI(false);
+        if (previousFocus && previousFocus->isEnabled() && previousFocus->isVisible()) {
+            previousFocus->setFocus();
+        }
+    });
+
     Cmd cmd;
     if (!cmd.runAsRoot("reset-locale-gen")) {
         showCommandError(this, cmd);

@@ -1,0 +1,17 @@
+# A bare tar-ignore keeps dpkg-source's default excludes (.git, .gitignore, ...);
+# giving only patterns would replace them and pull the whole git history in.
+tar-ignore
+tar-ignore = "build"
+tar-ignore = "build-*"
+tar-ignore = "debs"
+tar-ignore = "aur"
+tar-ignore = ".cache"
+tar-ignore = ".claude"
+tar-ignore = ".qtcreator"
+tar-ignore = "obj-*"
+tar-ignore = ".codex"
+tar-ignore = ".agents"
+# Arch makepkg output (build.sh --arch), which stays behind when makepkg fails.
+tar-ignore = "pkg"
+tar-ignore = "archpkgbuild.*"
+tar-ignore = "*.pkg.tar.zst"

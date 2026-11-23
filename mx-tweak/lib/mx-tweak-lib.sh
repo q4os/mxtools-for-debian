@@ -263,17 +263,36 @@ fi
 
 change_hostname()
 {
-local original="$(hostname)" new="$1"
+local original="$(/usr/bin/hostname)" new="$1"
 
-echo "$original"
-echo "$new"
+echo "Current hostnmae is $original"
+echo "New Hostname is $new"
+
+#process changes in /etc/hosts
+if [ -e "/etc/hosts" ]; then
+	#cleanup old hostname target on loopback address, typicall 127.0.0.1
+	LOOPBACK=$(ip -o -4 addr show dev lo | awk '{split($4, a, "/"); print a[1]}')
+	echo "Loopback/Localhost is $LOOPBACK"
+	#delete such lines that do not include localhost
+	sed -i "/^${LOOPBACK}/{/localhost/"'!'"d}" /etc/hosts
+
+	#get existing domain name, if any
+	DOMAIN=$(awk '$1=="127.0.1.1" && $2 ~ /\..*\./ {print $2}' /etc/hosts | cut -d'.' -f2-)
+	if [ -z "$DOMAIN" ]; then
+		DOMAIN="example.dom"
+	fi
+	echo "Domain is $DOMAIN"
+	#delete old line
+	sed -i '/127.0.1.1/d' /etc/hosts
+	#write new line after loopback entry
+	awk -i inplace -v d="${new}.${DOMAIN}" -v h="$new" '{print} /127\.0\.0\.1/ && /localhost/ {print "127.0.1.1 " d " " h}' /etc/hosts
+fi
 
 if [ -e "/etc/hostname" ]; then
 	sed -i "s/$original/$new/" /etc/hostname
 fi
-if [ -e "/etc/hosts" ]; then
-	sed -i "s/$original/$new/" /etc/hosts
-fi
+
+# simple sed replacemsnts other files
 if [ -e "/etc/mailname" ]; then
 	sed -i "s/$original/$new/" /etc/mailname
 fi
@@ -281,6 +300,7 @@ if [ -e "/etc/dhcp/dhclient.conf" ]; then
 	sed -i "s/$original/$new/" /etc/dhcp/dhclient.conf
 fi
 
+#notify system of hostname change
 hostname "$new"
 }
 
@@ -378,14 +398,15 @@ done
 #run commands from p=0 to j
 
 for ((p=0; p<=j; p++)); do
+echo "${CMD[$p]} "${CMD[$((p+1))]}
 
 	if [ -n "${CMD[$p]}" ]; then
 
 		case "${CMD[$p]}" in
 			hostname)  #next variable is the param
 			   p=$((p+1))
-		   	   #change_hostname ${CMD[$p]}
 		   	   echo "change_hostname  ${CMD[$p]}"
+		   	   change_hostname ${CMD[$p]}
 			;;
 			bluetooth_battery) #next variable is the param
 		       p=$((p+1))

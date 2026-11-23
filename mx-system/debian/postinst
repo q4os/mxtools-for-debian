@@ -32,16 +32,89 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
         fi
     fi
 
-#update mx-version to latest for MX23, beta, and RC and later
+    # Ensure /usr and /etc have appropriate permissions
+    DIRS="/etc /etc/apt /etc/apt/apt.conf.d /etc/apt/sources.list.d /etc/default /etc/init.d /etc/init.d/debian /etc/modprobe.d /etc/network /etc/skel /etc/systemd /etc/systemd/system /etc/systemd/system-generators /usr /usr/share /usr/share/keyrings"
+
+    for i in $DIRS; do
+        if [ -d $i ] && [ ! -L $i ]; then
+            chmod go-w $i 2>/dev/null || :
+        fi
+    done
+
+    # Ensure some MX files have the correct permissions by default
+
+	files="
+	/etc/apt/apt.conf.d/90mx-modernize-sources-notice
+	/etc/apt/sources.list.d/debian.sources
+	/etc/apt/sources.list.d/mx.sources
+	/etc/apt/apt.conf
+	/etc/default/console-setup
+	/etc/default/keyboard
+	/etc/default/resolvconf
+	/etc/init.d/checkfs.sh*
+	/etc/init.d/console-setup*
+	/etc/init.d/console-setup.sh*
+	/etc/init.d/cron
+	/etc/init.d/hwclock.sh*
+	/etc/init.d/keyboard-setup*
+	/etc/init.d/keyboard-setup.sh*
+	/etc/init.d/kmod
+	/etc/init.d/lm-sensors*
+	/etc/init.d/networking
+	/etc/init.d/sendsigs*
+	/etc/init.d/umountfs*
+	/etc/init.d/debian/checkfs.sh
+	/etc/init.d/debian/console-setup
+	/etc/init.d/debian/console-setup.sh
+	/etc/init.d/debian/cron
+	/etc/init.d/debian/hwclock.sh
+	/etc/init.d/debian/keyboard-setup
+	/etc/init.d/debian/keyboard-setup.sh
+	/etc/init.d/debian/kmod
+	/etc/init.d/debian/lm-sensors
+	/etc/init.d/debian/sendsigs
+	/etc/init.d/debian/umountfs*
+	/etc/modprobe.d/blacklist-ntfs3.conf
+	/etc/modprobe.d/kvm.conf
+	/etc/skel/.bashrc
+	/etc/skel/.inputrc
+	/etc/network/interfaces
+	/etc/systemd/system/live-disables-readme
+	/etc/systemd/system/systemd-networkd-wait-online.service
+	/etc/systemd/system/wpa_supplicant-nl80211@.service
+	/etc/systemd/system/wpa_supplicant-wired@.service
+	/etc/systemd/system/wpa_supplicant@.service
+	/etc/systemd/system-generators/live-generators-readme
+	/etc/systemd/system-generators/systemd-fstab-generator
+	/etc/systemd/system-generators/systemd-gpt-auto-generator
+	/etc/adduser.conf
+	/etc/adjtime
+	/etc/bash.bashrc
+	/etc/fstab
+	/etc/hosts
+	/etc/inittab
+	/etc/locale.gen
+	/etc/locale.gen.all
+	/etc/locale.gen.net
+	/usr/share/keyrings/mx-25-archive-keyring.gpg"
+
+	for i in $files; do
+	    if [ -e $i ] && [ ! -L $i ]; then
+	        chmod go-w $i 2>/dev/null || :
+	    fi
+	done
+
+	#update mx-version to latest for MX23, beta, and RC and later
     if [ -e /etc/mx-version ]; then
 
     sed -i 's/Libretto/Infinity/' /etc/mx-version
-    sed -i "s/MX-23.*_/MX-25.2_/" /etc/mx-version
-    sed -i "s/MX-25.*_Xfce_/MX-25.2_Xfce_/" /etc/mx-version
-    sed -i "s/MX-25.*_KDE_/MX-25.2_KDE_/" /etc/mx-version
-    sed -i "s/MX-25.*_fluxbox_/MX-25.2_fluxbox_/" /etc/mx-version
+    sed -i "s/MX-23.*_/MX-25.3_/" /etc/mx-version
+    sed -i "s/MX-25.*_Xfce_/MX-25.3_Xfce_/" /etc/mx-version
+    sed -i "s/MX-25.*_KDE_/MX-25.3_KDE_/" /etc/mx-version
+    sed -i "s/MX-25.*_fluxbox_/MX-25.3_fluxbox_/" /etc/mx-version
     #replacement for those updating from mx25.1 to 25.1 and so forth, mistake in mx25.1 string change
     sed -i "s/MX-25.1_x64/MX-25.2_x64/" /etc/mx-version
+    sed -i "s/MX-25.2_x64/MX-25.3_x64/" /etc/mx-version
     #handle update from beta and rc users
     sed -i s/_beta.*_/_/ /etc/mx-version
     sed -i s/_RC.*_/_/ /etc/mx-version
@@ -66,6 +139,109 @@ if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remov
         fi
         touch /etc/mxsystem_frontend.chk
     fi
+    
+    # Ensure /usr and /etc have appropriate permissions
+    DIRS="/etc /etc/apt /etc/apt/apt.conf.d /etc/apt/sources.list.d /etc/default /etc/init.d /etc/init.d/debian /etc/modprobe.d /etc/network /etc/skel /etc/systemd /etc/systemd/system /etc/systemd/system-generators /usr /usr/share /usr/share/keyrings"
+
+    for i in $DIRS; do
+        if [ -d $i ] && [ ! -L $i ]; then
+            chmod go-w $i 2>/dev/null || :
+        fi
+    done
+    
+    # Ensure some MX files have the correct permissions by default
+    
+	files="
+	/etc/apt/apt.conf.d/90mx-modernize-sources-notice
+	/etc/apt/sources.list.d/debian.sources
+	/etc/apt/sources.list.d/mx.sources
+	/etc/apt/apt.conf
+	/etc/default/console-setup
+	/etc/default/keyboard
+	/etc/default/resolvconf
+	/etc/init.d/checkfs.sh*
+	/etc/init.d/console-setup*
+	/etc/init.d/console-setup.sh*
+	/etc/init.d/cron
+	/etc/init.d/hwclock.sh*
+	/etc/init.d/keyboard-setup*
+	/etc/init.d/keyboard-setup.sh*
+	/etc/init.d/kmod
+	/etc/init.d/lm-sensors*
+	/etc/init.d/networking
+	/etc/init.d/sendsigs*
+	/etc/init.d/umountfs*
+	/etc/init.d/debian/checkfs.sh
+	/etc/init.d/debian/console-setup
+	/etc/init.d/debian/console-setup.sh
+	/etc/init.d/debian/cron
+	/etc/init.d/debian/hwclock.sh
+	/etc/init.d/debian/keyboard-setup
+	/etc/init.d/debian/keyboard-setup.sh
+	/etc/init.d/debian/kmod
+	/etc/init.d/debian/lm-sensors
+	/etc/init.d/debian/sendsigs
+	/etc/init.d/debian/umountfs*
+	/etc/modprobe.d/blacklist-ntfs3.conf
+	/etc/modprobe.d/kvm.conf
+	/etc/skel/.bashrc
+	/etc/skel/.inputrc
+	/etc/network/interfaces
+	/etc/systemd/system/live-disables-readme
+	/etc/systemd/system/systemd-networkd-wait-online.service
+	/etc/systemd/system/wpa_supplicant-nl80211@.service
+	/etc/systemd/system/wpa_supplicant-wired@.service
+	/etc/systemd/system/wpa_supplicant@.service
+	/etc/systemd/system-generators/live-generators-readme
+	/etc/systemd/system-generators/systemd-fstab-generator
+	/etc/systemd/system-generators/systemd-gpt-auto-generator
+	/etc/adduser.conf
+	/etc/adjtime
+	/etc/bash.bashrc
+	/etc/fstab
+	/etc/hosts
+	/etc/inittab
+	/etc/locale.gen
+	/etc/locale.gen.all
+	/etc/locale.gen.net
+	/usr/share/keyrings/mx-25-archive-keyring.gpg
+	/etc/skel/.local/share/applications
+	/etc/skel/.config/autostart/conky.desktop
+	/etc/default/grub
+	/usr/share/desktop-base/grub_background.sh
+	/usr/share/fonts/extra/Dinreg_Regular.ttf
+    /usr/share/fonts/extra/Existence-Light.otf
+    /usr/share/fonts/extra/Existence-Light.PFB
+    /usr/share/fonts/extra/Existence-Light.ttf
+    /usr/share/fonts/extra/Existence-UnicaseLight.otf
+    /usr/share/fonts/extra/Quicksand_Bold_Oblique.otf
+    /usr/share/fonts/extra/Quicksand_Bold.otf
+    /usr/share/fonts/extra/Quicksand_Book_Oblique.otf
+    /usr/share/fonts/extra/Quicksand_Book.otf
+    /usr/share/fonts/extra/Quicksand_Dash.otf
+    /usr/share/fonts/extra/Quicksand_Light_Oblique.otf
+    /usr/share/fonts/extra/Quicksand_Light.otf
+    /usr/share/fonts/extra/Roboto-Light.ttf
+    /usr/share/fonts/extra/RobotoMono-Light.ttf
+	/etc/libuser.conf
+	/etc/modules
+	/etc/timezone
+	/etc/lightdm/lightdm.conf
+	/etc/lightdm/lightdm-gtk-greeter.conf
+	/etc/modprobe.d/pc-speaker.conf
+	/usr/share/boot-menus/desktop.data
+	/usr/share/boot-menus/desktop.menu
+	/usr/share/X11/xorg.conf.d/20-thinkpad.conf
+	/etc/plymouth/plymouthd.conf
+	/etc/ufw/ufw.conf
+	/etc/skel/.config/autostart/magnus-autostart.desktop"
+	
+	for i in $files; do
+	    if [ -e $i ] && [ ! -L $i ]; then
+	        chmod go-w $i 2>/dev/null || :
+	    fi
+	done
+
 
      #add legacy libsane folders
 

@@ -18,5 +18,5 @@ Description: Various useful scripts for MX.
   * ps_initrd.sh (initrd packing/unpacking tool)
   * zram (script to set up zram)
   * ps_mem.py (RAM usage script)
-  * fstrim-mx (auto set up fstrim of SSE drives as a weekly cron job)
+  * fstrim-mx (auto set up fstrim of SSD drives as a weekly cron job)
   

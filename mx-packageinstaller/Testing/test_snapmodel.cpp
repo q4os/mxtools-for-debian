@@ -421,6 +421,13 @@ void TestSnapModel::testDecorationRole()
     QVERIFY(!model.data(model.index(0, SnapCol::Check), Qt::DecorationRole).value<QIcon>().isNull());
     QVERIFY(!model.data(model.index(1, SnapCol::Check), Qt::DecorationRole).isValid());
     QVERIFY(!model.data(model.index(0, SnapCol::Name), Qt::DecorationRole).isValid());
+
+    // The Info column shows the info icon on every row, installed or not
+    QVERIFY(model.data(model.index(1, SnapCol::Info), Qt::DecorationRole).value<QIcon>().isNull());
+    model.setIcons(QIcon(pixmap), QIcon(pixmap));
+    QVERIFY(!model.data(model.index(0, SnapCol::Info), Qt::DecorationRole).value<QIcon>().isNull());
+    QVERIFY(!model.data(model.index(1, SnapCol::Info), Qt::DecorationRole).value<QIcon>().isNull());
+    QVERIFY(!model.data(model.index(1, SnapCol::Info), Qt::DisplayRole).isValid());
 }
 
 void TestSnapModel::testClear()
@@ -463,6 +470,7 @@ void TestSnapModel::testHeaderData()
     SnapModel model;
 
     QCOMPARE(model.headerData(SnapCol::Name, Qt::Horizontal, Qt::DisplayRole).toString(), QString("Package"));
+    QCOMPARE(model.headerData(SnapCol::Info, Qt::Horizontal, Qt::DisplayRole).toString(), QString("Info"));
     QCOMPARE(model.headerData(SnapCol::Version, Qt::Horizontal, Qt::DisplayRole).toString(), QString("Version"));
     QCOMPARE(model.headerData(SnapCol::Publisher, Qt::Horizontal, Qt::DisplayRole).toString(), QString("Publisher"));
     QCOMPARE(model.headerData(SnapCol::Notes, Qt::Horizontal, Qt::DisplayRole).toString(), QString("Notes"));

@@ -30,8 +30,17 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QScreen>
+#include <QSet>
 #include <QStandardPaths>
 #include <QTextEdit>
+
+#include <grp.h>
+#include <pwd.h>
+#include <sys/stat.h>
+
+#include <cerrno>
+
+#include <vector>
 
 #ifndef VERSION
 #define VERSION "?.?.?.?"
@@ -70,6 +79,127 @@ MainWindow::~MainWindow()
     settings.setValue("geometry", saveGeometry());
 }
 
+namespace
+{
+
+// The conventional uid of the "nobody" pseudo-account. lslogins -u only hides
+// it because it lies above the default UID_MAX; exclude it explicitly so it
+// stays hidden even if /etc/login.defs raises UID_MAX past it.
+constexpr uid_t kNobodyUid = 65534;
+
+struct UidRange
+{
+    uid_t min = 1000;
+    uid_t max = 60000;
+};
+
+// Bounds for a "real" (non-system) account, matching the defaults that
+// `lslogins -u`/adduser/useradd use unless /etc/login.defs overrides them.
+// The file is read once and cached: it doesn't change over the process's
+// lifetime.
+const UidRange &uidRange()
+{
+    static const UidRange range = [] {
+        UidRange result;
+        QFile loginDefs(QStringLiteral("/etc/login.defs"));
+        if (loginDefs.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            while (!loginDefs.atEnd()) {
+                const QString line = QString::fromUtf8(loginDefs.readLine()).trimmed();
+                const QStringList parts = line.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
+                if (parts.size() < 2) {
+                    continue;
+                }
+                bool ok = false;
+                const qlonglong value = parts.at(1).toLongLong(&ok);
+                if (!ok || value < 0) {
+                    continue;
+                }
+                if (parts.at(0) == QLatin1String("UID_MIN")) {
+                    result.min = static_cast<uid_t>(value);
+                } else if (parts.at(0) == QLatin1String("UID_MAX")) {
+                    result.max = static_cast<uid_t>(value);
+                }
+            }
+        }
+        return result;
+    }();
+    return range;
+}
+
+// The autologin user SDDM will actually use. SDDM reads its configuration in
+// this order, later values overriding earlier ones: the system drop-ins in
+// /usr/lib/sddm/sddm.conf.d, the local drop-ins in /etc/sddm.conf.d (each
+// directory's *.conf files in alphabetical order), then /etc/sddm.conf. The
+// helper may write either /etc/sddm.conf.d/kde_settings.conf or /etc/sddm.conf,
+// so reading a single file can disagree with what was just configured.
+QString sddmAutologinUser()
+{
+    QStringList files;
+    for (const QString &dirPath : {QStringLiteral("/usr/lib/sddm/sddm.conf.d"), QStringLiteral("/etc/sddm.conf.d")}) {
+        const QDir dir(dirPath);
+        const QStringList names = dir.entryList({QStringLiteral("*.conf")}, QDir::Files | QDir::Readable, QDir::Name);
+        for (const QString &name : names) {
+            files << dir.filePath(name);
+        }
+    }
+    files << QStringLiteral("/etc/sddm.conf");
+
+    QString user;
+    for (const QString &file : std::as_const(files)) {
+        if (!QFileInfo::exists(file)) {
+            continue;
+        }
+        const QSettings conf(file, QSettings::IniFormat);
+        if (conf.contains(QStringLiteral("Autologin/User"))) {
+            user = conf.value(QStringLiteral("Autologin/User")).toString();
+        }
+    }
+    return user;
+}
+
+// The comm (executable) name of every running process, collected in a single
+// /proc scan so callers checking several candidate names don't each pay for
+// their own scan. Note this is an exact match on comm, unlike pgrep's
+// unanchored substring/regex match — fine for the fixed daemon names we look
+// for (lightdm/sddm/plasmalogin), which are never a strict substring match away
+// from something else.
+QSet<QByteArray> runningProcessNames()
+{
+    QSet<QByteArray> names;
+    QDir proc(QStringLiteral("/proc"));
+    const QStringList pids = proc.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QString &pid : pids) {
+        bool isPid = false;
+        pid.toInt(&isPid);
+        if (!isPid) {
+            continue;
+        }
+        QFile commFile(QStringLiteral("/proc/%1/comm").arg(pid));
+        if (commFile.open(QIODevice::ReadOnly)) {
+            names.insert(commFile.readAll().trimmed());
+        }
+    }
+    return names;
+}
+
+// Whether `user` is listed as a supplementary member of `group`.
+bool isSupplementaryMember(const QString &user, const QString &group)
+{
+    const struct group *gr = getgrnam(group.toLocal8Bit().constData());
+    if (!gr) {
+        return false;
+    }
+    const QByteArray name = user.toLocal8Bit();
+    for (char **member = gr->gr_mem; member && *member; ++member) {
+        if (name == *member) {
+            return true;
+        }
+    }
+    return false;
+}
+
+} // namespace
+
 void MainWindow::refresh()
 {
     setCursor(QCursor(Qt::ArrowCursor));
@@ -97,9 +227,17 @@ void MainWindow::refresh()
         refreshDelete();
         refreshChangePass();
         refreshRename();
-        users = shell->getOut("lslogins --noheadings -u -o user", QuietMode::Yes)
-                    .split('\n', Qt::SkipEmptyParts);
-        users.removeAll(QStringLiteral("root"));
+        users.clear();
+        {
+            const UidRange &range = uidRange();
+            setpwent();
+            while (const passwd *pw = getpwent()) {
+                if (pw->pw_uid >= range.min && pw->pw_uid <= range.max && pw->pw_uid != kNobodyUid) {
+                    users << QString::fromLocal8Bit(pw->pw_name);
+                }
+            }
+            endpwent();
+        }
         users.sort();
         comboRenameUser->addItems(users);
         comboChangePass->addItems(users);
@@ -111,13 +249,14 @@ void MainWindow::refresh()
 
 DisplayManager MainWindow::detectDisplayManager() const
 {
-    if (QProcess::execute("pgrep", {"lightdm"}) == 0) {
+    const QSet<QByteArray> running = runningProcessNames();
+    if (running.contains("lightdm")) {
         return DisplayManager::Lightdm;
     }
-    if (QProcess::execute("pgrep", {"sddm"}) == 0) {
+    if (running.contains("sddm")) {
         return DisplayManager::Sddm;
     }
-    if (QProcess::execute("pgrep", {"plasmalogin"}) == 0) {
+    if (running.contains("plasmalogin")) {
         return DisplayManager::Plasmalogin;
     }
     return DisplayManager::None;
@@ -129,12 +268,8 @@ void MainWindow::refreshOptions()
     userComboBox->addItems(users);
     checkGroups->setChecked(false);
     checkMozilla->setChecked(false);
-    radioAutologinNo->setAutoExclusive(false);
-    radioAutologinNo->setChecked(false);
-    radioAutologinNo->setAutoExclusive(true);
-    radioAutologinYes->setAutoExclusive(false);
-    radioAutologinYes->setChecked(false);
-    radioAutologinYes->setAutoExclusive(true);
+    // Load the autologin state of the preselected user (also resets the radios).
+    userComboBox_activated(userComboBox->currentText());
     // Autologin options only make sense when a supported login manager is running.
     groupBox->setVisible(displayManager != DisplayManager::None);
 }
@@ -238,6 +373,16 @@ void MainWindow::applyOptions()
     }
     setCursor(QCursor(Qt::WaitCursor));
 
+    // A refused elevation is already reported by Cmd (and the tab refreshed by
+    // buttonApply_clicked); any other failure is shown with the helper's output.
+    QString output;
+    const auto reportFailure = [this, &output](const QString &title, const QString &message) {
+        if (shell->elevationError()) {
+            return;
+        }
+        QMessageBox::critical(this, title, output.isEmpty() ? message : message + "\n\n" + output);
+    };
+
     // Restore groups
     if (checkGroups->isChecked() && user != QStringLiteral("root")) {
         buildListGroups();
@@ -252,23 +397,42 @@ void MainWindow::applyOptions()
                     new_group_list << group;
                 }
             }
-            if (shell->runHelper({"set-groups", user, new_group_list.join(',')})) {
+            // The admin group is a separate choice (see applyAdd) and is usually
+            // not in EXTRA_GROUPS; restoring defaults must not take away admin
+            // rights the user already has.
+            const QString adminGroup = adminGroupName();
+            if (!adminGroup.isEmpty() && !new_group_list.contains(adminGroup)
+                && isSupplementaryMember(user, adminGroup)) {
+                new_group_list << adminGroup;
+            }
+            if (shell->runHelper({"set-groups", user, new_group_list.join(',')}, &output)) {
                 QMessageBox::information(this, windowTitle(), tr("User group membership was restored."));
+            } else {
+                reportFailure(windowTitle(), tr("Could not restore the user's group membership."));
             }
         }
     }
     // Reset Mozilla configs
     if (checkMozilla->isChecked()) {
-        if (shell->runHelper({"remove-home-path", user, home + "/.mozilla"})) {
+        if (shell->runHelper({"remove-home-path", user, home + "/.mozilla"}, &output)) {
             QMessageBox::information(this, windowTitle(), tr("Mozilla settings were reset."));
+        } else {
+            reportFailure(windowTitle(), tr("Could not reset the Mozilla settings."));
         }
     }
-    if (radioAutologinNo->isChecked()) {
-        if (shell->runHelper({"autologin-disable", user})) {
+    // Only touch the display-manager config when the choice differs from the state
+    // loaded for this user; applying an unrelated reset must not change autologin.
+    if (radioAutologinNo->isChecked() && autologinLoaded) {
+        if (shell->runHelper({"autologin-disable", user}, &output)) {
+            autologinLoaded = false;
             QMessageBox::information(this, tr("Autologin options"),
                                      (tr("Autologin has been disabled for the '%1' account.").arg(user)));
+        } else {
+            reportFailure(tr("Autologin options"),
+                          tr("Autologin could not be disabled for the '%1' account.").arg(user));
+            userComboBox_activated(user); // show the actual autologin state again
         }
-    } else if (radioAutologinYes->isChecked()) {
+    } else if (radioAutologinYes->isChecked() && !autologinLoaded) {
         // The helper edits whichever DM config exists; supply the desired session
         // names so it can set them on the sddm config it chooses.
         QString kdeSession;
@@ -282,9 +446,14 @@ void MainWindow::applyOptions()
             }
             defaultSession = QStringLiteral("plasma.desktop");
         }
-        if (shell->runHelper({"autologin-enable", user, kdeSession, defaultSession})) {
+        if (shell->runHelper({"autologin-enable", user, kdeSession, defaultSession}, &output)) {
+            autologinLoaded = true;
             QMessageBox::information(this, tr("Autologin options"),
                                      (tr("Autologin has been enabled for the '%1' account.").arg(user)));
+        } else {
+            reportFailure(tr("Autologin options"),
+                          tr("Autologin could not be enabled for the '%1' account.").arg(user));
+            userComboBox_activated(user); // show the actual autologin state again
         }
     }
     setCursor(QCursor(Qt::ArrowCursor));
@@ -389,7 +558,7 @@ void MainWindow::applyAdd()
         return;
     }
     // Check that user name is not already used
-    if (QProcess::execute("grep", {"-E", "^" + userNameEdit->text() + ":", "/etc/passwd"}) == 0) {
+    if (getpwnam(userNameEdit->text().toLocal8Bit().constData()) != nullptr) {
         QMessageBox::critical(this, windowTitle(), tr("Sorry, this name is in use. Please enter a different name."));
         return;
     }
@@ -399,8 +568,7 @@ void MainWindow::applyAdd()
     }
     if (!passUser->lengthOK()) {
         QMessageBox::critical(this, windowTitle(),
-                              tr("Password needs to be at least 2 characters long. Please enter a longer password "
-                                 "before proceeding."));
+                              tr("The password cannot be empty. Please enter a password before proceeding."));
         return;
     }
 
@@ -422,6 +590,14 @@ void MainWindow::applyAdd()
                               tr("No suitable user management tools found (adduser or useradd)."));
         return;
     }
+
+    // adduser/useradd reuse a home directory that already exists (e.g. left
+    // behind when a user was deleted without removing it); a rollback below
+    // must never delete such a directory. Only a definite "not found" counts as
+    // absent; any other lookup error (e.g. no access to /home) keeps the home.
+    const QString expectedHome = QStringLiteral("/home/%1").arg(userNameEdit->text());
+    struct stat homeStat {};
+    const bool homeAbsent = ::lstat(QFile::encodeName(expectedHome).constData(), &homeStat) != 0 && errno == ENOENT;
 
     // The helper picks adduser/useradd, detects its option spelling, and applies
     // the groups; extra groups are only used by the useradd path, matching the
@@ -445,8 +621,27 @@ void MainWindow::applyAdd()
         }
         QMessageBox::information(this, windowTitle(), tr("The user was added ok."));
         refresh();
-    } else if (!shell->elevationError()) {
-        QMessageBox::critical(this, windowTitle(), tr("Failed to add the user."));
+    } else {
+        // The account already exists, but without a usable password. Remove the
+        // account this call just created so the user can simply try again; if
+        // that is not possible (e.g. elevation was refused), say what was left.
+        // Its home is removed only if this call created it.
+        QStringList delUserArgs {"del-user", userNameArg};
+        const passwd *pw = getpwnam(userNameArg.toLocal8Bit().constData());
+        if (homeAbsent && pw && QString::fromLocal8Bit(pw->pw_dir) == expectedHome) {
+            delUserArgs << "--remove-home";
+        }
+        const bool removed
+            = !shell->elevationError() && shell->runHelper(delUserArgs, nullptr, nullptr, QuietMode::Yes);
+        if (removed) {
+            QMessageBox::critical(this, windowTitle(), tr("Failed to add the user."));
+        } else {
+            QMessageBox::critical(this, windowTitle(),
+                                  tr("The user %1 was created, but its password could not be set. "
+                                     "Set a password for it or delete it on the Administration tab.")
+                                      .arg(userNameArg));
+        }
+        refresh();
     }
 }
 
@@ -459,8 +654,7 @@ void MainWindow::applyChangePass()
     }
     if (!passChange->lengthOK()) {
         QMessageBox::critical(this, windowTitle(),
-                              tr("Password needs to be at least 2 characters long. Please enter a longer password "
-                                 "before proceeding."));
+                              tr("The password cannot be empty. Please enter a password before proceeding."));
         return;
     }
 
@@ -476,6 +670,16 @@ void MainWindow::applyChangePass()
 
 void MainWindow::applyDelete()
 {
+    const QString logname = currentLogname();
+    if (logname == comboDeleteUser->currentText()) {
+        QMessageBox::critical(
+            this, windowTitle(),
+            tr("The selected user name is currently in use.") + "\n\n"
+                + tr("To delete this user, please log out and log back in using another user account."));
+        refresh();
+        return;
+    }
+
     QString msg = tr("This action cannot be undone. Are you sure you want to delete user %1?")
                       .arg(comboDeleteUser->currentText());
     if (QMessageBox::Yes == QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No)) {
@@ -526,7 +730,7 @@ void MainWindow::applyGroup()
             return;
         }
         // Check that group name is not already used
-        if (QProcess::execute("grep", {"-w", '^' + groupNameEdit->text(), "/etc/group"}) == 0) {
+        if (getgrnam(groupNameEdit->text().toLocal8Bit().constData()) != nullptr) {
             QMessageBox::critical(this, windowTitle(),
                                   tr("Sorry, that group name already exists. Please enter a different name."));
             return;
@@ -635,7 +839,7 @@ void MainWindow::applyRename()
                                  "Please choose another name before proceeding."));
         return;
     }
-    if (QProcess::execute("grep", {"-E", "^" + new_name + ":", "/etc/passwd"}) == 0) {
+    if (getpwnam(new_name.toLocal8Bit().constData()) != nullptr) {
         QMessageBox::critical(this, windowTitle(),
                               tr("Sorry, this name already exists on your system. Please enter a different name."));
         return;
@@ -665,27 +869,26 @@ void MainWindow::applyRename()
 
 void MainWindow::syncDone(bool success, const CopyJob &job)
 {
-    if (success) {
-        // Destination is a browsed directory, not a managed home: just report.
-        if (job.toIsDir) {
-            syncStatusEdit->setText(job.sync ? tr("Synchronizing desktop...ok") : tr("Copying desktop...ok"));
-            syncProgressBar->setValue(syncProgressBar->maximum());
-            setCursor(QCursor(Qt::ArrowCursor));
-            return;
-        }
-
+    // A browsed directory is not a managed home: there is nothing to fix up.
+    if (success && !job.toIsDir) {
         // Fix owner of exactly the copied subtree (job.toDir is what rsync wrote).
-        shell->runHelper({"chown-home", job.toUser, job.toDir});
+        // rsync preserved the source account's ownership, so if this fails the
+        // destination user may be unable to use the copy: report the copy failed.
+        success = shell->runHelper({"chown-home", job.toUser, job.toDir});
+        if (success) {
+            // Fix "home/<from>" references for entire-home or .mozilla copies.
+            if (job.rewritePaths) {
+                shell->runHelper({"rewrite-home-paths", job.toUser, job.toDir, job.fromUser, job.toUser});
+            }
 
-        // Fix "home/<from>" references for entire-home or .mozilla copies.
-        if (job.rewritePaths) {
-            shell->runHelper({"rewrite-home-paths", job.toUser, job.toDir, job.fromUser, job.toUser});
+            if (job.entire) {
+                shell->runHelper({"remove-home-path", job.toUser, job.toDir + "/.recently-used"});
+                shell->runHelper({"clean-openoffice-locks", job.toUser, job.toDir}, nullptr, nullptr,
+                                 QuietMode::Yes);
+            }
         }
-
-        if (job.entire) {
-            shell->runHelper({"remove-home-path", job.toUser, job.toDir + "/.recently-used"});
-            shell->runHelper({"clean-openoffice-locks", job.toUser, job.toDir}, nullptr, nullptr, QuietMode::Yes);
-        }
+    }
+    if (success) {
         syncStatusEdit->setText(job.sync ? tr("Synchronizing desktop...ok") : tr("Copying desktop...ok"));
     } else {
         syncStatusEdit->setText(job.sync ? tr("Synchronizing desktop...failed") : tr("Copying desktop...failed"));
@@ -793,7 +996,11 @@ void MainWindow::userComboBox_activated(const QString & /*unused*/)
     radioAutologinYes->setAutoExclusive(false);
     radioAutologinYes->setChecked(false);
     radioAutologinYes->setAutoExclusive(true);
+    autologinLoaded = false;
     const QString user = userComboBox->currentText();
+    if (user.isEmpty()) {
+        return;
+    }
     bool autologin = false;
     switch (displayManager) {
     case DisplayManager::Lightdm: {
@@ -810,8 +1017,7 @@ void MainWindow::userComboBox_activated(const QString & /*unused*/)
         break;
     }
     case DisplayManager::Sddm: {
-        QSettings sddm_settings("/etc/sddm.conf", QSettings::NativeFormat);
-        autologin = sddm_settings.value("Autologin/User").toString() == user;
+        autologin = sddmAutologinUser() == user;
         break;
     }
     case DisplayManager::Plasmalogin: {
@@ -822,6 +1028,7 @@ void MainWindow::userComboBox_activated(const QString & /*unused*/)
     case DisplayManager::None:
         return;
     }
+    autologinLoaded = autologin;
     radioAutologinYes->setChecked(autologin);
     radioAutologinNo->setChecked(!autologin);
 }
@@ -889,20 +1096,34 @@ void MainWindow::buildListGroups()
         item->setCheckState(Qt::Unchecked);
         listGroups->addItem(item);
     }
-    // Check the boxes for the groups that the current user belongs to. Run
-    // via an argument list (not a shell string) so the username can't be
-    // interpreted as shell syntax.
+    // Check the boxes for the groups that the current user belongs to
+    // (primary and supplementary, same set `id -nG` reports).
     const QString user = userComboMembership->currentText();
-    QString out;
     if (!user.isEmpty()) {
-        shell->proc(QStringLiteral("id"), {"-nG", user}, &out, nullptr, QuietMode::Yes);
-    }
-    QStringList out_tok = out.split(' ');
-    while (!out_tok.isEmpty()) {
-        QString text = out_tok.takeFirst().trimmed();
-        auto list = listGroups->findItems(text, Qt::MatchExactly);
-        while (!list.isEmpty()) {
-            list.takeFirst()->setCheckState(Qt::Checked);
+        const QByteArray userLocal8Bit = user.toLocal8Bit();
+        if (const passwd *pw = getpwnam(userLocal8Bit.constData())) {
+            int ngroups = 32;
+            std::vector<gid_t> gids(static_cast<size_t>(ngroups));
+            int ret = getgrouplist(userLocal8Bit.constData(), pw->pw_gid, gids.data(), &ngroups);
+            if (ret == -1) {
+                gids.resize(static_cast<size_t>(ngroups));
+                ret = getgrouplist(userLocal8Bit.constData(), pw->pw_gid, gids.data(), &ngroups);
+            }
+            // Only trust the buffer once a call actually succeeded: on a second
+            // failure (e.g. membership changing between the two calls), ngroups
+            // may exceed what's meaningfully filled, and blindly resizing/reading
+            // it would offer gid 0 (root) as if the user belonged to it.
+            if (ret != -1) {
+                gids.resize(static_cast<size_t>(ngroups));
+                for (gid_t gid : gids) {
+                    if (const struct group *gr = getgrgid(gid)) {
+                        auto list = listGroups->findItems(QString::fromLocal8Bit(gr->gr_name), Qt::MatchExactly);
+                        while (!list.isEmpty()) {
+                            list.takeFirst()->setCheckState(Qt::Checked);
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -992,11 +1213,13 @@ QString MainWindow::adminGroupName() const
 {
     const QStringList candidateGroups {"sudo", "wheel"};
     for (const auto &group : candidateGroups) {
-        if (QProcess::execute("getent", {"group", group}) == 0) {
+        if (getgrnam(group.toLocal8Bit().constData()) != nullptr) {
             return group;
         }
     }
 
+    // Fall back to reading /etc/group directly: on a live/rescue session NSS
+    // can be unavailable or misconfigured even though the file itself is fine.
     QFile groupFile("/etc/group");
     if (!groupFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return {};

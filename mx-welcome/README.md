@@ -41,12 +41,16 @@ A Qt 6 Quick welcome application for MX Linux that provides quick access to usef
 ```bash
 cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel
-sudo cmake --install build
+./build/mx-welcome
 ```
 
 #### Manual Debian Package Build
+
+For a complete installation from source, build the Debian package. It includes the desktop entries, autostart template, translations, and license used by the application.
+
 ```bash
-debuild -us -uc
+debuild -us -uc -b
+sudo apt install "../mx-welcome_$(dpkg-parsechangelog -S Version)_$(dpkg-architecture -qDEB_HOST_ARCH).deb"
 ```
 
 ### Package Installation

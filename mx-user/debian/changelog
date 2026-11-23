@@ -1,8 +1,46 @@
-mx-user (26.07.1.1302) stable; urgency=medium
+mx-user (26.11.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:07 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:22 +0100
+
+mx-user (26.11.1) mx; urgency=medium
+
+  * Restoring a user's default group memberships no longer takes away their
+    administrator (sudo) rights.
+  * When a new user's password cannot be set, remove the half-created account
+    so adding the user can simply be tried again, or say clearly that the
+    account exists without a password.
+  * Show an error with the reason when restoring groups, resetting Mozilla
+    settings or changing automatic login fails, instead of showing nothing.
+  * Correct the message shown when the password is left empty.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 09 Nov 2026 10:00:55 -0500
+
+mx-user (26.11) mx; urgency=medium
+
+  * Fix resetting Mozilla settings deleting the folder a linked Mozilla
+    profile points to (for example Documents) instead of just the link.
+  * Prevent deleting the user account you are currently logged in with.
+  * Show the copy progress bar while a desktop copy or sync is running
+    instead of only when it finishes.
+  * After copying a desktop, make sure the receiving user can open the copied
+    files, and report the copy as failed if that cannot be done.
+  * When copying or renaming a user, leave references to other users with
+    similar names (such as alice2 when renaming alice) unchanged.
+  * Applying a group or Mozilla reset no longer turns off automatic login,
+    including for a different user.
+  * Renaming or changing automatic login for one user no longer affects other
+    users with similar names.
+  * Show the correct automatic login status on KDE (SDDM) systems.
+  * Make enabling automatic login work even when the login manager settings
+    file has no automatic login section yet, and show an error instead of
+    a success message when it could not be enabled.
+  * Show a clear message instead of crashing when started without a desktop
+    display.
+  * Load user and group lists faster.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 06 Nov 2026 12:59:08 -0500
 
 mx-user (26.07.1) mx; urgency=medium
 

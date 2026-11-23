@@ -22,23 +22,12 @@
 
 #include "packagebackend.h"
 
-#include <QFile>
 #include <QProcess>
 
+#include "aptcache.h"
 #include "cmd.h"
 
 namespace {
-
-QString debconfFrontend()
-{
-    if (QFile::exists("/usr/share/doc/debconf-kde-helper")) {
-        return QStringLiteral("kde");
-    }
-    if (QFile::exists("/usr/share/doc/debconf-gnome")) {
-        return QStringLiteral("gnome");
-    }
-    return QStringLiteral("noninteractive");
-}
 
 QHash<QString, QString> debconfEnvironment()
 {

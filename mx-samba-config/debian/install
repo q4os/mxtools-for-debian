@@ -1,5 +1,6 @@
 actions/*			usr/share/polkit-1/actions
 docs/*				usr/share/doc/mx-samba-config
+help/*.1			usr/share/man/man1
 images/mx-samba-config.svg	usr/share/icons/hicolor/scalable/apps
 obj-*/mx-samba-config		usr/bin
 mx-samba-config.desktop		usr/share/applications

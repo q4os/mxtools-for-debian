@@ -23,6 +23,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Get version from debian/changelog
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/debian/changelog")
 execute_process(
     COMMAND dpkg-parsechangelog -SVersion
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}

@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2021 MX Authors
+ * Copyright (C) 2021-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          Dolphin_Oracle
@@ -23,16 +23,25 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <algorithm>
+
 #include <QDebug>
+#include <QDir>
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QInputDialog>
+#include <QMap>
+#include <QPointer>
 #include <QRadioButton>
+#include <QScopeGuard>
+#include <QScopedValueRollback>
 #include <QScreen>
 #include <QScrollBar>
+#include <QSysInfo>
 #include <QTextStream>
+#include <QTimer>
 
 #include "about.h"
 #include "ui_editshare.h"
@@ -57,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     refreshUserList();
     refreshShareList();
     checksamba();
+    checkHomesShare();
 }
 
 MainWindow::~MainWindow()
@@ -74,7 +84,11 @@ void MainWindow::centerWindow()
 void MainWindow::setConnections()
 {
     const auto connectButton = [this](QPushButton* button, void (MainWindow::*slot)()) {
-        connect(button, &QPushButton::clicked, this, slot);
+        connect(button, &QPushButton::clicked, this, [this, slot]() {
+            if (!commandRunning) {
+                (this->*slot)();
+            }
+        });
     };
 
     connectButton(ui->pushAbout, &MainWindow::pushAbout_clicked);
@@ -91,6 +105,7 @@ void MainWindow::setConnections()
 
 void MainWindow::addEditShares(EditShare *editshare)
 {
+    editshare->adjustSize();
     if (editshare->exec() != QDialog::Accepted) {
         return;
     }
@@ -110,28 +125,7 @@ void MainWindow::addEditShares(EditShare *editshare)
         return;
     }
 
-    QStringList userList {":Everyone"};
-    run("getent", {"group", "users"});
-    userList << QString(proc.readAllStandardOutput()).trimmed().split(',');
-
-    QStringList permissions;
-    for (const QString &user : userList) {
-        QString userName = user.section(':', -1);
-        if (userName.isEmpty()) {
-            continue;
-        }
-
-        auto *denyButton = editshare->findChild<QRadioButton *>("*Deny*" + userName);
-        auto *readOnlyButton = editshare->findChild<QRadioButton *>("*ReadOnly*" + userName);
-        auto *fullAccessButton = editshare->findChild<QRadioButton *>("*FullAccess*" + userName);
-        if (denyButton->isChecked()) {
-            permissions << userName + ":d";
-        } else if (readOnlyButton->isChecked()) {
-            permissions << userName + ":r";
-        } else if (fullAccessButton->isChecked()) {
-            permissions << userName + ":f";
-        }
-    }
+    const QStringList permissions = editshare->permissions();
 
     if (permissions.isEmpty()) {
         QMessageBox::critical(this, tr("Error"), tr("Please set access for at least one user."));
@@ -180,32 +174,20 @@ QStringList MainWindow::listUsers()
 void MainWindow::buildUserList(EditShare *editshare)
 {
     auto *layout = editshare->ui->frameUsers->layout();
-    QStringList userList {":Everyone"}; // Add Everyone with a column in front to follow general format of getent
-    run("getent", {"group", "users"});
-    userList << QString(proc.readAllStandardOutput()).trimmed().split(',');
+    // Offer the Samba accounts shown in the Users tab; principals that only
+    // appear in an existing ACL are added when the share is loaded.
+    QStringList userList {"Everyone"};
+    for (int i = 0; i < ui->listWidgetUsers->count(); ++i) {
+        const QString user = ui->listWidgetUsers->item(i)->text();
+        if (!user.isEmpty() && !userList.contains(user)) {
+            userList << user;
+        }
+    }
 
     for (const QString &user : userList) {
-        QString userName = user.section(':', -1);
-        auto *groupBox = new QGroupBox(userName);
-        groupBox->setObjectName(userName);
-        auto *hbox = new QHBoxLayout;
-
-        auto createRadioButton = [&](const QString &text, const QString &objectName) {
-            auto *radio = new QRadioButton(text);
-            radio->setObjectName(objectName);
-            hbox->addWidget(radio);
-            connect(radio, &QRadioButton::pressed, radio, [radio]() { radio->setAutoExclusive(!radio->isChecked()); });
-            return radio;
-        };
-
-        createRadioButton(tr("&Deny"), "*Deny*" + userName);
-        createRadioButton(tr("&Read Only"), "*ReadOnly*" + userName);
-        createRadioButton(tr("&Full Access"), "*FullAccess*" + userName);
-
-        hbox->addStretch(1);
-        groupBox->setLayout(hbox);
-        layout->addWidget(groupBox);
+        editshare->addUser(user);
     }
+
     layout->addItem(new QSpacerItem(0, 10, QSizePolicy::Ignored, QSizePolicy::Expanding));
 }
 
@@ -214,8 +196,17 @@ void MainWindow::refreshShareList()
     ui->treeWidgetShares->clear();
     ui->labelSambaSharesFound->hide();
 
-    if (run("net", {"usershare", "info"}) != 0) {
-        QMessageBox::critical(this, tr("Error"), tr("Error listing shares"));
+    const int result = run("net", {"usershare", "info"});
+    if (result != 0) {
+        QString details = QString::fromLocal8Bit(proc.readAllStandardError()).trimmed();
+        if (details.isEmpty()) {
+            details = result == -1 ? proc.errorString() : tr("Command exited with status %1.").arg(result);
+        }
+        QMessageBox box(QMessageBox::Critical, tr("Error"), tr("Error listing shares"), QMessageBox::Ok, this);
+        box.setInformativeText(tr("Could not read Samba usershares. Shares defined in /etc/samba/smb.conf "
+                                  "are managed separately and are not listed here."));
+        box.setDetailedText("net usershare info\n\n" + details);
+        box.exec();
         return;
     }
 
@@ -230,7 +221,7 @@ void MainWindow::refreshShareList()
 
     for (const QString &share : listShares) {
         QStringList shareDetails = share.split('\n');
-        if (shareDetails.isEmpty()) {
+        if (shareDetails.size() < 5) {
             continue;
         }
 
@@ -276,27 +267,90 @@ void MainWindow::refreshUserList()
  * For non-blocking commands proc.start() */
 int MainWindow::run(const QString &cmd, const QStringList &args, const QByteArray &input)
 {
+    if (commandRunning) {
+        return -1;
+    }
+    QScopedValueRollback<bool> commandGuard(commandRunning, true);
+    const bool wasEnabled = isEnabled();
+    const bool hadExplicitCursor = testAttribute(Qt::WA_SetCursor);
+    const QCursor previousCursor = cursor();
+    const QPointer<QWidget> previousFocus = QApplication::focusWidget();
+    bool disabledForCommand = false;
+    const auto restoreUi = qScopeGuard([this, wasEnabled, hadExplicitCursor, previousCursor, previousFocus,
+                                      &disabledForCommand]() {
+        setEnabled(wasEnabled);
+        if (hadExplicitCursor) {
+            setCursor(previousCursor);
+        } else {
+            unsetCursor();
+        }
+        if (disabledForCommand && previousFocus && previousFocus->isEnabled() && previousFocus->isVisible()) {
+            previousFocus->setFocus();
+        }
+    });
     setCursor(QCursor(Qt::BusyCursor));
     QEventLoop loop;
+    QTimer disableTimer(&loop);
+    disableTimer.setSingleShot(true);
+    connect(&disableTimer, &QTimer::timeout, this, [this, wasEnabled, &disabledForCommand]() {
+        if (proc.state() != QProcess::NotRunning) {
+            disabledForCommand = wasEnabled;
+            setEnabled(false);
+        }
+    });
     connect(&proc, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), &loop, &QEventLoop::quit);
     const QIODevice::OpenMode mode = input.isEmpty() ? QIODevice::ReadOnly : QIODevice::ReadWrite;
     proc.start(cmd, args, mode);
     if (!proc.waitForStarted()) {
-        setCursor(QCursor(Qt::ArrowCursor));
         return -1;
     }
+    disableTimer.start(150);
     if (!input.isEmpty()) {
         proc.write(input);
         proc.closeWriteChannel();
     }
-    loop.exec();
-    setCursor(QCursor(Qt::ArrowCursor));
-    return proc.exitCode();
+    if (proc.state() != QProcess::NotRunning) {
+        loop.exec();
+    }
+    return proc.exitStatus() == QProcess::NormalExit ? proc.exitCode() : -1;
+}
+
+// The [homes] section in smb.conf exports each Samba user's home folder to
+// that user. It is not a usershare, so it never shows in the share list.
+void MainWindow::checkHomesShare()
+{
+    if (run("testparm", {"-s", "--section-name=homes", "--parameter-name=read only"}) != 0) {
+        return;
+    }
+    const bool readOnly = QString::fromLocal8Bit(proc.readAllStandardOutput()).trimmed().compare("No", Qt::CaseInsensitive) != 0;
+    const QString host = QSysInfo::machineHostName().section('.', 0, 0);
+    ui->labelHomesNote->setText(
+        (readOnly ? tr("Each Samba user can also open their own home folder, read-only, as \\\\%1\\<user name>.")
+                  : tr("Each Samba user can also open their own home folder, with write access, as \\\\%1\\<user name>."))
+            .arg(host)
+        + ' ' + tr("This is set by the [homes] section in /etc/samba/smb.conf."));
+    ui->labelHomesNote->show();
+}
+
+// The name Samba qualifies local accounts with in ACLs, e.g. "MX" in "MX\adrian"
+QString MainWindow::netbiosName()
+{
+    if (run("testparm", {"-s", "--parameter-name=netbios name"}) == 0) {
+        const QString configuredName = QString::fromLocal8Bit(proc.readAllStandardOutput()).trimmed();
+        if (!configuredName.isEmpty()) {
+            return configuredName;
+        }
+    }
+    return QSysInfo::machineHostName().section('.', 0, 0).left(15).toUpper();
 }
 
 void MainWindow::checkSambashareGroup()
 {
-    if (run("/bin/bash", {"-c", "groups | grep -q sambashare"}) != 0) {
+    QProcess groups;
+    groups.start("groups", {});
+    groups.waitForFinished();
+    const auto groupList = QString::fromLocal8Bit(groups.readAllStandardOutput()).split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
+    if (!groupList.contains("sambashare")) {
         QMessageBox::critical(this, tr("Error"),
                               tr("Your user doesn't belong to 'sambashare' group  "
                                  "if you just installed the app you might need to restart the system first."));
@@ -324,12 +378,23 @@ void MainWindow::checksamba()
 
     bool enabled = false;
     if (run("grep", {"-q", "systemd", "/proc/1/comm"}) == 0) {
-        if (run("/bin/bash", {"-c", "LANG=C systemctl is-enabled smbd | grep enabled"}) == 0) {
+        QProcess isEnabled;
+        auto env = QProcessEnvironment::systemEnvironment();
+        env.insert("LANG", "C");
+        isEnabled.setProcessEnvironment(env);
+        isEnabled.start("systemctl", {"is-enabled", "smbd"});
+        isEnabled.waitForFinished();
+        if (QString::fromLocal8Bit(isEnabled.readAllStandardOutput()).trimmed() == "enabled") {
             enabled = true;
         }
     } else {
-        if (run("grep", {"-q", "smbd", "/etc/init.d/.depend.start"}) == 0) {
-            enabled = true;
+        // Disabled services keep K links, so look for an S link in the
+        // multi-user runlevels
+        for (const QString runlevel : {"2", "3", "4", "5"}) {
+            if (!QDir("/etc/rc" + runlevel + ".d").entryList({"S??smbd"}, QDir::Files | QDir::System).isEmpty()) {
+                enabled = true;
+                break;
+            }
         }
     }
 
@@ -401,13 +466,96 @@ void MainWindow::pushHelp_clicked()
 
 void MainWindow::pushRemoveUser_clicked()
 {
-    if (ui->listWidgetUsers->currentItem() == nullptr) {
+    const auto selectedItems = ui->listWidgetUsers->selectedItems();
+    if (selectedItems.isEmpty()) {
         return;
     }
-    const QString &user = ui->listWidgetUsers->currentItem()->text();
+    const QString user = selectedItems.first()->text();
+
+    // Find shares whose ACL names this local user, plain or qualified with the
+    // local NetBIOS name. Domain accounts and SIDs may be other accounts.
+    struct ShareUpdate {
+        QTreeWidgetItem *item;
+        QStringList remaining;
+    };
+    QList<ShareUpdate> updates;
+    QStringList updatedNames;
+    QStringList removedNames;
+    const QString localNetbiosName = netbiosName();
+    for (int i = 0; i < ui->treeWidgetShares->topLevelItemCount(); ++i) {
+        auto *item = ui->treeWidgetShares->topLevelItem(i);
+        QStringList remaining;
+        bool listed = false;
+        for (const QString &entry : item->text(3).split(',', Qt::SkipEmptyParts)) {
+            const QString principal = entry.section(':', 0, 0);
+            const QString qualifier = principal.contains('\\') ? principal.section('\\', 0, -2) : QString();
+            const bool isUser = principal.section('\\', -1).compare(user, Qt::CaseInsensitive) == 0
+                                && (qualifier.isEmpty() || qualifier.compare(localNetbiosName, Qt::CaseInsensitive) == 0);
+            if (isUser) {
+                listed = true;
+            } else {
+                // net usershare add rejects some uppercase letters that info prints
+                remaining << principal + ':' + entry.section(':', 1).toLower();
+            }
+        }
+        if (listed) {
+            // A share left with only Deny entries is as unreachable as one left
+            // with none, and an empty ACL would make net usershare add default
+            // to Everyone:R, so offer to remove both instead
+            const bool grantsAccess = std::any_of(remaining.cbegin(), remaining.cend(),
+                                                  [](const QString &entry) { return !entry.endsWith(":d"); });
+            if (!grantsAccess) {
+                remaining.clear();
+            }
+            updates.append({item, remaining});
+            (remaining.isEmpty() ? removedNames : updatedNames) << item->text(0);
+        }
+    }
+
+    bool updateShares = false;
+    if (!updates.isEmpty()) {
+        QString text = tr("%1 is listed on these shares:").arg(user);
+        if (!updatedNames.isEmpty()) {
+            text += "\n\n" + tr("Remove %1's access from: %2").arg(user, updatedNames.join(", "));
+        }
+        if (!removedNames.isEmpty()) {
+            text += "\n\n" + tr("Remove these shares, which no one else can access: %1").arg(removedNames.join(", "));
+        }
+        QMessageBox box(QMessageBox::Question, tr("Remove User"), text, QMessageBox::NoButton, this);
+        auto *removeButton = box.addButton(tr("Remove from Shares"), QMessageBox::AcceptRole);
+        auto *keepButton = box.addButton(tr("Keep Entries"), QMessageBox::ActionRole);
+        box.addButton(QMessageBox::Cancel);
+        box.setDefaultButton(removeButton);
+        box.exec();
+        if (box.clickedButton() != removeButton && box.clickedButton() != keepButton) {
+            return;
+        }
+        updateShares = box.clickedButton() == removeButton;
+    }
 
     if (run("pkexec", {"/usr/lib/mx-samba-config/mx-samba-config-lib", "removesambauser", user}) != 0) {
         QMessageBox::critical(this, tr("Error"), tr("Cannot delete user: ") + user);
+        refreshUserList();
+        return;
+    }
+
+    if (updateShares) {
+        QStringList failed;
+        for (const ShareUpdate &update : updates) {
+            const QString name = update.item->text(0);
+            const int result = update.remaining.isEmpty()
+                ? run("net", {"usershare", "delete", name})
+                : run("net", {"usershare", "add", name, update.item->text(1), update.item->text(2),
+                              update.remaining.join(','), update.item->text(4) == "y" ? "guest_ok=y" : "guest_ok=n"});
+            if (result != 0) {
+                failed << name;
+            }
+        }
+        refreshShareList();
+        if (!failed.isEmpty()) {
+            QMessageBox::critical(this, tr("Error"),
+                                  tr("%1 was removed, but these shares could not be updated: %2").arg(user, failed.join(", ")));
+        }
     }
     refreshUserList();
 }
@@ -442,17 +590,26 @@ void MainWindow::pushAddUser_clicked()
             QMessageBox::critical(this, tr("Error"), tr("Empty username, please enter a name."));
             return;
         }
-        if (run("grep", {"^" + userText + ":", "/etc/passwd"}) != 0) {
+        // getent also matches numeric UIDs; accept only a name match and use the
+        // canonical spelling NSS reports
+        const QString accountName = run("getent", {"passwd", "--", userText}) == 0
+            ? QString::fromLocal8Bit(proc.readAllStandardOutput()).section(':', 0, 0)
+            : QString();
+        if (accountName.compare(userText, Qt::CaseInsensitive) != 0) {
             QMessageBox::critical(this, tr("Error"),
                                   tr("Matching linux user not found on system, "
                                      "make sure you enter a valid username."));
+            return;
+        }
+        if (passText.isEmpty() || passText2.isEmpty()) {
+            QMessageBox::critical(this, tr("Error"), tr("Password fields cannot be empty."));
             return;
         }
         if (passText != passText2) {
             QMessageBox::critical(this, tr("Error"), tr("Passwords don't match, please enter again."));
             return;
         }
-        QStringList args {"/usr/lib/mx-samba-config/mx-samba-config-lib", "addsambauser", userText};
+        QStringList args {"/usr/lib/mx-samba-config/mx-samba-config-lib", "addsambauser", accountName};
         QByteArray passwordInput = passText.toUtf8();
         passwordInput.append('\n');
         if (run("pkexec", args, passwordInput) != 0) {
@@ -465,13 +622,13 @@ void MainWindow::pushAddUser_clicked()
 
 void MainWindow::pushUserPassword_clicked()
 {
-    auto *currentItem = ui->listWidgetUsers->currentItem();
-    if (!currentItem) {
+    const auto selectedItems = ui->listWidgetUsers->selectedItems();
+    if (selectedItems.isEmpty()) {
         QMessageBox::warning(this, tr("Warning"), tr("No user selected."));
         return;
     }
 
-    const QString currentUser = currentItem->text();
+    const QString currentUser = selectedItems.first()->text();
     QDialog dialog(this);
     QFormLayout form(&dialog);
     form.addRow(new QLabel(tr("Change the password for '%1'").arg(currentUser)));
@@ -510,18 +667,19 @@ void MainWindow::pushUserPassword_clicked()
             QMessageBox::critical(this, tr("Error"), tr("Could not change password."));
             return;
         }
+        QMessageBox::information(this, tr("Success"), tr("Password changed successfully for '%1'.").arg(currentUser));
     }
 }
 
 void MainWindow::pushRemoveShare_clicked()
 {
-    auto *currentItem = ui->treeWidgetShares->currentItem();
-    if (!currentItem) {
+    const auto selectedItems = ui->treeWidgetShares->selectedItems();
+    if (selectedItems.isEmpty()) {
         QMessageBox::warning(this, tr("Warning"), tr("No share selected."));
         return;
     }
 
-    const QString share = currentItem->text(0);
+    const QString share = selectedItems.first()->text(0);
     if (share.isEmpty()) {
         QMessageBox::warning(this, tr("Warning"), tr("Selected share is empty."));
         return;
@@ -538,8 +696,11 @@ void MainWindow::pushRemoveShare_clicked()
 
 void MainWindow::pushEditShare_clicked()
 {
-    auto *currentItem = ui->treeWidgetShares->currentItem();
-    if (!currentItem) {
+    if (commandRunning) {
+        return;
+    }
+    const auto selectedItems = ui->treeWidgetShares->selectedItems();
+    if (selectedItems.isEmpty()) {
         QMessageBox::warning(this, tr("Warning"), tr("No share selected."));
         return;
     }
@@ -550,16 +711,33 @@ void MainWindow::pushEditShare_clicked()
         return;
     }
 
-    auto *editshare = new EditShare;
-    buildUserList(editshare);
+    EditShare editshare(this);
+    editshare.setWindowTitle(tr("Edit Share"));
+    buildUserList(&editshare);
 
-    auto selectedItem = ui->treeWidgetShares->selectedItems().at(0);
-    editshare->ui->textShareName->setText(selectedItem->text(0));
-    editshare->ui->textSharePath->setText(selectedItem->text(1));
-    editshare->ui->textComment->setText(selectedItem->text(2));
-    editshare->ui->comboGuestOK->setCurrentIndex(selectedItem->text(4) == "y" ? 0 : 1);
+    auto *selectedItem = selectedItems.first();
+    editshare.ui->textShareName->setText(selectedItem->text(0));
+    editshare.ui->textShareName->setReadOnly(true);
+    editshare.ui->textShareName->setToolTip(tr("Share names cannot be changed when editing an existing share."));
+    editshare.ui->labelEditNote->show();
+    editshare.ui->textSharePath->setText(selectedItem->text(1));
+    editshare.ui->textComment->setText(selectedItem->text(2));
+    editshare.ui->comboGuestOK->setCurrentIndex(selectedItem->text(4) == "y" ? 0 : 1);
 
     QStringList permissionList = selectedItem->text(3).split(',', Qt::SkipEmptyParts);
+
+    const QString localNetbiosName = netbiosName();
+
+    // Only reuse a bare-name control for an unknown qualifier when no other
+    // principal in the ACL claims that name. Keep the original principal on save.
+    QMap<QString, QStringList> principalsByName;
+    for (const QString &item : permissionList) {
+        const QString principal = item.section(':', 0, 0);
+        const QString name = principal.section('\\', -1);
+        if (!principalsByName[name].contains(principal)) {
+            principalsByName[name] << principal;
+        }
+    }
 
     for (const QString &item : permissionList) {
         const QStringList parts = item.split(':');
@@ -568,27 +746,56 @@ void MainWindow::pushEditShare_clicked()
             return;
         }
 
-        QString user = parts.at(0).section('\\', -1);
+        const QString principal = parts.at(0);
+        const qsizetype separator = principal.lastIndexOf('\\');
+        const QString qualifier = separator < 0 ? QString() : principal.left(separator);
+        const QString user = separator < 0 ? principal : principal.mid(separator + 1);
         const QString permission = parts.at(1).toLower();
-        QRadioButton *button = nullptr;
-
-        if (permission == "d") {
-            button = editshare->findChild<QRadioButton *>("*Deny*" + user);
-        } else if (permission == "r") {
-            button = editshare->findChild<QRadioButton *>("*ReadOnly*" + user);
-        } else if (permission == "f") {
-            button = editshare->findChild<QRadioButton *>("*FullAccess*" + user);
-        } else {
+        if (permission != "d" && permission != "r" && permission != "f") {
             QMessageBox::critical(this, tr("Error"), tr("Error processing permissions: ") + item);
             return;
         }
 
-        if (button) {
-            button->setChecked(true);
+        const bool knownLocal = qualifier.isEmpty() || qualifier.compare(localNetbiosName, Qt::CaseInsensitive) == 0;
+        auto *groupBox = editshare.ui->frameUsers->findChild<QGroupBox *>(user, Qt::FindDirectChildrenOnly);
+        if (!groupBox || (!knownLocal && principalsByName.value(user).size() != 1)) {
+            groupBox = editshare.ui->frameUsers->findChild<QGroupBox *>(principal, Qt::FindDirectChildrenOnly);
+            if (!groupBox) {
+                groupBox = editshare.addUser(principal);
+            }
+        }
+
+        const QString controlName = groupBox->objectName();
+        // Each control holds a single permission, so several rules for one
+        // account cannot be represented without dropping or reordering them.
+        if (editshare.permissionOrder.contains(controlName)) {
+            QMessageBox::critical(this, tr("Error"),
+                                  tr("This share has more than one permission rule for %1 and cannot be edited "
+                                     "here without changing its access. Use 'net usershare' to edit it.")
+                                      .arg(groupBox->property("principal").toString()));
+            return;
+        }
+        editshare.permissionOrder << controlName;
+        groupBox->setProperty("principal", principal);
+        editshare.addRemoveButton(groupBox);
+        if (!knownLocal) {
+            groupBox->setTitle(principal);
+        }
+        const QString controlPrefix = permission == "d" ? "*Deny*" : permission == "r" ? "*ReadOnly*" : "*FullAccess*";
+        groupBox->findChild<QRadioButton *>(controlPrefix + controlName)->setChecked(true);
+    }
+
+    // Do not offer an unused bare-name rule alongside several qualified entries
+    // whose relationship to the local account cannot be established.
+    for (auto it = principalsByName.cbegin(); it != principalsByName.cend(); ++it) {
+        auto *groupBox = editshare.ui->frameUsers->findChild<QGroupBox *>(it.key(), Qt::FindDirectChildrenOnly);
+        if (groupBox && !editshare.permissionOrder.contains(it.key()) && it.value().size() > 1) {
+            groupBox->setEnabled(false);
+            groupBox->setToolTip(tr("Several existing rules refer to this name; edit them individually."));
         }
     }
 
-    addEditShares(editshare);
+    addEditShares(&editshare);
 }
 
 void MainWindow::pushAddShare_clicked()
@@ -604,7 +811,11 @@ void MainWindow::pushAddShare_clicked()
         return;
     }
 
-    auto *editshare = new EditShare;
-    buildUserList(editshare);
-    addEditShares(editshare);
+    EditShare editshare(this);
+    editshare.setWindowTitle(tr("Add Share"));
+    for (int i = 0; i < ui->treeWidgetShares->topLevelItemCount(); ++i) {
+        editshare.existingShareNames << ui->treeWidgetShares->topLevelItem(i)->text(0);
+    }
+    buildUserList(&editshare);
+    addEditShares(&editshare);
 }

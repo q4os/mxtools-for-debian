@@ -15,7 +15,6 @@ Vcs-Browser: https://github.com/DolphinOracle/formatusb
 Package: formatusb
 Architecture: any
 Depends: cli-shell-utils,
-         coreutils,
          parted,
          ${misc:Depends},
          ${shlibs:Depends}

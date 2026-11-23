@@ -1,8 +1,57 @@
-mx-samba-config (26.03.1302) stable; urgency=medium
+mx-samba-config (26.11.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:06 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:20 +0100
+
+mx-samba-config (26.11) mx; urgency=medium
+
+  * When the share list can't be read, the error now explains why and
+    offers the full error details
+  * A damaged share entry no longer stops the other shares from listing
+  * Changing a Samba user's password now works when the app is started
+    from the menu
+  * The share window now offers every Samba user, not only members of
+    the "users" group
+  * A share with more than one access rule for the same user is no longer
+    opened for editing, because saving it would have changed who can
+    access it
+  * Adding a share with a name already in use is refused, instead of
+    replacing the existing share
+  * On systems started without systemd, turning off Samba autostart now
+    stays off after Samba is updated
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 03 Nov 2026 10:59:55 -0500
+
+mx-samba-config (26.10) mx; urgency=medium
+
+  * Network accounts, such as LDAP or domain users, can now be added as
+    Samba users, not only accounts stored on this computer
+  * Adding a Samba user with an empty password is refused with a message
+  * Editing or removing a share, removing a user, and changing a password
+    now act only on the selected entry, instead of on a deselected one or
+    crashing
+  * Changing a Samba user's password shows a confirmation when it succeeds
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 Oct 2026 12:49:21 -0400
+
+mx-samba-config (26.09) mx; urgency=medium
+
+  * Editing a share no longer drops access settings for users and groups
+    that the edit window doesn't list
+  * The share name can no longer be changed when editing, which used to
+    leave the old share active alongside a new one
+  * Buttons are disabled while a Samba action is running, so a second
+    click can't interfere with it
+  * Removing a Samba user offers to remove that user from the shares they
+    are listed on, and to remove shares no one else could access
+  * The add and edit share windows are titled "Add Share" and "Edit Share"
+  * Add tooltips explaining the buttons and fields
+  * Add a manual page (man mx-samba-config)
+  * Show a clear message instead of crashing when started without a
+    graphical session
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 29 Sep 2026 23:20:59 -0400
 
 mx-samba-config (26.03) mx; urgency=medium
 

@@ -1,7 +1,7 @@
 /**********************************************************************
  *  helper.cpp
  **********************************************************************
- * Copyright (C) 2026 MX Authors
+ * Copyright (C) 2026-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -100,12 +100,13 @@ struct ProcessResult
     return resolveBinary({"/usr/bin/flatpak", "/bin/flatpak"});
 }
 
-[[nodiscard]] ProcessResult runProcess(const QString &program, const QStringList &args)
+[[nodiscard]] ProcessResult runProcess(const QString &program, const QStringList &args,
+                                       const QByteArray &input = {})
 {
     ProcessResult result;
 
     QProcess process;
-    process.start(program, args, QIODevice::ReadOnly);
+    process.start(program, args, input.isEmpty() ? QIODevice::ReadOnly : QIODevice::ReadWrite);
     if (!process.waitForStarted()) {
         result.standardError = QString("Failed to start %1").arg(program).toUtf8();
         result.exitCode = 127;
@@ -113,6 +114,10 @@ struct ProcessResult
     }
 
     result.started = true;
+    if (!input.isEmpty()) {
+        process.write(input);
+        process.closeWriteChannel();
+    }
     process.waitForFinished(-1);
     result.exitStatus = process.exitStatus();
     result.exitCode = process.exitCode();
@@ -131,13 +136,14 @@ struct ProcessResult
     return result.exitStatus == QProcess::NormalExit ? result.exitCode : 1;
 }
 
-[[nodiscard]] int runRequiredBinary(const QString &binary, const QString &name, const QStringList &args)
+[[nodiscard]] int runRequiredBinary(const QString &binary, const QString &name, const QStringList &args,
+                                    const QByteArray &input = {})
 {
     if (binary.isEmpty()) {
         printError(QString("Command is not available: %1").arg(name));
         return 127;
     }
-    return relayResult(runProcess(binary, args));
+    return relayResult(runProcess(binary, args, input));
 }
 
 // check
@@ -377,6 +383,9 @@ struct ProcessResult
     if (!lookupUser(user)) {
         return 1;
     }
+    if (kind == "cron" && !removeScheduleFileIfPresent(base + userCronSuffix(user))) {
+        return 1;
+    }
     return removeScheduleFileIfPresent(base + '.' + userScheduleFileId(user)) ? 0 : 1;
 }
 
@@ -424,7 +433,7 @@ struct ProcessResult
         return 1;
     }
     const QString suffix = fileId.isEmpty() ? QString() : '.' + fileId;
-    const QString cronTarget = cronEntryBase(period) + suffix;
+    const QString cronTarget = cronEntryBase(period) + userCronSuffix(opts.user);
 
     // Staged renames replace each target atomically. Removing targets
     // beforehand would only risk losing the previous schedule if a write
@@ -471,7 +480,11 @@ struct ProcessResult
         discardStagedFile(&systemScript);
         return 1;
     }
-    return commitStagedFile(&systemScript) ? 0 : 1;
+    if (!commitStagedFile(&systemScript)) {
+        return 1;
+    }
+    // Retire the ignored dotted entry only after all replacements are saved.
+    return opts.user.isEmpty() || removeScheduleFileIfPresent(cronEntryBase(period) + suffix) ? 0 : 1;
 }
 
 [[nodiscard]] bool parseSizeOrDelete(const QString &mode, bool *isDelete)
@@ -638,7 +651,15 @@ struct ProcessResult
         return 1;
     }
     if (isArchLinuxHost()) {
-        return runRequiredBinary(pacmanBinary(), "pacman", {mode == "auto" ? "-Sc" : "-Scc", "--noconfirm"});
+        if (mode == "auto") {
+            return runRequiredBinary(pacmanBinary(), "pacman", {"-Sc", "--noconfirm"});
+        }
+        // -Scc's "remove ALL files from cache?" prompt defaults to No, so
+        // --noconfirm would skip the cleanup; answer yes explicitly instead
+        // (one prompt per cache dir plus one for unused sync databases).
+        // Force the C locale so pacman accepts "y" rather than e.g. German "j".
+        qputenv("LC_ALL", "C");
+        return runRequiredBinary(pacmanBinary(), "pacman", {"-Scc"}, QByteArray("y\n").repeated(16));
     }
     return runRequiredBinary(aptGetBinary(), "apt-get", {mode == "auto" ? "autoclean" : "clean"});
 }

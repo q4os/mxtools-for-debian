@@ -1,1 +1,1 @@
-inline const QString VERSION {"26.09.7"};
+inline const QString VERSION {"26.11.1"};

@@ -30,6 +30,8 @@
 #include <QHash>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QSaveFile>
+#include <QSettings>
 #include <QStringList>
 
 #include <cstdio>
@@ -81,6 +83,15 @@ void printError(const QString &message)
 [[nodiscard]] bool isUserName(const QString &value)
 {
     return matchesPattern(value, QStringLiteral(R"([A-Za-z_][A-Za-z0-9_-]*[$]?)"));
+}
+
+// Escape a validated user name for use as a literal in a sed regex. Names are
+// limited to [A-Za-z0-9_-] plus an optional trailing '$', which is the only
+// regex metacharacter they can contain.
+[[nodiscard]] QString sedLiteral(const QString &user)
+{
+    QString escaped = user;
+    return escaped.replace(QLatin1Char('$'), QLatin1String("[$]"));
 }
 
 [[nodiscard]] bool isGroupName(const QString &value)
@@ -179,6 +190,44 @@ void printError(const QString &message)
 
     if (safe) {
         *safe = resolved;
+    }
+    return true;
+}
+
+// Resolve `requested` as an entry *inside* `user`'s home without following its
+// final component. Only the containing directory is symlink-resolved and must be
+// the home or lie within it; the final name is re-attached verbatim. On success,
+// *safe receives <canonical parent>/<name>.
+//
+// Use this for operations that act on the entry itself rather than on what it
+// points to (deletion): if the entry is a symlink, `rm -rf` on this path unlinks
+// the symlink instead of recursively deleting its target. The home directory
+// itself can never be returned, since the result always has a final component
+// below a contained parent.
+[[nodiscard]] bool resolveEntryWithinHome(const QString &user, const QString &requested, QString *safe)
+{
+    if (!isUserName(user) || requested.contains(QChar(u'\0')) || requested.contains('\n')
+        || requested.contains('\r')) {
+        return false;
+    }
+    const QString homeReal = QFileInfo(QStringLiteral("/home/%1").arg(user)).canonicalFilePath();
+    if (homeReal.isEmpty()) {
+        return false;
+    }
+    const QString clean = QDir::cleanPath(requested);
+    if (!clean.startsWith('/')) {
+        return false;
+    }
+    const QString name = QFileInfo(clean).fileName();
+    if (name.isEmpty() || name == QLatin1String(".") || name == QLatin1String("..")) {
+        return false;
+    }
+    const QString parentReal = QFileInfo(QFileInfo(clean).path()).canonicalFilePath();
+    if (parentReal.isEmpty() || (parentReal != homeReal && !parentReal.startsWith(homeReal + '/'))) {
+        return false;
+    }
+    if (safe) {
+        *safe = parentReal + '/' + name;
     }
     return true;
 }
@@ -352,6 +401,28 @@ int runTool(const QString &key, const QStringList &args, const QByteArray &input
     return relayResult(runProcess(program, args, input));
 }
 
+// Run an allow-listed tool whose stdout/stderr go straight to the helper's own,
+// so the caller sees output while the tool runs (e.g. rsync progress) instead of
+// all at once when it exits. Use runTool() when output must be captured first.
+int runToolStreaming(const QString &key, const QStringList &args)
+{
+    const QString program = resolveTool(key);
+    if (program.isEmpty()) {
+        printError(QString("Command is not available: %1").arg(key));
+        return 127;
+    }
+    QProcess process;
+    process.setProcessChannelMode(QProcess::ForwardedChannels);
+    process.start(program, args);
+    if (!process.waitForStarted()) {
+        printError(QString("Failed to start %1").arg(program));
+        return 127;
+    }
+    process.closeWriteChannel();
+    process.waitForFinished(-1);
+    return process.exitStatus() == QProcess::NormalExit ? process.exitCode() : 1;
+}
+
 // --------------------------------------------------------------------------
 // Display-manager autologin configuration
 // --------------------------------------------------------------------------
@@ -371,6 +442,29 @@ const QString PlasmaConf = QStringLiteral("/etc/plasmalogin.conf.d/autologin.con
         return SddmConf;
     }
     return {};
+}
+
+// SDDM reads /usr/lib/sddm/sddm.conf.d, then /etc/sddm.conf.d (each directory's
+// *.conf in alphabetical order), then /etc/sddm.conf; later values win. With
+// `localOnly`, the package-owned /usr/lib drop-ins are left out (they are never
+// edited). Only existing files are returned.
+[[nodiscard]] QStringList sddmConfFiles(bool localOnly)
+{
+    QStringList dirs {QStringLiteral("/etc/sddm.conf.d")};
+    if (!localOnly) {
+        dirs.prepend(QStringLiteral("/usr/lib/sddm/sddm.conf.d"));
+    }
+    QStringList files;
+    for (const QString &dirPath : std::as_const(dirs)) {
+        const QDir dir(dirPath);
+        for (const QString &name : dir.entryList({QStringLiteral("*.conf")}, QDir::Files, QDir::Name)) {
+            files << dir.filePath(name);
+        }
+    }
+    if (QFileInfo::exists(SddmConf)) {
+        files << SddmConf;
+    }
+    return files;
 }
 
 // --------------------------------------------------------------------------
@@ -540,10 +634,20 @@ int opRewriteHomePaths(const QStringList &args)
     // profiles, images, ...), which `sed -i` would otherwise corrupt by treating
     // them as text. find runs sed (batched via +) only on files the grep test
     // selected.
+    //
+    // The old name must end the directory component: it has to be followed by
+    // '/', the end of the line, whitespace, a quote, or a delimiter used in
+    // config syntax (lists, key=value, URLs, markup). Anything else may continue
+    // a different directory name, so "home/alice" leaves "home/alice2",
+    // "home/alice.bak" and "home/alice+old" alone. The terminator is kept.
+    // '%' is absent because in a URL "alice%20x" names a different directory;
+    // braces are absent because find's "-exec ... +" rejects any argument other
+    // than the final one containing "{}".
     const QString pattern = QStringLiteral("home/%1").arg(args.at(2));
-    const QString script = QString("s|home/%1|home/%2|g").arg(args.at(2), args.at(3));
+    const QString script = QString(R"(s#home/%1([]/"'[:space:]:;,=<>()&?[]|$)#home/%2\1#g)")
+                               .arg(sedLiteral(args.at(2)), args.at(3));
     return runTool(QStringLiteral("find"),
-                   {dir, "-type", "f", "-exec", "grep", "-IqF", "-e", pattern, "{}", ";", "-exec", "sed", "-i",
+                   {dir, "-type", "f", "-exec", "grep", "-IqF", "-e", pattern, "{}", ";", "-exec", "sed", "-i", "-E",
                     script, "{}", "+"});
 }
 
@@ -589,11 +693,13 @@ int opRewriteHomePaths(const QStringList &args)
 {
     // <user> <path under that user's home>
     QString safe;
-    if (args.size() != 2 || !resolveWithinHome(args.at(0), args.at(1), &safe)) {
+    // The final component is not resolved, so a symlinked entry (e.g. ~/.mozilla
+    // -> ~/Documents, or ~/.recently-used -> .) is unlinked, never its target.
+    if (args.size() != 2 || !resolveEntryWithinHome(args.at(0), args.at(1), &safe)) {
         printError(QStringLiteral("remove-home-path requires <user> <path under that user's home>"));
         return 1;
     }
-    return runTool(QStringLiteral("rm"), {"-rf", safe});
+    return runTool(QStringLiteral("rm"), {"-rf", "--", safe});
 }
 
 [[nodiscard]] int opChownHome(const QStringList &args)
@@ -604,7 +710,9 @@ int opRewriteHomePaths(const QStringList &args)
         printError(QStringLiteral("chown-home requires <user> <path under that user's home>"));
         return 1;
     }
-    return runTool(QStringLiteral("chown"), {"-R", QString("%1:%1").arg(args.at(0)), safe});
+    // "<user>:" sets the group to the user's login group, which need not share
+    // the user's name (e.g. primary group "users").
+    return runTool(QStringLiteral("chown"), {"-R", QString("%1:").arg(args.at(0)), "--", safe});
 }
 
 [[nodiscard]] int opCleanOpenOfficeLocks(const QStringList &args)
@@ -641,7 +749,105 @@ int opRewriteHomePaths(const QStringList &args)
     // Preserve rsync's "copy directory contents" semantics: the source always
     // carried a trailing slash in the original call.
     rsyncArgs << (fromSafe + '/') << toSafe;
-    return runTool(QStringLiteral("rsync"), rsyncArgs);
+    return runToolStreaming(QStringLiteral("rsync"), rsyncArgs);
+}
+
+// Set `values` (key, value pairs) in every section of the INI-style file `path`
+// whose header is one of `sections`, preserving all other lines and comments.
+// Within a matching section, the first uncommented "key=" line is rewritten and
+// later duplicates are dropped; a missing key is added right after the header.
+// If no matching section exists, sections.first() is appended with the values.
+// The file must already exist; it is replaced atomically.
+[[nodiscard]] bool setIniValues(const QString &path, const QStringList &sections,
+                                const QList<QPair<QString, QString>> &values)
+{
+    QFile in(path);
+    if (!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        printError(QStringLiteral("Cannot read %1").arg(path));
+        return false;
+    }
+    QStringList lines = QString::fromUtf8(in.readAll()).split('\n');
+    in.close();
+    if (!lines.isEmpty() && lines.constLast().isEmpty()) {
+        lines.removeLast(); // trailing newline; re-added on write
+    }
+
+    const auto isHeader = [](const QString &line) { return line.trimmed().startsWith('['); };
+    const auto keyOf = [](const QString &line) -> QString {
+        const QString t = line.trimmed();
+        if (t.startsWith('#') || t.startsWith(';')) {
+            return {};
+        }
+        const qsizetype eq = t.indexOf('=');
+        return eq > 0 ? t.left(eq).trimmed() : QString();
+    };
+
+    bool foundSection = false;
+    for (qsizetype i = 0; i < lines.size(); ++i) {
+        if (!sections.contains(lines.at(i).trimmed())) {
+            continue;
+        }
+        foundSection = true;
+        const qsizetype header = i;
+        QList<QPair<QString, QString>> missing;
+        for (const auto &[key, value] : values) {
+            bool set = false;
+            for (qsizetype j = header + 1; j < lines.size() && !isHeader(lines.at(j));) {
+                if (keyOf(lines.at(j)) == key) {
+                    if (set) {
+                        lines.removeAt(j); // duplicate would override the value set above
+                        continue;
+                    }
+                    lines[j] = key + '=' + value;
+                    set = true;
+                }
+                ++j;
+            }
+            if (!set) {
+                missing.append({key, value});
+            }
+        }
+        for (qsizetype k = 0; k < missing.size(); ++k) {
+            lines.insert(header + 1 + k, missing.at(k).first + '=' + missing.at(k).second);
+        }
+        // Continue scanning after this section's header; inserted lines are
+        // plain key=value lines, never headers.
+        i = header;
+    }
+    if (!foundSection) {
+        if (!lines.isEmpty() && !lines.constLast().trimmed().isEmpty()) {
+            lines.append(QString());
+        }
+        lines.append(sections.constFirst());
+        for (const auto &[key, value] : values) {
+            lines.append(key + '=' + value);
+        }
+    }
+
+    QSaveFile out(path);
+    if (!out.open(QIODevice::WriteOnly | QIODevice::Text)
+        || out.write((lines.join('\n') + '\n').toUtf8()) < 0 || !out.commit()) {
+        printError(QStringLiteral("Cannot write %1").arg(path));
+        return false;
+    }
+    return true;
+}
+
+// The autologin user SDDM will actually use, and the file that sets it. Parsed
+// with QSettings exactly as the GUI reads it, so both always agree.
+[[nodiscard]] QString sddmEffectiveUser(QString *source = nullptr)
+{
+    QString user;
+    for (const QString &file : sddmConfFiles(false)) {
+        const QSettings conf(file, QSettings::IniFormat);
+        if (conf.contains(QStringLiteral("Autologin/User"))) {
+            user = conf.value(QStringLiteral("Autologin/User")).toString();
+            if (source) {
+                *source = file;
+            }
+        }
+    }
+    return user;
 }
 
 [[nodiscard]] int opAutologinEnable(const QStringList &args)
@@ -655,24 +861,68 @@ int opRewriteHomePaths(const QStringList &args)
     const QString kdeSession = args.at(1);
     const QString defaultSession = args.at(2);
 
+    // Edit every display-manager config that exists, adding the section/keys
+    // when missing. Configs are never created from scratch: with none present
+    // there is nothing to enable, which is reported rather than claimed done.
+    bool configured = false;
+    bool ok = true;
     if (QFileInfo::exists(LightdmConf)) {
-        runTool(QStringLiteral("sed"),
-                {"-i", "-E", "-e",
-                 QStringLiteral(R"(/^[[]Seat(Defaults|:[*])[]]/,/[[]/{/^[[:space:]]*autologin-user=/d;})"), "-e",
-                 QString(R"(/^[[]Seat(Defaults|:[*])[]]/aautologin-user=%1)").arg(user), LightdmConf});
+        configured = true;
+        ok &= setIniValues(LightdmConf, {QStringLiteral("[Seat:*]"), QStringLiteral("[SeatDefaults]")},
+                           {{QStringLiteral("autologin-user"), user}});
     }
     const QString sddm = sddmConfFile();
     if (!sddm.isEmpty()) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=.*/User=%1/").arg(user), sddm});
+        configured = true;
+        QList<QPair<QString, QString>> values {{QStringLiteral("User"), user}};
         const QString session = sddm == SddmKdeConf ? kdeSession : defaultSession;
         if (!session.isEmpty()) {
-            runTool(QStringLiteral("sed"), {"-i", QString("s/^Session=.*/Session=%1/").arg(session), sddm});
+            values.append({QStringLiteral("Session"), session});
+        }
+        ok &= setIniValues(sddm, {QStringLiteral("[Autologin]")}, values);
+        QString source;
+        if (ok && sddmEffectiveUser(&source) != user) {
+            printError(QStringLiteral("SDDM autologin is overridden by %1; autologin was not enabled").arg(source));
+            ok = false;
         }
     }
     if (QFileInfo::exists(PlasmaConf)) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=.*/User=%1/").arg(user), PlasmaConf});
+        configured = true;
+        ok &= setIniValues(PlasmaConf, {QStringLiteral("[Autologin]")}, {{QStringLiteral("User"), user}});
     }
-    return 0;
+    if (!configured) {
+        printError(QStringLiteral("No display-manager configuration file found; autologin was not enabled"));
+        return 1;
+    }
+    return ok ? 0 : 1;
+}
+
+// Clear autologin only where it is set to exactly `user`; entries for other
+// accounts are left untouched.
+[[nodiscard]] int clearAutologinFor(const QString &user)
+{
+    int failed = 0;
+    if (QFileInfo::exists(LightdmConf)) {
+        failed |= runTool(QStringLiteral("sed"),
+                {"-i", "-E",
+                 QString(R"(/^[[]Seat(Defaults|:[*])[]]/,/[[]/{/^[[:space:]]*autologin-user=%1[[:space:]]*$/d;})").arg(sedLiteral(user)),
+                 LightdmConf});
+    }
+    // Clear the user in every local SDDM file, since any of them may be the one
+    // that wins; then confirm SDDM no longer resolves to this user.
+    for (const QString &sddm : sddmConfFiles(true)) {
+        failed |= runTool(QStringLiteral("sed"), {"-i", QString("s/^User=%1[[:space:]]*$/User=/").arg(sedLiteral(user)), sddm});
+    }
+    QString source;
+    if (sddmEffectiveUser(&source) == user) {
+        printError(QStringLiteral("SDDM autologin for %1 is still set in %2").arg(user, source));
+        failed = 1;
+    }
+    if (QFileInfo::exists(PlasmaConf)) {
+        failed |= runTool(QStringLiteral("sed"),
+                {"-i", QString("s/^User=%1[[:space:]]*$/User=/").arg(sedLiteral(user)), PlasmaConf});
+    }
+    return failed != 0 ? 1 : 0;
 }
 
 [[nodiscard]] int opAutologinDisable(const QStringList &args)
@@ -681,20 +931,7 @@ int opRewriteHomePaths(const QStringList &args)
         printError(QStringLiteral("autologin-disable requires one valid username"));
         return 1;
     }
-    const QString user = args.constFirst();
-    if (QFileInfo::exists(LightdmConf)) {
-        runTool(QStringLiteral("sed"),
-                {"-i", "-E",
-                 QStringLiteral(R"(/^[[]Seat(Defaults|:[*])[]]/,/[[]/{/^[[:space:]]*autologin-user=/d;})"), LightdmConf});
-    }
-    const QString sddm = sddmConfFile();
-    if (!sddm.isEmpty()) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=%1/User=/").arg(user), sddm});
-    }
-    if (QFileInfo::exists(PlasmaConf)) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=%1/User=/").arg(user), PlasmaConf});
-    }
-    return 0;
+    return clearAutologinFor(args.constFirst());
 }
 
 [[nodiscard]] int opAutologinRemoveUser(const QStringList &args)
@@ -703,21 +940,7 @@ int opRewriteHomePaths(const QStringList &args)
         printError(QStringLiteral("autologin-remove-user requires one valid username"));
         return 1;
     }
-    const QString user = args.constFirst();
-    if (QFileInfo::exists(LightdmConf)) {
-        runTool(QStringLiteral("sed"),
-                {"-i", "-E",
-                 QString(R"(/^[[]Seat(Defaults|:[*])[]]/,/[[]/{/^[[:space:]]*autologin-user=%1$/d;})").arg(user),
-                 LightdmConf});
-    }
-    const QString sddm = sddmConfFile();
-    if (!sddm.isEmpty()) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=%1$/User=/").arg(user), sddm});
-    }
-    if (QFileInfo::exists(PlasmaConf)) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=%1$/User=/").arg(user), PlasmaConf});
-    }
-    return 0;
+    return clearAutologinFor(args.constFirst());
 }
 
 [[nodiscard]] int opAutologinRename(const QStringList &args)
@@ -728,18 +951,23 @@ int opRewriteHomePaths(const QStringList &args)
     }
     const QString oldName = args.at(0);
     const QString newName = args.at(1);
+    int failed = 0;
     if (QFileInfo::exists(LightdmConf)) {
-        runTool(QStringLiteral("sed"),
-                {"-i", QString("s/autologin-user=%1/autologin-user=%2/g").arg(oldName, newName), LightdmConf});
+        failed |= runTool(QStringLiteral("sed"),
+                {"-i", "-E",
+                 QString(R"(s/^([#[:space:]]*autologin-user=)%1([[:space:]]*)$/\1%2\2/)")
+                     .arg(sedLiteral(oldName), newName),
+                 LightdmConf});
     }
-    const QString sddm = sddmConfFile();
-    if (!sddm.isEmpty()) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=%1$/User=%2/g").arg(oldName, newName), sddm});
+    for (const QString &sddm : sddmConfFiles(true)) {
+        failed |= runTool(QStringLiteral("sed"),
+                {"-i", QString("s/^User=%1[[:space:]]*$/User=%2/").arg(sedLiteral(oldName), newName), sddm});
     }
     if (QFileInfo::exists(PlasmaConf)) {
-        runTool(QStringLiteral("sed"), {"-i", QString("s/^User=%1$/User=%2/g").arg(oldName, newName), PlasmaConf});
+        failed |= runTool(QStringLiteral("sed"),
+                {"-i", QString("s/^User=%1[[:space:]]*$/User=%2/").arg(sedLiteral(oldName), newName), PlasmaConf});
     }
-    return 0;
+    return failed != 0 ? 1 : 0;
 }
 } // namespace
 

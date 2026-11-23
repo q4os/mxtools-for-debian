@@ -1,8 +1,32 @@
-mx-system (26.5.02mx25.1302) stable; urgency=medium
+mx-system (26.09.06mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:07 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:21 +0100
+
+mx-system (26.09.06mx25) mx; urgency=medium
+
+  * correct outlier distrib_release value on some upgraded systems
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 28 Sep 2026 20:37:40 -0400
+
+mx-system (26.09.05mx25) mx; urgency=medium
+
+  * fix permissions on some default files & directories
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 22 Sep 2026 13:17:48 -0400
+
+mx-system (26.09.02mx25) mx; urgency=medium
+
+  * ensure appropriate permissions on /usr and /etc 755
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 21 Sep 2026 15:29:59 -0400
+
+mx-system (26.09.01mx25) mx; urgency=medium
+
+  * mx25.3 strings
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 12 Sep 2026 21:23:44 -0400
 
 mx-system (26.5.02mx25) mx; urgency=medium
 

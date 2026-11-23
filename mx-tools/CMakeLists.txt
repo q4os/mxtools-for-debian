@@ -77,28 +77,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Enable compile commands export for IDEs and tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Optimize for Ninja builds
-if(CMAKE_GENERATOR STREQUAL "Ninja")
-    # Enable colored output for Ninja
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        add_compile_options(-fdiagnostics-color=always)
-    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        add_compile_options(-fcolor-diagnostics)
-    endif()
-endif()
-
-# Option to use clang for testing builds
-option(USE_CLANG "Use clang compiler" OFF)
-if(USE_CLANG)
-    set(CMAKE_C_COMPILER clang)
-    set(CMAKE_CXX_COMPILER clang++)
-    set(CMAKE_CXX_COMPILER_ID "Clang")
-    message(STATUS "Using clang compiler")
-endif()
-
 # Find Qt6 components
 find_package(Qt6 REQUIRED COMPONENTS
     Core
+    Concurrent
     Gui
     Widgets
     Qml
@@ -116,7 +98,12 @@ endif()
 # about them.
 if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
     qt6_policy(SET QTP0001 NEW)
+    set(MX_TOOLS_QML_RESOURCE_PREFIX "/qt/qml")
+else()
+    set(MX_TOOLS_QML_RESOURCE_PREFIX "")
 endif()
+# QTP0001 decides where the QML module's resources live; C++ needs the same path.
+add_compile_definitions(MX_TOOLS_LOGO_RESOURCE=":${MX_TOOLS_QML_RESOURCE_PREFIX}/MxTools/icons/logo.svg")
 if(Qt6_VERSION VERSION_GREATER_EQUAL 6.8)
     qt6_policy(SET QTP0004 NEW)
 endif()
@@ -168,6 +155,8 @@ qt6_add_qml_module(mx-tools
     QML_FILES
         ${MX_TOOLS_MAIN_QML}
         qml/components/CategoryButton.qml
+        qml/components/CategoryRepeater.qml
+        qml/components/MenuVisibilityToggle.qml
         qml/components/ModernSwitch.qml
         qml/components/SecondaryButton.qml
         qml/components/ThemeToolTip.qml
@@ -179,6 +168,7 @@ qt6_add_qml_module(mx-tools
 # Link Qt6 libraries
 target_link_libraries(mx-tools PRIVATE
     Qt6::Core
+    Qt6::Concurrent
     Qt6::Gui
     Qt6::Widgets
     Qt6::Qml
@@ -187,7 +177,11 @@ target_link_libraries(mx-tools PRIVATE
 )
 
 # Set compiler flags
-target_compile_options(mx-tools PRIVATE
+# Warnings shared by the application and the tests; every warning is an error.
+add_library(mx-tools-warnings INTERFACE)
+target_compile_options(mx-tools-warnings INTERFACE
+    -Wall
+    -Wextra
     -Wpedantic
     -pedantic
     -Werror=return-type
@@ -195,33 +189,32 @@ target_compile_options(mx-tools PRIVATE
     -Werror=uninitialized
     -Werror
 )
-
-# Add compiler-specific flags
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-    target_compile_options(mx-tools PRIVATE -Werror=return-stack-address)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(mx-tools-warnings INTERFACE -Werror=return-stack-address)
 else()
-    target_compile_options(mx-tools PRIVATE -Werror=return-local-addr)
+    target_compile_options(mx-tools-warnings INTERFACE -Werror=return-local-addr)
 endif()
+target_link_libraries(mx-tools PRIVATE mx-tools-warnings)
+# -Wshadow only for our own sources: Qt 6.4's qmlcachegen output shadows its own parameters.
+set_source_files_properties(src/main.cpp src/toolmodel.cpp tests/test_toolmodel.cpp
+    PROPERTIES COMPILE_OPTIONS -Wshadow)
 
 # Set compile definitions
 target_compile_definitions(mx-tools PRIVATE
-    QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PROJECT_VERSION_FROM_CHANGELOG}"
 )
 
-# Release-specific optimizations
+# Release builds optimize for size, and use link-time optimization where the toolchain
+# supports it. CMake's Release flags already define NDEBUG.
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    target_compile_definitions(mx-tools PRIVATE NDEBUG)
     target_compile_options(mx-tools PRIVATE -Os)
-
-    # Add LTO - different flags for different compilers
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-        target_compile_options(mx-tools PRIVATE -flto=thin)
-        target_link_options(mx-tools PRIVATE -flto=thin)
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT MX_TOOLS_IPO_SUPPORTED OUTPUT MX_TOOLS_IPO_OUTPUT LANGUAGES CXX)
+    if(MX_TOOLS_IPO_SUPPORTED)
+        set_property(TARGET mx-tools PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
     else()
-        target_compile_options(mx-tools PRIVATE -flto=auto)
-        target_link_options(mx-tools PRIVATE -flto=auto)
+        message(STATUS "Link-time optimization is not available: ${MX_TOOLS_IPO_OUTPUT}")
     endif()
 endif()
 
@@ -232,8 +225,6 @@ qt6_add_translations(mx-tools
     QM_FILES_OUTPUT_VARIABLE qm_files
 )
 
-
-
 # Set target properties
 set_target_properties(mx-tools PROPERTIES
     OUTPUT_NAME "mx-tools"
@@ -242,11 +233,27 @@ set_target_properties(mx-tools PROPERTIES
 
 
 
-# Install target (required by Debian build system)
-# Other files are handled by debian/install
-install(TARGETS mx-tools
-    RUNTIME DESTINATION bin
-)
+# Install everything here, so that every packager gets the same files from
+# 'cmake --install' (dh_auto_install on Debian).
+include(GNUInstallDirs)
+add_compile_definitions(MX_TOOLS_DOC_DIR="${CMAKE_INSTALL_FULL_DOCDIR}")
+target_compile_definitions(mx-tools PRIVATE MX_TOOLS_LOCALE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/mx-tools/locale")
+# The "MX Tools" submenu; Debian gets it from desktop-defaults-mx-common instead.
+option(MX_TOOLS_INSTALL_MENU "Install the MX Tools menu directory and merge file" OFF)
+
+install(TARGETS mx-tools RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(FILES ${qm_files} DESTINATION ${CMAKE_INSTALL_DATADIR}/mx-tools/locale)
+install(FILES data/mx-tools.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES icons/mx-tools.png DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/96x96/apps)
+install(FILES icons/mx-tools.svg DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+install(FILES help/license.html help/custom.css DESTINATION ${CMAKE_INSTALL_DOCDIR})
+install(FILES help/mx-tools.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+if(MX_TOOLS_INSTALL_MENU)
+    install(FILES data/menu/mx-tools-menu.directory DESTINATION ${CMAKE_INSTALL_DATADIR}/desktop-directories)
+    # FULL_SYSCONFDIR is /etc for a /usr prefix, where the relative form would give /usr/etc.
+    install(FILES data/menu/mx-tools-menu.menu
+            DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/xdg/menus/applications-merged)
+endif()
 
 if(BUILD_TESTING)
     add_executable(test-toolmodel
@@ -255,26 +262,63 @@ if(BUILD_TESTING)
         src/toolmodel.h
     )
     target_link_libraries(test-toolmodel PRIVATE
-        Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Qml Qt6::Quick Qt6::Test
+        Qt6::Core Qt6::Concurrent Qt6::Gui Qt6::Widgets Qt6::Qml Qt6::Quick Qt6::Test
     )
-    target_compile_options(test-toolmodel PRIVATE
-        -Wpedantic
-        -pedantic
-        -Werror=return-type
-        -Werror=switch
-        -Werror=uninitialized
-        -Werror
-    )
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-        target_compile_options(test-toolmodel PRIVATE -Werror=return-stack-address)
-    else()
-        target_compile_options(test-toolmodel PRIVATE -Werror=return-local-addr)
-    endif()
+    target_link_libraries(test-toolmodel PRIVATE mx-tools-warnings)
     target_compile_definitions(test-toolmodel PRIVATE
         MX_TOOLS_APPLICATIONS_PATH="${CMAKE_CURRENT_BINARY_DIR}/test-applications"
+        MX_TOOLS_CHANGELOG_PATH="${CMAKE_CURRENT_BINARY_DIR}/test-changelog.gz"
+        MX_TOOLS_FAKE_XFCONF_QUERY="${CMAKE_CURRENT_SOURCE_DIR}/tests/fake-xfconf-query"
         MX_TOOLS_TESTING
     )
     target_include_directories(test-toolmodel PRIVATE src)
     add_test(NAME toolmodel COMMAND test-toolmodel)
     set_tests_properties(toolmodel PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+
+    # Loads Main.qml offscreen against a stub backend and fails on QML warnings. Importing
+    # MxTools doesn't work outside the binary, because the build tree's qmldir files prefer
+    # the embedded resources, so the test opens a Main.qml file by path: the source one, or
+    # for Qt < 6.5 the build tree's copy of the generated one (with no qmldir beside it).
+    # Build chroots usually lack the runtime QML modules, so only register the test when
+    # every module it loads is installed. CI turns on MX_TOOLS_REQUIRE_QML_TEST so that a
+    # missing module fails the configure step instead of skipping the test.
+    option(MX_TOOLS_REQUIRE_QML_TEST "Fail if the QML test can't be registered" OFF)
+    find_program(MX_TOOLS_QMLTESTRUNNER qmltestrunner HINTS "${QT6_INSTALL_PREFIX}/${QT6_INSTALL_BINS}")
+    set(MX_TOOLS_QML_TEST_MODULES QtTest QtQuick QtQuick/Controls QtQuick/Layouts QtQuick/Templates
+                                  QtQuick/Window QtQml/WorkerScript)
+    if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
+        list(APPEND MX_TOOLS_QML_TEST_MODULES QtCore)
+    else()
+        list(APPEND MX_TOOLS_QML_TEST_MODULES Qt/labs/settings)
+    endif()
+    set(MX_TOOLS_QML_TEST_MISSING "")
+    foreach(module IN LISTS MX_TOOLS_QML_TEST_MODULES)
+        if(NOT EXISTS "${QT6_INSTALL_PREFIX}/${QT6_INSTALL_QML}/${module}/qmldir")
+            list(APPEND MX_TOOLS_QML_TEST_MISSING ${module})
+        endif()
+    endforeach()
+    if(NOT MX_TOOLS_QMLTESTRUNNER)
+        list(APPEND MX_TOOLS_QML_TEST_MISSING qmltestrunner)
+    endif()
+    # Main.qml shows the SVG logo, and a missing image plugin would fail the test's
+    # no-warnings check.
+    file(GLOB MX_TOOLS_SVG_IMAGE_PLUGIN "${QT6_INSTALL_PREFIX}/${QT6_INSTALL_PLUGINS}/imageformats/*qsvg*")
+    if(NOT MX_TOOLS_SVG_IMAGE_PLUGIN)
+        list(APPEND MX_TOOLS_QML_TEST_MISSING "the SVG image plugin")
+    endif()
+    if(NOT MX_TOOLS_QML_TEST_MISSING)
+        if(Qt6_VERSION VERSION_GREATER_EQUAL 6.5)
+            set(MX_TOOLS_MAIN_QML_URL "file://${CMAKE_CURRENT_SOURCE_DIR}/qml/Main.qml")
+        else()
+            set(MX_TOOLS_MAIN_QML_URL "file://${CMAKE_CURRENT_BINARY_DIR}/MxTools/qml/Main.qml")
+        endif()
+        configure_file(tests/tst_main.qml.in qml-tests/tst_main.qml @ONLY)
+        add_test(NAME qml-main COMMAND ${MX_TOOLS_QMLTESTRUNNER} -input ${CMAKE_CURRENT_BINARY_DIR}/qml-tests)
+        set_tests_properties(qml-main PROPERTIES ENVIRONMENT
+            "QT_QPA_PLATFORM=offscreen;XDG_CONFIG_HOME=${CMAKE_CURRENT_BINARY_DIR}/qml-tests/config")
+    elseif(MX_TOOLS_REQUIRE_QML_TEST)
+        message(FATAL_ERROR "The QML test is required, but these are missing: ${MX_TOOLS_QML_TEST_MISSING}")
+    else()
+        message(STATUS "Skipping the QML test; missing: ${MX_TOOLS_QML_TEST_MISSING}")
+    endif()
 endif()

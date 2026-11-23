@@ -9,8 +9,17 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QProcess>
+#include <QProcessEnvironment>
 #include <QRegularExpression>
+#include <QSaveFile>
+#include <QSettings>
+#include <QStandardPaths>
+#include <QStorageInfo>
+#include <QTimer>
 #include <QTextStream>
+
+#include <functional>
+#include <optional>
 
 namespace
 {
@@ -20,15 +29,110 @@ QString configuredValue(const QSettings &system, const QSettings &defaults, cons
     return system.value(key, defaults.value(key, fallback)).toString();
 }
 
+void runInxi(QObject *owner, const QStringList &arguments, const std::function<void(const QString &)> &onResult)
+{
+    auto *process = new QProcess(owner);
+    auto environment = QProcessEnvironment::systemEnvironment();
+    environment.insert(QStringLiteral("LC_ALL"), QStringLiteral("C"));
+    process->setProcessEnvironment(environment);
+    const auto finish = [process, onResult](const QString &output) {
+        process->deleteLater();
+        onResult(output);
+    };
+    QObject::connect(process, &QProcess::errorOccurred, owner, [finish](QProcess::ProcessError error) {
+        if (error == QProcess::FailedToStart) {
+            finish({});
+        }
+    });
+    QObject::connect(process, &QProcess::finished, owner, [process, finish](int code, QProcess::ExitStatus status) {
+        finish(status == QProcess::NormalExit && code == 0
+                   ? QString::fromUtf8(process->readAllStandardOutput()).trimmed() : QString());
+    });
+    QTimer::singleShot(10000, process, &QProcess::kill);
+    process->start(QStringLiteral("inxi"), arguments);
+}
+
+QString autostartDirectory()
+{
+    return QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + QStringLiteral("/autostart");
+}
+
+// Preserve desktop-entry escapes, localized keys and unrelated groups verbatim.
+struct LoginEntry {
+    QByteArray contents;
+    bool disabled = false;
+    bool hasLaunchCommand = false;
+};
+
+std::optional<LoginEntry> readLoginEntry(const QString &path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        return {};
+    }
+    LoginEntry entry;
+    bool desktopGroup = false;
+    while (!file.atEnd()) {
+        const QByteArray line = file.readLine();
+        const QByteArray trimmed = line.trimmed();
+        if (trimmed.startsWith('[')) {
+            desktopGroup = trimmed == "[Desktop Entry]";
+        } else if (desktopGroup) {
+            const auto separator = trimmed.indexOf('=');
+            const QByteArray key = trimmed.left(separator).trimmed();
+            const QByteArray value = trimmed.mid(separator + 1).trimmed();
+            if ((key == "Hidden" && value == "true") || (key == "X-GNOME-Autostart-enabled" && value == "false")) {
+                entry.disabled = true;
+                continue;
+            }
+            if ((key == "Exec" && !value.isEmpty()) || (key == "DBusActivatable" && value == "true")) {
+                entry.hasLaunchCommand = true;
+            }
+        }
+        entry.contents += line;
+    }
+    if (file.error() != QFileDevice::NoError) {
+        return std::nullopt;
+    }
+    return entry;
+}
+
+bool enableLoginEntry(const QString &target)
+{
+    const QString source = QStringLiteral("/usr/share/mx-welcome/mx-welcome.desktop");
+    if (!QFileInfo::exists(target)) {
+        return QFile::copy(source, target);
+    }
+    auto entry = readLoginEntry(target);
+    if (!entry) {
+        return false;
+    }
+    if (!entry->hasLaunchCommand) {
+        // A desktop session can leave just a Hidden=true mask behind.
+        entry = readLoginEntry(source);
+        if (!entry || !entry->hasLaunchCommand) {
+            return false;
+        }
+    } else if (!entry->disabled) {
+        return true;
+    }
+    QSaveFile file(target);
+    return file.open(QIODevice::WriteOnly) && file.write(entry->contents) == entry->contents.size() && file.commit();
+}
+
 }
 
 Backend::Backend(const QCommandLineParser &parser, QObject *parent)
-    : QObject(parent),
-      m_userSettings()
+    : QObject(parent)
 {
     m_startOnAbout = parser.isSet(QStringLiteral("about"));
+    QSettings settings;
+    m_initialWindowSize = QSize(settings.value(QStringLiteral("Window/windowWidth"), 760).toInt(),
+                                settings.value(QStringLiteral("Window/windowHeight"), 720).toInt());
     loadConfiguration(parser.isSet(QStringLiteral("test")));
     rebuildActions();
+    runInxi(this, {QStringLiteral("-c"), QStringLiteral("0"), QStringLiteral("-S")},
+            [this](const QString &output) { updateDesktopVersion(output); });
 }
 
 ActionModel *Backend::actions()
@@ -50,7 +154,15 @@ bool Backend::autoStartup() const { return m_autoStartup; }
 bool Backend::liveSession() const { return m_liveSession; }
 bool Backend::showLiveUserInfo() const { return m_showLiveUserInfo; }
 bool Backend::startOnAbout() const { return m_startOnAbout; }
+QSize Backend::initialWindowSize() const { return m_initialWindowSize; }
 QString Backend::version() const { return QStringLiteral(VERSION); }
+
+void Backend::saveWindowSize(const QSize &size)
+{
+    QSettings settings;
+    settings.setValue(QStringLiteral("Window/windowWidth"), size.width());
+    settings.setValue(QStringLiteral("Window/windowHeight"), size.height());
+}
 
 void Backend::setAutoStartup(bool enabled)
 {
@@ -58,14 +170,11 @@ void Backend::setAutoStartup(bool enabled)
         return;
     }
 
-    const QString targetDir = QDir::homePath() + QStringLiteral("/.config/autostart");
+    const QString targetDir = autostartDirectory();
     const QString target = targetDir + QStringLiteral("/mx-welcome.desktop");
     bool succeeded = true;
     if (enabled) {
-        succeeded = QDir().mkpath(targetDir);
-        if (succeeded && !QFileInfo::exists(target)) {
-            succeeded = QFile::copy(QStringLiteral("/usr/share/mx-welcome/mx-welcome.desktop"), target);
-        }
+        succeeded = QDir().mkpath(targetDir) && enableLoginEntry(target);
     } else {
         succeeded = !QFileInfo::exists(target) || QFile::remove(target);
     }
@@ -76,7 +185,6 @@ void Backend::setAutoStartup(bool enabled)
     }
 
     m_autoStartup = enabled;
-    m_userSettings.setValue(QStringLiteral("AutoStartup"), enabled);
     emit autoStartupChanged();
 }
 
@@ -90,7 +198,15 @@ void Backend::activate(const QString &identifier)
     if (!definition->command.isEmpty()) {
         launchCommand(definition->command);
     } else if (!definition->defaultCommand.isEmpty()) {
-        launchCommand(definition->defaultCommand);
+        const bool manual = identifier == QLatin1String("manual");
+        if (manual && m_desktopProbePending) {
+            m_manualRequested = true;
+            return;
+        }
+        const QString program = manual && m_isFluxbox ? QStringLiteral("mxfb-help") : definition->defaultCommand;
+        if (!QProcess::startDetached(program)) {
+            emit errorOccurred(tr("Error"), tr("Could not start the requested action."));
+        }
     } else if (definition->defaultUrl.isValid() && !QDesktopServices::openUrl(definition->defaultUrl)) {
         emit errorOccurred(tr("Error"), tr("Could not open %1").arg(definition->defaultUrl.toString()));
     }
@@ -98,14 +214,14 @@ void Backend::activate(const QString &identifier)
 
 void Backend::requestSystemInfo()
 {
-    if (!m_systemInfo.isEmpty()) {
+    if (m_reportRequested) {
         return;
     }
-    m_systemInfo = commandOutput(QStringLiteral("LANG=C inxi -c 0"));
-    if (m_systemInfo.isEmpty()) {
-        m_systemInfo = tr("System information is unavailable.");
-    }
-    emit systemInfoChanged();
+    m_reportRequested = true;
+    runInxi(this, {QStringLiteral("-c"), QStringLiteral("0")}, [this](const QString &output) {
+        m_systemInfo = output.isEmpty() ? tr("System information is unavailable.") : output;
+        emit systemInfoChanged();
+    });
 }
 
 void Backend::openFullSystemReport()
@@ -149,7 +265,6 @@ QString Backend::changelogText() const
 QString Backend::runCommand(const QString &program, const QStringList &arguments, int timeoutMs)
 {
     QProcess process;
-    process.setProcessChannelMode(QProcess::MergedChannels);
     process.start(program, arguments);
     if (!process.waitForStarted(timeoutMs)) {
         return {};
@@ -157,13 +272,12 @@ QString Backend::runCommand(const QString &program, const QStringList &arguments
     if (!process.waitForFinished(timeoutMs)) {
         process.kill();
         process.waitForFinished();
+        return {};
     }
-    return QString::fromUtf8(process.readAll()).trimmed();
-}
-
-QString Backend::commandOutput(const QString &command)
-{
-    return runCommand(QStringLiteral("/bin/bash"), {QStringLiteral("-c"), command});
+    if (process.exitStatus() != QProcess::NormalExit || process.exitCode() != 0) {
+        return {};
+    }
+    return QString::fromUtf8(process.readAllStandardOutput()).trimmed();
 }
 
 QUrl Backend::localSource(const QString &path)
@@ -175,16 +289,16 @@ void Backend::loadConfiguration(bool testMode)
 {
     const QString oldConfig = QDir::homePath() + QStringLiteral("/.config/")
                               + QCoreApplication::applicationName() + QStringLiteral(".conf");
-    if (QFileInfo::exists(oldConfig)) {
-        QSettings oldSettings(QCoreApplication::applicationName());
-        m_userSettings.setValue(QStringLiteral("AutoStartup"),
-                                oldSettings.value(QStringLiteral("AutoStartup"), false).toBool());
-        QFile::remove(oldConfig);
-    }
-    m_autoStartup = m_userSettings.value(QStringLiteral("AutoStartup"), false).toBool();
-    if (!m_autoStartup) {
-        QFile::remove(QDir::homePath() + QStringLiteral("/.config/autostart/mx-welcome.desktop"));
-    }
+    QFile::remove(oldConfig);
+
+    const QDir autostartDir(autostartDirectory());
+    // /etc/skel seeds this marker so new accounts see the welcome dialog once on
+    // first login; remove it after that single launch without touching the
+    // user's own autostart entry, which may have been enabled independently
+    // (e.g. via the desktop environment's session settings).
+    QFile::remove(autostartDir.filePath(QStringLiteral("mx-welcome-once.desktop")));
+    const auto loginEntry = readLoginEntry(autostartDir.filePath(QStringLiteral("mx-welcome.desktop")));
+    m_autoStartup = loginEntry && loginEntry->hasLaunchCommand && !loginEntry->disabled;
 
     QSettings defaults(QStringLiteral("/usr/share/mx-welcome/mx-welcome.conf"), QSettings::NativeFormat);
     QSettings system(QStringLiteral("/etc/mx-welcome/mx-welcome.conf"), QSettings::NativeFormat);
@@ -208,13 +322,12 @@ void Backend::loadConfiguration(bool testMode)
         m_liveUserInfo = tr("User demo, password: demo. Superuser root, password: root.");
     }
 
-    const QStringList fileSystems = commandOutput(QStringLiteral("df -T /")).split(QLatin1Char('\n'), Qt::SkipEmptyParts);
-    const QString rootFileSystem = fileSystems.isEmpty()
-                                       ? QString()
-                                       : fileSystems.last().section(QLatin1Char(' '), 1, 1,
-                                                                    QString::SectionSkipEmpty).trimmed();
-    m_liveSession = rootFileSystem == QLatin1String("aufs") || rootFileSystem == QLatin1String("overlay");
-    m_showLiveUserInfo = testMode || (m_liveSession && showLive != QLatin1String("false"));
+    const QByteArray rootFileSystem = QStorageInfo::root().fileSystemType();
+    m_liveSession = rootFileSystem == "aufs" || rootFileSystem == "overlay";
+    //hide password information when using root persistence or force-passwd is present
+    const bool persistRoot = QFileInfo::exists(QStringLiteral("/live/config/persist-root"));
+    const bool newPasswords = QFileInfo::exists(QStringLiteral("/live/config/force-passwd"));
+    m_showLiveUserInfo = testMode || (m_liveSession && !newPasswords && !persistRoot && showLive != QLatin1String("false"));
 
     const QString checkRelease = configuredValue(system, defaults, QStringLiteral("CHECKLSB_RELEASE"),
                                                   QStringLiteral("true"));
@@ -232,23 +345,6 @@ void Backend::loadConfiguration(bool testMode)
         m_debianVersion = QString::fromUtf8(debianFile.readLine()).trimmed();
     }
 
-    const QString sessionInfo = commandOutput(QStringLiteral("LANG=C.UTF-8 inxi -c 0 -S"));
-    const QRegularExpression desktopPattern(QStringLiteral(R"(Desktop:\s*(.+?)\s+v:\s*([\d\.]+))"));
-    const auto match = desktopPattern.match(sessionInfo);
-    if (match.hasMatch()) {
-        m_desktopVersion = match.captured(1) + QLatin1Char(' ') + match.captured(2);
-    }
-    m_isFluxbox = m_desktopVersion.contains(QStringLiteral("Fluxbox"));
-    if (m_isFluxbox) {
-        QFile fluxboxFile(QStringLiteral("/etc/mxfb_version"));
-        if (fluxboxFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            const QString fluxboxVersion = QString::fromUtf8(fluxboxFile.readLine()).trimmed();
-            if (!fluxboxVersion.isEmpty()) {
-                m_desktopVersion += QLatin1Char(' ') + fluxboxVersion;
-            }
-        }
-    }
-
     struct Seed {
         const char *identifier;
         int configIndex;
@@ -262,7 +358,7 @@ void Backend::loadConfiguration(bool testMode)
         {"setup", 1, tr("Install MX Linux"), tr("Install MX Linux on this computer."), "system-software-install", QStringLiteral("minstall-launcher"), nullptr},
         {"faq", 2, tr("FAQ"), tr("Find answers to frequently asked questions."), "help-faq", QStringLiteral("mx-faq"), nullptr},
         {"forum", 3, tr("Forums"), tr("Ask questions and join the MX Linux community."), "system-users", {}, "http://forum.mxlinux.org/index.php"},
-        {"manual", 4, tr("Users Manual"), tr("Read the documentation for your MX Linux release."), "help-contents", m_isFluxbox ? QStringLiteral("mxfb-help") : QStringLiteral("mx-manual"), nullptr},
+        {"manual", 4, tr("Users Manual"), tr("Read the documentation for your MX Linux release."), "help-contents", QStringLiteral("mx-manual"), nullptr},
         {"video", 5, tr("Videos"), tr("Watch MX Linux tutorials and demonstrations."), "video-x-generic", {}, "http://www.mxlinux.org/videos/"},
         {"wiki", 6, tr("Wiki"), tr("Browse community-maintained guides and reference material."), "internet-web-browser", {}, "http://www.mxlinux.org/wiki"},
         {"contribute", 7, tr("Contribute"), tr("Learn how to support and contribute to MX Linux."), "help-donate", {}, "http://www.mxlinux.org/donate"},
@@ -294,6 +390,30 @@ void Backend::loadConfiguration(bool testMode)
             definition.visible = !configuredTitle.isEmpty() || QFileInfo::exists(QStringLiteral("/usr/bin/mx-tour"));
         }
         m_definitions.append(std::move(definition));
+    }
+}
+
+void Backend::updateDesktopVersion(const QString &sessionInfo)
+{
+    m_desktopProbePending = false;
+    const QRegularExpression desktopPattern(QStringLiteral(R"(Desktop:\s*(.+?)\s+v:\s*([\d\.]+))"));
+    const auto match = desktopPattern.match(sessionInfo);
+    if (match.hasMatch()) {
+        m_desktopVersion = match.captured(1) + QLatin1Char(' ') + match.captured(2);
+        m_isFluxbox = m_desktopVersion.contains(QStringLiteral("Fluxbox"));
+        if (m_isFluxbox) {
+            QFile file(QStringLiteral("/etc/mxfb_version"));
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                const QString version = QString::fromUtf8(file.readLine()).trimmed();
+                if (!version.isEmpty()) {
+                    m_desktopVersion += QLatin1Char(' ') + version;
+                }
+            }
+        }
+        emit desktopVersionChanged();
+    }
+    if (m_manualRequested) {
+        activate(QStringLiteral("manual"));
     }
 }
 

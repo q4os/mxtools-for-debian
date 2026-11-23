@@ -442,7 +442,7 @@
        <item row="2" column="1" colspan="2">
         <widget class="QPushButton" name="pushDisableLocales">
          <property name="text">
-          <string extracomment="disables generation of any locale except on that is currently in use">Disable all locales except the one in use</string>
+          <string extracomment="keeps locales used by the system language, session language, and configured locale categories">Disable locales not in use</string>
          </property>
          <property name="autoDefault">
           <bool>false</bool>

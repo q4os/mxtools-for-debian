@@ -50,6 +50,9 @@ public:
     explicit MainWindow(Settings *settings, QWidget *parent = nullptr);
     ~MainWindow() override;
 
+    // SIGINT/SIGTERM/SIGHUP: tear down a started snapshot, otherwise quit.
+    void cancelFromSignal();
+
 protected:
     void closeEvent(QCloseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
@@ -75,7 +78,7 @@ private slots:
     void btnSelectSnapshot_clicked();
     void cbCompression_currentIndexChanged();
     void checkMd5_toggled(bool checked);
-    void checkSha512_toggled(bool checked);
+    void checkSha256_toggled(bool checked);
     void radioPersonal_clicked(bool checked);
     void radioRespin_toggled(bool checked);
     void spinCPU_valueChanged(int arg1);
@@ -91,9 +94,14 @@ private:
     QString pendingOutputBuffer;
     bool transientOutputLineActive {};
     bool realProgressActive {};
-    bool cleanupInProgress = false;
+    // The first elevated calls of a run are waiting (for authentication) in a
+    // nested event loop that still delivers clicks and close requests.
+    bool elevatedSetupInProgress = false;
+    // A signal asked to quit before the snapshot started; nothing may start it.
+    bool quitRequested = false;
 
     [[nodiscard]] bool confirmStart();
+    [[nodiscard]] bool confirmUnitCredentials();
     void cleanUp();
     void abortIfElevationDenied();
     bool installPackage(const QString &package);

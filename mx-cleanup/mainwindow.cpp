@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2018-2025 MX Authors
+ * Copyright (C) 2018-2026 MX Authors
  *
  * Authors: Adrian
  *          MX Linux <http://mxlinux.org>
@@ -220,6 +220,8 @@ void MainWindow::setup()
     if (isArchLinux) {
         ui->groupBoxKernel->hide();
         ui->groupBoxApt->setTitle(tr("Clean pacman cache"));
+        // pacman has no "removed, config files left" package state to purge
+        ui->checkPurge->hide();
     }
 
     suppressUserSwitch = true;
@@ -388,7 +390,7 @@ QString MainWindow::cronEntryBase(const QString &period) const
 QString MainWindow::cronEntryPath(const QString &period, bool forWrite) const
 {
     const QString base = cronEntryBase(period);
-    const QString suffix = currentUserSuffix();
+    const QString suffix = userCronSuffix(ui->comboUserClean->currentText());
 
     if (suffix.isEmpty()) {
         return base;
@@ -401,6 +403,11 @@ QString MainWindow::cronEntryPath(const QString &period, bool forWrite) const
 
     if (QFile::exists(candidate)) {
         return candidate;
+    }
+
+    const QString legacy = base + currentUserSuffix();
+    if (QFile::exists(legacy)) {
+        return legacy;
     }
 
     const bool selectedIsCurrent = (ui->comboUserClean->currentText() == currentUser);
@@ -477,16 +484,16 @@ bool MainWindow::loadSystemScriptOptions(const QString &legacyFallbackContent)
         content = legacyFallbackContent;
     }
 
-    if (content.contains("apt-get autoclean")) {
+    if (content.contains("apt-get autoclean") || content.contains("pacman -Sc --noconfirm")) {
         ui->groupBoxApt->setChecked(true);
         ui->radioAutoClean->setChecked(true);
-    } else if (content.contains("apt-get clean")) {
+    } else if (content.contains("apt-get clean") || content.contains("pacman -Scc")) {
         ui->groupBoxApt->setChecked(true);
         ui->radioClean->setChecked(true);
     } else {
         ui->groupBoxApt->setChecked(false);
     }
-    ui->checkPurge->setChecked(content.contains("apt-get purge"));
+    ui->checkPurge->setChecked(!isArchLinux && content.contains("apt-get purge"));
 
     if (QRegularExpression(R"(\-exec truncate \-s 0)").match(content).hasMatch()) {
         ui->groupBoxLogs->setChecked(true);
@@ -1171,7 +1178,7 @@ void MainWindow::pushApply_clicked()
         }
     }
 
-    if (ui->checkPurge->isChecked()) {
+    if (!isArchLinux && ui->checkPurge->isChecked()) {
         quint64 before_size = helperDuSize("dpkg-info", {}, QuietMode::Yes);
         const QStringList residualPackages
             = cmdOut("dpkg-query -W -f='${db:Status-Abbrev}\t${Package}\n'", QuietMode::Yes)

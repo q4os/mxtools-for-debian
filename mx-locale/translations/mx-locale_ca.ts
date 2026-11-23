@@ -260,7 +260,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="468"/>
         <source>Updating locales, please wait</source>
-        <translation>Actualitzant locales, espereu si us plau</translation>
+        <translation>S&apos;actualitzen les llengües. Espereu, si us plau.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="519"/>

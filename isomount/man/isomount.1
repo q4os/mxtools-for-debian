@@ -137,9 +137,9 @@
 .SH "NAME"
 .Vb 6
 \&    isomount        \-\- mount iso files
-\&    isuomount       \-\- unmount iso files
+\&    isoumount       \-\- unmount iso files
 \&    sqmount         \-\- mount squashfs files
-\&    isuomount       \-\- unmount squashfs files
+\&    squmount        \-\- unmount squashfs files
 \&    clean\-isomount  \-\- remove stale files and directories
 \&    show\-isomount   \-\- show current mountpoints
 .Ve
@@ -147,9 +147,9 @@
 .IX Header "SYNOPSIS"
 .Vb 6
 \&    isomount       [options] isofile.iso
-\&    isuomount      [options] [mountpoint]
+\&    isoumount      [options] [mountpoint]
 \&    sqmount        [options] [squashfs\-file]
-\&    isuomount      [options] [mountpoint]
+\&    squmount       [options] [mountpoint]
 \&    clean\-isomount [options]
 \&    show\-isomount  [options]
 .Ve
@@ -169,15 +169,15 @@
 .Ve
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
-.ie n .IP """isoumount [options] /path/to/file.iso""" 4
-.el .IP "\f(CWisoumount [options] /path/to/file.iso\fR" 4
-.IX Item "isoumount [options] /path/to/file.iso"
+.ie n .IP """isomount [options] /path/to/file.iso""" 4
+.el .IP "\f(CWisomount [options] /path/to/file.iso\fR" 4
+.IX Item "isomount [options] /path/to/file.iso"
 Mount the iso file specified at a directory like /mnt/iso/iso1.  If
 it is an \s-1MX\s0 or antiX iso then also mount the /antiX/linuxfs file
 as a squashfs file.
-.ie n .IP """soumount [options] /path/to/squashfs\-file""" 4
-.el .IP "\f(CWsoumount [options] /path/to/squashfs\-file\fR" 4
-.IX Item "soumount [options] /path/to/squashfs-file"
+.ie n .IP """sqmount [options] /path/to/squashfs\-file""" 4
+.el .IP "\f(CWsqmount [options] /path/to/squashfs\-file\fR" 4
+.IX Item "sqmount [options] /path/to/squashfs-file"
 Mount the squashfs file specified at a directory like /mnt/iso/sq1/.
 .ie n .IP """isoumount [options] [/mnt/iso/isoN|\*(Aqall\*(Aq]""" 4
 .el .IP "\f(CWisoumount [options] [/mnt/iso/isoN|\*(Aqall\*(Aq]\fR" 4
@@ -185,28 +185,28 @@ Mount the squashfs file specified at a directory like /mnt/iso/sq1/.
 Umount the most recently mounted iso file.  If a mountpoint is given
 then unmount that mountpoint instead.  If 'all' is given then unmount
 all of our mounts.
-.ie n .IP """isoumount [options] [/mnt/iso/sqN|\*(Aqall\*(Aq]""" 4
-.el .IP "\f(CWisoumount [options] [/mnt/iso/sqN|\*(Aqall\*(Aq]\fR" 4
-.IX Item "isoumount [options] [/mnt/iso/sqN|all]"
+.ie n .IP """squmount [options] [/mnt/iso/sqN|\*(Aqall\*(Aq]""" 4
+.el .IP "\f(CWsqumount [options] [/mnt/iso/sqN|\*(Aqall\*(Aq]\fR" 4
+.IX Item "squmount [options] [/mnt/iso/sqN|all]"
 Umount the most recently mounted squashfs file.  If a mountpoint is
 given then unmount that mountpoint instead.  In both cases we also
 delete the mountpoint directory and the /mnt/iso/sqN@<name> file.
 .Sp
 If 'all' is given then unmount all of our mounts.
-.ie n .IP """isoumount [options]""" 4
-.el .IP "\f(CWisoumount [options]\fR" 4
-.IX Item "isoumount [options]"
+.ie n .IP """clean-isomount [options]""" 4
+.el .IP "\f(CWclean-isomount [options]\fR" 4
+.IX Item "clean-isomount [options]"
 Clean up leftover mountpoint directories and @ files.
-.ie n .IP """isoumount [options]""" 4
-.el .IP "\f(CWisoumount [options]\fR" 4
-.IX Item "isoumount [options]"
+.ie n .IP """show-isomount [options]""" 4
+.el .IP "\f(CWshow-isomount [options]\fR" 4
+.IX Item "show-isomount [options]"
 Show the currently mounted iso and squashfs files
 .SH "LICENSE"
 .IX Header "LICENSE"
 GPLv3
 .SH "COPYRIGHT"
 .IX Header "COPYRIGHT"
-Copyright 2019
+Copyright 2026
 .PP
-antiX Linux <http://antix.freeforums.org/>
+MX Linux <https://mxlinux.org/>
 .ex

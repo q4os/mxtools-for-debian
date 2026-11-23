@@ -52,6 +52,7 @@ install(TARGETS formatusb
 
 # Handle translations
 file(GLOB TS_FILES translations/*.ts)
+list(FILTER TS_FILES EXCLUDE REGEX "/formatusb_en_US\\.ts$")
 if(Qt6_FOUND)
     qt_add_translations(formatusb TS_FILES ${TS_FILES})
 else()

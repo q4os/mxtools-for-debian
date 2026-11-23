@@ -141,11 +141,14 @@ set(COMMON_SOURCES
     src/batchprocessing.cpp
     src/work.cpp
     src/filesystemutils.cpp
+    src/instancelock.cpp
     src/systeminfo.cpp
     src/messagehandler.cpp
     src/excludesutils.cpp
     src/squashfsutils.cpp
     src/checksumutils.cpp
+    src/unitsecrets.cpp
+    src/snapdstate.cpp
 )
 
 set(COMMON_HEADERS
@@ -157,11 +160,14 @@ set(COMMON_HEADERS
     src/batchprocessing.h
     src/work.h
     src/filesystemutils.h
+    src/instancelock.h
     src/systeminfo.h
     src/messagehandler.h
     src/excludesutils.h
     src/squashfsutils.h
     src/checksumutils.h
+    src/unitsecrets.h
+    src/snapdstate.h
 )
 
 set(HELPER_SOURCES
@@ -341,6 +347,16 @@ if(BUILD_TESTS)
     set_common_properties(test-filesystemutils)
     add_test(NAME filesystemutils COMMAND test-filesystemutils)
 
+    add_executable(test-instancelock
+        tests/test_instancelock.cpp
+        src/instancelock.cpp
+        src/instancelock.h
+    )
+    target_link_libraries(test-instancelock Qt6::Core Qt6::Test)
+    target_include_directories(test-instancelock PRIVATE src)
+    set_common_properties(test-instancelock)
+    add_test(NAME instancelock COMMAND test-instancelock)
+
     add_executable(test-checksumutils
         tests/test_checksumutils.cpp
         src/checksumutils.cpp
@@ -350,6 +366,26 @@ if(BUILD_TESTS)
     target_include_directories(test-checksumutils PRIVATE src)
     set_common_properties(test-checksumutils)
     add_test(NAME checksumutils COMMAND test-checksumutils)
+
+    add_executable(test-unitsecrets
+        tests/test_unitsecrets.cpp
+        src/unitsecrets.cpp
+        src/unitsecrets.h
+    )
+    target_link_libraries(test-unitsecrets Qt6::Core Qt6::Test)
+    target_include_directories(test-unitsecrets PRIVATE src)
+    set_common_properties(test-unitsecrets)
+    add_test(NAME unitsecrets COMMAND test-unitsecrets)
+
+    add_executable(test-snapdstate
+        tests/test_snapdstate.cpp
+        src/snapdstate.cpp
+        src/snapdstate.h
+    )
+    target_link_libraries(test-snapdstate Qt6::Core Qt6::Test)
+    target_include_directories(test-snapdstate PRIVATE src)
+    set_common_properties(test-snapdstate)
+    add_test(NAME snapdstate COMMAND test-snapdstate)
 
     add_executable(test-elevationbroker
         tests/test_elevationbroker.cpp
@@ -361,6 +397,17 @@ if(BUILD_TESTS)
     set_common_properties(test-elevationbroker)
     add_dependencies(test-elevationbroker helper)
     add_test(NAME elevationbroker COMMAND test-elevationbroker)
+
+    # Separate process: a quit shuts the process-wide broker down for good.
+    add_executable(test-elevationbroker-quit
+        tests/test_elevationbroker_quit.cpp
+        src/elevationbroker.cpp
+        src/elevationbroker.h
+    )
+    target_link_libraries(test-elevationbroker-quit Qt6::Core Qt6::Test)
+    target_include_directories(test-elevationbroker-quit PRIVATE src)
+    set_common_properties(test-elevationbroker-quit)
+    add_test(NAME elevationbroker-quit COMMAND test-elevationbroker-quit)
 endif()
 
 # Handle translations

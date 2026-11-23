@@ -66,15 +66,28 @@ Google Chrome
 <screenshot>https://www.google.com/chrome/assets/common/images/marquee/chrome-new.jpg</screenshot>
 
 <preinstall>
-rm -f /etc/apt/sources.list.d/google-chrome.list
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee /etc/apt/trusted.gpg.d/google-chrome.gpg >/dev/null
-echo "X-Repolib-Name: Google Chrome    
-Types: deb    
-URIs: https://dl.google.com/linux/chrome-stable/deb/    
-Suites: stable    
-Components: main    
-Architectures: amd64    
+#cleanup
+#remove any temporary google keys
+rm -f /etc/apt/trusted.gpg.d/google-chrome.gpg
+#remove old or temporary sources, install will replace them, refresh sources in this case
+if [ -e "/etc/apt/sources.list.d/google-chrome.list" ] || [ -e "/etc/apt/sources.list.d/mxpitemp.sources" ] ; then
+	rm -f /etc/apt/sources.list.d/google-chrome.list
+	rm -f /etc/apt/sources.list.d/mxpitemp.sources
+	apt-get update
+fi
+# only add a temporary repo if no Google Chrome apt repo is still enabled after cleanup
+if apt-get indextargets --format '$(REPO_URI)' 2>/dev/null | grep -q 'dl\.google\.com/linux/chrome'; then
+   echo "Google Chrome apt repo already enabled, not adding temporary repo"
+else
+   wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee /etc/apt/trusted.gpg.d/google-chrome.gpg >/dev/null
+   echo "X-Repolib-Name: Google Chrome
+Types: deb
+URIs: https://dl.google.com/linux/chrome-stable/deb/
+Suites: stable
+Components: main
+Architectures: amd64
 Signed-By: /etc/apt/trusted.gpg.d/google-chrome.gpg" > /etc/apt/sources.list.d/mxpitemp.sources
+fi
 apt-get update
 </preinstall>
 
@@ -84,12 +97,19 @@ google-chrome-stable
 
 
 <postinstall>
-rm -f /etc/apt/sources.list.d/mxpitemp.sources
-rm -f /etc/apt/trusted.gpg.d/google-chrome.gpg
+# only clean up if the temporary repo was set up in preinstall
+if [ -f /etc/apt/sources.list.d/mxpitemp.sources ]; then
+   rm -f /etc/apt/sources.list.d/mxpitemp.sources
+   rm -f /etc/apt/trusted.gpg.d/google-chrome.gpg
+fi
 </postinstall>
 
 
 <uninstall_package_names>
 google-chrome-stable
 </uninstall_package_names>
+<postuninstall>
+rm -f /etc/apt/sources.list.d/google-chrome.sources
+apt-get update
+</postuninstall>
 </app>

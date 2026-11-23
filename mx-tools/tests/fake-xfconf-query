@@ -1,0 +1,84 @@
+#!/bin/sh
+# A stand-in for xfconf-query that keeps xfce4-panel properties as files in
+# $FAKE_XFCONF_DIR: "plugins" lists the plugin instances, "plugin-N" holds a
+# plugin type, and "plugin-N-favorites" holds one array item per line (or,
+# with a ".scalar" suffix, a plain string value; a single --set value without
+# -a is stored that way, as the real command does). A "fail-type",
+# "fail-favorites" or "fail-write" file makes queries of that kind fail with a
+# generic error. Every invocation's arguments are appended to "calls".
+#
+# Like the real command, messages are translated through gettext: LANGUAGE (or
+# LANG) set to German gives German text unless LC_ALL is C or C.UTF-8. With
+# FAKE_XFCONF_NOISY set, every call also prints a GLib-style warning on stderr.
+d="$FAKE_XFCONF_DIR"
+echo "$*" >> "$d/calls"
+array_header='Value is an array with %d items:'
+missing='Property "%s" does not exist on channel "xfce4-panel"'
+case "$LC_ALL" in
+    C|C.UTF-8|C.utf8) ;;
+    *)
+        case "${LANGUAGE:-$LANG}" in
+            de*)
+                array_header='Wert ist ein Feld mit %d Elementen:'
+                missing='Eigenschaft "%s" existiert nicht im Kanal "xfce4-panel"'
+                ;;
+        esac
+        ;;
+esac
+if [ -n "$FAKE_XFCONF_NOISY" ]; then
+    echo "(xfconf-query:4242): GLib-GIO-WARNING **: 10:00:00.000: fake warning" >&2
+fi
+prop= list= verbose= reset= array= values= count=0
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -p) shift; prop="$1" ;;
+        -l) list=1 ;;
+        -v) verbose=1 ;;
+        -r) reset=1 ;;
+        -a) array=1 ;;
+        -s) shift; values="$values$1
+"; count=$((count + 1)) ;;
+        -c|-t) shift ;;
+    esac
+    shift
+done
+if [ -n "$list" ]; then
+    # Listing is how plugin types are read, so "fail-type" fails it too.
+    if [ -e "$d/fail-type" ]; then
+        echo "Failed to contact the configuration daemon" >&2
+        exit 1
+    fi
+    for n in $(cat "$d/plugins"); do
+        if [ -n "$verbose" ] && [ -e "$d/plugin-$n" ]; then
+            printf '%-24s%s\n' "/plugins/plugin-$n" "$(cat "$d/plugin-$n")"
+        else
+            echo "/plugins/plugin-$n"
+        fi
+    done
+    exit 0
+fi
+key=$(echo "${prop#/plugins/}" | tr / -)
+case "$key" in *-favorites) kind=favorites ;; *) kind=type ;; esac
+if [ -e "$d/fail-$kind" ] || { [ -e "$d/fail-write" ] && [ -n "$reset$values" ]; }; then
+    echo "Failed to contact the configuration daemon" >&2
+    exit 1
+fi
+if [ -n "$reset" ]; then
+    rm -f "$d/$key" "$d/$key.scalar"
+elif [ "$count" -eq 1 ] && [ -z "$array" ]; then
+    rm -f "$d/$key"
+    printf '%s' "$values" > "$d/$key.scalar"
+elif [ "$count" -gt 0 ]; then
+    rm -f "$d/$key.scalar"
+    printf '%s' "$values" > "$d/$key"
+elif [ -e "$d/$key.scalar" ]; then
+    cat "$d/$key.scalar"
+elif [ -e "$d/$key" ] && [ "$kind" = favorites ]; then
+    printf "$array_header\n\n" "$(wc -l < "$d/$key")"
+    cat "$d/$key"
+elif [ -e "$d/$key" ]; then
+    cat "$d/$key"
+else
+    printf "$missing\n" "$prop" >&2
+    exit 1
+fi

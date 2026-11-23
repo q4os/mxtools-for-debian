@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Part of MX Package Installer's mx-packageinstaller-pkglist.
+     Purpose: install pia-vpn-installer-helper, which adds a "PIA VPN
+     Installer" menu entry to download/run PIA's own installer as the user. -->
 <app>
 
 <category>
@@ -66,21 +69,37 @@ PIAVPN - Private Internet Access VPN
 <screenshot>none</screenshot>
 
 <preinstall>
+<![CDATA[
+SH="/usr/share/mx-packageinstaller-pkglist/piavpn.sh"
+[ -f "$SH" ] || { echo "ERROR: PIA VPN installer helper script not found: $SH"; exit 1; }
+[ -x "$SH" ] || chmod +x "$SH"
+"$SH" preinstall
+]]>
 </preinstall>
 
 <install_package_names>
-piavpn-downloader-installer
+pia-vpn-installer-helper
 </install_package_names>
 
 <postinstall>
-
-if [ -x /usr/share/pia-downloader-installer/install_piavpn.sh ]; then
-/usr/share/pia-downloader-installer/install_piavpn.sh
-fi
-
+<![CDATA[
+SH="/usr/share/mx-packageinstaller-pkglist/piavpn.sh"
+[ -f "$SH" ] || { echo "ERROR: PIA VPN installer helper script not found: $SH"; exit 1; }
+[ -x "$SH" ] || chmod +x "$SH"
+"$SH" postinstall
+]]>
 </postinstall>
 
 <uninstall_package_names>
-piavpn-downloader-installer
+pia-vpn-installer-helper
 </uninstall_package_names>
+
+<postuninstall>
+<![CDATA[
+SH="/usr/share/mx-packageinstaller-pkglist/piavpn.sh"
+[ -f "$SH" ] || { echo "ERROR: PIA VPN installer helper script not found: $SH"; exit 1; }
+[ -x "$SH" ] || chmod +x "$SH"
+"$SH" postuninstall
+]]>
+</postuninstall>
 </app>

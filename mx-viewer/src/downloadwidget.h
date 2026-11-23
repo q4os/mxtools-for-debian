@@ -1,7 +1,7 @@
 /*****************************************************************************
  * downloadwidget.h
  *****************************************************************************
- * Copyright (C) 2022 MX Authors
+ * Copyright (C) 2022-2026 MX Authors
  *
  * Authors: Adrian <adrian@mxlinux.org>
  *          MX Linux <http://mxlinux.org>
@@ -33,18 +33,25 @@ class DownloadWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit DownloadWidget(QWidget* parent = nullptr);
+    // Stays a top-level window; browserWindow parents the save dialog so it opens over the browser.
+    explicit DownloadWidget(QWidget* browserWindow);
     ~DownloadWidget() override;
 
+    // Downloads from this window that are still transferring; they stop when the window closes.
+    [[nodiscard]] int activeDownloadCount() const;
     static QString withUnit(qreal bytes);
     static QString timeUnit(int seconds);
-    void downloadRequested(QWebEngineDownloadRequest* download);
-    static void updateDownload(QWebEngineDownloadRequest* download, QPushButton* pushButton, QProgressBar* progressBar);
+    // The profile remembers the chosen folder for the next download.
+    void downloadRequested(QWebEngineDownloadRequest* download, QWebEngineProfile* profile);
+    static void updateDownload(QWebEngineDownloadRequest* download, QPushButton* pushButton, QProgressBar* progressBar,
+                               QWidget* finishedActions);
 
 protected:
     void closeEvent(QCloseEvent* event) override;
 
 private:
     QSettings settings;
+    QPointer<QWidget> browserWindow;
     Ui::DownloadWidget* ui;
+    QList<QPointer<QWebEngineDownloadRequest>> downloads;
 };

@@ -1,0 +1,7 @@
+# A bare tar-ignore keeps dpkg-source's default excludes (.git, .gitignore, ...);
+# giving only patterns would replace them and pull the whole git history in.
+tar-ignore
+tar-ignore = "build-check"
+tar-ignore = "build-check2"
+tar-ignore = "build-deb"
+tar-ignore = "debian/mx-locale"

@@ -144,17 +144,22 @@ bool redirectUserConfigPath()
     return true;
 }
 
-void chownFileToLoggedInUser(const QString &path)
+void chownUserConfigPath(const QString &path, const QString &userConfigDir)
 {
     const QString username = loggedInUserName();
     if (username.isEmpty() || path.isEmpty()) {
+        return;
+    }
+    const QString cleanPath = QDir::cleanPath(path);
+    const QString cleanConfigDir = QDir::cleanPath(userConfigDir);
+    if (cleanPath != cleanConfigDir && !cleanPath.startsWith(cleanConfigDir + "/")) {
         return;
     }
     // Never chown through a symlink: run as root the chown would follow it and
     // could hand ownership of an arbitrary target file to the user.
     struct stat st;
     const QByteArray pathBytes = path.toLocal8Bit();
-    if (lstat(pathBytes.constData(), &st) != 0 || S_ISLNK(st.st_mode)) {
+    if (lstat(pathBytes.constData(), &st) != 0 || (!S_ISREG(st.st_mode) && !S_ISDIR(st.st_mode))) {
         return;
     }
     // Only chown when the file is not already owned by the target user. The
@@ -163,6 +168,15 @@ void chownFileToLoggedInUser(const QString &path)
     // stayed root-owned, leaving the user unable to edit them.
     const struct passwd *pw = getpwnam(username.toLocal8Bit().constData());
     if (pw == nullptr || st.st_uid == pw->pw_uid) {
+        return;
+    }
+    // Confine resolved paths too: an intermediate symlink must not turn a
+    // user-config path into a system file or a directory outside the user's home.
+    const QString home = QFileInfo(QString::fromLocal8Bit(pw->pw_dir)).canonicalFilePath();
+    const QString config = QFileInfo(cleanConfigDir).canonicalFilePath();
+    const QString resolved = QFileInfo(path).canonicalFilePath();
+    if (home.isEmpty() || config.isEmpty() || !config.startsWith(home + "/")
+        || (resolved != config && !resolved.startsWith(config + "/"))) {
         return;
     }
     // -h: operate on the path itself (defends against a TOCTOU symlink swap).
@@ -203,9 +217,8 @@ Settings::Settings(const QCommandLineParser &argParser, bool isGuiApp)
         // Two possible bind-root setups left behind from a previous run:
         // installed-to-live (Debian, marker at /tmp/installed-to-live/cleanup.conf)
         // and installed-to-live-arch (Arch, state at /run/<app>/cleanup-arch.state
-        // or its /tmp/ fallback). Run whichever cleanup matches.
-        const bool archStatePresent = QFileInfo::exists("/run/" + appName + "/cleanup-arch.state")
-                                      || QFileInfo::exists("/tmp/" + appName + "/cleanup-arch.state");
+        // only). Run whichever cleanup matches.
+        const bool archStatePresent = QFileInfo::exists("/run/" + appName + "/cleanup-arch.state");
         bool archCleanupOk = true;
         if (archStatePresent) {
             const QString archScript
@@ -436,15 +449,8 @@ bool Settings::checkConfiguration() const
 
     // Note: Directory creation is handled later with elevated permissions in checkSnapshotDir()
 
-    // Check snapshot name
-    if (snapshotName.isEmpty()) {
-        qCritical() << QObject::tr("Snapshot name cannot be empty");
-        return false;
-    }
-
-    // Check for invalid characters in snapshot name
-    if (snapshotName.contains(QRegularExpression("[<>:\"/\\|?*]"))) {
-        qCritical() << QObject::tr("Snapshot name contains invalid characters: %1").arg(snapshotName);
+    if (const QString nameError = snapshotNameError(snapshotName); !nameError.isEmpty()) {
+        qCritical().noquote() << nameError;
         return false;
     }
 
@@ -487,6 +493,22 @@ bool Settings::checkConfiguration() const
     return true;
 }
 
+QString Settings::snapshotNameError(const QString &name)
+{
+    QString baseName = name;
+    if (baseName.endsWith(".iso")) {
+        baseName.chop(4);
+    }
+    if (baseName.trimmed().isEmpty()) {
+        return QObject::tr("Snapshot name cannot be empty");
+    }
+    static const QRegularExpression invalidCharacters("[<>:\"/\\|?*]");
+    if (name.contains(invalidCharacters)) {
+        return QObject::tr("Snapshot name contains invalid characters: %1").arg(name);
+    }
+    return {};
+}
+
 bool Settings::validateExclusions() const
 {
     qDebug() << "+++" << __PRETTY_FUNCTION__ << "+++";
@@ -518,11 +540,15 @@ bool Settings::validateSpaceRequirements() const
     // Check if we have minimum free space (at least 1GB)
     constexpr quint64 MIN_FREE_SPACE = 1024 * 1024; // 1GB in KiB
 
-    // Get free space for snapshot directory (or its parent if it doesn't exist)
-    QString pathToCheck = snapshotDir;
-    if (!QDir(snapshotDir).exists()) {
-        // If snapshot dir doesn't exist, check parent directory
-        pathToCheck = QFileInfo(snapshotDir).absolutePath();
+    // Get free space for the snapshot directory, or for its nearest existing
+    // ancestor: checkSnapshotDir() creates the missing levels later (mkdir -p).
+    QString pathToCheck = QDir::cleanPath(QFileInfo(snapshotDir).absoluteFilePath());
+    while (!QFileInfo::exists(pathToCheck)) {
+        const QString parent = QFileInfo(pathToCheck).absolutePath();
+        if (parent == pathToCheck) {
+            break;
+        }
+        pathToCheck = parent;
     }
 
     const quint64 availableSpace = FileSystemUtils::getFreeSpace(pathToCheck);
@@ -867,16 +893,6 @@ void Settings::setVariables()
         distroVersion = osVersionId;
     } else {
         distroVersion = Cmd().getOut("lsb_release -rs");
-    }
-
-    // MX-on-Arch hybrid: /etc/mx-version contains e.g. "Infinity_Arch"
-    if (distroVersion.contains("Arch")) {
-        const QString baseName = projectName; // "MX"
-        const QStringList parts = distroVersion.split('_');
-        if (parts.size() >= 2) {
-            projectName = baseName + parts[0];     // "MXInfinity" or similar
-            codename = parts[1] + " " + parts[0];  // "Arch Infinity"
-        }
     }
 
     fullDistroName = projectName + "-" + distroVersion + "_" + QString(x86 ? "386" : "x64");
@@ -1252,6 +1268,13 @@ void Settings::loadConfig()
     const QString userExcludesPath =
         QDir::cleanPath(userConfigDir + "/" + qApp->applicationName() + "-exclude.list");
     const QString userConfigPath = settingsUser.fileName();
+    // Create and repair the directory even when the exclude list already exists
+    // or a custom list is selected. QSettings may have created it as root while
+    // reading the initial settings earlier in the constructor.
+    if (!QDir().mkpath(userConfigDir)) {
+        qWarning() << QObject::tr("Could not create user configuration directory: %1").arg(userConfigDir);
+    }
+    chownUserConfigPath(userConfigDir, userConfigDir);
     const QString systemExcludesPath = QDir::cleanPath("/etc/" + qApp->applicationName() + "-exclude.list");
     QString localPath = QDir::cleanPath("/usr/local/share/excludes/" + qApp->applicationName() + "-exclude.list");
     QString usrPath = QDir::cleanPath("/usr/share/excludes/" + qApp->applicationName() + "-exclude.list");
@@ -1267,14 +1290,8 @@ void Settings::loadConfig()
     const bool usingDefaultUserPath = configuredExcludesPath == userExcludesPath;
     if (usingDefaultUserPath && !QFileInfo::exists(userExcludesPath)) {
         if (!excludesSourcePath.isEmpty() && QFileInfo::exists(excludesSourcePath)) {
-            QDir().mkpath(userConfigDir);
             if (QFile::copy(excludesSourcePath, userExcludesPath)) {
                 qDebug() << "Copied exclusion file from" << excludesSourcePath << "to" << userExcludesPath;
-                const QString username = loggedInUserName();
-                if (!username.isEmpty()) {
-                    Cmd().procAsRoot("chown", {username + ":", userExcludesPath}, nullptr, nullptr,
-                                     Cmd::QuietMode::Yes);
-                }
             } else {
                 qWarning() << QObject::tr("Could not copy exclusion file from %1 to %2")
                                   .arg(excludesSourcePath, userExcludesPath);
@@ -1284,15 +1301,15 @@ void Settings::loadConfig()
     }
     if (!QFileInfo::exists(configuredExcludesPath)) {
         qDebug() << "Configured snapshot_excludes file not found (" << configuredExcludesPath
-                 << "), using fallback path:" << fallbackExcludesPath;
-        configuredExcludesPath = fallbackExcludesPath;
+                 << "), using fallback path:" << excludesSourcePath;
+        configuredExcludesPath = excludesSourcePath;
     }
     snapshotExcludes.setFileName(configuredExcludesPath);
-    chownFileToLoggedInUser(userConfigPath);
-    chownFileToLoggedInUser(configuredExcludesPath);
     // snapshotBasename, makeIsohybrid, guiEditor, stamp, forceInstaller are now const members
     makeMd5sum = settingsUser.value("make_md5sum", "no").toString() != "no";
-    makeSha512sum = settingsUser.value("make_sha512sum", "no").toString() != "no";
+    // The ISO checksum switched from SHA-512 to SHA-256; honour the old key
+    // until the user saves the new one.
+    makeSha256sum = settingsUser.value("make_sha256sum", settingsUser.value("make_sha512sum", "no")).toString() != "no";
     compression = trimQuotes(settingsUser.value("compression", "zstd").toString());
     // The CLI path validates --compression in main.cpp; the config file value
     // was taken on trust. Reject anything outside the supported set so a
@@ -1325,6 +1342,12 @@ void Settings::loadConfig()
     }
     throttle = storedThrottle;
     resetAccounts = false;
+
+    // Sync before repairing file ownership: QSettings uses atomic replacement,
+    // so its final write can create a new root-owned inode.
+    settingsUser.sync();
+    chownUserConfigPath(userConfigPath, userConfigDir);
+    chownUserConfigPath(configuredExcludesPath, userConfigDir);
 }
 
 void Settings::excludeAll()
@@ -1351,6 +1374,32 @@ void Settings::otherExclusions()
 
     if (resetAccounts) {
         addRemoveExclusion(true, QStringLiteral("/etc/minstall.conf"));
+        // Host identity and root's private data must not be shared by every
+        // system made from a respin. mksquashfs wildcards don't match dotfiles
+        // with "*", so directories get a second pattern for those.
+        //
+        // root's home is the admin's (keys, tokens, shell history, tool
+        // logins), so keep only the shell startup files, which hold the
+        // distro's defaults.
+        const QStringList resetExcludes {
+            QStringLiteral("var/lib/systemd/random-seed"),
+            QStringLiteral("var/lib/tailscale/*"),
+            QStringLiteral("var/lib/tailscale/.*"),
+            QStringLiteral("root/*"),
+            QStringLiteral("root/.!(bashrc|profile|bash_profile|bash_logout)"),
+            // snapd's store registration; Work::resetSnapdIdentity() drops the
+            // matching entries from its state, so snapd registers anew.
+            QStringLiteral("var/lib/snapd/device/private-keys-v1/*"),
+            QStringLiteral("var/lib/snapd/assertions/asserts-v0/serial/*"),
+        };
+        for (const QString &exclusion : resetExcludes) {
+            addRemoveExclusion(true, exclusion);
+        }
+        if (isArch) {
+            // Arch's sshdgenkeys.service recreates missing host keys before
+            // sshd starts; Debian's ssh.service does not, so keep them there.
+            addRemoveExclusion(true, QStringLiteral("etc/ssh/ssh_host_*"));
+        }
         if (!isArch) {
             // Exclude /etc/localtime if link and timezone not America/New_York.
             // Skipped on Arch — /etc/timezone is absent and the heuristic doesn't apply.
@@ -1423,14 +1472,14 @@ void Settings::processArgs(const QCommandLineParser &argParser)
         resetAccounts = true;
     }
     if (argParser.isSet("checksums")) {
-        makeSha512sum = makeMd5sum = true;
+        makeSha256sum = makeMd5sum = true;
     }
     if (argParser.isSet("month")) {
-        makeSha512sum = true;
+        makeSha256sum = true;
         makeMd5sum = false;
     }
     if (argParser.isSet("no-checksums")) {
-        makeSha512sum = makeMd5sum = false;
+        makeSha256sum = makeMd5sum = false;
     }
     if (!argParser.value("compression").isEmpty()) {
         compression = argParser.value("compression");

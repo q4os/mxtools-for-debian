@@ -29,6 +29,7 @@
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QLocale>
+#include <QThreadPool>
 #include <QTranslator>
 
 #include <unistd.h>
@@ -42,6 +43,13 @@
 
 int main(int argc, char *argv[])
 {
+    if (qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
+        && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
+        qWarning("mx-packageinstaller: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
+                "a graphical session is required to run this program.");
+        return EXIT_FAILURE;
+    }
+
     if (getuid() == 0) {
         qputenv("XDG_RUNTIME_DIR", "/run/user/0");
         qunsetenv("SESSION_MANAGER");
@@ -104,18 +112,23 @@ int main(int argc, char *argv[])
                 nullptr, QObject::tr("Error"),
                 QObject::tr(
                     "You seem to be logged in as root, please log out and log in as normal user to use this program."));
-            exit(EXIT_FAILURE);
+            return EXIT_FAILURE;
         }
     }
     if (getuid() != 0) {
-        if (!QFile::exists("/usr/bin/pkexec") && !QFile::exists("/usr/bin/gksu")) {
+        if (!QFile::exists("/usr/bin/pkexec")) {
             QMessageBox::critical(nullptr, QObject::tr("Error"),
                                   QObject::tr("You must run this program with admin access."));
-            exit(EXIT_FAILURE);
+            return EXIT_FAILURE;
         }
     }
     Log startLog(Log::defaultLogPath());
     MainWindow w(parser);
     w.show();
-    return QApplication::exec();
+    const int result = QApplication::exec();
+    // Background workers (e.g. pacman's startup queries) run their commands through
+    // QProcess. Once ~QCoreApplication() starts, those processes stop receiving events,
+    // so its own wait for the thread pool would never return; wait here instead.
+    QThreadPool::globalInstance()->waitForDone();
+    return result;
 }

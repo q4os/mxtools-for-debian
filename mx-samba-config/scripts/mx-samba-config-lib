@@ -7,10 +7,11 @@
 enablesamba()
 {
 if [ -x /usr/sbin/update-rc.d ]; then
-    update-rc.d smbd remove
-    update-rc.d nmbd remove
+    # defaults installs links when missing; enable turns disabled ones back on
     update-rc.d smbd defaults
     update-rc.d nmbd defaults
+    update-rc.d smbd enable
+    update-rc.d nmbd enable
 fi
 if [ -x /usr/bin/systemctl ]; then
     systemctl unmask smbd
@@ -23,8 +24,12 @@ fi
 disablesamba()
 {
 if [ -x /usr/sbin/update-rc.d ]; then
-    update-rc.d smbd remove
-    update-rc.d nmbd remove
+    # Keep disabled (K) links instead of removing them, so a package
+    # upgrade running "update-rc.d ... defaults" does not re-enable Samba
+    update-rc.d smbd defaults
+    update-rc.d nmbd defaults
+    update-rc.d smbd disable
+    update-rc.d nmbd disable
 fi
 if [ -x /usr/bin/systemctl ]; then
     systemctl disable smbd
@@ -61,7 +66,7 @@ exit $?
 changesambapasswd()
 {
 read_password
-printf '%s\n%s\n' "$pass" "$pass" | smbpasswd -U "$user"
+printf '%s\n%s\n' "$pass" "$pass" | smbpasswd -s "$user"
 exit $?
 }
 

@@ -2,12 +2,12 @@
 <context>
     <name>Cmd</name>
     <message>
-        <location filename="../src/cmd.cpp" line="90"/>
+        <location filename="../src/cmd.cpp" line="95"/>
         <source>Administrator Access Required</source>
         <translation>Pääkäyttäjän oikeudet vaaditaan</translation>
     </message>
     <message>
-        <location filename="../src/cmd.cpp" line="91"/>
+        <location filename="../src/cmd.cpp" line="96"/>
         <source>This operation requires administrator privileges. Please restart the application and enter your password when prompted.</source>
         <translation>Toiminto vaatii pääkäyttäjän oikeudet. Käynnistä sovellus uudelleen ja anna salasanasi pyydettäessä.</translation>
     </message>
@@ -16,14 +16,14 @@
     <name>MainWindow</name>
     <message>
         <location filename="../src/mainwindow.ui" line="14"/>
-        <location filename="../src/mainwindow.cpp" line="634"/>
+        <location filename="../src/mainwindow.cpp" line="787"/>
         <source>MX Service Manager</source>
         <translation>MX Taustapalvelut</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="26"/>
-        <location filename="../src/mainwindow.cpp" line="217"/>
-        <location filename="../src/mainwindow.cpp" line="650"/>
+        <location filename="../src/mainwindow.cpp" line="261"/>
+        <location filename="../src/mainwindow.cpp" line="810"/>
         <source>&amp;Enable at boot</source>
         <translation>&amp;Käynnistä käynnistyksessä</translation>
     </message>
@@ -74,25 +74,25 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="216"/>
-        <location filename="../src/mainwindow.cpp" line="199"/>
+        <location filename="../src/mainwindow.cpp" line="243"/>
         <source>&amp;Stop</source>
         <translation>&amp;Pysäytä</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="240"/>
-        <location filename="../src/mainwindow.cpp" line="562"/>
+        <location filename="../src/mainwindow.cpp" line="716"/>
         <source>Running services</source>
         <translation>Käynnissä olevat palvelut</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="245"/>
-        <location filename="../src/mainwindow.cpp" line="563"/>
+        <location filename="../src/mainwindow.cpp" line="717"/>
         <source>Services enabled at boot</source>
         <translation>Käynnistyksessä käynnistyvät palvelut</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="250"/>
-        <location filename="../src/mainwindow.cpp" line="564"/>
+        <location filename="../src/mainwindow.cpp" line="718"/>
         <source>Services disabled at boot</source>
         <translation>Poistetut palvelut käynnistyksen aikana</translation>
     </message>
@@ -108,22 +108,23 @@
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="258"/>
-        <location filename="../src/mainwindow.cpp" line="81"/>
-        <location filename="../src/mainwindow.cpp" line="89"/>
-        <location filename="../src/mainwindow.cpp" line="93"/>
+        <location filename="../src/mainwindow.cpp" line="83"/>
+        <location filename="../src/mainwindow.cpp" line="101"/>
+        <location filename="../src/mainwindow.cpp" line="105"/>
+        <location filename="../src/mainwindow.cpp" line="227"/>
         <source>Loading...</source>
         <translation>Lataa...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="230"/>
-        <location filename="../src/mainwindow.cpp" line="561"/>
-        <location filename="../src/mainwindow.cpp" line="566"/>
+        <location filename="../src/mainwindow.cpp" line="715"/>
+        <location filename="../src/mainwindow.cpp" line="720"/>
         <source>System services</source>
         <translation>Palvelut tietokone</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="235"/>
-        <location filename="../src/mainwindow.cpp" line="565"/>
+        <location filename="../src/mainwindow.cpp" line="719"/>
         <source>User services</source>
         <translation>Palvelut käyttäjä</translation>
     </message>
@@ -133,126 +134,126 @@
         <translation>Työkalu listaa palvelut ja taustaprosessit (taustalla suoritettavat prosessit). Älä pysäytä kriittisiä komponentteja. parempi jättää tekemättä, jos et tiedä mistä on kyse.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="75"/>
-        <location filename="../src/mainwindow.cpp" line="652"/>
-        <location filename="../src/mainwindow.cpp" line="659"/>
-        <location filename="../src/mainwindow.cpp" line="706"/>
-        <location filename="../src/mainwindow.cpp" line="715"/>
+        <location filename="../src/mainwindow.cpp" line="77"/>
+        <location filename="../src/mainwindow.cpp" line="812"/>
+        <location filename="../src/mainwindow.cpp" line="819"/>
+        <location filename="../src/mainwindow.cpp" line="874"/>
+        <location filename="../src/mainwindow.cpp" line="883"/>
         <source>Error</source>
         <translation>Virhe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="76"/>
+        <location filename="../src/mainwindow.cpp" line="78"/>
         <source>Could not determine the init system. This program is supposed to run either with systemd or sysvinit</source>
         <translation>Alkujärjestelmää ei voitu määrittää. Tämän ohjelman oletetaan toimivan joko systemd:n tai sysvinitin kanssa</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="204"/>
-        <location filename="../src/mainwindow.cpp" line="704"/>
+        <location filename="../src/mainwindow.cpp" line="248"/>
+        <location filename="../src/mainwindow.cpp" line="872"/>
         <source>S&amp;tart</source>
         <translation>&amp;Käynnistä</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="210"/>
+        <location filename="../src/mainwindow.cpp" line="254"/>
         <source>&amp;Disable at boot</source>
         <translation>&amp;Poista käynnistyksestä</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="605"/>
+        <location filename="../src/mainwindow.cpp" line="759"/>
         <source>[User] </source>
         <translation>[käyttäjä] </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="613"/>
+        <location filename="../src/mainwindow.cpp" line="767"/>
         <source>%1 total services, %2 currently &lt;font color=&apos;%3&apos;&gt;running&lt;/font&gt;</source>
         <translation>%1 palvelua, %2 &lt;font color=&apos;%3&apos;&gt;käynnissä&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="618"/>
+        <location filename="../src/mainwindow.cpp" line="772"/>
         <source>%1 &lt;font color=&apos;%2&apos;&gt;enabled&lt;/font&gt; at boot, but not running</source>
         <translation>%1 käynnistetään &lt;font color=&apos;%2&apos;&gt;käyttöön&lt;/font&gt;, mutta ovat valmiustilassa</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="634"/>
+        <location filename="../src/mainwindow.cpp" line="787"/>
         <source>About %1</source>
         <translation>%1 lisätietoja</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="635"/>
+        <location filename="../src/mainwindow.cpp" line="788"/>
         <source>Version: </source>
         <translation>Versio: </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="636"/>
+        <location filename="../src/mainwindow.cpp" line="789"/>
         <source>Service and daemon manager</source>
         <translation>Palveluiden ja prosessien hallinta</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="638"/>
+        <location filename="../src/mainwindow.cpp" line="791"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="639"/>
+        <location filename="../src/mainwindow.cpp" line="792"/>
         <source>%1 License</source>
         <translation>%1 lisenssi</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="652"/>
+        <location filename="../src/mainwindow.cpp" line="812"/>
         <source>Could not enable %1</source>
         <translation>Ei voitu ottaa käyttöön %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="656"/>
-        <location filename="../src/mainwindow.cpp" line="663"/>
-        <location filename="../src/mainwindow.cpp" line="711"/>
-        <location filename="../src/mainwindow.cpp" line="720"/>
+        <location filename="../src/mainwindow.cpp" line="816"/>
+        <location filename="../src/mainwindow.cpp" line="823"/>
+        <location filename="../src/mainwindow.cpp" line="879"/>
+        <location filename="../src/mainwindow.cpp" line="888"/>
         <source>Success</source>
         <translation>Onnistui</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="656"/>
+        <location filename="../src/mainwindow.cpp" line="816"/>
         <source>%1 was enabled at boot time.</source>
         <translation>%1 oli käytössä käynnistyksen yhteydessä.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="659"/>
+        <location filename="../src/mainwindow.cpp" line="819"/>
         <source>Could not disable %1</source>
         <translation>Ei voitu poistaa käytöstä %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="663"/>
+        <location filename="../src/mainwindow.cpp" line="823"/>
         <source>%1 was disabled.</source>
         <translation>%1 oli poistettu käytöstä.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="670"/>
+        <location filename="../src/mainwindow.cpp" line="830"/>
         <source>%1 Help</source>
         <translation>%1 ohje</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="680"/>
-        <location filename="../src/mainwindow.cpp" line="683"/>
+        <location filename="../src/mainwindow.cpp" line="840"/>
+        <location filename="../src/mainwindow.cpp" line="843"/>
         <source>Refreshing...</source>
         <translation>Virkistetään...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="706"/>
+        <location filename="../src/mainwindow.cpp" line="874"/>
         <source>Could not start %1</source>
         <translation>Ei voitu käynnistää %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="711"/>
+        <location filename="../src/mainwindow.cpp" line="879"/>
         <source>%1 was started.</source>
         <translation>%1 käynnistettiin.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="715"/>
+        <location filename="../src/mainwindow.cpp" line="883"/>
         <source>Could not stop %1</source>
         <translation>Ei voitu pysäyttää %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="720"/>
+        <location filename="../src/mainwindow.cpp" line="888"/>
         <source>%1 was stopped.</source>
         <translation>%1 pysäytettiin.</translation>
     </message>
@@ -303,7 +304,7 @@
         <translation>Tämä ohjelma on suoritettava järjestelmänvalvojan oikeuksilla.</translation>
     </message>
     <message>
-        <location filename="../src/service.cpp" line="169"/>
+        <location filename="../src/service.cpp" line="170"/>
         <source>Could not find service description</source>
         <translation>Palvelun kuvausta ei löydy</translation>
     </message>

@@ -1,0 +1,2 @@
+rm_conffile /etc/skel/.config/autostart/mx-welcome-first-run.desktop/mx-welcome.desktop 26.11.1mx25~
+rm_conffile /etc/skel/.config/autostart/mx-welcome.desktop 26.11.1mx25~

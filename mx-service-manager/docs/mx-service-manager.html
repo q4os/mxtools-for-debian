@@ -62,7 +62,7 @@
 
 <ul>
     <li>The left button changes the current running state. It reads <strong>Stop</strong> for a running service and <strong>Start</strong> for a stopped one.</li>
-    <li>The right button changes boot behavior. It toggles between enabling the service at boot and disabling it at boot.</li>
+    <li>The right button changes boot behavior. It toggles between enabling the service at boot and disabling it at boot. With systemd, disabling also masks the service, which blocks manual starts and starts requested by other units. Enable at boot removes the mask when enabling the service.</li>
 </ul>
 
 <p>Select the service you want to change, then click the appropriate button. A confirmation message appears when the action succeeds.</p>

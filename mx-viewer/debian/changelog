@@ -1,8 +1,125 @@
-mx-viewer (26.06.1302) stable; urgency=medium
+mx-viewer (26.10.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:07 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:22 +0100
+
+mx-viewer (26.10.1) mx; urgency=medium
+
+  * Show menus and dialogs in the system language again instead of English.
+  * Share cookies and logins between all open windows.
+  * Apply changed settings to every open window right away.
+  * Open new tabs from links next to the page they came from, and keep tabs
+    opened in the background from jumping to the front.
+  * Open addresses such as localhost:8080 instead of searching for them.
+  * Add Open and Show in folder buttons to finished downloads.
+  * With "Save tabs on closing", restore the tabs of all open windows.
+  * Keep passwords that are part of web addresses out of the history, and
+    remove history older than one year.
+  * Hold Esc to leave full screen turned on with F11; a short press still
+    goes to the page.
+  * Run more safely when started by administrator tools, switching to the
+    regular user right away.
+  * Fix a crash in the tab menu, and make opening many tabs faster.
+  * Fix the Reload button sometimes staying disabled after switching tabs.
+
+ -- Adrian <adrian@mxlinux.org>  Sun, 04 Oct 2026 16:26:41 -0400
+
+mx-viewer (26.10) mx; urgency=medium
+
+  * Fix web pages that load extra parts right after opening, such as the
+    Try GNU APL page, which stopped with a "Service disabled" message.
+  * Make the title of the current tab readable when tabs are shown in the
+    title bar; it was white on light gray with some themes such as MX Matcha.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 03 Oct 2026 22:14:09 -0400
+
+mx-viewer (26.09.4) mx; urgency=medium
+
+  * Changing a setting now takes effect right away in all open windows and
+    tabs, not just the current one.
+  * Settings can no longer be changed from a private window; open a regular
+    window to change them.
+  * Keep spaces in the home page and custom search addresses entered on the
+    settings page instead of turning them into plus signs.
+  * Use less CPU on computers without graphics acceleration, such as virtual
+    machines or WSL.
+
+ -- Adrian <adrian@mxlinux.org>  Wed, 30 Sep 2026 14:39:20 -0400
+
+mx-viewer (26.09.3) mx; urgency=medium
+
+  * Fix a crash when playing videos on computers without graphics
+    acceleration, such as virtual machines or WSL.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 28 Sep 2026 01:05:49 -0400
+
+mx-viewer (26.09.2) mx; urgency=medium
+
+  * Use about half as much CPU when playing videos on computers without
+    graphics acceleration, such as virtual machines or WSL.
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 28 Sep 2026 00:40:46 -0400
+
+mx-viewer (26.09.1) mx; urgency=medium
+
+  * Prevent a KDE Breeze startup crash when tabs are in the title bar.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 26 Sep 2026 16:56:09 -0400
+
+mx-viewer (26.09) mx; urgency=medium
+
+  * New tabs open a start page with your bookmarks and most visited sites.
+  * Pin a tab from its right-click menu to keep it as a small icon at the
+    left of the tab bar, safe from "close other tabs".
+  * Open a private window (Ctrl+Shift+N) that saves no history, tabs or
+    site data.
+  * Reader view (F9) shows an article's text without ads and clutter.
+  * Right-click a tab to reload, duplicate, pin, mute or close it, or to
+    close other tabs; tabs playing sound show a speaker button to mute them.
+  * Zoom level is remembered for each site.
+  * Find in page shows how many matches there are and can match case.
+  * Clear browsing data lets you choose a time range, such as the last hour.
+  * Save a page or print it from the menu.
+  * Right-click selected text to search the web for it.
+  * Spelling mistakes are underlined in text boxes when spelling
+    dictionaries are installed.
+  * Sites must ask before using your camera, microphone, screen or location.
+  * Warn about sites with certificate problems, with an option to continue
+    anyway.
+  * Ask for a user name and password when a site or proxy requires one,
+    with an option to remember the password in the system keyring.
+  * Videos and pages can go full screen.
+  * When a tab crashes, show a page with a Reload link instead of a blank tab.
+  * Links opened from other applications open as new tabs in the window
+    that is already running.
+  * Opening several files at once from the file manager now opens all of them.
+  * Popup windows open as tabs and close again when the page is done
+    with them.
+  * New keyboard shortcuts: F6 or Alt+D to go to the address bar and
+    Ctrl+PgUp/PgDn to switch tabs; the menu has a list of all shortcuts.
+  * Tabs are shown in the title bar, with minimize, maximize and close
+    buttons; drag the tab row to move the window. A setting brings back
+    the system title bar.
+  * Tabs all have the same width and shrink together when the row is full;
+    the "+" new tab button is always visible.
+  * Bookmarks bar under the toolbar (Ctrl+Shift+B): drag the address or a
+    link onto it to add a bookmark, drag bookmarks to reorder them, and
+    right-click one to open it in a new tab, edit or delete it.
+  * History is listed newest first under day headings, with the time of
+    each visit, and is stored in a database so large histories stay fast.
+  * Redesigned About and Keyboard shortcuts dialogs.
+  * Ask before closing a window while downloads are in progress.
+  * Printing to a file saves to the Downloads folder, named after the page.
+  * Reader view is kept when going back and forward.
+  * Various fixes: the Home, Back, Forward and Stop buttons now work in
+    every tab, menu and toolbar icons stay visible on dark themes,
+    middle-clicking a link no longer leaves an empty tab, bookmark titles
+    with "&" show correctly, and a possible crash when quitting is gone.
+  * Web pages can no longer change your settings or clear your history.
+  * When started as root, also give up root's group memberships.
+
+ -- Adrian <adrian@mxlinux.org>  Sat, 26 Sep 2026 13:12:28 -0400
 
 mx-viewer (26.06) mx; urgency=medium
 

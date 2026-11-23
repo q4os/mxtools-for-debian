@@ -1,8 +1,14 @@
-ddm-mx (26.08.01.1302) stable; urgency=medium
+ddm-mx (26.11.1.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Thu, 17 Sep 2026 13:38:03 +0200
+ -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:15 +0100
+
+ddm-mx (26.11.1) mx; urgency=medium
+
+  * fix issue with nvidia-470 detection in nvidia-detect-mx
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 13 Nov 2026 20:56:16 -0500
 
 ddm-mx (26.08.01) mx; urgency=medium
 

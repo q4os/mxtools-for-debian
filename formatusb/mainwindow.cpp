@@ -182,12 +182,16 @@ void MainWindow::cmdDone()
 {
     setCursor(QCursor(Qt::ArrowCursor));
     ui->buttonBack->setEnabled(true);
+    if (cancelRequested) {
+        cmd->disconnect(this);
+        return;
+    }
     if (cmd->exitCode() == 0 && cmd->exitStatus() == QProcess::NormalExit) {
         QMessageBox::information(this, tr("Success"), tr("Format successful!"));
     } else {
         QMessageBox::critical(this, tr("Failure"), tr("Error encountered in the Format process"));
     }
-    cmd->disconnect();
+    cmd->disconnect(this);
 }
 
 void MainWindow::setConnections()
@@ -266,6 +270,21 @@ void MainWindow::on_buttonBack_clicked()
     ui->outputBox->clear();
 }
 
+void MainWindow::on_buttonCancel_clicked()
+{
+    if (cmd->state() != QProcess::NotRunning) {
+        const QString msg = tr("A format operation is still in progress. Stopping it may leave the USB device "
+                               "in an unusable state.\n\nDo you wish to cancel the operation and close?");
+        if (QMessageBox::Yes
+            != QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
+            return;
+        }
+        cancelRequested = true;
+        cmd->halt();
+    }
+    close();
+}
+
 // About button clicked
 void MainWindow::on_buttonAbout_clicked()
 {
@@ -337,12 +356,12 @@ void MainWindow::validate_name()
     }
 }
 
-void MainWindow::on_lineEditFSlabel_textChanged(const QString &arg1)
+void MainWindow::on_lineEditFSlabel_textChanged(const QString &)
 {
     validate_name();
 }
 
-void MainWindow::on_comboBoxDataFormat_currentIndexChanged(int index)
+void MainWindow::on_comboBoxDataFormat_currentIndexChanged(int)
 {
     validate_name();
 }

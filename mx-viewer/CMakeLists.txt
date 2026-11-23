@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2017-2025 MX Authors
+# * Copyright (C) 2017-2026 MX Authors
 # *
 # * Authors: Adrian
 # *          MX Linux <http://mxlinux.org>
@@ -22,17 +22,28 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-# Get version from debian/changelog
-execute_process(
-    COMMAND dpkg-parsechangelog -SVersion
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    RESULT_VARIABLE DPKG_RESULT
-)
+# Arch packaging supplies the version directly because dpkg is unavailable there.
+if(PROJECT_VERSION_OVERRIDE)
+    set(PROJECT_VERSION_FROM_CHANGELOG "${PROJECT_VERSION_OVERRIDE}")
+else()
+    execute_process(
+        COMMAND dpkg-parsechangelog -SVersion
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE PROJECT_VERSION_FROM_CHANGELOG
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE DPKG_RESULT
+    )
 
-if(NOT DPKG_RESULT EQUAL 0)
-    message(FATAL_ERROR "Failed to get version from debian/changelog using dpkg-parsechangelog")
+    if(NOT DPKG_RESULT EQUAL 0)
+        message(FATAL_ERROR "Failed to get version from debian/changelog using dpkg-parsechangelog")
+    endif()
+endif()
+
+# Build with Clang. The compiler has to be chosen before project() enables the language; an explicit
+# -DCMAKE_CXX_COMPILER wins.
+option(USE_CLANG "Use clang compiler" OFF)
+if(USE_CLANG AND NOT CMAKE_CXX_COMPILER)
+    set(CMAKE_CXX_COMPILER clang++)
 endif()
 
 project(mx-viewer
@@ -40,6 +51,10 @@ project(mx-viewer
     DESCRIPTION "MX Viewer - Lightweight web browser for MX Linux"
     LANGUAGES CXX
 )
+if(USE_CLANG AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(WARNING "USE_CLANG is ignored: this build directory already uses ${CMAKE_CXX_COMPILER}. "
+                    "Configure a fresh build directory to build with Clang.")
+endif()
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -58,23 +73,18 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     endif()
 endif()
 
-# Option to use clang for testing builds
-option(USE_CLANG "Use clang compiler" OFF)
-if(USE_CLANG)
-    set(CMAKE_C_COMPILER clang)
-    set(CMAKE_CXX_COMPILER clang++)
-    set(CMAKE_CXX_COMPILER_ID "Clang")
-    message(STATUS "Using clang compiler")
-endif()
-
 # Find Qt6 components
 find_package(Qt6 REQUIRED COMPONENTS
     Core
     Gui
     Widgets
+    Network
+    PrintSupport
+    Sql
     WebEngineWidgets
     LinguistTools
 )
+find_package(Qt6Keychain REQUIRED)
 
 # Enable automatic MOC, UIC, and RCC processing
 set(CMAKE_AUTOMOC ON)
@@ -85,18 +95,40 @@ set(CMAKE_AUTORCC ON)
 set(SOURCES
     src/main.cpp
     src/mainwindow.cpp
+    src/browsercontext.cpp
+    src/bookmarks.cpp
+    src/newtabpage.cpp
+    src/historypage.cpp
+    src/settingspage.cpp
+    src/readermode.cpp
+    src/dialogs.cpp
+    src/windowchrome.cpp
+    src/navigation.cpp
+    src/iconutils.cpp
+    src/pageutils.cpp
     src/webview.cpp
     src/tabwidget.cpp
     src/addressbar.cpp
+    src/bookmarkbar.cpp
+    src/findbar.cpp
     src/downloadwidget.cpp
+    src/historystore.cpp
+    src/singleinstance.cpp
 )
 
 set(HEADERS
     src/mainwindow.h
+    src/mainwindowhelpers.h
+    src/resizegrip.h
+    src/tabmenubar.h
     src/webview.h
     src/tabwidget.h
     src/addressbar.h
+    src/bookmarkbar.h
+    src/findbar.h
     src/downloadwidget.h
+    src/historystore.h
+    src/singleinstance.h
 )
 
 set(UI_FILES
@@ -109,6 +141,7 @@ set(RESOURCE_FILES
 
 # Get all translation files
 file(GLOB TRANSLATION_FILES "translations/*.ts")
+list(FILTER TRANSLATION_FILES EXCLUDE REGEX "/mx-viewer_en_US\\.ts$")
 
 # Create the executable
 add_executable(mx-viewer
@@ -123,20 +156,30 @@ target_link_libraries(mx-viewer
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets
+    Qt6::Network
+    Qt6::PrintSupport
+    Qt6::Sql
     Qt6::WebEngineWidgets
+    Qt6Keychain::Qt6Keychain
 )
 
-# Set compiler flags
+# Set compiler flags. Warnings fail the build only when asked (build.sh and CI do), so a newer
+# compiler with new warnings cannot break distribution package builds.
+option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors" OFF)
 target_compile_options(mx-viewer PRIVATE
+    -Wall
+    -Wextra
     -Wpedantic
     -Werror=return-type
     -Werror=switch
     -Werror=uninitialized
-    -Werror
 )
+if(WARNINGS_AS_ERRORS)
+    target_compile_options(mx-viewer PRIVATE -Werror)
+endif()
 
 # Add compiler-specific flags
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options(mx-viewer PRIVATE -Werror=return-stack-address)
 else()
     target_compile_options(mx-viewer PRIVATE -Werror=return-local-addr)
@@ -148,19 +191,23 @@ target_compile_definitions(mx-viewer PRIVATE
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PROJECT_VERSION}"
 )
+# QKeychain::isAvailable() is new in qtkeychain 0.14; its version macro in the header is not kept up to date.
+if(Qt6Keychain_VERSION VERSION_GREATER_EQUAL 0.14)
+    target_compile_definitions(mx-viewer PRIVATE HAVE_KEYCHAIN_IS_AVAILABLE)
+endif()
 
 # Release-specific optimizations
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(mx-viewer PRIVATE NDEBUG)
     target_compile_options(mx-viewer PRIVATE -O3)
 
-    # Add LTO - different flags for different compilers
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR USE_CLANG)
-        target_compile_options(mx-viewer PRIVATE -flto=thin)
-        target_link_options(mx-viewer PRIVATE -flto=thin)
+    # Link-time optimization, with the flags CMake knows for the compiler in use.
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT ipo_supported OUTPUT ipo_error LANGUAGES CXX)
+    if(ipo_supported)
+        set_property(TARGET mx-viewer PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
     else()
-        target_compile_options(mx-viewer PRIVATE -flto=auto)
-        target_link_options(mx-viewer PRIVATE -flto=auto)
+        message(STATUS "Link-time optimization not available: ${ipo_error}")
     endif()
 endif()
 

@@ -4,388 +4,332 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../qml/Main.qml" line="20"/>
-        <location filename="../qml/Main.qml" line="90"/>
-        <location filename="../qml/Main.qml" line="566"/>
+        <location filename="../qml/Main.qml" line="42"/>
+        <location filename="../qml/Main.qml" line="132"/>
+        <location filename="../qml/Main.qml" line="567"/>
         <source>MX Tools</source>
-        <translation type="unfinished">MX Tools</translation>
+        <translation>MX Tools</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="97"/>
+        <location filename="../qml/Main.qml" line="139"/>
         <source>System dashboard</source>
-        <translation type="unfinished"></translation>
+        <translation>System-instrumentpanel</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="143"/>
+        <location filename="../qml/Main.qml" line="204"/>
         <source>Search tools and tasks…</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök verktyg och aktiviteter...</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="118"/>
+        <location filename="../qml/Main.qml" line="160"/>
         <source>Search tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök verktyg</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="156"/>
+        <location filename="../qml/Main.qml" line="217"/>
         <source>Clear search</source>
-        <translation type="unfinished"></translation>
+        <translation>Töm sökning</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="166"/>
+        <location filename="../qml/Main.qml" line="227"/>
         <source>Manual</source>
-        <translation type="unfinished">Manual</translation>
+        <translation>Manual</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="175"/>
+        <location filename="../qml/Main.qml" line="232"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Om</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="207"/>
+        <location filename="../qml/Main.qml" line="260"/>
         <source>CATEGORIES</source>
-        <translation type="unfinished"></translation>
+        <translation>KATEGORIER</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="374"/>
+        <location filename="../qml/Main.qml" line="379"/>
         <source>Condensed view</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimerad vy</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="392"/>
+        <source>Show more tools at once</source>
+        <translation>Visa fler verktyg på en gång</translation>
     </message>
     <message>
         <location filename="../qml/Main.qml" line="389"/>
-        <source>Show more tools at once</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/Main.qml" line="386"/>
         <source>Use condensed tool view</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd komprimerad verktygsvy</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="250"/>
-        <location filename="../qml/Main.qml" line="268"/>
-        <location filename="../qml/Main.qml" line="500"/>
-        <location filename="../qml/Main.qml" line="516"/>
+        <location filename="../qml/components/MenuVisibilityToggle.qml" line="23"/>
+        <location filename="../qml/components/MenuVisibilityToggle.qml" line="51"/>
         <source>Hide those tools from the system menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Göm dessa verktyg från systemmenyn</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="257"/>
-        <location filename="../qml/Main.qml" line="271"/>
-        <location filename="../qml/Main.qml" line="506"/>
-        <location filename="../qml/Main.qml" line="519"/>
+        <location filename="../qml/components/MenuVisibilityToggle.qml" line="12"/>
         <source>They&apos;ll still be available here in MX Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>De kommer fortfarande att vara tillgängliga här i MX Tools</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="340"/>
+        <location filename="../qml/Main.qml" line="345"/>
         <source>Search results</source>
-        <translation type="unfinished"></translation>
+        <translation>Sökresultat</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="342"/>
+        <location filename="../qml/Main.qml" line="347"/>
         <source>All tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla verktyg</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="349"/>
+        <location filename="../qml/Main.qml" line="356"/>
         <source>Results matching “%1”</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultat som matchar “%1”</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="350"/>
+        <location filename="../qml/Main.qml" line="357"/>
         <source>Choose a tool to configure or maintain your system</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj ett verktyg att konfigurera eller underhåll ditt system</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/Main.qml" line="359"/>
+        <location filename="../qml/Main.qml" line="364"/>
         <source>%n tool(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n verktyg</numerusform>
+            <numerusform>%n verktyg</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="404"/>
+        <location filename="../qml/Main.qml" line="407"/>
         <source>Hide categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Dölj kategorier</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="416"/>
+        <location filename="../qml/Main.qml" line="417"/>
         <source>Hide the category list</source>
-        <translation type="unfinished"></translation>
+        <translation>Dölj kategorilistan</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="419"/>
+        <location filename="../qml/Main.qml" line="420"/>
         <source>Use the whole window for tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd hela fönstret för verktyg</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="484"/>
+        <location filename="../qml/Main.qml" line="510"/>
         <source>No tools found
 Try a different search or category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga verktyg hittade
+Försök en annan sökning eller kategori.</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="533"/>
+        <location filename="../qml/Main.qml" line="539"/>
         <source>About MX Tools</source>
-        <translation type="unfinished">Om MX Tools</translation>
+        <translation>Om MX Tools</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="573"/>
+        <location filename="../qml/Main.qml" line="574"/>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Version %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="579"/>
+        <location filename="../qml/Main.qml" line="580"/>
         <source>A focused collection of configuration and maintenance tools for MX Linux.</source>
-        <translation type="unfinished"></translation>
+        <translation>En fokuserad samling konfigurations och underhållsverktyg förr MX Linux.</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="588"/>
+        <location filename="../qml/Main.qml" line="589"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>webbplats</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="596"/>
+        <location filename="../qml/Main.qml" line="593"/>
         <source>License</source>
-        <translation type="unfinished">Licens</translation>
+        <translation>Licens</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="604"/>
+        <location filename="../qml/Main.qml" line="597"/>
         <source>Changelog</source>
-        <translation type="unfinished">Ändringslogg</translation>
+        <translation>Ändringslogg</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="614"/>
+        <location filename="../qml/Main.qml" line="603"/>
         <source>Copyright © MX Linux</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MainWindow</name>
-    <message>
-        <source>MX Tools</source>
-        <translation type="vanished">MX Tools</translation>
-    </message>
-    <message>
-        <source>About this application</source>
-        <translation type="vanished">Om detta program</translation>
-    </message>
-    <message>
-        <source>About...</source>
-        <translation type="vanished">Om...</translation>
-    </message>
-    <message>
-        <source>Alt+B</source>
-        <translation type="vanished">Alt+B</translation>
-    </message>
-    <message>
-        <source>Close application</source>
-        <translation type="vanished">Stäng programmet</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="vanished">Stäng</translation>
-    </message>
-    <message>
-        <source>Alt+N</source>
-        <translation type="vanished">Alt+N</translation>
-    </message>
-    <message>
-        <source>Manual</source>
-        <translation type="vanished">Manual</translation>
-    </message>
-    <message>
-        <source>These MX applications save time and effort with important tasks.</source>
-        <translation type="vanished">De här MX-programmen spar tid och arbete vid viktiga göromål.</translation>
-    </message>
-    <message>
-        <source>Hide individual tools from the menu</source>
-        <translation type="vanished">Göm enskilda verktyg från menyn</translation>
-    </message>
-    <message>
-        <source>search</source>
-        <translation type="vanished">sök</translation>
-    </message>
-    <message>
-        <source>About MX Tools</source>
-        <translation type="vanished">Om MX Tools</translation>
-    </message>
-    <message>
-        <source>Version: </source>
-        <translation type="vanished">Version:</translation>
-    </message>
-    <message>
-        <source>Configuration Tools for MX Linux</source>
-        <translation type="vanished">Konfigurationsverktyg för MX Linux</translation>
-    </message>
-    <message>
-        <source>Copyright (c) MX Linux</source>
-        <translation type="vanished">Copyright (c) MX Linux</translation>
-    </message>
-    <message>
-        <source>%1 License</source>
-        <translation type="vanished">%1 Licens</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>License</source>
-        <translation type="vanished">Licens</translation>
-    </message>
-    <message>
-        <source>Changelog</source>
-        <translation type="vanished">Ändringslogg</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Avbryt</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;Stäng</translation>
+        <translation>Copyright © MX Linux</translation>
     </message>
 </context>
 <context>
     <name>ToolCard</name>
     <message>
-        <location filename="../qml/components/ToolCard.qml" line="84"/>
+        <location filename="../qml/components/ToolCard.qml" line="130"/>
+        <source>Unpin %1</source>
+        <translation>Avpinna %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/components/ToolCard.qml" line="130"/>
+        <source>Pin %1</source>
+        <translation>Pinna %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/components/ToolCard.qml" line="171"/>
+        <source>Unpin tool</source>
+        <translation>Avpinna verktyg</translation>
+    </message>
+    <message>
+        <location filename="../qml/components/ToolCard.qml" line="171"/>
+        <source>Pin tool</source>
+        <translation>Pinna verktyg</translation>
+    </message>
+    <message>
+        <location filename="../qml/components/ToolCard.qml" line="98"/>
         <source>Open this MX tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Öppna detta MX verktyg</translation>
     </message>
 </context>
 <context>
     <name>ToolModel</name>
     <message>
-        <location filename="../src/toolmodel.cpp" line="92"/>
+        <location filename="../src/toolmodel.cpp" line="115"/>
         <source>Live</source>
-        <translation type="unfinished"></translation>
+        <translation>Live</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="95"/>
+        <location filename="../src/toolmodel.cpp" line="118"/>
         <source>Maintenance</source>
-        <translation type="unfinished"></translation>
+        <translation>Skötsel</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="98"/>
+        <location filename="../src/toolmodel.cpp" line="121"/>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="101"/>
+        <location filename="../src/toolmodel.cpp" line="124"/>
         <source>Software</source>
-        <translation type="unfinished"></translation>
+        <translation>Mjukvara</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="103"/>
+        <location filename="../src/toolmodel.cpp" line="126"/>
         <source>Utilities</source>
-        <translation type="unfinished"></translation>
+        <translation>Redskap</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="482"/>
+        <location filename="../src/toolmodel.cpp" line="754"/>
+        <source>Pin setting failed</source>
+        <translation>Inställning av pinning misslyckades</translation>
+    </message>
+    <message>
+        <location filename="../src/toolmodel.cpp" line="754"/>
+        <source>Could not save pinned tools.</source>
+        <translation>Kunde inte spara pinnade verktyg.</translation>
+    </message>
+    <message>
+        <location filename="../src/toolmodel.cpp" line="766"/>
         <source>All tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla verktyg</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="670"/>
-        <location filename="../src/toolmodel.cpp" line="684"/>
-        <location filename="../src/toolmodel.cpp" line="693"/>
+        <location filename="../src/toolmodel.cpp" line="993"/>
+        <location filename="../src/toolmodel.cpp" line="1004"/>
+        <location filename="../src/toolmodel.cpp" line="1009"/>
+        <location filename="../src/toolmodel.cpp" line="1027"/>
         <source>Unable to launch tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inte starta verktyg</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="670"/>
+        <location filename="../src/toolmodel.cpp" line="993"/>
         <source>The selected tool is no longer available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det valda verktyget  är inte längre tillgängligt.</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="675"/>
+        <location filename="../src/toolmodel.cpp" line="998"/>
         <source>Tool already running</source>
-        <translation type="unfinished"></translation>
+        <translation>Verktyget körs redan</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="675"/>
+        <location filename="../src/toolmodel.cpp" line="998"/>
         <source>%1 is already running.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 körs redan.</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="684"/>
+        <location filename="../src/toolmodel.cpp" line="1009"/>
         <source>The selected tool has no launch command.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det valda verktyget har inget startkommando</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="693"/>
+        <location filename="../src/toolmodel.cpp" line="1004"/>
+        <location filename="../src/toolmodel.cpp" line="1027"/>
         <source>Could not start %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte starta %1.</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="702"/>
-        <location filename="../src/toolmodel.cpp" line="726"/>
+        <location filename="../src/toolmodel.cpp" line="1039"/>
+        <location filename="../src/toolmodel.cpp" line="1063"/>
         <source>Could not open %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte öppna %1.</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="708"/>
+        <location filename="../src/toolmodel.cpp" line="1045"/>
         <source>Manual unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual ej tillgänglig</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="713"/>
+        <location filename="../src/toolmodel.cpp" line="1050"/>
         <source>License unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Licens ej tillgänglig</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="719"/>
+        <location filename="../src/toolmodel.cpp" line="1056"/>
         <source>Website unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Webbsida ej tillgänglig</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="719"/>
+        <location filename="../src/toolmodel.cpp" line="1056"/>
         <source>Could not open the MX Linux website.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte öppna MX Linux webbsida.</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="726"/>
-        <location filename="../src/toolmodel.cpp" line="732"/>
+        <location filename="../src/toolmodel.cpp" line="1063"/>
+        <location filename="../src/toolmodel.cpp" line="1076"/>
         <source>Changelog unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändringslogg ej tillgänglig</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="732"/>
+        <location filename="../src/toolmodel.cpp" line="1076"/>
         <source>Could not read the application changelog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte läsa applikationens ändringslogg.</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="735"/>
+        <location filename="../src/toolmodel.cpp" line="1074"/>
         <source>Changelog</source>
-        <translation type="unfinished">Ändringslogg</translation>
+        <translation>Ändringslogg</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="450"/>
-        <location filename="../src/toolmodel.cpp" line="458"/>
-        <location filename="../src/toolmodel.cpp" line="774"/>
-        <location filename="../src/toolmodel.cpp" line="779"/>
-        <location filename="../src/toolmodel.cpp" line="825"/>
-        <location filename="../src/toolmodel.cpp" line="876"/>
-        <location filename="../src/toolmodel.cpp" line="914"/>
+        <location filename="../src/toolmodel.cpp" line="1097"/>
+        <location filename="../src/toolmodel.cpp" line="1105"/>
+        <location filename="../src/toolmodel.cpp" line="1249"/>
+        <location filename="../src/toolmodel.cpp" line="1254"/>
+        <location filename="../src/toolmodel.cpp" line="1265"/>
+        <location filename="../src/toolmodel.cpp" line="1285"/>
+        <location filename="../src/toolmodel.cpp" line="1362"/>
+        <location filename="../src/toolmodel.cpp" line="1401"/>
         <source>Menu setting failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyinställning misslyckades</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="450"/>
-        <location filename="../src/toolmodel.cpp" line="774"/>
-        <location filename="../src/toolmodel.cpp" line="779"/>
+        <location filename="../src/toolmodel.cpp" line="1097"/>
+        <location filename="../src/toolmodel.cpp" line="1249"/>
+        <location filename="../src/toolmodel.cpp" line="1254"/>
         <source>Could not create %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte skapa %1.</translation>
     </message>
     <message>
-        <location filename="../src/toolmodel.cpp" line="458"/>
-        <location filename="../src/toolmodel.cpp" line="825"/>
-        <location filename="../src/toolmodel.cpp" line="876"/>
-        <location filename="../src/toolmodel.cpp" line="914"/>
+        <location filename="../src/toolmodel.cpp" line="1105"/>
+        <location filename="../src/toolmodel.cpp" line="1265"/>
+        <location filename="../src/toolmodel.cpp" line="1285"/>
+        <location filename="../src/toolmodel.cpp" line="1362"/>
+        <location filename="../src/toolmodel.cpp" line="1401"/>
         <source>Could not update %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunde inte uppdatera %1.</translation>
     </message>
 </context>
 </TS>

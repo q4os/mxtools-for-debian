@@ -1,7 +1,7 @@
 /**********************************************************************
  *  main.cpp
  **********************************************************************
- * Copyright (C) 2024 MX Authors
+ * Copyright (C) 2024-2026 MX Authors
  *
  * Authors: Dolphin Oracle
  *          MX Linux <http://mxlinux.org>
@@ -41,6 +41,13 @@
 
 int main(int argc, char *argv[])
 {
+    if (qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
+        && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
+        qWarning("mx-locale: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
+                "a graphical session is required to run this program.");
+        return EXIT_FAILURE;
+    }
+
     // Set Qt platform to XCB (X11) if not already set and we're in X11 environment
     if (qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
         if (!qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
@@ -49,11 +56,6 @@ int main(int argc, char *argv[])
     }
 
     QApplication a(argc, argv);
-
-    if (a.arguments().contains("--version") || a.arguments().contains("-v")) {
-        qDebug() << "Version:" << VERSION;
-        return EXIT_SUCCESS;
-    }
 
     QApplication::setWindowIcon(QIcon::fromTheme("preferences-desktop-locale"));
     QApplication::setOrganizationName("MX-Linux");
