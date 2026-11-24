@@ -1,50 +1,8 @@
-mx-iso-template (26.11.2mx25+1.1302) stable; urgency=medium
+mx-iso-template (26.08.1mx25.1302) stable; urgency=medium
 
   * Release
 
- -- Devs <devteam@localdomain>  Mon, 23 Nov 2026 23:13:18 +0100
-
-mx-iso-template (26.11.2mx25+1) mx; urgency=medium
-
-  * new live-busybox build
-  * with 11 runit applets are enabled
-  * runit service supervision applets: runsvdir, runsv, sv, svc, svok, svlogd (+ runsvdir log), and the helpers chpst, setuidgid, envuidgid, envdir, softlimit
-  * default service directory /etc/service
-  * size +24 KB (amd64 640792 bytes), 160 applet links instead of 149; all other applets and the config are unchanged 
-
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 11 Nov 2026 20:12:12 -0500
-
-mx-iso-template (26.11.1mx25) mx; urgency=medium
-
-  * pickup fd (virtio-blk) major number for linuxfs search
-
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 10 Nov 2026 19:28:44 -0500
-
-mx-iso-template (26.10.2mx25) mx; urgency=medium
-
-  * busybox from the new live-busybox package (BusyBox 1.38.0, static
-    musl, amd64/i386), copied into the initrd at build time; replaces the
-    old prebuilt BusyBox 1.31.1 (static i386) kept in initrd/bin
-  * init: no error message for remount,rw on read-only media (busybox
-    >= 1.33 no longer falls back to read-only)
-  * gfxsave, grub2-save: sed fixes, also work with busybox sed
-  * fix black VT10 after "pw" with first-time persistence (no tsplash)
-  * periodic fsck: really check (-f), reset mount count only on success;
-    new persistence files: check every 60 mounts or monthly
-  * offer swap file only when the boot device is writable
-  * pass a runlevel given before init= on to sysvinit (the kernel drops
-    bare words before init=)
-  * init: no busy-wait in device search, no divide by zero on serial
-    console
-
- -- fehlix <fehlix@mxlinux.org>  Fri, 06 Nov 2026 06:23:23 -0500
-
-mx-iso-template (26.10.1mx25) mx; urgency=medium
-
-  * create machine-id file earlier in boot
-  * prevents systemd from starting too many services on first bootup
-
- -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 14 Oct 2026 19:56:31 -0400
+ -- Devs <devteam@localdomain>  Tue, 24 Nov 2026 13:23:52 +0100
 
 mx-iso-template (26.08.1mx25) mx; urgency=medium
 

@@ -673,7 +673,7 @@ do_grubdefault() {
     local targ_file=$template_dir$orig_file
     mkdir -p $(dirname $targ_file)
     cp $orig_file $targ_file
-    dash /usr/local/bin/fix_etcdefgrub.sh $targ_file
+    dash /usr/bin/fix_etcdefgrub.sh $targ_file
     bind_mount_template "$template_dir"  "$BIND_ROOT" "$REAL_ROOT"
 }
 
