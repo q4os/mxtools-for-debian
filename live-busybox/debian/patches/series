@@ -1,0 +1,25 @@
+# other patches
+shell-ash-export-HOME.patch
+version.patch
+init-console.patch
+stop-checking-ancient-kernel-version.patch
+platform-linux.diff
+fix-non-linux-build.patch
+#
+syslogd-option_mask32.patch
+syslogd-make-it-optionally-systemd-socket-activated.patch
+#
+busybox-1.36.1-no-cbq.patch
+awk.c-fix-CVE-2023-42366-bug-15874.patch
+wget-disallow-control-chars-in-URLs-CVE-2025-60876.patch
+archival-libarchive-sanitize-filenames-on-output-CVE-2025-46394-2.patch
+netstat-sanitize-argv0-for-p-CVE-2024-58251.patch
+cpio-tests-echo.diff
+ls-tests-printf.diff
+coreutils-cut.c-typo-fix-delimeter.patch
+ash-omit-variables-with-invalid-names-in-showvars.patch
+ash-fix-out-of-bounds-read-in-ifsbreakup-CVE-2026-38754.patch
+ash-fix-stack-overflow-in-evalfun-CVE-2026-38755.patch
+awk-fix-stack-overflow-in-evaluate-CVE-2026-38752.patch
+awk-fix-use-after-free-in-awk_sub-CVE-2026-38753.patch
+live-ttyname-fallback-without-proc.patch

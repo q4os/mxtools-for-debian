@@ -1,0 +1,68 @@
+Description: xmalloc_ttyname: fall back to scanning /dev without /proc
+ musl's ttyname_r() resolves the name only through /proc/self/fd/N.
+ In the live-initrd, init runs "setfont $file -C $(tty)" before /proc is
+ mounted; with musl "tty" then prints "not a tty" and setfont fails.
+ glibc and uClibc fall back to searching /dev; do the same here for all
+ users of xmalloc_ttyname() (tty, getty, login, su, less).
+Author: fehlix <fehlix@mxlinux.org>
+Forwarded: no
+Last-Update: 2026-11-03
+
+--- a/libbb/xfuncs_printf.c
++++ b/libbb/xfuncs_printf.c
+@@ -632,12 +632,53 @@ int FAST_FUNC bb_xioctl(int fd, unsigned
+ }
+ #endif
+ 
++/* live-busybox: musl's ttyname_r() only works via /proc/self/fd.
++ * In an early initrd /proc is not mounted yet, so "tty" prints
++ * "not a tty" where glibc/uClibc builds print e.g. /dev/console.
++ * Fall back to searching /dev and /dev/pts for the char device
++ * with the same device number (as glibc does).
++ */
++static char *ttyname_by_scan(int fd)
++{
++	static const char *const dirs[] = { "/dev", "/dev/pts" };
++	struct stat fst, st;
++	unsigned i;
++
++	if (fstat(fd, &fst) != 0 || !S_ISCHR(fst.st_mode))
++		return NULL;
++	for (i = 0; i < ARRAY_SIZE(dirs); i++) {
++		DIR *dir = opendir(dirs[i]);
++		struct dirent *de;
++		if (!dir)
++			continue;
++		while ((de = readdir(dir)) != NULL) {
++			char *path;
++			if (de->d_name[0] == '.')
++				continue;
++			path = concat_path_file(dirs[i], de->d_name);
++			if (stat(path, &st) == 0
++			 && S_ISCHR(st.st_mode)
++			 && st.st_rdev == fst.st_rdev
++			) {
++				closedir(dir);
++				return path;
++			}
++			free(path);
++		}
++		closedir(dir);
++	}
++	return NULL;
++}
++
+ char* FAST_FUNC xmalloc_ttyname(int fd)
+ {
+ 	char buf[128];
+ 	int r = ttyname_r(fd, buf, sizeof(buf) - 1);
+-	if (r)
+-		return NULL;
++	if (r) {
++		if (!isatty(fd))
++			return NULL;
++		return ttyname_by_scan(fd);
++	}
+ 	return xstrdup(buf);
+ }
+ 

@@ -1,0 +1,18 @@
+From: Jeff Pohlmeyer <yetanothergeek@gmail.com>
+Date: Thu Sep 21 12:10:49 UTC 2023
+Subject: syslogd problem
+Forwarded: yes, http://lists.busybox.net/pipermail/busybox/2023-September/090499.html
+
+diff --git a/sysklogd/syslogd.c b/sysklogd/syslogd.c
+index 83b5c0cf6..97578813b 100644
+--- a/sysklogd/syslogd.c
++++ b/sysklogd/syslogd.c
+@@ -1178,7 +1178,7 @@ int syslogd_main(int argc UNUSED_PARAM, char **argv)
+ 			}
+ 		}
+ #endif
+-		if (!ENABLE_FEATURE_REMOTE_LOG || (opts & OPT_locallog)) {
++		if (!ENABLE_FEATURE_REMOTE_LOG || (option_mask32 & OPT_locallog)) {
+ 			recvbuf[sz] = '\0'; /* ensure it *is* NUL terminated */
+ 			split_escape_and_log(recvbuf, sz);
+ 		}

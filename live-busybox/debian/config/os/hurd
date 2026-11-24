@@ -1,0 +1,8 @@
+CONFIG_INIT_TERMINAL_TYPE="mach"
+CONFIG_BLOCKDEV=n
+CONFIG_MOUNT=n
+CONFIG_UMOUNT=n
+CONFIG_SWAPONOFF=n
+CONFIG_TASKSET=n
+# hurd does not have a working equivalent of /proc/self/exe
+CONFIG_BUSYBOX_EXEC_PATH="/bin/busybox"

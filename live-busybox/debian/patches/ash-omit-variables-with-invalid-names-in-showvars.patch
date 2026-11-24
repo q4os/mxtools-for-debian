@@ -1,0 +1,68 @@
+From: Michael Tokarev <mjt@tls.msk.ru>
+Date: Sun, 12 Jul 2026 15:34:32 +0300
+Subject: [PATCH] ash: omit variables with invalid names in showvars()
+Forwarded: yes, https://lists.busybox.net/pipermail/busybox/2026-July/092386.html
+
+showvars() in shell/ash.c produces incomplete output when
+environment variable has invalid characters in name (on
+the left of the equal sign):
+
+  $ env test/test=test busybox ash -c set | grep ^test
+  test
+  $ _
+
+Instead of printing incomplete variable names with no values,
+just omit printing these variables entirely.  This is how `set`
+builtin behaves in bash implementation, too.
+
+Note that previous change in this place, which was supposed to
+make `export -p` eval'able, actually did not succeed, because
+such bare names without an equal sign are not actually eval'able
+this way, they're interpreted by `eval` as a command name to
+execute, instead of to add this name to environment.
+
+(This function is used for `export -p` and `set`).
+
+Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
+---
+ shell/ash.c | 25 +++++++++----------------
+ 1 file changed, 9 insertions(+), 16 deletions(-)
+
+diff --git a/shell/ash.c b/shell/ash.c
+--- a/shell/ash.c
++++ b/shell/ash.c
+@@ -12088,22 +12088,15 @@ showvars(const char *sep_prefix, int on, int off)
+ 	sep = *sep_prefix ? " " : sep_prefix;
+ 
+ 	for (; ep < epend; ep++) {
+-		const char *p;
+-		const char *q;
+-
+-		p = endofname(*ep);
+-/* Used to have simple "p = strchrnul(*ep, '=')" here instead, but this
+- * makes "export -p" to have output not suitable for "eval":
+- * import os
+- * os.environ["test-test"]="test"
+- * if os.fork() == 0:
+- *   os.execv("ash", [ 'ash', '-c', 'eval $(export -p); echo OK' ])  # fixes this
+- * os.execv("ash", [ 'ash', '-c', 'env | grep test-test' ])
+- */
+-		q = nullstr;
+-		if (*p == '=')
+-			q = single_quote(++p);
+-		out1fmt("%s%s%.*s%s\n", sep_prefix, sep, (int)(p - *ep), *ep, q);
++		/*
++		 * omit variables with invalid names, so `export -p` can be eval'ed:
++		 *   env test-test=test -- busybox ash -c 'eval $(export -p)'
++		 */
++		const char *p = endofname(*ep);
++		if (*p == '=') {
++			const char *q = single_quote(++p);
++			out1fmt("%s%s%.*s%s\n", sep_prefix, sep, (int)(p - *ep), *ep, q);
++        }
+ 	}
+ 	return 0;
+ }
+-- 
+2.47.3
+

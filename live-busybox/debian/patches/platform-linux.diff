@@ -1,0 +1,1516 @@
+From 96f71bb00b5b7bcf3e09bfa6b3c291eb3944de9d Mon Sep 17 00:00:00 2001
+From: Michael Tokarev <mjt@tls.msk.ru>
+Date: Mon, 30 Sep 2024 09:01:19 +0300
+Subject: [PATCH] buildsys: resurrect PLATFORM_LINUX and depend on it for
+ linux-specific applets
+
+This effectively reverts the following two commits:
+
+  commit e3b1a1fd28558f7a1b3c0ec33313bedb675be8a1
+  Author: Denys Vlasenko <vda.linux@googlemail.com>
+  Date:   Sat Feb 26 22:24:08 2011 +0100
+
+    Replace "depends on PLATFORM_LINUX" with "select PLATFORM_LINUX"
+
+and
+
+  commit 5c69ad0ecdc18cf51b312c7c82848f4438fe1c8d
+  Author: Ron Yorston <rmy@pobox.com>
+  Date:   Tue Aug 4 08:24:19 2020 +0100
+
+    build system: drop PLATFORM_LINUX
+
+but does, hopefully, the right thing.
+
+Original complain was that the allnoconfig turns off PLATFORM_LINUX
+on which all linux-specific applets depends. Instead of setting this
+config option right for linux and non-linux (initially it was just a
+regular kconfig symbol, not set depending on the platform), it were
+turned into something which made little sense (in the first commit),
+and later dropped completely.
+
+So introduce a dynamic kconfig symbol PLATFORM_LINUX with the value
+actually depending on the target platform, so that it is not affected
+by all{yes|no|whatever}config. This way, it is possible to depend on
+it for linux-specific applets without breaking *config anymore.
+
+It is done by creating a small kconfig fragment, .platform.in, to
+define just PLATFORM_LINUX symbol. It is created in Makefile if
+${CPP} has __linux__ #defined. And include it in the top-level Config.in.
+
+Regenerate default config files with the new symbol.
+
+And mark all the applets which were marked as "select PLATFORM_LINUX"
+before the "build system: drop PLATFORM_LINUX" commit, as
+"depends on PLATFORM_LINUX".
+
+Also mark 2 other applets, tc and dhcprelay, as linux-only too.
+
+This way, it is finally possible to build busybox on other platforms
+without really huge efforts to maintain list of "incompatible" applets
+externally, and does not put any pressure on the main development, -
+the only thing needed is to keep the existing "depends on PLATFORM_LINUX"
+lines.
+
+Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
+---
+ Config.in                       | 4 ++++
+ Makefile                        | 9 ++++++++-
+ configs/TEST_nommu_defconfig    | 1 +
+ configs/TEST_noprintf_defconfig | 1 +
+ configs/TEST_rh9_defconfig      | 1 +
+ configs/android2_defconfig      | 1 +
+ configs/android_502_defconfig   | 1 +
+ configs/android_defconfig       | 1 +
+ configs/android_ndk_defconfig   | 1 +
+ configs/cygwin_defconfig        | 1 +
+ configs/freebsd_defconfig       | 1 +
+ console-tools/chvt.c            | 1 +
+ console-tools/deallocvt.c       | 1 +
+ console-tools/dumpkmap.c        | 1 +
+ console-tools/fgconsole.c       | 1 +
+ console-tools/kbd_mode.c        | 1 +
+ console-tools/loadfont.c        | 2 ++
+ console-tools/loadkmap.c        | 1 +
+ console-tools/openvt.c          | 1 +
+ console-tools/setconsole.c      | 1 +
+ console-tools/setkeycodes.c     | 1 +
+ console-tools/setlogcons.c      | 1 +
+ console-tools/showkey.c         | 1 +
+ coreutils/date.c                | 1 +
+ coreutils/stat.c                | 1 +
+ e2fsprogs/lsattr.c              | 1 +
+ klibc-utils/run-init.c          | 1 +
+ libbb/Config.src                | 2 ++
+ miscutils/adjtimex.c            | 1 +
+ miscutils/beep.c                | 1 +
+ miscutils/conspy.c              | 1 +
+ miscutils/devfsd.c              | 2 ++
+ miscutils/fbsplash.c            | 1 +
+ miscutils/hdparm.c              | 1 +
+ miscutils/i2c_tools.c           | 5 +++++
+ miscutils/lsscsi.c              | 1 +
+ miscutils/nandwrite.c           | 2 ++
+ miscutils/partprobe.c           | 1 +
+ miscutils/raidautorun.c         | 1 +
+ miscutils/readahead.c           | 1 +
+ miscutils/rfkill.c              | 1 +
+ miscutils/rx.c                  | 1 +
+ miscutils/setserial.c           | 1 +
+ miscutils/ubi_tools.c           | 6 ++++++
+ miscutils/ubirename.c           | 1 +
+ miscutils/watchdog.c            | 1 +
+ modutils/depmod.c               | 1 +
+ modutils/insmod.c               | 1 +
+ modutils/lsmod.c                | 1 +
+ modutils/modinfo.c              | 1 +
+ modutils/modprobe.c             | 1 +
+ modutils/rmmod.c                | 1 +
+ networking/arp.c                | 1 +
+ networking/arping.c             | 1 +
+ networking/brctl.c              | 1 +
+ networking/ether-wake.c         | 1 +
+ networking/ifconfig.c           | 1 +
+ networking/ifenslave.c          | 1 +
+ networking/ifplugd.c            | 1 +
+ networking/ip.c                 | 7 +++++++
+ networking/nameif.c             | 1 +
+ networking/nbd-client.c         | 1 +
+ networking/netstat.c            | 1 +
+ networking/ntpd.c               | 1 +
+ networking/ping.c               | 1 +
+ networking/route.c              | 1 +
+ networking/slattach.c           | 1 +
+ networking/tc.c                 | 1 +
+ networking/traceroute.c         | 1 +
+ networking/tunctl.c             | 1 +
+ networking/udhcp/Config.src     | 3 +++
+ networking/udhcp/d6_dhcpc.c     | 1 +
+ networking/vconfig.c            | 1 +
+ networking/zcip.c               | 1 +
+ procps/free.c                   | 1 +
+ procps/ps.c                     | 1 +
+ procps/uptime.c                 | 1 +
+ sysklogd/klogd.c                | 1 +
+ sysklogd/syslogd.c              | 1 +
+ util-linux/acpid.c              | 1 +
+ util-linux/blkdiscard.c         | 1 +
+ util-linux/blkid.c              | 1 +
+ util-linux/dmesg.c              | 1 +
+ util-linux/eject.c              | 1 +
+ util-linux/fatattr.c            | 1 +
+ util-linux/fbset.c              | 1 +
+ util-linux/fdformat.c           | 1 +
+ util-linux/fdisk.c              | 1 +
+ util-linux/findfs.c             | 1 +
+ util-linux/freeramdisk.c        | 2 ++
+ util-linux/fsfreeze.c           | 1 +
+ util-linux/fstrim.c             | 1 +
+ util-linux/hwclock.c            | 1 +
+ util-linux/ionice.c             | 1 +
+ util-linux/ipcs.c               | 1 +
+ util-linux/losetup.c            | 1 +
+ util-linux/lspci.c              | 1 +
+ util-linux/lsusb.c              | 1 +
+ util-linux/mdev.c               | 1 +
+ util-linux/mkfs_ext2.c          | 2 ++
+ util-linux/mkfs_minix.c         | 1 +
+ util-linux/mkfs_reiser.c        | 1 +
+ util-linux/mkfs_vfat.c          | 2 ++
+ util-linux/mount.c              | 1 +
+ util-linux/nsenter.c            | 1 +
+ util-linux/pivot_root.c         | 1 +
+ util-linux/readprofile.c        | 1 +
+ util-linux/rtcwake.c            | 1 +
+ util-linux/setarch.c            | 3 +++
+ util-linux/setpriv.c            | 1 +
+ util-linux/swaponoff.c          | 2 ++
+ util-linux/switch_root.c        | 1 +
+ util-linux/uevent.c             | 1 +
+ util-linux/umount.c             | 1 +
+ util-linux/unshare.c            | 1 +
+ 115 files changed, 152 insertions(+), 1 deletion(-)
+
+diff --git a/Config.in b/Config.in
+index ad0cd1e26..425e601bb 100644
+--- a/Config.in
++++ b/Config.in
+@@ -10,4 +10,7 @@ config HAVE_DOT_CONFIG
+ 	default y
+ 
++# include generated CONFIG_PLATFORM_LINUX symbol:
++source .platform.in
++
+ menu "Settings"
+ 
+@@ -324,4 +327,5 @@ config SELINUX
+ 	bool "Support NSA Security Enhanced Linux"
+ 	default n
++	depends on PLATFORM_LINUX
+ 	help
+ 	Enable support for SELinux in applets ls, ps, and id. Also provide
+diff --git a/Makefile b/Makefile
+index 9550c391a..14dd81231 100644
+--- a/Makefile
++++ b/Makefile
+@@ -362,7 +362,14 @@ scripts/basic/%: scripts_basic ;
+ # This target generates Kbuild's and Config.in's from *.c files
+ PHONY += gen_build_files
+-gen_build_files: $(wildcard $(srctree)/*/*.c) $(wildcard $(srctree)/*/*/*.c) $(wildcard $(srctree)/embed/*)
++gen_build_files: $(wildcard $(srctree)/*/*.c) $(wildcard $(srctree)/*/*/*.c) $(wildcard $(srctree)/embed/*) .platform.in
+ 	$(Q)$(srctree)/scripts/gen_build_files.sh $(srctree) $(objtree)
+ 
++.platform.in:
++	$(Q)printf '#ifndef __linux__\nplatform_is_not_linux\n#endif' \
++	    | $(CPP) - | grep -s platform_is_not_linux \
++	  && linux=n || linux=y; \
++	printf "config PLATFORM_LINUX\n\tbool\n\tdefault $$linux\n" > $@
++MRPROPER_FILES += .platform.in
++
+ # bbox: we have helpers in applets/
+ # we depend on scripts_basic, since scripts/basic/fixdep
+diff --git a/configs/TEST_nommu_defconfig b/configs/TEST_nommu_defconfig
+index fa3e96326..9b1c82447 100644
+--- a/configs/TEST_nommu_defconfig
++++ b/configs/TEST_nommu_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/TEST_noprintf_defconfig b/configs/TEST_noprintf_defconfig
+index 9b378fd55..064a28955 100644
+--- a/configs/TEST_noprintf_defconfig
++++ b/configs/TEST_noprintf_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/TEST_rh9_defconfig b/configs/TEST_rh9_defconfig
+index 4ac62b9da..c81d051d3 100644
+--- a/configs/TEST_rh9_defconfig
++++ b/configs/TEST_rh9_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/android2_defconfig b/configs/android2_defconfig
+index d4b8f1616..0eef44a22 100644
+--- a/configs/android2_defconfig
++++ b/configs/android2_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/android_502_defconfig b/configs/android_502_defconfig
+index 104e70f23..39c2bd6ec 100644
+--- a/configs/android_502_defconfig
++++ b/configs/android_502_defconfig
+@@ -75,4 +75,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/android_defconfig b/configs/android_defconfig
+index 92a66048a..fe5c9a614 100644
+--- a/configs/android_defconfig
++++ b/configs/android_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/android_ndk_defconfig b/configs/android_ndk_defconfig
+index 425593454..8374ca241 100644
+--- a/configs/android_ndk_defconfig
++++ b/configs/android_ndk_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/cygwin_defconfig b/configs/cygwin_defconfig
+index 61e2c2463..9a369e931 100644
+--- a/configs/cygwin_defconfig
++++ b/configs/cygwin_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/configs/freebsd_defconfig b/configs/freebsd_defconfig
+index 6cbd54895..dc8b6409c 100644
+--- a/configs/freebsd_defconfig
++++ b/configs/freebsd_defconfig
+@@ -5,4 +5,5 @@
+ #
+ CONFIG_HAVE_DOT_CONFIG=y
++CONFIG_PLATFORM_LINUX=y
+ 
+ #
+diff --git a/console-tools/chvt.c b/console-tools/chvt.c
+index 2444e1f9d..e86586366 100644
+--- a/console-tools/chvt.c
++++ b/console-tools/chvt.c
+@@ -10,4 +10,5 @@
+ //config:	bool "chvt (2.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program is used to change to another terminal.
+diff --git a/console-tools/deallocvt.c b/console-tools/deallocvt.c
+index f03ad079b..9351a5eeb 100644
+--- a/console-tools/deallocvt.c
++++ b/console-tools/deallocvt.c
+@@ -11,4 +11,5 @@
+ //config:	bool "deallocvt (2.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program deallocates unused virtual consoles.
+diff --git a/console-tools/dumpkmap.c b/console-tools/dumpkmap.c
+index 957d16529..8c3ee8dba 100644
+--- a/console-tools/dumpkmap.c
++++ b/console-tools/dumpkmap.c
+@@ -10,4 +10,5 @@
+ //config:	bool "dumpkmap (1.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program dumps the kernel's keyboard translation table to
+diff --git a/console-tools/fgconsole.c b/console-tools/fgconsole.c
+index b6dbc472b..85f9e66ea 100644
+--- a/console-tools/fgconsole.c
++++ b/console-tools/fgconsole.c
+@@ -10,4 +10,5 @@
+ //config:	bool "fgconsole (1.8 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program prints active (foreground) console number.
+diff --git a/console-tools/kbd_mode.c b/console-tools/kbd_mode.c
+index 1ec25757d..c5088477d 100644
+--- a/console-tools/kbd_mode.c
++++ b/console-tools/kbd_mode.c
+@@ -12,4 +12,5 @@
+ //config:	bool "kbd_mode (4.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program reports and sets keyboard mode.
+diff --git a/console-tools/loadfont.c b/console-tools/loadfont.c
+index cec5e19cd..eb7c2ba55 100644
+--- a/console-tools/loadfont.c
++++ b/console-tools/loadfont.c
+@@ -13,4 +13,5 @@
+ //config:	bool "loadfont (5.4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program loads a console font from standard input.
+@@ -19,4 +20,5 @@
+ //config:	bool "setfont (24 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Allows to load console screen map. Useful for i18n.
+diff --git a/console-tools/loadkmap.c b/console-tools/loadkmap.c
+index 22e918dbf..38b3c05e4 100644
+--- a/console-tools/loadkmap.c
++++ b/console-tools/loadkmap.c
+@@ -10,4 +10,5 @@
+ //config:	bool "loadkmap (2.1 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program loads a keyboard translation table from
+diff --git a/console-tools/openvt.c b/console-tools/openvt.c
+index c35617eb8..642ac4c19 100644
+--- a/console-tools/openvt.c
++++ b/console-tools/openvt.c
+@@ -11,4 +11,5 @@
+ //config:	bool "openvt (7.4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program is used to start a command on an unused
+diff --git a/console-tools/setconsole.c b/console-tools/setconsole.c
+index 4e625890a..062ca4184 100644
+--- a/console-tools/setconsole.c
++++ b/console-tools/setconsole.c
+@@ -11,4 +11,5 @@
+ //config:	bool "setconsole (3.8 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Redirect writes to /dev/console to another device,
+diff --git a/console-tools/setkeycodes.c b/console-tools/setkeycodes.c
+index 03accec2f..52ac762e9 100644
+--- a/console-tools/setkeycodes.c
++++ b/console-tools/setkeycodes.c
+@@ -12,4 +12,5 @@
+ //config:	bool "setkeycodes (2.4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program loads entries into the kernel's scancode-to-keycode
+diff --git a/console-tools/setlogcons.c b/console-tools/setlogcons.c
+index a94c0035a..926b6ed68 100644
+--- a/console-tools/setlogcons.c
++++ b/console-tools/setlogcons.c
+@@ -12,4 +12,5 @@
+ //config:	bool "setlogcons (2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This program redirects the output console of kernel messages.
+diff --git a/console-tools/showkey.c b/console-tools/showkey.c
+index 87532a8ac..3dcd5948f 100644
+--- a/console-tools/showkey.c
++++ b/console-tools/showkey.c
+@@ -10,4 +10,5 @@
+ //config:	bool "showkey (4.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Shows keys pressed.
+diff --git a/coreutils/date.c b/coreutils/date.c
+index 3a89b6caf..578d923ca 100644
+--- a/coreutils/date.c
++++ b/coreutils/date.c
+@@ -38,4 +38,5 @@
+ //config:	default n # stat's nanosecond field is a bit non-portable
+ //config:	depends on DATE
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Support %[num]N format specifier. Adds ~250 bytes of code.
+diff --git a/coreutils/stat.c b/coreutils/stat.c
+index 2c2909e7e..dd4b36fa0 100644
+--- a/coreutils/stat.c
++++ b/coreutils/stat.c
+@@ -32,4 +32,5 @@
+ //config:	default y
+ //config:	depends on STAT
++//config:	depends on PLATFORM_LINUX # statfs()
+ //config:	help
+ //config:	Without this, stat will not support the '-f' option to display
+diff --git a/e2fsprogs/lsattr.c b/e2fsprogs/lsattr.c
+index f678f72fb..e4cdebe43 100644
+--- a/e2fsprogs/lsattr.c
++++ b/e2fsprogs/lsattr.c
+@@ -13,4 +13,5 @@
+ //config:	bool "lsattr (5.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	lsattr lists the file attributes on a second extended file system.
+diff --git a/klibc-utils/run-init.c b/klibc-utils/run-init.c
+index 5eadd9fc0..9ea51f188 100644
+--- a/klibc-utils/run-init.c
++++ b/klibc-utils/run-init.c
+@@ -9,4 +9,5 @@
+ //config:	bool "run-init (8 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The run-init utility is used from initramfs to select a new
+diff --git a/libbb/Config.src b/libbb/Config.src
+index b980f19a9..418d03deb 100644
+--- a/libbb/Config.src
++++ b/libbb/Config.src
+@@ -119,4 +119,5 @@ config FEATURE_USE_SENDFILE
+ 	bool "Use sendfile system call"
+ 	default y
++	depends on PLATFORM_LINUX
+ 	help
+ 	When enabled, busybox will use the kernel sendfile() function
+@@ -141,4 +142,5 @@ config MONOTONIC_SYSCALL
+ 	bool "Use clock_gettime(CLOCK_MONOTONIC) syscall"
+ 	default y
++	depends on PLATFORM_LINUX
+ 	help
+ 	Use clock_gettime(CLOCK_MONOTONIC) syscall for measuring
+diff --git a/miscutils/adjtimex.c b/miscutils/adjtimex.c
+index fb478c0c9..578ddd88a 100644
+--- a/miscutils/adjtimex.c
++++ b/miscutils/adjtimex.c
+@@ -14,4 +14,5 @@
+ //config:	bool "adjtimex (4.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Adjtimex reads and optionally sets adjustment parameters for
+diff --git a/miscutils/beep.c b/miscutils/beep.c
+index 724a666c8..48826eabf 100644
+--- a/miscutils/beep.c
++++ b/miscutils/beep.c
+@@ -10,4 +10,5 @@
+ //config:	bool "beep (2.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The beep applets beeps in a given freq/Hz.
+diff --git a/miscutils/conspy.c b/miscutils/conspy.c
+index 21a498d0f..df926cc20 100644
+--- a/miscutils/conspy.c
++++ b/miscutils/conspy.c
+@@ -13,4 +13,5 @@
+ //config:	bool "conspy (10 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	A text-mode VNC like program for Linux virtual terminals.
+diff --git a/miscutils/devfsd.c b/miscutils/devfsd.c
+index 36b491595..f7e9481ac 100644
+--- a/miscutils/devfsd.c
++++ b/miscutils/devfsd.c
+@@ -57,4 +57,5 @@
+ //config:	bool "devfsd (obsolete)"
+ //config:	default n
++//config:	depends on PLATFORM_LINUX
+ //config:	select FEATURE_SYSLOG
+ //config:	help
+@@ -99,4 +100,5 @@
+ //config:	bool "Use devfs names for all devices (obsolete)"
+ //config:	default n
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This is obsolete and should NOT be used anymore.
+diff --git a/miscutils/fbsplash.c b/miscutils/fbsplash.c
+index 2934d8eb7..a913428d1 100644
+--- a/miscutils/fbsplash.c
++++ b/miscutils/fbsplash.c
+@@ -24,4 +24,5 @@
+ //config:	bool "fbsplash (26 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Shows splash image and progress bar on framebuffer device.
+diff --git a/miscutils/hdparm.c b/miscutils/hdparm.c
+index 83e2f8d53..f72352bd9 100644
+--- a/miscutils/hdparm.c
++++ b/miscutils/hdparm.c
+@@ -15,4 +15,5 @@
+ //config:	bool "hdparm (25 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Get/Set hard drive parameters. Primarily intended for ATA
+diff --git a/miscutils/i2c_tools.c b/miscutils/i2c_tools.c
+index 5f41a72ec..dba7498a5 100644
+--- a/miscutils/i2c_tools.c
++++ b/miscutils/i2c_tools.c
+@@ -12,4 +12,5 @@
+ //config:	bool "i2cget (5.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Read from I2C/SMBus chip registers.
+@@ -18,4 +19,5 @@
+ //config:	bool "i2cset (6.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Set I2C registers.
+@@ -24,4 +26,5 @@
+ //config:	bool "i2cdump (7.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Examine I2C registers.
+@@ -30,4 +33,5 @@
+ //config:	bool "i2cdetect (7.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Detect I2C chips.
+@@ -36,4 +40,5 @@
+ //config:	bool "i2ctransfer (5.5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Send user-defined I2C messages in one transfer.
+diff --git a/miscutils/lsscsi.c b/miscutils/lsscsi.c
+index 9f677ba28..192f508ee 100644
+--- a/miscutils/lsscsi.c
++++ b/miscutils/lsscsi.c
+@@ -10,4 +10,5 @@
+ //config:	bool "lsscsi (2.9 kb)"
+ //config:	default y
++//config:	#depends on PLATFORM_LINUX
+ //config:	help
+ //config:	lsscsi is a utility for displaying information about SCSI buses in the
+diff --git a/miscutils/nandwrite.c b/miscutils/nandwrite.c
+index 6ac92aa1f..43cc0e259 100644
+--- a/miscutils/nandwrite.c
++++ b/miscutils/nandwrite.c
+@@ -11,4 +11,5 @@
+ //config:	bool "nandwrite (5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Write to the specified MTD device, with bad blocks awareness
+@@ -17,4 +18,5 @@
+ //config:	bool "nanddump (5.4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Dump the content of raw NAND chip
+diff --git a/miscutils/partprobe.c b/miscutils/partprobe.c
+index b21c6241b..87949ad0f 100644
+--- a/miscutils/partprobe.c
++++ b/miscutils/partprobe.c
+@@ -8,4 +8,5 @@
+ //config:	bool "partprobe (3.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Ask kernel to rescan partition table.
+diff --git a/miscutils/raidautorun.c b/miscutils/raidautorun.c
+index 8e70b5a51..04aaef6c8 100644
+--- a/miscutils/raidautorun.c
++++ b/miscutils/raidautorun.c
+@@ -10,4 +10,5 @@
+ //config:	bool "raidautorun (1.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	raidautorun tells the kernel md driver to
+diff --git a/miscutils/readahead.c b/miscutils/readahead.c
+index a9e672617..4f73c04b3 100644
+--- a/miscutils/readahead.c
++++ b/miscutils/readahead.c
+@@ -14,4 +14,5 @@
+ //config:	default y
+ //config:	depends on LFS
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Preload the files listed on the command line into RAM cache so that
+diff --git a/miscutils/rfkill.c b/miscutils/rfkill.c
+index 9d91ea82f..9d8921b87 100644
+--- a/miscutils/rfkill.c
++++ b/miscutils/rfkill.c
+@@ -10,4 +10,5 @@
+ //config:	bool "rfkill (4.4 kb)"
+ //config:	default n # doesn't build on Ubuntu 9.04
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Enable/disable wireless devices.
+diff --git a/miscutils/rx.c b/miscutils/rx.c
+index 3052bdef7..c2bdebe19 100644
+--- a/miscutils/rx.c
++++ b/miscutils/rx.c
+@@ -18,4 +18,5 @@
+ //config:	bool "rx (3.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Receive files using the Xmodem protocol.
+diff --git a/miscutils/setserial.c b/miscutils/setserial.c
+index 5fb93d226..9e3e73630 100644
+--- a/miscutils/setserial.c
++++ b/miscutils/setserial.c
+@@ -11,4 +11,5 @@
+ //config:	bool "setserial (7.1 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Retrieve or set Linux serial port.
+diff --git a/miscutils/ubi_tools.c b/miscutils/ubi_tools.c
+index 8de444eb2..c35328030 100644
+--- a/miscutils/ubi_tools.c
++++ b/miscutils/ubi_tools.c
+@@ -7,4 +7,5 @@
+ //config:	bool "ubiattach (4.5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Attach MTD device to an UBI device.
+@@ -13,4 +14,5 @@
+ //config:	bool "ubidetach (4.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Detach MTD device from an UBI device.
+@@ -19,4 +21,5 @@
+ //config:	bool "ubimkvol (5.5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Create a UBI volume.
+@@ -25,4 +28,5 @@
+ //config:	bool "ubirmvol (5.1 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Delete a UBI volume.
+@@ -31,4 +35,5 @@
+ //config:	bool "ubirsvol (4.4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Resize a UBI volume.
+@@ -37,4 +42,5 @@
+ //config:	bool "ubiupdatevol (5.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Update a UBI volume.
+diff --git a/miscutils/ubirename.c b/miscutils/ubirename.c
+index af94354f3..c07390b5f 100644
+--- a/miscutils/ubirename.c
++++ b/miscutils/ubirename.c
+@@ -10,4 +10,5 @@
+ //config:	bool "ubirename (2.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Utility to rename UBI volumes
+diff --git a/miscutils/watchdog.c b/miscutils/watchdog.c
+index db1d27b48..eef220b59 100644
+--- a/miscutils/watchdog.c
++++ b/miscutils/watchdog.c
+@@ -12,4 +12,5 @@
+ //config:	bool "watchdog (5.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The watchdog utility is used with hardware or software watchdog
+diff --git a/modutils/depmod.c b/modutils/depmod.c
+index bb42bbefe..14dd12a07 100644
+--- a/modutils/depmod.c
++++ b/modutils/depmod.c
+@@ -11,4 +11,5 @@
+ //config:	bool "depmod (27 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	depmod generates modules.dep (and potentially modules.alias
+diff --git a/modutils/insmod.c b/modutils/insmod.c
+index 8f7163e25..9b26e27a3 100644
+--- a/modutils/insmod.c
++++ b/modutils/insmod.c
+@@ -10,4 +10,5 @@
+ //config:	bool "insmod (22 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	insmod is used to load specified modules in the running kernel.
+diff --git a/modutils/lsmod.c b/modutils/lsmod.c
+index d9df5ad81..17905fcf0 100644
+--- a/modutils/lsmod.c
++++ b/modutils/lsmod.c
+@@ -11,4 +11,5 @@
+ //config:	bool "lsmod (2.1 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	lsmod is used to display a list of loaded modules.
+diff --git a/modutils/modinfo.c b/modutils/modinfo.c
+index 0a86c3296..099f645c1 100644
+--- a/modutils/modinfo.c
++++ b/modutils/modinfo.c
+@@ -9,4 +9,5 @@
+ //config:	bool "modinfo (24 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Show information about a Linux Kernel module
+diff --git a/modutils/modprobe.c b/modutils/modprobe.c
+index 543f53e99..48380be69 100644
+--- a/modutils/modprobe.c
++++ b/modutils/modprobe.c
+@@ -11,4 +11,5 @@
+ //config:	bool "modprobe (27 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Handle the loading of modules, and their dependencies on a high
+diff --git a/modutils/rmmod.c b/modutils/rmmod.c
+index fe86a6766..edb44a1e9 100644
+--- a/modutils/rmmod.c
++++ b/modutils/rmmod.c
+@@ -11,4 +11,5 @@
+ //config:	bool "rmmod (3.5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	rmmod is used to unload specified modules from the kernel.
+diff --git a/networking/arp.c b/networking/arp.c
+index 16783ab95..e162af136 100644
+--- a/networking/arp.c
++++ b/networking/arp.c
+@@ -16,4 +16,5 @@
+ //config:	bool "arp (10 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Manipulate the system ARP cache.
+diff --git a/networking/arping.c b/networking/arping.c
+index 967f1ac04..62b7adcb0 100644
+--- a/networking/arping.c
++++ b/networking/arping.c
+@@ -9,4 +9,5 @@
+ //config:	bool "arping (9.1 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Ping hosts by ARP packets.
+diff --git a/networking/brctl.c b/networking/brctl.c
+index 0f8dc2f7a..f593d2664 100644
+--- a/networking/brctl.c
++++ b/networking/brctl.c
+@@ -13,4 +13,5 @@
+ //config:	bool "brctl (9.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Manage ethernet bridges.
+diff --git a/networking/ether-wake.c b/networking/ether-wake.c
+index 68df19361..570f013f8 100644
+--- a/networking/ether-wake.c
++++ b/networking/ether-wake.c
+@@ -67,4 +67,5 @@
+ //config:	bool "ether-wake (5.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Send a magic packet to wake up sleeping machines.
+diff --git a/networking/ifconfig.c b/networking/ifconfig.c
+index 9ee232a66..42a1ac8bc 100644
+--- a/networking/ifconfig.c
++++ b/networking/ifconfig.c
+@@ -28,4 +28,5 @@
+ //config:	bool "ifconfig (12 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Ifconfig is used to configure the kernel-resident network interfaces.
+diff --git a/networking/ifenslave.c b/networking/ifenslave.c
+index bdb9894be..75f395e72 100644
+--- a/networking/ifenslave.c
++++ b/networking/ifenslave.c
+@@ -101,4 +101,5 @@
+ //config:	bool "ifenslave (13 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Userspace application to bind several interfaces
+diff --git a/networking/ifplugd.c b/networking/ifplugd.c
+index a776d4121..b7aa0e820 100644
+--- a/networking/ifplugd.c
++++ b/networking/ifplugd.c
+@@ -10,4 +10,5 @@
+ //config:	bool "ifplugd (11 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Network interface plug detection daemon.
+diff --git a/networking/ip.c b/networking/ip.c
+index 02f93adbf..25868c933 100644
+--- a/networking/ip.c
++++ b/networking/ip.c
+@@ -12,4 +12,5 @@
+ //config:	bool "ip (35 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The "ip" applet is a TCP/IP interface configuration and routing
+@@ -23,4 +24,5 @@
+ //config:	default y
+ //config:	select FEATURE_IP_ADDRESS
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Short form of "ip addr"
+@@ -30,4 +32,5 @@
+ //config:	default y
+ //config:	select FEATURE_IP_LINK
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Short form of "ip link"
+@@ -37,4 +40,5 @@
+ //config:	default y
+ //config:	select FEATURE_IP_ROUTE
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Short form of "ip route"
+@@ -44,4 +48,5 @@
+ //config:	default y
+ //config:	select FEATURE_IP_TUNNEL
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Short form of "ip tunnel"
+@@ -51,4 +56,5 @@
+ //config:	default y
+ //config:	select FEATURE_IP_RULE
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Short form of "ip rule"
+@@ -58,4 +64,5 @@
+ //config:	default y
+ //config:	select FEATURE_IP_NEIGH
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Short form of "ip neigh"
+diff --git a/networking/nameif.c b/networking/nameif.c
+index 461745c70..65a80e500 100644
+--- a/networking/nameif.c
++++ b/networking/nameif.c
+@@ -13,4 +13,5 @@
+ //config:	bool "nameif (6.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	select FEATURE_SYSLOG
+ //config:	help
+diff --git a/networking/nbd-client.c b/networking/nbd-client.c
+index 556fa8c97..1489e5452 100644
+--- a/networking/nbd-client.c
++++ b/networking/nbd-client.c
+@@ -7,4 +7,5 @@
+ //config:	bool "nbd-client (6.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Network block device client
+diff --git a/networking/netstat.c b/networking/netstat.c
+index 807800a62..dadc54877 100644
+--- a/networking/netstat.c
++++ b/networking/netstat.c
+@@ -17,4 +17,5 @@
+ //config:	bool "netstat (10 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	netstat prints information about the Linux networking subsystem.
+diff --git a/networking/ntpd.c b/networking/ntpd.c
+index dcbdb8e60..bd8f66ae4 100644
+--- a/networking/ntpd.c
++++ b/networking/ntpd.c
+@@ -44,4 +44,5 @@
+ //config:	bool "ntpd (23 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The NTP client/server daemon.
+diff --git a/networking/ping.c b/networking/ping.c
+index b7e6955a9..189029785 100644
+--- a/networking/ping.c
++++ b/networking/ping.c
+@@ -28,4 +28,5 @@
+ //config:	bool "ping (10 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	ping uses the ICMP protocol's mandatory ECHO_REQUEST datagram to
+diff --git a/networking/route.c b/networking/route.c
+index 6e2d30cfd..c41908e88 100644
+--- a/networking/route.c
++++ b/networking/route.c
+@@ -28,4 +28,5 @@
+ //config:	bool "route (9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Route displays or manipulates the kernel's IP routing tables.
+diff --git a/networking/slattach.c b/networking/slattach.c
+index 2f5cd15ab..eb7f8bf76 100644
+--- a/networking/slattach.c
++++ b/networking/slattach.c
+@@ -16,4 +16,5 @@
+ //config:	bool "slattach (6.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	slattach configures serial line as SLIP network interface.
+diff --git a/networking/tc.c b/networking/tc.c
+index 3a79fd2d9..c70d47b55 100644
+--- a/networking/tc.c
++++ b/networking/tc.c
+@@ -10,4 +10,5 @@
+ //config:	bool "tc (8.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Show / manipulate traffic control settings
+diff --git a/networking/traceroute.c b/networking/traceroute.c
+index 767f537ce..f2da7e860 100644
+--- a/networking/traceroute.c
++++ b/networking/traceroute.c
+@@ -213,4 +213,5 @@
+ //config:	bool "traceroute (11 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Utility to trace the route of IP packets.
+diff --git a/networking/tunctl.c b/networking/tunctl.c
+index c17302eac..37a049e7a 100644
+--- a/networking/tunctl.c
++++ b/networking/tunctl.c
+@@ -13,4 +13,5 @@
+ //config:	bool "tunctl (6.4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	tunctl creates or deletes tun devices.
+diff --git a/networking/udhcp/Config.src b/networking/udhcp/Config.src
+index 4b9259eb8..e346a5526 100644
+--- a/networking/udhcp/Config.src
++++ b/networking/udhcp/Config.src
+@@ -7,4 +7,5 @@ config UDHCPD
+ 	bool "udhcpd (21 kb)"
+ 	default y
++	depends on PLATFORM_LINUX
+ 	help
+ 	udhcpd is a DHCP server geared primarily toward embedded systems,
+@@ -61,4 +62,5 @@ config DHCPRELAY
+ 	bool "dhcprelay (5.5 kb)"
+ 	default y
++	depends on PLATFORM_LINUX
+ 	help
+ 	dhcprelay listens for DHCP requests on one or more interfaces
+@@ -69,4 +71,5 @@ config UDHCPC
+ 	bool "udhcpc (24 kb)"
+ 	default y
++	depends on PLATFORM_LINUX
+ 	help
+ 	udhcpc is a DHCP client geared primarily toward embedded systems,
+diff --git a/networking/udhcp/d6_dhcpc.c b/networking/udhcp/d6_dhcpc.c
+index 79cef1999..7f0f4225c 100644
+--- a/networking/udhcp/d6_dhcpc.c
++++ b/networking/udhcp/d6_dhcpc.c
+@@ -11,4 +11,5 @@
+ //config:	default y
+ //config:	depends on FEATURE_IPV6
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	udhcpc6 is a DHCPv6 client
+diff --git a/networking/vconfig.c b/networking/vconfig.c
+index 77fbe3a40..b482f4b87 100644
+--- a/networking/vconfig.c
++++ b/networking/vconfig.c
+@@ -10,4 +10,5 @@
+ //config:	bool "vconfig (2.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Creates, removes, and configures VLAN interfaces
+diff --git a/networking/zcip.c b/networking/zcip.c
+index 137d46e13..605a3c884 100644
+--- a/networking/zcip.c
++++ b/networking/zcip.c
+@@ -17,4 +17,5 @@
+ //config:	bool "zcip (8.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	select FEATURE_SYSLOG
+ //config:	help
+diff --git a/procps/free.c b/procps/free.c
+index d0c849b79..41353a6df 100644
+--- a/procps/free.c
++++ b/procps/free.c
+@@ -10,4 +10,5 @@
+ //config:	bool "free (3.8 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX #sysinfo()
+ //config:	help
+ //config:	free displays the total amount of free and used physical and swap
+diff --git a/procps/ps.c b/procps/ps.c
+index 5b521aebd..cd434ecfb 100644
+--- a/procps/ps.c
++++ b/procps/ps.c
+@@ -36,4 +36,5 @@
+ //config:	default y
+ //config:	depends on (PS || MINIPS) && DESKTOP
++//config:	depends on PLATFORM_LINUX
+ //config:
+ //config:config FEATURE_PS_UNUSUAL_SYSTEMS
+diff --git a/procps/uptime.c b/procps/uptime.c
+index aec7bd7d1..6802ca576 100644
+--- a/procps/uptime.c
++++ b/procps/uptime.c
+@@ -15,4 +15,5 @@
+ //config:	bool "uptime (4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX #sysinfo()
+ //config:	help
+ //config:	uptime gives a one line display of the current time, how long
+diff --git a/sysklogd/klogd.c b/sysklogd/klogd.c
+index d4f2c0c8f..7c64e2557 100644
+--- a/sysklogd/klogd.c
++++ b/sysklogd/klogd.c
+@@ -34,4 +34,5 @@
+ //config:	default y
+ //config:	depends on KLOGD
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The klogd applet supports two interfaces for reading
+diff --git a/sysklogd/syslogd.c b/sysklogd/syslogd.c
+index 7558051f0..72480ec47 100644
+--- a/sysklogd/syslogd.c
++++ b/sysklogd/syslogd.c
+@@ -110,4 +110,5 @@
+ //config:	default y
+ //config:	depends on SYSLOGD
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	When you enable this feature, the syslogd utility will
+diff --git a/util-linux/acpid.c b/util-linux/acpid.c
+index 5c0bb1768..8da349069 100644
+--- a/util-linux/acpid.c
++++ b/util-linux/acpid.c
+@@ -10,4 +10,5 @@
+ //config:	bool "acpid (9.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	acpid listens to ACPI events coming either in textual form from
+diff --git a/util-linux/blkdiscard.c b/util-linux/blkdiscard.c
+index 70fd34af3..74a1f4826 100644
+--- a/util-linux/blkdiscard.c
++++ b/util-linux/blkdiscard.c
+@@ -9,4 +9,5 @@
+ //config:	bool "blkdiscard (4.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	blkdiscard discards sectors on a given device.
+diff --git a/util-linux/blkid.c b/util-linux/blkid.c
+index 4a820771f..cb96c178b 100644
+--- a/util-linux/blkid.c
++++ b/util-linux/blkid.c
+@@ -10,4 +10,5 @@
+ //config:	bool "blkid (12 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	select VOLUMEID
+ //config:	help
+diff --git a/util-linux/dmesg.c b/util-linux/dmesg.c
+index 5d8f01a64..06b5d998e 100644
+--- a/util-linux/dmesg.c
++++ b/util-linux/dmesg.c
+@@ -12,4 +12,5 @@
+ //config:	bool "dmesg (3.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	dmesg is used to examine or control the kernel ring buffer. When the
+diff --git a/util-linux/eject.c b/util-linux/eject.c
+index b9813262b..c02eee86e 100644
+--- a/util-linux/eject.c
++++ b/util-linux/eject.c
+@@ -16,4 +16,5 @@
+ //config:	bool "eject (4.3 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Used to eject cdroms. (defaults to /dev/cdrom)
+diff --git a/util-linux/fatattr.c b/util-linux/fatattr.c
+index d8ea4553d..d704cb062 100644
+--- a/util-linux/fatattr.c
++++ b/util-linux/fatattr.c
+@@ -12,4 +12,5 @@
+ //config:	bool "fatattr (2.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	fatattr lists or changes the file attributes on a fat file system.
+diff --git a/util-linux/fbset.c b/util-linux/fbset.c
+index 7e88c8313..85bca161f 100644
+--- a/util-linux/fbset.c
++++ b/util-linux/fbset.c
+@@ -15,4 +15,5 @@
+ //config:	bool "fbset (6.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	fbset is used to show or change the settings of a Linux frame buffer
+diff --git a/util-linux/fdformat.c b/util-linux/fdformat.c
+index 0f8743020..482078335 100644
+--- a/util-linux/fdformat.c
++++ b/util-linux/fdformat.c
+@@ -9,4 +9,5 @@
+ //config:	bool "fdformat (4.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	fdformat is used to low-level format a floppy disk.
+diff --git a/util-linux/fdisk.c b/util-linux/fdisk.c
+index 96e2abffe..f33832cb9 100644
+--- a/util-linux/fdisk.c
++++ b/util-linux/fdisk.c
+@@ -11,4 +11,5 @@
+ //config:	bool "fdisk (31 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The fdisk utility is used to divide hard disks into one or more
+diff --git a/util-linux/findfs.c b/util-linux/findfs.c
+index ec0375dfb..363d1a2f7 100644
+--- a/util-linux/findfs.c
++++ b/util-linux/findfs.c
+@@ -11,4 +11,5 @@
+ //config:	bool "findfs (11 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	select VOLUMEID
+ //config:	help
+diff --git a/util-linux/freeramdisk.c b/util-linux/freeramdisk.c
+index 88f50c51a..afd843dd6 100644
+--- a/util-linux/freeramdisk.c
++++ b/util-linux/freeramdisk.c
+@@ -12,4 +12,5 @@
+ //config:	bool "fdflush (1.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	fdflush is only needed when changing media on slightly-broken
+@@ -24,4 +25,5 @@
+ //config:	bool "freeramdisk (1.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Linux allows you to create ramdisks. This utility allows you to
+diff --git a/util-linux/fsfreeze.c b/util-linux/fsfreeze.c
+index 66b6fd06f..46f30653e 100644
+--- a/util-linux/fsfreeze.c
++++ b/util-linux/fsfreeze.c
+@@ -8,4 +8,5 @@
+ //config:	bool "fsfreeze (3.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	select LONG_OPTS
+ //config:	help
+diff --git a/util-linux/fstrim.c b/util-linux/fstrim.c
+index c28e67270..c121ea3cf 100644
+--- a/util-linux/fstrim.c
++++ b/util-linux/fstrim.c
+@@ -11,4 +11,5 @@
+ //config:	bool "fstrim (4.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Discard unused blocks on a mounted filesystem.
+diff --git a/util-linux/hwclock.c b/util-linux/hwclock.c
+index c3fd0eb57..962488575 100644
+--- a/util-linux/hwclock.c
++++ b/util-linux/hwclock.c
+@@ -10,4 +10,5 @@
+ //config:	bool "hwclock (5.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	select LONG_OPTS
+ //config:	help
+diff --git a/util-linux/ionice.c b/util-linux/ionice.c
+index b768c8322..6e587966f 100644
+--- a/util-linux/ionice.c
++++ b/util-linux/ionice.c
+@@ -10,4 +10,5 @@
+ //config:	bool "ionice (4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Set/set program io scheduling class and priority
+diff --git a/util-linux/ipcs.c b/util-linux/ipcs.c
+index f0e5c5a7f..1dd1438e4 100644
+--- a/util-linux/ipcs.c
++++ b/util-linux/ipcs.c
+@@ -11,4 +11,5 @@
+ //config:	bool "ipcs (12 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The ipcs utility is used to provide information on the currently
+diff --git a/util-linux/losetup.c b/util-linux/losetup.c
+index 9b43d20b3..e8621c548 100644
+--- a/util-linux/losetup.c
++++ b/util-linux/losetup.c
+@@ -10,4 +10,5 @@
+ //config:	bool "losetup (6.2 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	losetup is used to associate or detach a loop device with a regular
+diff --git a/util-linux/lspci.c b/util-linux/lspci.c
+index b38b46be3..7734be187 100644
+--- a/util-linux/lspci.c
++++ b/util-linux/lspci.c
+@@ -10,4 +10,5 @@
+ //config:	bool "lspci (6.4 kb)"
+ //config:	default y
++//config:	#depends on PLATFORM_LINUX
+ //config:	help
+ //config:	lspci is a utility for displaying information about PCI buses in the
+diff --git a/util-linux/lsusb.c b/util-linux/lsusb.c
+index 0a9e505f4..ac9524b94 100644
+--- a/util-linux/lsusb.c
++++ b/util-linux/lsusb.c
+@@ -10,4 +10,5 @@
+ //config:	bool "lsusb (4.4 kb)"
+ //config:	default y
++//config:	#depends on PLATFORM_LINUX
+ //config:	help
+ //config:	lsusb is a utility for displaying information about USB buses in the
+diff --git a/util-linux/mdev.c b/util-linux/mdev.c
+index e98d46743..d7911feef 100644
+--- a/util-linux/mdev.c
++++ b/util-linux/mdev.c
+@@ -11,4 +11,5 @@
+ //config:	bool "mdev (20 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	mdev is a mini-udev implementation for dynamically creating device
+diff --git a/util-linux/mkfs_ext2.c b/util-linux/mkfs_ext2.c
+index fcf374b2d..5b9a39793 100644
+--- a/util-linux/mkfs_ext2.c
++++ b/util-linux/mkfs_ext2.c
+@@ -11,4 +11,5 @@
+ //config:	bool "mke2fs (10 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Utility to create EXT2 filesystems.
+@@ -17,4 +18,5 @@
+ //config:	bool "mkfs.ext2 (10 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Alias to "mke2fs".
+diff --git a/util-linux/mkfs_minix.c b/util-linux/mkfs_minix.c
+index 3c72e5419..0dcacfe79 100644
+--- a/util-linux/mkfs_minix.c
++++ b/util-linux/mkfs_minix.c
+@@ -66,4 +66,5 @@
+ //config:	bool "mkfs.minix (10 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The minix filesystem is a nice, small, compact, read-write filesystem
+diff --git a/util-linux/mkfs_reiser.c b/util-linux/mkfs_reiser.c
+index 44a743147..22ffcd346 100644
+--- a/util-linux/mkfs_reiser.c
++++ b/util-linux/mkfs_reiser.c
+@@ -10,4 +10,5 @@
+ //config:	bool "mkfs_reiser"
+ //config:	default n
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Utility to create ReiserFS filesystems.
+diff --git a/util-linux/mkfs_vfat.c b/util-linux/mkfs_vfat.c
+index 7ae4fd520..ac022e7f3 100644
+--- a/util-linux/mkfs_vfat.c
++++ b/util-linux/mkfs_vfat.c
+@@ -11,4 +11,5 @@
+ //config:	bool "mkdosfs (7.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Utility to create FAT32 filesystems.
+@@ -17,4 +18,5 @@
+ //config:	bool "mkfs.vfat (7.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Alias to "mkdosfs".
+diff --git a/util-linux/mount.c b/util-linux/mount.c
+index d0f0ae1ad..032301e89 100644
+--- a/util-linux/mount.c
++++ b/util-linux/mount.c
+@@ -21,4 +21,5 @@
+ //config:	bool "mount (24 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	All files and filesystems in Unix are arranged into one big directory
+diff --git a/util-linux/nsenter.c b/util-linux/nsenter.c
+index 9a250e43c..07c6380c8 100644
+--- a/util-linux/nsenter.c
++++ b/util-linux/nsenter.c
+@@ -10,4 +10,5 @@
+ //config:	bool "nsenter (6.8 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Run program with namespaces of other processes.
+diff --git a/util-linux/pivot_root.c b/util-linux/pivot_root.c
+index b65e914cf..953498ff6 100644
+--- a/util-linux/pivot_root.c
++++ b/util-linux/pivot_root.c
+@@ -12,4 +12,5 @@
+ //config:	bool "pivot_root (1.4 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The pivot_root utility swaps the mount points for the root filesystem
+diff --git a/util-linux/readprofile.c b/util-linux/readprofile.c
+index a7e4dcb73..f81109738 100644
+--- a/util-linux/readprofile.c
++++ b/util-linux/readprofile.c
+@@ -35,4 +35,5 @@
+ //config:	bool "readprofile (7.5 kb)"
+ //config:	default y
++//config:	#depends on PLATFORM_LINUX
+ //config:	help
+ //config:	This allows you to parse /proc/profile for basic profiling.
+diff --git a/util-linux/rtcwake.c b/util-linux/rtcwake.c
+index a8dfab064..1ac2cf6af 100644
+--- a/util-linux/rtcwake.c
++++ b/util-linux/rtcwake.c
+@@ -26,4 +26,5 @@
+ //config:	bool "rtcwake (7.5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Enter a system sleep state until specified wakeup time.
+diff --git a/util-linux/setarch.c b/util-linux/setarch.c
+index 68b7c663c..b15d2b9eb 100644
+--- a/util-linux/setarch.c
++++ b/util-linux/setarch.c
+@@ -10,4 +10,5 @@
+ //config:	bool "setarch (3.8 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The linux32 utility is used to create a 32bit environment for the
+@@ -19,4 +20,5 @@
+ //config:	bool "linux32 (3.6 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Alias to "setarch linux32".
+@@ -25,4 +27,5 @@
+ //config:	bool "linux64 (3.5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Alias to "setarch linux64".
+diff --git a/util-linux/setpriv.c b/util-linux/setpriv.c
+index ee038516d..088e11376 100644
+--- a/util-linux/setpriv.c
++++ b/util-linux/setpriv.c
+@@ -10,4 +10,5 @@
+ //config:	bool "setpriv (6.9 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	select LONG_OPTS
+ //config:	help
+diff --git a/util-linux/swaponoff.c b/util-linux/swaponoff.c
+index e2ff4b5cc..4caa28935 100644
+--- a/util-linux/swaponoff.c
++++ b/util-linux/swaponoff.c
+@@ -10,4 +10,5 @@
+ //config:	bool "swapon (15 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	Once you have created some swap space using 'mkswap', you also need
+@@ -36,4 +37,5 @@
+ //config:	bool "swapoff (14 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:
+ //config:config FEATURE_SWAPONOFF_LABEL
+diff --git a/util-linux/switch_root.c b/util-linux/switch_root.c
+index 14139736e..c33783081 100644
+--- a/util-linux/switch_root.c
++++ b/util-linux/switch_root.c
+@@ -10,4 +10,5 @@
+ //config:	bool "switch_root (5.7 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	The switch_root utility is used from initramfs to select a new
+diff --git a/util-linux/uevent.c b/util-linux/uevent.c
+index 2193eb0f2..7a09ef65a 100644
+--- a/util-linux/uevent.c
++++ b/util-linux/uevent.c
+@@ -7,4 +7,5 @@
+ //config:	bool "uevent (3.5 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	uevent is a netlink listener for kernel uevent notifications
+diff --git a/util-linux/umount.c b/util-linux/umount.c
+index f5c97a034..3eadb54f0 100644
+--- a/util-linux/umount.c
++++ b/util-linux/umount.c
+@@ -11,4 +11,5 @@
+ //config:	bool "umount (5.1 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	When you want to remove a mounted filesystem from its current mount
+diff --git a/util-linux/unshare.c b/util-linux/unshare.c
+index a9f56f388..7443a7c69 100644
+--- a/util-linux/unshare.c
++++ b/util-linux/unshare.c
+@@ -11,4 +11,5 @@
+ //config:	default y
+ //config:	depends on !NOMMU
++//config:	depends on PLATFORM_LINUX
+ //config:	select LONG_OPTS
+ //config:	help
+diff --git a/e2fsprogs/chattr.c b/e2fsprogs/chattr.c
+index 5dec3253b..7aee8c64c 100644
+--- a/e2fsprogs/chattr.c
++++ b/e2fsprogs/chattr.c
+@@ -13,4 +13,5 @@
+ //config:	bool "chattr (4.1 kb)"
+ //config:	default y
++//config:	depends on PLATFORM_LINUX
+ //config:	help
+ //config:	chattr changes the file attributes on a second extended file system.
+-- 
+2.39.5
+

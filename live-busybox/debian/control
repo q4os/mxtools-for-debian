@@ -1,0 +1,30 @@
+Source: live-busybox
+Section: utils
+Priority: optional
+Maintainer: fehlix <fehlix@mxlinux.org>
+Build-Depends: debhelper-compat (= 13),
+ musl-tools,
+ linux-libc-dev,
+ zip <!nocheck>
+Standards-Version: 4.7.4
+Homepage: http://www.busybox.net
+
+Package: live-busybox
+Architecture: amd64 i386
+Built-Using: ${built-using}
+Depends: ${misc:Depends}
+Description: static BusyBox binary for the MX/antiX live-initrd
+ BusyBox combines tiny versions of many common UNIX utilities into a single
+ small executable.
+ .
+ This package provides a BusyBox statically linked against musl,
+ configured for the MX/antiX live-initrd (mx-iso-template).
+ It is a build helper only: it installs into /usr/lib/live-busybox/
+ and does not create any applet symlinks, so it does not interfere
+ with the system busybox.
+ .
+ Installed files:
+  /usr/lib/live-busybox/bin/busybox        the static binary
+  /usr/lib/live-busybox/busybox.links      list of applet paths
+  /usr/lib/live-busybox/busybox.config     build configuration
+ The build configuration is also embedded: "busybox bbconfig".

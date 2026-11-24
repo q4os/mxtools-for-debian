@@ -1,0 +1,24 @@
+From: Michael Tokarev <mjt@tls.msk.ru>
+Subject: [PATCH] ls.tests: replace printf with $ECHO -ne
+Date: Thu, 11 Jun 2026 14:24:40 +0300
+Forwarded: yes, https://lists.busybox.net/pipermail/busybox/2026-June/092341.html
+
+testsuite/ls.tests uses printf to produce a filename, but uses
+\xNN escape sequence.  Dash (debian default) has printf buult-in,
+but it does not understand \xNN, - it produces literal \xNN
+instead of a single-byte corresponding to the value NN.
+So the test fails.
+
+Replace printf with $ECHO -ne - this one is used elsewhere
+for similar purpose.
+
+Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
+
+diff --git a/testsuite/ls.tests b/testsuite/ls.tests
+--- a/testsuite/ls.tests
++++ b/testsuite/ls.tests
+@@ -266,3 +266,3 @@ rm -rf ls.testdir 2>/dev/null
+ mkdir ls.testdir || exit 1
+-touch "`printf "ls.testdir/\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f_\x7f\x80\xfe\xff_\x22_\x27_\x5c"`"
++touch "`$ECHO -ne "ls.testdir/\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f_\x7f\x80\xfe\xff_\x22_\x27_\x5c"`"
+ 

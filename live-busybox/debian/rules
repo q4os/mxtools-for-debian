@@ -1,0 +1,154 @@
+#!/usr/bin/make -f
+# live-busybox: static busybox for the MX/antiX live-initrd.
+# Derived from Debian's busybox debian/rules, reduced to a single
+# flavour "live" (config: debian/config/pkg/live), linked statically
+# against musl (much smaller than a static glibc build).
+SHELL = /bin/sh -e
+
+# in order to keep output non-intermixed together, disable parallel building
+# of different targets in this d/rules but allow running parallel submakes
+.NOTPARALLEL:
+# DEB_BUILD_OPTIONS=parallel=N
+MAKEFLAGS += $(subst parallel=,-j,$(filter parallel=%,${DEB_BUILD_OPTIONS}))
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+V = $(if $(filter terse, ${DEB_BUILD_OPTIONS}),,1)
+
+# Activate full hardening build flags
+export DEB_BUILD_MAINT_OPTIONS := hardening=+all
+# Fast version of dpkg/architecture.mk defining all vars in one go
+ifeq (${DEB_HOST_MULTIARCH},)
+   $(foreach d, $(shell dpkg-architecture | sed 's/=/?=/'), $(eval export $d))
+endif
+include /usr/share/dpkg/default.mk
+
+##############################################################################
+
+TESTSUITE_ENV = SKIP_KNOWN_BUGS=y
+#TESTSUITE_ENV = VERBOSE=y
+# always run tests in UTF8 mode to verify unicode support
+TESTSUITE_ENV += LANG=C.UTF-8 LC_ALL=C.UTF-8
+TESTSUITE_ENV += SKIP_INTERNET_TESTS=y
+# Required for testsuite/taskset.tests
+TESTSUITE_ENV += SHELL='${SHELL}'
+# dash echo does not understand -e, bb builds its own in this case
+TESTSUITE_ENV += ECHO=/bin/echo
+
+# build directory
+b = b
+
+# the only flavour we build
+flavours = live
+
+# install location inside the package
+LBDIR = usr/lib/live-busybox
+
+ifneq (${DEB_HOST_GNU_TYPE},${DEB_BUILD_GNU_TYPE})
+$(error cross building is not supported, build natively or in a chroot)
+endif
+
+# Build with musl. musl-gcc hides /usr/include, so the Linux kernel headers
+# (from linux-libc-dev) are made visible through a directory of symlinks.
+MUSL_CC = musl-gcc
+KHDR = ${CURDIR}/$b/kernel-headers
+KHDR_DIRS = /usr/include/linux /usr/include/asm-generic \
+	    /usr/include/mtd /usr/include/scsi \
+	    /usr/include/${DEB_HOST_MULTIARCH}/asm
+
+# Filter -O2 from CFLAGS to use busybox's own -Os (smaller binary).
+CFLAGS := $(filter-out -O2, ${CFLAGS})
+
+# Avoid Kconfig outputting the timestamp into generated configuration files,
+# so we can compare against debian/config/pkg/live (detects upstream changes).
+export KCONFIG_NOTIMESTAMP=1
+
+install-indep install-arch install \
+binary-indep binary-arch binary \
+: %:
+	dh $@
+
+##############################################################################
+
+configure: $(patsubst %,$b/%/.stamp-setup, ${flavours})
+$(addprefix configure-,${flavours}): configure-%: $b/%/.stamp-setup
+.PHONY: configure $(addprefix configure-,${flavours})
+
+$b/%/.stamp-setup: d = $b/$*
+$b/%/.stamp-setup:
+	rm -rf $d
+	mkdir -p $d
+	mkdir -p ${KHDR}
+	for i in ${KHDR_DIRS}; do ln -sfn $$i ${KHDR}/; done
+# 1, arch-specific overrides (empty for linux)
+	cat debian/config/os/${DEB_HOST_ARCH_OS} > $d/.config
+# 2, the flavour config
+	cat debian/config/pkg/$* >> $d/.config
+# 3, sort out the result using oldconfig Kbuild machinery and generate Makefile
+	yes "" | ${MAKE} -C $d -f "${CURDIR}/Makefile" KBUILD_SRC="${CURDIR}" silentoldconfig V=$V
+# 4, the regenerated config must match the shipped one exactly
+	diff -u debian/config/pkg/$* $d/.config
+	ln -s .config $@
+
+##############################################################################
+
+build-arch: $(patsubst %,$b/%/.stamp-build, ${flavours})
+build: build-arch
+$(addprefix build-,${flavours}): build-%: $b/%/.stamp-build
+build-indep:
+.PHONY: build build-arch build-indep $(addprefix build-,${flavours})
+
+$b/%/.stamp-build: d = $b/$*
+$b/%/.stamp-build: $b/%/.stamp-setup
+	${MAKE} -C $d all \
+	 CC='${MUSL_CC}' \
+	 SKIP_STRIP=y \
+	 BB_EXTRA_VERSION="${DEB_SOURCE} ${DEB_VERSION}" \
+	 CONFIG_EXTRA_CFLAGS='${CFLAGS} ${CPPFLAGS} -isystem ${KHDR}' \
+	 CONFIG_EXTRA_LDFLAGS='${CFLAGS} ${LDFLAGS}' \
+	 V=$V
+	${MAKE} -C $d busybox.links
+	ln -sf busybox $@
+
+##############################################################################
+
+build-arch: $(if $(filter nocheck,${DEB_BUILD_OPTIONS}),,test-live)
+$(addprefix test-,${flavours}): test-%: $b/%/.stamp-test
+.PHONY: $(addprefix test-,${flavours})
+
+$b/%/.stamp-test: d = $b/$*
+$b/%/.stamp-test: $b/%/.stamp-build
+	@echo ======== running testsuite in $d ========
+	@if [ ! -f $d/testsuite/.setup ]; then \
+	    rm  -rf $d/testsuite ; \
+	    cp -al testsuite $d/ ; \
+	    rm -f $d/testsuite/mdev.tests; \
+	    patch -p1 -d $d/ < debian/testsuite-musl.diff ; \
+	    touch $d/testsuite/.setup ; \
+	fi
+	cd $d/testsuite && ${TESTSUITE_ENV} ./runtest
+	touch $@
+
+##############################################################################
+
+clean:
+	dh_clean $b/
+	rm -f .kernelrelease # leftover from the build process
+.PHONY: clean
+
+##############################################################################
+
+override_dh_auto_install:
+	install -D -m 0755 $b/live/busybox       debian/live-busybox/${LBDIR}/bin/busybox
+	install -D -m 0644 $b/live/busybox.links debian/live-busybox/${LBDIR}/busybox.links
+	install -D -m 0644 $b/live/.config       debian/live-busybox/${LBDIR}/busybox.config
+
+# no -dbgsym package
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
+
+# the binary is static: record the musl/libgcc sources it was linked with
+execute_before_dh_gencontrol-arch:
+	srcs=$$(dpkg-query -f '$${source:Package} (= $${source:Version}), ' \
+	        -W musl-dev libgcc-$$(gcc -dumpversion | cut -d. -f1)-dev | sed 's/, $$//'); \
+	echo "built-using=$$srcs" >> debian/live-busybox.substvars

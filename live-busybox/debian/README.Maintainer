@@ -1,0 +1,38 @@
+live-busybox
+============
+
+Static busybox for the MX/antiX live-initrd (mx-iso-template).
+Source: Debian busybox (debian/patches is Debian's patch set, unchanged).
+
+Only one flavour is built: "live", configured by debian/config/pkg/live.
+It is linked statically against musl (musl-gcc from musl-tools). Kernel
+headers are made visible to musl-gcc via symlinks in b/kernel-headers.
+
+musl differences vs. the old uClibc/glibc builds:
+  - FEATURE_VI_REGEX_SEARCH is off (needs GNU regex API), plain vi search works
+  - no ERE back-references inside the pattern (grep -E '(ab)\1')
+  - \< followed by an empty-matching expression (awk gsub(/\<b*/,...))
+  - date -d does not accept a timezone inside the date string
+  The two affected testsuite cases are removed by debian/testsuite-musl.diff.
+
+debian/config/reference/ holds, for comparison only (not used in the build):
+  mx-busybox-1.31.1.config   config recovered from the old initrd busybox
+                             ("busybox bbconfig"), the origin of pkg/live
+  deb static udeb            Debian's flavour configs of this version
+
+Changing the configuration / new upstream version
+-------------------------------------------------
+The build fails if the shipped config differs from what oldconfig
+generates (e.g. new upstream options). To update:
+
+  mkdir /tmp/bbcfg && cp debian/config/pkg/live /tmp/bbcfg/.config
+  make -C /tmp/bbcfg -f $PWD/Makefile KBUILD_SRC=$PWD oldconfig   # or menuconfig
+  cp /tmp/bbcfg/.config debian/config/pkg/live
+
+Keep the applet set in sync with what the live-initrd uses; new applets
+default to "y" in oldconfig - say "n" unless needed.
+
+Building both architectures
+---------------------------
+  amd64:  dpkg-buildpackage -us -uc -b
+  i386:   build in an i386 chroot, e.g. sbuild --arch=i386 / pbuilder

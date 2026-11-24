@@ -1,0 +1,28 @@
+From: Michael Tokarev <mjt@tls.msk.ru>
+Date: Sat, 11 Jul 2026 19:46:12 +0300
+Subject: [PATCH] coreutils/cut.c: typo fix (delimeter)
+Forwarded: yes, https://lists.busybox.net/pipermail/busybox/2026-July/092385.html
+
+Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
+---
+ coreutils/cut.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/coreutils/cut.c b/coreutils/cut.c
+--- a/coreutils/cut.c
++++ b/coreutils/cut.c
+@@ -47,8 +47,8 @@
+ //usage:     IF_LONG_OPTS(
+-//usage:     "\n	--output-delimiter SEP	Output field delimeter"
++//usage:     "\n	--output-delimiter SEP	Output field delimiter"
+ //usage:     ) IF_NOT_LONG_OPTS(
+ //usage:     IF_FEATURE_CUT_REGEX(
+-//usage:     "\n	-O SEP	Output field delimeter (default = -d for -f, one space for -F)"
++//usage:     "\n	-O SEP	Output field delimiter (default = -d for -f, one space for -F)"
+ //usage:     ) IF_NOT_FEATURE_CUT_REGEX(
+-//usage:     "\n	-O SEP	Output field delimeter (default = -d)"
++//usage:     "\n	-O SEP	Output field delimiter (default = -d)"
+ //usage:     )
+-- 
+2.47.3
+
